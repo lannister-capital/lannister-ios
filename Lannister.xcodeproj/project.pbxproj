@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
+		26264CB5BB29C1179D830205 /* Pods_LannisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */; };
 		70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B352272E7F700A5EB54 /* AppDelegate.swift */; };
 		70E96B382272E7F700A5EB54 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B372272E7F700A5EB54 /* ViewController.swift */; };
 		70E96B3B2272E7F700A5EB54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B392272E7F700A5EB54 /* Main.storyboard */; };
@@ -14,6 +16,7 @@
 		70E96B402272E7F900A5EB54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3E2272E7F900A5EB54 /* LaunchScreen.storyboard */; };
 		70E96B4B2272E7F900A5EB54 /* LannisterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B4A2272E7F900A5EB54 /* LannisterTests.swift */; };
 		70E96B562272E7F900A5EB54 /* LannisterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B552272E7F900A5EB54 /* LannisterUITests.swift */; };
+		E0239ED7BE77EB6A2BF985AB /* Pods_LannisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40B65A67EE973FEA42828D95 /* Pods-Lannister.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister.debug.xcconfig"; path = "Target Support Files/Pods-Lannister/Pods-Lannister.debug.xcconfig"; sourceTree = "<group>"; };
+		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
+		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B7F6DB0CF0AE1E4D5DD38C4 /* Pods-LannisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		70E96B322272E7F700A5EB54 /* Lannister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lannister.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E96B352272E7F700A5EB54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70E96B372272E7F700A5EB54 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +54,11 @@
 		70E96B512272E7F900A5EB54 /* LannisterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LannisterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E96B552272E7F900A5EB54 /* LannisterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LannisterUITests.swift; sourceTree = "<group>"; };
 		70E96B572272E7F900A5EB54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LannisterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		986DDED2C135F4193BC8B943 /* Pods-LannisterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterUITests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterUITests/Pods-LannisterUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C54D0B245B43BB9320917656 /* Pods-LannisterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterUITests.release.xcconfig"; path = "Target Support Files/Pods-LannisterUITests/Pods-LannisterUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LannisterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA49CCB3B4D43C05281E5A73 /* Pods-Lannister.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister.release.xcconfig"; path = "Target Support Files/Pods-Lannister/Pods-Lannister.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0239ED7BE77EB6A2BF985AB /* Pods_LannisterTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +82,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26264CB5BB29C1179D830205 /* Pods_LannisterUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29DABE590C69861C677144B1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				40B65A67EE973FEA42828D95 /* Pods-Lannister.debug.xcconfig */,
+				DA49CCB3B4D43C05281E5A73 /* Pods-Lannister.release.xcconfig */,
+				6B7F6DB0CF0AE1E4D5DD38C4 /* Pods-LannisterTests.debug.xcconfig */,
+				47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */,
+				986DDED2C135F4193BC8B943 /* Pods-LannisterUITests.debug.xcconfig */,
+				C54D0B245B43BB9320917656 /* Pods-LannisterUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		40D2334B62B0997C7D5AB35B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */,
+				7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */,
+				CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		70E96B292272E7F700A5EB54 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +119,8 @@
 				70E96B492272E7F900A5EB54 /* LannisterTests */,
 				70E96B542272E7F900A5EB54 /* LannisterUITests */,
 				70E96B332272E7F700A5EB54 /* Products */,
+				29DABE590C69861C677144B1 /* Pods */,
+				40D2334B62B0997C7D5AB35B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70E96B5A2272E7F900A5EB54 /* Build configuration list for PBXNativeTarget "Lannister" */;
 			buildPhases = (
+				2B2015CCE491AEDC9F43F8B4 /* [CP] Check Pods Manifest.lock */,
 				70E96B2E2272E7F700A5EB54 /* Sources */,
 				70E96B2F2272E7F700A5EB54 /* Frameworks */,
 				70E96B302272E7F700A5EB54 /* Resources */,
+				B56E350878F5845F0CB75CE6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +191,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70E96B5D2272E7F900A5EB54 /* Build configuration list for PBXNativeTarget "LannisterTests" */;
 			buildPhases = (
+				03FFFD2C9EB3B89BB84D5B66 /* [CP] Check Pods Manifest.lock */,
 				70E96B422272E7F900A5EB54 /* Sources */,
 				70E96B432272E7F900A5EB54 /* Frameworks */,
 				70E96B442272E7F900A5EB54 /* Resources */,
@@ -167,6 +210,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70E96B602272E7F900A5EB54 /* Build configuration list for PBXNativeTarget "LannisterUITests" */;
 			buildPhases = (
+				AAF2164A70343FDBBD0481DA /* [CP] Check Pods Manifest.lock */,
 				70E96B4D2272E7F900A5EB54 /* Sources */,
 				70E96B4E2272E7F900A5EB54 /* Frameworks */,
 				70E96B4F2272E7F900A5EB54 /* Resources */,
@@ -250,6 +294,99 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03FFFD2C9EB3B89BB84D5B66 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LannisterTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2B2015CCE491AEDC9F43F8B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lannister-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAF2164A70343FDBBD0481DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LannisterUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B56E350878F5845F0CB75CE6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lannister/Pods-Lannister-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lannister/Pods-Lannister-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		70E96B2E2272E7F700A5EB54 /* Sources */ = {
@@ -430,6 +567,7 @@
 		};
 		70E96B5B2272E7F900A5EB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40B65A67EE973FEA42828D95 /* Pods-Lannister.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -439,7 +577,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lannister.Lannister;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lannister-capital.Lannister";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -448,6 +586,7 @@
 		};
 		70E96B5C2272E7F900A5EB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA49CCB3B4D43C05281E5A73 /* Pods-Lannister.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -457,7 +596,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lannister.Lannister;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lannister-capital.Lannister";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -466,6 +605,7 @@
 		};
 		70E96B5E2272E7F900A5EB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B7F6DB0CF0AE1E4D5DD38C4 /* Pods-LannisterTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -487,6 +627,7 @@
 		};
 		70E96B5F2272E7F900A5EB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -508,6 +649,7 @@
 		};
 		70E96B612272E7F900A5EB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 986DDED2C135F4193BC8B943 /* Pods-LannisterUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -528,6 +670,7 @@
 		};
 		70E96B622272E7F900A5EB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C54D0B245B43BB9320917656 /* Pods-LannisterUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
