@@ -9,8 +9,18 @@
 /* Begin PBXBuildFile section */
 		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
 		26264CB5BB29C1179D830205 /* Pods_LannisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */; };
+		70572CB92273A19500297421 /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CB82273A19500297421 /* LaunchController.swift */; };
+		70572CBB2273A1A300297421 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBA2273A1A300297421 /* AuthController.swift */; };
+		70572CBD2273A1B400297421 /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBC2273A1B400297421 /* DashboardController.swift */; };
+		70572CBF2273A1D600297421 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBE2273A1D600297421 /* SettingsController.swift */; };
+		70572CC12273A1E100297421 /* HoldingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC02273A1E100297421 /* HoldingController.swift */; };
+		70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC22273A25600297421 /* CreateHoldingController.swift */; };
+		70572CC52273A26F00297421 /* CreateTransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC42273A26F00297421 /* CreateTransactionController.swift */; };
+		70572CC72273A28700297421 /* ColorCodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC62273A28700297421 /* ColorCodesController.swift */; };
+		70572CC92273A2A800297421 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC82273A2A800297421 /* RootController.swift */; };
+		70572CCB227475E800297421 /* HoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CCA227475E800297421 /* HoldingCell.swift */; };
+		70572CCD2274788D00297421 /* DashboardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CCC2274788D00297421 /* DashboardHeaderView.swift */; };
 		70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B352272E7F700A5EB54 /* AppDelegate.swift */; };
-		70E96B382272E7F700A5EB54 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B372272E7F700A5EB54 /* ViewController.swift */; };
 		70E96B3B2272E7F700A5EB54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B392272E7F700A5EB54 /* Main.storyboard */; };
 		70E96B3D2272E7F900A5EB54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3C2272E7F900A5EB54 /* Assets.xcassets */; };
 		70E96B402272E7F900A5EB54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3E2272E7F900A5EB54 /* LaunchScreen.storyboard */; };
@@ -41,9 +51,19 @@
 		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B7F6DB0CF0AE1E4D5DD38C4 /* Pods-LannisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		70572CB82273A19500297421 /* LaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchController.swift; sourceTree = "<group>"; };
+		70572CBA2273A1A300297421 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		70572CBC2273A1B400297421 /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
+		70572CBE2273A1D600297421 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		70572CC02273A1E100297421 /* HoldingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingController.swift; sourceTree = "<group>"; };
+		70572CC22273A25600297421 /* CreateHoldingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHoldingController.swift; sourceTree = "<group>"; };
+		70572CC42273A26F00297421 /* CreateTransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionController.swift; sourceTree = "<group>"; };
+		70572CC62273A28700297421 /* ColorCodesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodesController.swift; sourceTree = "<group>"; };
+		70572CC82273A2A800297421 /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
+		70572CCA227475E800297421 /* HoldingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingCell.swift; sourceTree = "<group>"; };
+		70572CCC2274788D00297421 /* DashboardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderView.swift; sourceTree = "<group>"; };
 		70E96B322272E7F700A5EB54 /* Lannister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lannister.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E96B352272E7F700A5EB54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		70E96B372272E7F700A5EB54 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		70E96B3A2272E7F700A5EB54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		70E96B3C2272E7F900A5EB54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70E96B3F2272E7F900A5EB54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -112,6 +132,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		70572CB52273A14500297421 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				70572CC82273A2A800297421 /* RootController.swift */,
+				70572CB82273A19500297421 /* LaunchController.swift */,
+				70572CBA2273A1A300297421 /* AuthController.swift */,
+				70572CBC2273A1B400297421 /* DashboardController.swift */,
+				70572CBE2273A1D600297421 /* SettingsController.swift */,
+				70572CC02273A1E100297421 /* HoldingController.swift */,
+				70572CC22273A25600297421 /* CreateHoldingController.swift */,
+				70572CC42273A26F00297421 /* CreateTransactionController.swift */,
+				70572CC62273A28700297421 /* ColorCodesController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		70572CB62273A15100297421 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				70572CCC2274788D00297421 /* DashboardHeaderView.swift */,
+				70572CCA227475E800297421 /* HoldingCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		70572CB72273A15900297421 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		70E96B292272E7F700A5EB54 = {
 			isa = PBXGroup;
 			children = (
@@ -137,8 +189,10 @@
 		70E96B342272E7F700A5EB54 /* Lannister */ = {
 			isa = PBXGroup;
 			children = (
+				70572CB52273A14500297421 /* Controllers */,
+				70572CB72273A15900297421 /* Models */,
+				70572CB62273A15100297421 /* Views */,
 				70E96B352272E7F700A5EB54 /* AppDelegate.swift */,
-				70E96B372272E7F700A5EB54 /* ViewController.swift */,
 				70E96B392272E7F700A5EB54 /* Main.storyboard */,
 				70E96B3C2272E7F900A5EB54 /* Assets.xcassets */,
 				70E96B3E2272E7F900A5EB54 /* LaunchScreen.storyboard */,
@@ -397,7 +451,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70E96B382272E7F700A5EB54 /* ViewController.swift in Sources */,
+				70572CBF2273A1D600297421 /* SettingsController.swift in Sources */,
+				70572CC52273A26F00297421 /* CreateTransactionController.swift in Sources */,
+				70572CC92273A2A800297421 /* RootController.swift in Sources */,
+				70572CBB2273A1A300297421 /* AuthController.swift in Sources */,
+				70572CCD2274788D00297421 /* DashboardHeaderView.swift in Sources */,
+				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
+				70572CC12273A1E100297421 /* HoldingController.swift in Sources */,
+				70572CBD2273A1B400297421 /* DashboardController.swift in Sources */,
+				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
+				70572CB92273A19500297421 /* LaunchController.swift in Sources */,
+				70572CC72273A28700297421 /* ColorCodesController.swift in Sources */,
 				70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
