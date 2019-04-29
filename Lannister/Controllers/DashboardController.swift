@@ -37,6 +37,12 @@ class DashboardController: UIViewController {
         }
     }
     
+    @IBAction func createHolding() {
+        
+        let createHoldingNavVC = storyboard?.instantiateViewController(withIdentifier: "createHoldingNavVC")
+        navigationController?.present(createHoldingNavVC!, animated: true, completion: nil)
+    }
+    
 }
 
 extension DashboardController : UICollectionViewDataSource {
