@@ -9,22 +9,69 @@
 import UIKit
 
 class ColorCodesController: UIViewController {
+    
+    @IBOutlet weak var tableView : UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        navigationItem.title = "Color Codes"
+        navigationController!.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
+             NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
+        navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+    }
+}
+
+extension ColorCodesController : UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 6 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "colorCodeCustomCellId", for: indexPath) as! ColorCodeCustomCell
+            cell.colorCodeView.layer.borderWidth = 1
+            cell.colorCodeView.layer.borderColor = UIColor(red: 151/255, green: 151/255, blue: 151/255, alpha: 1).cgColor
+            return cell
 
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "colorCodePresetCellId", for: indexPath) as! ColorCodePresetCell
+            if indexPath.row == 0 {
+                cell.colorCodeLabel.text = "Gold - #FFBF00"
+                cell.colorCodeView.backgroundColor = UIColor(red: 255/255, green: 191/255, blue: 0, alpha: 1)
+            } else if indexPath.row == 1 {
+                cell.colorCodeLabel.text = "Silver - #FFBF00"
+                cell.colorCodeView.backgroundColor = UIColor(red: 124/255, green: 130/255, blue: 136/255, alpha: 1)
+            } else if indexPath.row == 2 {
+                cell.colorCodeLabel.text = "Ruby - #FFBF00"
+                cell.colorCodeView.backgroundColor = UIColor(red: 229/255, green: 21/255, blue: 34/255, alpha: 1)
+            } else if indexPath.row == 3 {
+                cell.colorCodeLabel.text = "Emmerald - #FFBF00"
+                cell.colorCodeView.backgroundColor = UIColor(red: 0, green: 179/255, blue: 130/255, alpha: 1)
+            } else if indexPath.row == 4 {
+                cell.colorCodeLabel.text = "Saphire - #FFBF00"
+                cell.colorCodeView.backgroundColor = UIColor(red: 21/255, green: 56/255, blue: 192/255, alpha: 1)
+            } else if indexPath.row == 5 {
+                cell.colorCodeLabel.text = "Amethyst - #FFBF00"
+                cell.colorCodeView.backgroundColor = UIColor(red: 111/255, green: 13/255, blue: 190/255, alpha: 1)
+            }
+            return cell
+
+        }
+    }
+}
+
+extension ColorCodesController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }

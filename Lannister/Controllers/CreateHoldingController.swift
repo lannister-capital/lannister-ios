@@ -15,7 +15,14 @@ class CreateHoldingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        navigationController!.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
+             NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
+        navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""        
+        navigationItem.backBarButtonItem = backItem
     }
     
     @IBAction func dismiss() {
@@ -64,5 +71,11 @@ extension CreateHoldingController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.deselectRow(at: indexPath, animated: true)
+     
+        if indexPath.row == 3 {
+            let colorCodeVC = storyboard?.instantiateViewController(withIdentifier: "colorCodesVC")
+            navigationController?.pushViewController(colorCodeVC!, animated: true)
+        }
     }
 }

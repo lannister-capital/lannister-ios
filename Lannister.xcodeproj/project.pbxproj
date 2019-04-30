@@ -24,6 +24,8 @@
 		707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20D22773DE0005B29A2 /* TotalValueCell.swift */; };
 		707FB21022773DEC005B29A2 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20F22773DEC005B29A2 /* CurrencyCell.swift */; };
 		707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB21122773DF8005B29A2 /* ColorCodeCell.swift */; };
+		70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */; };
+		70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */; };
 		70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B352272E7F700A5EB54 /* AppDelegate.swift */; };
 		70E96B3B2272E7F700A5EB54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B392272E7F700A5EB54 /* Main.storyboard */; };
 		70E96B3D2272E7F900A5EB54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3C2272E7F900A5EB54 /* Assets.xcassets */; };
@@ -70,6 +72,8 @@
 		707FB20D22773DE0005B29A2 /* TotalValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalValueCell.swift; sourceTree = "<group>"; };
 		707FB20F22773DEC005B29A2 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		707FB21122773DF8005B29A2 /* ColorCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCell.swift; sourceTree = "<group>"; };
+		70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCustomCell.swift; sourceTree = "<group>"; };
+		70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodePresetCell.swift; sourceTree = "<group>"; };
 		70E96B322272E7F700A5EB54 /* Lannister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lannister.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E96B352272E7F700A5EB54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70E96B3A2272E7F700A5EB54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				707FB20D22773DE0005B29A2 /* TotalValueCell.swift */,
 				707FB20F22773DEC005B29A2 /* CurrencyCell.swift */,
 				707FB21122773DF8005B29A2 /* ColorCodeCell.swift */,
+				70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */,
+				70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -465,6 +471,7 @@
 			files = (
 				707FB21022773DEC005B29A2 /* CurrencyCell.swift in Sources */,
 				707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */,
+				70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */,
 				70572CBF2273A1D600297421 /* SettingsController.swift in Sources */,
 				70572CC52273A26F00297421 /* CreateTransactionController.swift in Sources */,
 				70572CC92273A2A800297421 /* RootController.swift in Sources */,
@@ -475,6 +482,7 @@
 				70572CC12273A1E100297421 /* HoldingController.swift in Sources */,
 				707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */,
 				70572CBD2273A1B400297421 /* DashboardController.swift in Sources */,
+				70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */,
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
 				70572CB92273A19500297421 /* LaunchController.swift in Sources */,
 				70572CC72273A28700297421 /* ColorCodesController.swift in Sources */,
