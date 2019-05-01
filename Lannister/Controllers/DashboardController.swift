@@ -22,6 +22,10 @@ class DashboardController: UIViewController {
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,5 +103,8 @@ extension DashboardController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let holdingVC = storyboard?.instantiateViewController(withIdentifier: "holdingVC") as! HoldingController
+        navigationController?.pushViewController(holdingVC, animated: true)
     }
 }

@@ -10,21 +10,83 @@ import UIKit
 
 class HoldingController: UIViewController {
 
+    @IBOutlet weak var collectionView : UICollectionView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Holding"
 
-        // Do any additional setup after loading the view.
+        navigationController!.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
+             NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
+        navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        let editButton = UIBarButtonItem()
+        editButton.title = "Edit"
+        navigationItem.rightBarButtonItem = editButton
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if UIScreen.main.bounds.size.width < 414 {
+            if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                let itemWidth = 414*UIScreen.main.bounds.size.width/414
+                let itemHeight = layout.itemSize.height
+                layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+                layout.invalidateLayout()
+            }
+        }
     }
-    */
+    
+    @IBAction func createTransaction() {
+        
+    }
 
 }
+
+extension HoldingController : UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        var sectionHeader = HoldingHeaderView()
+        
+        sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "holdingHeaderId", for: indexPath) as! HoldingHeaderView
+        
+        if kind == UICollectionView.elementKindSectionHeader {
+            
+            return sectionHeader
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.row == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "topCellId", for: indexPath)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "transactionCellId", for: indexPath) as! TransactionCell
+            return cell
+        }
+    }
+}
+
+extension HoldingController : UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+}
+

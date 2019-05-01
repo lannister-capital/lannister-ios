@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
 		26264CB5BB29C1179D830205 /* Pods_LannisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */; };
+		700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF6227A28F300276068 /* HoldingHeaderView.swift */; };
+		700BDDF9227A297600276068 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF8227A297600276068 /* TransactionCell.swift */; };
 		70572CB92273A19500297421 /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CB82273A19500297421 /* LaunchController.swift */; };
 		70572CBB2273A1A300297421 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBA2273A1A300297421 /* AuthController.swift */; };
 		70572CBD2273A1B400297421 /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBC2273A1B400297421 /* DashboardController.swift */; };
@@ -57,6 +59,8 @@
 		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B7F6DB0CF0AE1E4D5DD38C4 /* Pods-LannisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		700BDDF6227A28F300276068 /* HoldingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingHeaderView.swift; sourceTree = "<group>"; };
+		700BDDF8227A297600276068 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		70572CB82273A19500297421 /* LaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchController.swift; sourceTree = "<group>"; };
 		70572CBA2273A1A300297421 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		70572CBC2273A1B400297421 /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
@@ -164,8 +168,10 @@
 			isa = PBXGroup;
 			children = (
 				70572CCC2274788D00297421 /* DashboardHeaderView.swift */,
+				700BDDF6227A28F300276068 /* HoldingHeaderView.swift */,
 				70572CCA227475E800297421 /* HoldingCell.swift */,
 				707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */,
+				700BDDF8227A297600276068 /* TransactionCell.swift */,
 				707FB20D22773DE0005B29A2 /* TotalValueCell.swift */,
 				707FB20F22773DEC005B29A2 /* CurrencyCell.swift */,
 				707FB21122773DF8005B29A2 /* ColorCodeCell.swift */,
@@ -477,6 +483,7 @@
 				70572CC92273A2A800297421 /* RootController.swift in Sources */,
 				70572CBB2273A1A300297421 /* AuthController.swift in Sources */,
 				70572CCD2274788D00297421 /* DashboardHeaderView.swift in Sources */,
+				700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */,
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
 				707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */,
 				70572CC12273A1E100297421 /* HoldingController.swift in Sources */,
@@ -486,6 +493,7 @@
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
 				70572CB92273A19500297421 /* LaunchController.swift in Sources */,
 				70572CC72273A28700297421 /* ColorCodesController.swift in Sources */,
+				700BDDF9227A297600276068 /* TransactionCell.swift in Sources */,
 				70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
