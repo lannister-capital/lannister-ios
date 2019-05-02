@@ -47,6 +47,12 @@ class DashboardController: UIViewController {
         navigationController?.present(createHoldingNavVC!, animated: true, completion: nil)
     }
     
+    @IBAction func settings() {
+        
+        let settingsNavVC = storyboard?.instantiateViewController(withIdentifier: "settingsNavVC")
+        navigationController?.present(settingsNavVC!, animated: true, completion: nil)
+    }
+    
 }
 
 extension DashboardController : UICollectionViewDataSource {
