@@ -1,28 +1,55 @@
 PODS:
-  - Alamofire (4.8.0)
+  - BiometricAuthentication (3.0)
   - Blockstack (0.5.4):
     - CryptoSwift
+  - Charts (3.3.0):
+    - Charts/Core (= 3.3.0)
+  - Charts/Core (3.3.0)
   - CryptoSwift (1.0.0)
+  - Groot (3.0.1):
+    - Groot/Swift (= 3.0.1)
+  - Groot/Swift (3.0.1)
+  - MagicalRecord (2.3.3):
+    - MagicalRecord/Core (= 2.3.3)
+  - MagicalRecord/Core (2.3.3)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
-  - Alamofire (= 4.8.0)
+  - BiometricAuthentication
   - Blockstack
+  - Charts
+  - Groot (= 3.0.1)
+  - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`, tag `v2.3.3`)
   - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
+    - BiometricAuthentication
     - Blockstack
+    - Charts
     - CryptoSwift
+    - Groot
     - SVProgressHUD
 
+EXTERNAL SOURCES:
+  MagicalRecord:
+    :git: https://github.com/magicalpanda/MagicalRecord.git
+    :tag: v2.3.3
+
+CHECKOUT OPTIONS:
+  MagicalRecord:
+    :git: https://github.com/magicalpanda/MagicalRecord.git
+    :tag: v2.3.3
+
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  BiometricAuthentication: e39b1a55040d679d5dbc4fa90d76e067c432de7f
   Blockstack: 872c6a86c8fe80487f439966303dd2cb8d888603
+  Charts: ec1f57f9340054155691e84d4544a1d239d382c5
   CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
+  Groot: a668afbcf0be88d76c0a26c714cfa4638ceaca66
+  MagicalRecord: e3dfdee87c234c6d460dbd5d8a32e3cb4de223aa
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 2177b6d1a7ac7b7115ee1e8f8070466e1c38f2f7
+PODFILE CHECKSUM: 6a7a9f7f552058533f1f69079944727b5928e253
 
 COCOAPODS: 1.6.1
