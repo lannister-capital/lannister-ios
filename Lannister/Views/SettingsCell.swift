@@ -12,4 +12,6 @@ class SettingsCell: UITableViewCell {
 
     @IBOutlet weak var logo : UIImageView!
     @IBOutlet weak var nameLabel : UILabel!
+    @IBOutlet weak var cellIndicator : UIImageView!
+    @IBOutlet weak var currencyLabel : UILabel!
 }
