@@ -28,6 +28,8 @@
 		70572CC92273A2A800297421 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC82273A2A800297421 /* RootController.swift */; };
 		70572CCB227475E800297421 /* HoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CCA227475E800297421 /* HoldingCell.swift */; };
 		70572CCD2274788D00297421 /* DashboardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CCC2274788D00297421 /* DashboardHeaderView.swift */; };
+		7073A69922806A6600049A2E /* TransactionNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073A69822806A6500049A2E /* TransactionNameCell.swift */; };
+		7073A69B22806BAE00049A2E /* TransactionDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073A69A22806BAE00049A2E /* TransactionDto.swift */; };
 		707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */; };
 		707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20D22773DE0005B29A2 /* TotalValueCell.swift */; };
 		707FB21022773DEC005B29A2 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20F22773DEC005B29A2 /* CurrencyCell.swift */; };
@@ -84,6 +86,8 @@
 		70572CC82273A2A800297421 /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		70572CCA227475E800297421 /* HoldingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingCell.swift; sourceTree = "<group>"; };
 		70572CCC2274788D00297421 /* DashboardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderView.swift; sourceTree = "<group>"; };
+		7073A69822806A6500049A2E /* TransactionNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionNameCell.swift; sourceTree = "<group>"; };
+		7073A69A22806BAE00049A2E /* TransactionDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDto.swift; sourceTree = "<group>"; };
 		707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingNameCell.swift; sourceTree = "<group>"; };
 		707FB20D22773DE0005B29A2 /* TotalValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalValueCell.swift; sourceTree = "<group>"; };
 		707FB20F22773DEC005B29A2 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				702B2D22227F7CA1005C0B64 /* HoldingDto.swift */,
+				7073A69A22806BAE00049A2E /* TransactionDto.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 				700BDDF6227A28F300276068 /* HoldingHeaderView.swift */,
 				70572CCA227475E800297421 /* HoldingCell.swift */,
 				707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */,
+				7073A69822806A6500049A2E /* TransactionNameCell.swift */,
 				700BDDF8227A297600276068 /* TransactionCell.swift */,
 				707FB20D22773DE0005B29A2 /* TotalValueCell.swift */,
 				707FB20F22773DEC005B29A2 /* CurrencyCell.swift */,
@@ -577,6 +583,8 @@
 				70572CBD2273A1B400297421 /* DashboardController.swift in Sources */,
 				70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */,
 				70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */,
+				7073A69B22806BAE00049A2E /* TransactionDto.swift in Sources */,
+				7073A69922806A6600049A2E /* TransactionNameCell.swift in Sources */,
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
 				702B2D26227F9CAA005C0B64 /* Colors.swift in Sources */,
 				70572CB92273A19500297421 /* LaunchController.swift in Sources */,

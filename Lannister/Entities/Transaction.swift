@@ -10,12 +10,13 @@ import UIKit
 
 struct Transaction {
 
-    var name    : String!
-    var type    : String!
-    var value   : Double!
-    var holding : Holding!
+    var identifier  : String!
+    var name        : String!
+    var type        : String!
+    var value       : Double!
+    var holding     : Holding!
     
     init(with dictionary: [String : Any]?) {
-        guard let dictionary = dictionary else { return }
+        
     }
 }

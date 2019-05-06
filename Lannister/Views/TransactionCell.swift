@@ -10,5 +10,7 @@ import UIKit
 
 class TransactionCell: UICollectionViewCell {
     
-    @IBOutlet weak var colorView : UIView!
+    @IBOutlet weak var colorView    : UIView!
+    @IBOutlet weak var nameLabel    : UILabel!
+    @IBOutlet weak var valueLabel   : UILabel!
 }

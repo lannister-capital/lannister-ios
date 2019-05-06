@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import MagicalRecord
 
 class CreateTransactionController: UIViewController {
 
-    @IBOutlet weak var tableView : UITableView!
+    @IBOutlet weak var tableView    : UITableView!
+    var transaction                 : Transaction!
+    var holding                     : Holding!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +23,49 @@ class CreateTransactionController: UIViewController {
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
     }
+    
+    @IBAction func save() {
         
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = tableView.cellForRow(at: indexPath) as! TransactionNameCell
+        let transactionNameTextField = cell.transactionNameTextField
+        
+        if transactionNameTextField!.text == "" {
+            let alert = UIAlertController(title: "Oops!", message: "Enter a name for this transaction.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        var newTransaction : TransactionManagedObject
+        if transaction == nil {
+            newTransaction = TransactionManagedObject(context: NSManagedObjectContext.mr_default())
+            let totalNumberOfTransactions = TransactionManagedObject.mr_findAll()
+            newTransaction.identifier = "\(totalNumberOfTransactions!.count)"
+        } else {
+            newTransaction = TransactionManagedObject.mr_findFirst(byAttribute: "id", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())!
+        }
+        newTransaction.name = transactionNameTextField!.text
+        newTransaction.type = "credit"
+        let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())
+        newTransaction.holding = holdingManagedObject
+        
+        let indexPathValue = IndexPath(row: 2, section: 0)
+        let cellForValue = tableView.cellForRow(at: indexPathValue) as! TotalValueCell
+        let valueTextField = cellForValue.totalValueTextField
+        if let totalValue = Double(valueTextField!.text!) {
+            newTransaction.value = totalValue
+        } else {
+            let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+        
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension CreateTransactionController : UITableViewDataSource {
@@ -36,7 +81,7 @@ extension CreateTransactionController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionNameCellId", for: indexPath) as! HoldingNameCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionNameCellId", for: indexPath) as! TransactionNameCell
             
             return cell
             

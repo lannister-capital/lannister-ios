@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import MagicalRecord
 
 class HoldingController: UIViewController {
 
     @IBOutlet weak var barView          : UIView!
     @IBOutlet weak var collectionView   : UICollectionView!
     var holding                         : Holding!
+    var transactions                    : [Transaction]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,14 @@ class HoldingController: UIViewController {
         editButton.target = self
         editButton.action = #selector(edit)
         navigationItem.rightBarButtonItem = editButton
+        
+        updateTransactions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateTransactions()
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,6 +60,14 @@ class HoldingController: UIViewController {
         }
     }
     
+    func updateTransactions() {
+        
+        let transactionsManagedObjects = TransactionManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
+        transactions = TransactionDto().transactions(from: transactionsManagedObjects as! [TransactionManagedObject])
+        print("updateTransactions \(transactions.count)")
+        collectionView.reloadData()
+    }
+    
     @IBAction func createTransaction() {
         
     }
@@ -60,7 +78,13 @@ class HoldingController: UIViewController {
         createHoldingVC.holding = holding
         navigationController?.pushViewController(createHoldingVC, animated: true)
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "createTransaction" {
+            let destinationVC = segue.destination as! CreateTransactionController
+            destinationVC.holding = holding
+        }
+    }
 }
 
 extension HoldingController : UICollectionViewDataSource {
@@ -70,7 +94,10 @@ extension HoldingController : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        if transactions.count == 0 {
+            return 1
+        }
+        return transactions.count+1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -93,6 +120,15 @@ extension HoldingController : UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "transactionCellId", for: indexPath) as! TransactionCell
+            let transaction = transactions[indexPath.row-1]
+            cell.nameLabel.text = transaction.name
+            if(transaction.type == "credit") {
+                cell.valueLabel.text = String(format: "€%.2f", transaction.value!)
+                cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "00B382")
+            } else {
+                cell.valueLabel.text = String(format: "€%.2f", transaction.value!)
+                cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "E60243")
+            }
             return cell
         }
     }
@@ -102,6 +138,16 @@ extension HoldingController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if indexPath.row > 0 {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            
+            let transaction = transactions[indexPath.row-1]
+            
+            let transactionVC = storyboard?.instantiateViewController(withIdentifier: "transactionVC") as! CreateTransactionController
+            transactionVC.transaction = transaction
+            transactionVC.holding = holding
+            navigationController?.pushViewController(transactionVC, animated: true)
+        }
     }
 }
 
