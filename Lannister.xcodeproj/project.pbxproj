@@ -269,11 +269,11 @@
 		70E96B342272E7F700A5EB54 /* Lannister */ = {
 			isa = PBXGroup;
 			children = (
-				702B2D24227F9C96005C0B64 /* Utilities */,
 				70572CB52273A14500297421 /* Controllers */,
 				702B2D12227F6745005C0B64 /* Data */,
 				70572CB72273A15900297421 /* Entities */,
 				70572CB62273A15100297421 /* Views */,
+				702B2D24227F9C96005C0B64 /* Utilities */,
 				70E96B352272E7F700A5EB54 /* AppDelegate.swift */,
 				70E96B392272E7F700A5EB54 /* Main.storyboard */,
 				70E96B3C2272E7F900A5EB54 /* Assets.xcassets */,

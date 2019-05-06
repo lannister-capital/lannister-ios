@@ -134,4 +134,32 @@ extension SettingsController : UITableViewDataSource {
 
 extension SettingsController : UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+
+            } else if indexPath.row == 1 {
+
+            } else {
+
+            }
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+
+            } else {
+
+            }
+        } else {
+            if indexPath.row == 0 {
+                UIApplication.shared.open(URL(string: "https://twitter.com/lannistercap")!, options: [:], completionHandler: nil)
+            } else if indexPath.row == 1 {
+                UIApplication.shared.open(URL(string: "https://discord.gg/kMTUpME")!, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.open(URL(string: "https://github.com/lannister-capital")!, options: [:], completionHandler: nil)
+            }
+        }
+    }
 }
