@@ -113,7 +113,7 @@ extension CreateHoldingController : UITableViewDataSource {
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "totalValueCellId", for: indexPath) as! TotalValueCell
             if holding != nil {
-                cell.totalValueTextField.text = "\(holding.value!)"
+                cell.totalValueTextField.text = String(format: "%.2f", holding.value!)
             }
             return cell
 

@@ -9,5 +9,6 @@
 import UIKit
 
 class HoldingHeaderView: UICollectionReusableView {
-        
+    
+    @IBOutlet weak var valueLabel : UILabel!
 }

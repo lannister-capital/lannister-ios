@@ -10,6 +10,7 @@ import UIKit
 
 class HoldingController: UIViewController {
 
+    @IBOutlet weak var barView          : UIView!
     @IBOutlet weak var collectionView   : UICollectionView!
     var holding                         : Holding!
 
@@ -23,6 +24,7 @@ class HoldingController: UIViewController {
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
         
+        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
         navigationItem.title = holding.name
 
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -79,6 +81,7 @@ extension HoldingController : UICollectionViewDataSource {
         
         if kind == UICollectionView.elementKindSectionHeader {
             
+            sectionHeader.valueLabel.text =  String(format: "€%.2f", holding.value!)
             return sectionHeader
         }
         return UICollectionReusableView()

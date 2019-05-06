@@ -10,5 +10,6 @@ import UIKit
 
 class DashboardHeaderView: UICollectionReusableView {
  
-    @IBOutlet weak var totalValueLabel : UILabel!
+    @IBOutlet weak var numberOfHoldingsLabel    : UILabel!
+    @IBOutlet weak var totalValueLabel          : UILabel!
 }

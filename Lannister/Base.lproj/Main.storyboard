@@ -273,6 +273,7 @@
                                         <constraint firstItem="Jg0-BY-s5M" firstAttribute="top" secondItem="aCD-Z3-PdB" secondAttribute="top" id="wtF-Hz-01r"/>
                                     </constraints>
                                     <connections>
+                                        <outlet property="numberOfHoldingsLabel" destination="c6i-P3-dkF" id="dYO-92-8Ww"/>
                                         <outlet property="totalValueLabel" destination="QSS-L2-RCc" id="6LC-kn-Mgy"/>
                                     </connections>
                                 </collectionReusableView>
@@ -484,6 +485,9 @@
                                         <constraint firstAttribute="trailing" secondItem="0vk-Bd-dcz" secondAttribute="trailing" id="cH8-Hd-fKn"/>
                                         <constraint firstItem="S9r-wo-nU7" firstAttribute="width" secondItem="0vk-Bd-dcz" secondAttribute="width" id="pxO-98-PDH"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="valueLabel" destination="0sA-nP-e11" id="UcS-Ah-ygf"/>
+                                    </connections>
                                 </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="ktT-16-rkg" id="HaR-GT-HQl"/>
@@ -504,6 +508,7 @@
                         <viewLayoutGuide key="safeArea" id="1J1-r4-xtI"/>
                     </view>
                     <connections>
+                        <outlet property="barView" destination="FKj-iX-4aU" id="BqF-nV-i3x"/>
                         <outlet property="collectionView" destination="Uyh-fd-R1w" id="l59-Qh-17m"/>
                     </connections>
                 </viewController>

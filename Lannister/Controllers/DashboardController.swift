@@ -106,6 +106,7 @@ extension DashboardController : UICollectionViewDataSource {
             } else {
                 sectionHeader.totalValueLabel.text = "€ --"
             }
+            sectionHeader.numberOfHoldingsLabel.text = "\(holdings.count) holdings"
             return sectionHeader
         }
         return UICollectionReusableView()
