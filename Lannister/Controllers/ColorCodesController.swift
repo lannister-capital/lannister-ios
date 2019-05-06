@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol ColorCodesDelegate {
+    func newColorCode(hex: String)
+}
+
 class ColorCodesController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
+    var delegate                 : ColorCodesDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,19 +53,19 @@ extension ColorCodesController : UITableViewDataSource {
                 cell.colorCodeLabel.text = "Gold - #FFBF00"
                 cell.colorCodeView.backgroundColor = UIColor(red: 255/255, green: 191/255, blue: 0, alpha: 1)
             } else if indexPath.row == 1 {
-                cell.colorCodeLabel.text = "Silver - #FFBF00"
+                cell.colorCodeLabel.text = "Silver - #7C8288"
                 cell.colorCodeView.backgroundColor = UIColor(red: 124/255, green: 130/255, blue: 136/255, alpha: 1)
             } else if indexPath.row == 2 {
-                cell.colorCodeLabel.text = "Ruby - #FFBF00"
+                cell.colorCodeLabel.text = "Ruby - #E51522"
                 cell.colorCodeView.backgroundColor = UIColor(red: 229/255, green: 21/255, blue: 34/255, alpha: 1)
             } else if indexPath.row == 3 {
-                cell.colorCodeLabel.text = "Emmerald - #FFBF00"
+                cell.colorCodeLabel.text = "Emmerald - #00B382"
                 cell.colorCodeView.backgroundColor = UIColor(red: 0, green: 179/255, blue: 130/255, alpha: 1)
             } else if indexPath.row == 4 {
-                cell.colorCodeLabel.text = "Saphire - #FFBF00"
+                cell.colorCodeLabel.text = "Saphire - #1538C0"
                 cell.colorCodeView.backgroundColor = UIColor(red: 21/255, green: 56/255, blue: 192/255, alpha: 1)
             } else if indexPath.row == 5 {
-                cell.colorCodeLabel.text = "Amethyst - #FFBF00"
+                cell.colorCodeLabel.text = "Amethyst - #6F0DBE"
                 cell.colorCodeView.backgroundColor = UIColor(red: 111/255, green: 13/255, blue: 190/255, alpha: 1)
             }
             return cell
@@ -72,6 +77,10 @@ extension ColorCodesController : UITableViewDataSource {
 extension ColorCodesController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+     
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath) as! ColorCodePresetCell
+        delegate.newColorCode(hex: String(cell.colorCodeLabel.text!.suffix(7)))
+        navigationController?.popViewController(animated: true)
     }
 }

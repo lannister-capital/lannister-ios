@@ -10,6 +10,8 @@ import UIKit
 
 class HoldingCell: UICollectionViewCell {
     
-    @IBOutlet weak var colorView : UIView!
-    
+    @IBOutlet weak var colorView        : UIView!
+    @IBOutlet weak var nameLabel        : UILabel!
+    @IBOutlet weak var valueLabel       : UILabel!
+    @IBOutlet weak var percentageLabel  : UILabel!
 }

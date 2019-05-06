@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import MagicalRecord
 
 class DashboardController: UIViewController {
     
-    var navBarTitleLabel : UILabel!
-    @IBOutlet weak var collectionView : UICollectionView!
+    var navBarTitleLabel                        : UILabel!
+    @IBOutlet weak var collectionView           : UICollectionView!
+    @IBOutlet weak var emptyStateContainerView  : UIView!
+    var holdings                                : [Holding]!
+    var totalValue                              : Double!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +31,14 @@ class DashboardController: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        updateHoldings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateHoldings()
     }
     
     override func viewDidLayoutSubviews() {
@@ -38,6 +51,22 @@ class DashboardController: UIViewController {
                 layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
                 layout.invalidateLayout()
             }
+        }
+    }
+    
+    func updateHoldings() {
+        
+        let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
+        if holdingsManagedObjects?.count == 0 {
+            emptyStateContainerView.isHidden = false
+            view.bringSubviewToFront(emptyStateContainerView)
+        } else {
+            holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
+            totalValue = 0
+            for holding in holdings {
+                totalValue += holding.value
+            }
+            collectionView.reloadData()
         }
     }
     
@@ -62,7 +91,7 @@ extension DashboardController : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return holdings.count+1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -72,7 +101,11 @@ extension DashboardController : UICollectionViewDataSource {
         sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "dashboardHeaderId", for: indexPath) as! DashboardHeaderView
         
         if kind == UICollectionView.elementKindSectionHeader {
-            
+            if totalValue > 0 {
+                sectionHeader.totalValueLabel.text = String(format: "€%.0f", totalValue)
+            } else {
+                sectionHeader.totalValueLabel.text = "€ --"
+            }
             return sectionHeader
         }
         return UICollectionReusableView()
@@ -84,6 +117,14 @@ extension DashboardController : UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "holdingCellId", for: indexPath) as! HoldingCell
+            
+            let holding = holdings[indexPath.row-1]
+            cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
+            cell.nameLabel.text = holding.name
+            let value = String(format: "%.2f", holding.value!)
+            cell.valueLabel.text = "€\(value)"
+            let percentage = String(format: "%.2f", holding.value/totalValue*100)
+            cell.percentageLabel.text = "\(percentage)%"
             
             let path = UIBezierPath(roundedRect:cell.colorView.bounds,
                                     byRoundingCorners:[.topLeft, .bottomLeft],
@@ -109,8 +150,14 @@ extension DashboardController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        collectionView.deselectItem(at: indexPath, animated: true)
-        let holdingVC = storyboard?.instantiateViewController(withIdentifier: "holdingVC") as! HoldingController
-        navigationController?.pushViewController(holdingVC, animated: true)
+        if indexPath.row > 0 {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            
+            let holding = holdings[indexPath.row-1]
+            
+            let holdingVC = storyboard?.instantiateViewController(withIdentifier: "holdingVC") as! HoldingController
+            holdingVC.holding = holding
+            navigationController?.pushViewController(holdingVC, animated: true)
+        }
     }
 }

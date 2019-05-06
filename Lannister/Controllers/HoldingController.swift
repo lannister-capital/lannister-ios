@@ -10,7 +10,8 @@ import UIKit
 
 class HoldingController: UIViewController {
 
-    @IBOutlet weak var collectionView : UICollectionView!
+    @IBOutlet weak var collectionView   : UICollectionView!
+    var holding                         : Holding!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +22,16 @@ class HoldingController: UIViewController {
             [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+        
+        navigationItem.title = holding.name
 
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
         let editButton = UIBarButtonItem()
         editButton.title = "Edit"
+        editButton.target = self
+        editButton.action = #selector(edit)
         navigationItem.rightBarButtonItem = editButton
     }
     
@@ -45,6 +50,13 @@ class HoldingController: UIViewController {
     
     @IBAction func createTransaction() {
         
+    }
+    
+    @objc func edit() {
+        
+        let createHoldingVC = storyboard?.instantiateViewController(withIdentifier: "createHoldingVC") as! CreateHoldingController
+        createHoldingVC.holding = holding
+        navigationController?.pushViewController(createHoldingVC, animated: true)
     }
 
 }

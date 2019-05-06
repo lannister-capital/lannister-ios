@@ -159,7 +159,7 @@
                                                         <constraint firstAttribute="height" constant="14" id="inM-4t-daA"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0x-w1-3E4">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0x-w1-3E4">
                                                     <rect key="frame" x="282.5" y="23.5" width="30.5" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="GyN-Oz-8mD"/>
@@ -169,7 +169,7 @@
                                                     <color key="textColor" red="0.46274509800000002" green="0.52549019610000003" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-up" translatesAutoresizingMaskIntoConstraints="NO" id="ZHO-p9-qMU">
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-up" translatesAutoresizingMaskIntoConstraints="NO" id="ZHO-p9-qMU">
                                                     <rect key="frame" x="270.5" y="25.5" width="8" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="Dl0-hk-0no"/>
@@ -199,6 +199,9 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="colorView" destination="T97-mq-gQw" id="fBC-gD-x1K"/>
+                                            <outlet property="nameLabel" destination="ddD-xv-fQp" id="Myn-aF-NWq"/>
+                                            <outlet property="percentageLabel" destination="wbS-3G-j9M" id="D7i-yg-v45"/>
+                                            <outlet property="valueLabel" destination="rMa-nG-OaU" id="vVD-rp-vKy"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -269,6 +272,9 @@
                                         <constraint firstItem="Jg0-BY-s5M" firstAttribute="leading" secondItem="aCD-Z3-PdB" secondAttribute="trailing" id="uNx-yH-A9p"/>
                                         <constraint firstItem="Jg0-BY-s5M" firstAttribute="top" secondItem="aCD-Z3-PdB" secondAttribute="top" id="wtF-Hz-01r"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="totalValueLabel" destination="QSS-L2-RCc" id="6LC-kn-Mgy"/>
+                                    </connections>
                                 </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="da9-fw-i7M" id="KSL-08-Ep2"/>
@@ -306,6 +312,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="ebl-0N-bWI" id="HTt-c7-ozN"/>
+                        <outlet property="emptyStateContainerView" destination="Cs4-ya-Toi" id="ggT-o3-Ykj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ho2-Yx-Kv2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -875,6 +882,9 @@
                                                 <constraint firstItem="Mvw-O2-6QJ" firstAttribute="top" secondItem="3nH-Fu-YWo" secondAttribute="top" constant="15" id="xvx-fY-qjl"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="holdingNameTextField" destination="IPK-Ve-Qcz" id="0D7-FI-w97"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="totalValueCellId" id="hS5-HL-rXx" customClass="TotalValueCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="137" width="414" height="109"/>
@@ -899,7 +909,7 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.1647058824" green="0.21176470589999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lO-aM-c4X">
                                                     <rect key="frame" x="15" y="79" width="384" height="1"/>
@@ -945,6 +955,9 @@
                                                 <constraint firstItem="juC-ZV-Wa6" firstAttribute="leading" secondItem="I2Q-Tz-gyL" secondAttribute="leading" constant="15" id="viG-iO-5TX"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="totalValueTextField" destination="Abr-U8-d23" id="HGf-7G-16d"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="currencyCellId" id="fKh-hV-Qgg" customClass="CurrencyCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="246" width="414" height="109"/>
@@ -1000,6 +1013,9 @@
                                                 <constraint firstItem="kXV-7U-OEN" firstAttribute="top" secondItem="aMG-u8-Jsg" secondAttribute="bottom" constant="6" id="vlR-Wb-lxt"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="currencyLabel" destination="aMG-u8-Jsg" id="9ZN-hg-Pf0"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="colorCodeCellId" id="lA5-2m-226" customClass="ColorCodeCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="355" width="414" height="109"/>
@@ -1065,6 +1081,10 @@
                                                 <constraint firstItem="HQH-iE-0vW" firstAttribute="leading" secondItem="GfA-k6-Pw6" secondAttribute="leading" constant="15" id="qUs-gO-hs3"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="colorCodeLabel" destination="GjZ-Xx-oGM" id="fka-A1-Hmn"/>
+                                            <outlet property="colorCodeView" destination="HQH-iE-0vW" id="ADD-g3-bYG"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1089,7 +1109,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="6ab-38-6Px">
                             <color key="tintColor" red="0.035294117647058823" green="0.2196078431372549" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="dismiss" destination="VTP-QL-0sM" id="Iip-Rc-Crg"/>
+                                <action selector="save" destination="VTP-QL-0sM" id="yxT-jC-jxL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

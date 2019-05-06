@@ -12,6 +12,11 @@
 		70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007208F227ADA3A003F3DEF /* SettingsCell.swift */; };
 		700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF6227A28F300276068 /* HoldingHeaderView.swift */; };
 		700BDDF9227A297600276068 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF8227A297600276068 /* TransactionCell.swift */; };
+		702B2D17227F6798005C0B64 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D15227F6798005C0B64 /* db.xcdatamodeld */; };
+		702B2D19227F6832005C0B64 /* Holding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D18227F6832005C0B64 /* Holding.swift */; };
+		702B2D1B227F683F005C0B64 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D1A227F683F005C0B64 /* Transaction.swift */; };
+		702B2D23227F7CA1005C0B64 /* HoldingDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D22227F7CA1005C0B64 /* HoldingDto.swift */; };
+		702B2D26227F9CAA005C0B64 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D25227F9CAA005C0B64 /* Colors.swift */; };
 		70572CB92273A19500297421 /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CB82273A19500297421 /* LaunchController.swift */; };
 		70572CBB2273A1A300297421 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBA2273A1A300297421 /* AuthController.swift */; };
 		70572CBD2273A1B400297421 /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBC2273A1B400297421 /* DashboardController.swift */; };
@@ -63,6 +68,11 @@
 		7007208F227ADA3A003F3DEF /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		700BDDF6227A28F300276068 /* HoldingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingHeaderView.swift; sourceTree = "<group>"; };
 		700BDDF8227A297600276068 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
+		702B2D16227F6798005C0B64 /* db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db.xcdatamodel; sourceTree = "<group>"; };
+		702B2D18227F6832005C0B64 /* Holding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Holding.swift; sourceTree = "<group>"; };
+		702B2D1A227F683F005C0B64 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		702B2D22227F7CA1005C0B64 /* HoldingDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingDto.swift; sourceTree = "<group>"; };
+		702B2D25227F9CAA005C0B64 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		70572CB82273A19500297421 /* LaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchController.swift; sourceTree = "<group>"; };
 		70572CBA2273A1A300297421 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		70572CBC2273A1B400297421 /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
@@ -150,6 +160,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		702B2D12227F6745005C0B64 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				702B2D15227F6798005C0B64 /* db.xcdatamodeld */,
+				702B2D21227F7C90005C0B64 /* Mappers */,
+				702B2D13227F674A005C0B64 /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		702B2D13227F674A005C0B64 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				702B2D14227F6766005C0B64 /* Generated */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		702B2D14227F6766005C0B64 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		702B2D21227F7C90005C0B64 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				702B2D22227F7CA1005C0B64 /* HoldingDto.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		702B2D24227F9C96005C0B64 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				702B2D25227F9CAA005C0B64 /* Colors.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		70572CB52273A14500297421 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,11 +235,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		70572CB72273A15900297421 /* Models */ = {
+		70572CB72273A15900297421 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				702B2D18227F6832005C0B64 /* Holding.swift */,
+				702B2D1A227F683F005C0B64 /* Transaction.swift */,
 			);
-			path = Models;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		70E96B292272E7F700A5EB54 = {
@@ -216,8 +269,10 @@
 		70E96B342272E7F700A5EB54 /* Lannister */ = {
 			isa = PBXGroup;
 			children = (
+				702B2D24227F9C96005C0B64 /* Utilities */,
 				70572CB52273A14500297421 /* Controllers */,
-				70572CB72273A15900297421 /* Models */,
+				702B2D12227F6745005C0B64 /* Data */,
+				70572CB72273A15900297421 /* Entities */,
 				70572CB62273A15100297421 /* Views */,
 				70E96B352272E7F700A5EB54 /* AppDelegate.swift */,
 				70E96B392272E7F700A5EB54 /* Main.storyboard */,
@@ -258,6 +313,7 @@
 				70E96B2F2272E7F700A5EB54 /* Frameworks */,
 				70E96B302272E7F700A5EB54 /* Resources */,
 				B56E350878F5845F0CB75CE6 /* [CP] Embed Pods Frameworks */,
+				702B2D1C227F6889005C0B64 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -421,6 +477,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		702B2D1C227F6889005C0B64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# mogenerator -m Lannister/Data/db.xcdatamodeld/db.xcdatamodel -O Lannister/Data/Models/Generated --swift --template-var arc=true\n";
+		};
 		AAF2164A70343FDBBD0481DA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,6 +558,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				707FB21022773DEC005B29A2 /* CurrencyCell.swift in Sources */,
+				702B2D19227F6832005C0B64 /* Holding.swift in Sources */,
+				702B2D23227F7CA1005C0B64 /* HoldingDto.swift in Sources */,
+				702B2D1B227F683F005C0B64 /* Transaction.swift in Sources */,
 				707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */,
 				70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */,
 				70572CBF2273A1D600297421 /* SettingsController.swift in Sources */,
@@ -493,6 +569,7 @@
 				70572CBB2273A1A300297421 /* AuthController.swift in Sources */,
 				70572CCD2274788D00297421 /* DashboardHeaderView.swift in Sources */,
 				700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */,
+				702B2D17227F6798005C0B64 /* db.xcdatamodeld in Sources */,
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
 				707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */,
 				70572CC12273A1E100297421 /* HoldingController.swift in Sources */,
@@ -501,6 +578,7 @@
 				70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */,
 				70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */,
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
+				702B2D26227F9CAA005C0B64 /* Colors.swift in Sources */,
 				70572CB92273A19500297421 /* LaunchController.swift in Sources */,
 				70572CC72273A28700297421 /* ColorCodesController.swift in Sources */,
 				700BDDF9227A297600276068 /* TransactionCell.swift in Sources */,
@@ -839,6 +917,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		702B2D15227F6798005C0B64 /* db.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				702B2D16227F6798005C0B64 /* db.xcdatamodel */,
+			);
+			currentVersion = 702B2D16227F6798005C0B64 /* db.xcdatamodel */;
+			path = db.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 70E96B2A2272E7F700A5EB54 /* Project object */;
 }
