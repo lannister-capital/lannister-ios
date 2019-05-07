@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TransactionCell: UICollectionViewCell {
+class TransactionCell: UITableViewCell {
     
     @IBOutlet weak var colorView    : UIView!
     @IBOutlet weak var nameLabel    : UILabel!
