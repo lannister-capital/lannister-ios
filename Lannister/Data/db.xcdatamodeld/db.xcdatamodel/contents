@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="HoldingManagedObject" representedClassName=".HoldingManagedObject" syncable="YES" codeGenerationType="class">
-        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hex_color" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TransactionManagedObject" inverseName="holding" inverseEntity="TransactionManagedObject" syncable="YES"/>
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="currency"/>
+            </userInfo>
+        </attribute>
+        <attribute name="hex_color" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="hex_color"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="value"/>
+            </userInfo>
+        </attribute>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TransactionManagedObject" inverseName="holding" inverseEntity="TransactionManagedObject" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="transactions"/>
+            </userInfo>
+        </relationship>
     </entity>
     <entity name="TransactionManagedObject" representedClassName=".TransactionManagedObject" syncable="YES" codeGenerationType="class">
-        <attribute name="identifier" attributeType="String" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="type" attributeType="String" syncable="YES"/>
-        <attribute name="value" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="identifier" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="identifier"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <attribute name="type" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="type"/>
+            </userInfo>
+        </attribute>
+        <attribute name="value" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="value"/>
+            </userInfo>
+        </attribute>
         <relationship name="holding" maxCount="1" deletionRule="Nullify" destinationEntity="HoldingManagedObject" inverseName="transactions" inverseEntity="HoldingManagedObject" syncable="YES"/>
     </entity>
     <elements>

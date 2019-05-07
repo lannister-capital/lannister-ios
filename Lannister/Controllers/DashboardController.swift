@@ -14,8 +14,8 @@ class DashboardController: UIViewController {
     var navBarTitleLabel                        : UILabel!
     @IBOutlet weak var collectionView           : UICollectionView!
     @IBOutlet weak var emptyStateContainerView  : UIView!
-    var holdings                                : [Holding]!
-    var totalValue                              : Double!
+    var holdings                                : [Holding]! = []
+    var totalValue                              : Double! = 0
 
     
     override func viewDidLoad() {
