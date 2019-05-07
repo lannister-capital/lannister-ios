@@ -9,6 +9,7 @@
 import UIKit
 import Groot
 import MagicalRecord
+import BiometricAuthentication
 
 class SettingsController: UIViewController {
     
@@ -27,6 +28,77 @@ class SettingsController: UIViewController {
         
         navigationController?.dismiss(animated: true, completion: nil)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingsCell
+        cell.bioAccessSwitch.addTarget(self, action: #selector(stateChanged), for: .valueChanged)
+        
+        if let bioAccess = UserDefaults.standard.object(forKey: "bioAccess") as? Bool {
+            if bioAccess == true {
+                cell.bioAccessSwitch.setOn(true, animated: true)
+            }
+        }
+    }
+    
+    @IBAction func bioAccessSwitch(_ sender: Any) {
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingsCell
+        if cell.bioAccessSwitch.isOn {
+             cell.bioAccessSwitch.setOn(true, animated: true)
+        } else {
+             cell.bioAccessSwitch.setOn(false, animated:true)
+        }
+    }
+    
+    @objc func stateChanged(switchState: UISwitch) {
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingsCell
+        if cell.bioAccessSwitch.isOn {
+            askBioAccess()
+        } else {
+            UserDefaults.standard.set(false, forKey: "bioAccess")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    func askBioAccess() {
+        
+        let alert = UIAlertController(title: "Biometric access", message: "Enable authentication.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title:  NSLocalizedString("Yes, please!", comment: ""), style: .cancel, handler: { _ in
+            
+            BioMetricAuthenticator.authenticateWithBioMetrics(reason: "") { (result) in
+                switch result {
+                case .success( _):
+                    UserDefaults.standard.set(true, forKey: "bioAccess")
+                    UserDefaults.standard.synchronize()
+                    
+                case .failure(let error):
+                    switch error {
+                    // device does not support biometric (face id or touch id) authentication
+                    case .biometryNotAvailable:
+                        self.showErrorAlert(message: error.message())
+                        
+                    // No biometry enrolled in this device, ask user to register fingerprint or face
+                    case .biometryNotEnrolled:
+                        self.showGotoSettingsAlert(message: error.message())
+                        
+                    // do nothing on canceled by system or user
+                    case .fallback, .biometryLockedout, .canceledBySystem, .canceledByUser:
+                        self.showPasscodeAuthentication(message: error.message())
+
+                    // show error for any other reason
+                    default:
+                        self.showErrorAlert(message: error.message())
+                    }
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title:  NSLocalizedString("No, thank you!", comment: ""), style: .default, handler: { _ in
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingsCell
+            cell.bioAccessSwitch.setOn(false, animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension SettingsController : UITableViewDataSource {
@@ -39,7 +111,11 @@ extension SettingsController : UITableViewDataSource {
         if section == 0 {
             return 3
         } else if section == 1 {
-            return 2
+//            return 2
+            if BioMetricAuthenticator.shared.faceIDAvailable() || BioMetricAuthenticator.shared.touchIDAvailable() {
+                return 1
+            }
+            return 0
         } else {
             return 3
         }
@@ -92,21 +168,28 @@ extension SettingsController : UITableViewDataSource {
                 return cell
             }
         } else if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
-                cell.logo.image = UIImage(named: "settings-passcode")
-                cell.nameLabel.text = "Change passcode"
-                cell.cellIndicator.isHidden = false
-                cell.currencyLabel.isHidden = true
-                return cell
-            } else {
+//            if indexPath.row == 0 {
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
+//                cell.logo.image = UIImage(named: "settings-passcode")
+//                cell.nameLabel.text = "Change passcode"
+//                cell.cellIndicator.isHidden = false
+//                cell.currencyLabel.isHidden = true
+//                return cell
+//            } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
                 cell.logo.image = UIImage(named: "settings-fingerprint")
-                cell.nameLabel.text = "Sign in with Touch ID"
+                if BioMetricAuthenticator.shared.faceIDAvailable() {
+                    cell.nameLabel.text = "Sign in with Face ID"
+                }
+                if BioMetricAuthenticator.shared.touchIDAvailable() {
+                    cell.nameLabel.text = "Sign in with Touch ID"
+                }
                 cell.cellIndicator.isHidden = true
                 cell.currencyLabel.isHidden = true
+                cell.bioAccessSwitch.isHidden = false
+                cell.bioAccessSwitch.isUserInteractionEnabled = true
                 return cell
-            }
+//            }
         } else {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell

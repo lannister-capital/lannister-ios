@@ -691,9 +691,21 @@
                                                         <constraint firstAttribute="height" constant="1" id="Sl3-1U-PfX"/>
                                                     </constraints>
                                                 </view>
+                                                <switch hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="clv-Yh-pqs">
+                                                    <rect key="frame" x="351" y="18" width="50" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="48" id="ADf-cm-GPd"/>
+                                                        <constraint firstAttribute="height" constant="22" id="vSx-fp-xhN"/>
+                                                    </constraints>
+                                                    <color key="onTintColor" red="0.1647058824" green="0.21176470589999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="bioAccessSwitch:" destination="eTY-jA-SqR" eventType="touchUpInside" id="HuW-Pz-Rsi"/>
+                                                    </connections>
+                                                </switch>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="4Sa-Ia-qta" firstAttribute="centerY" secondItem="ZXG-e9-NQe" secondAttribute="centerY" id="0wU-4E-9Bx"/>
+                                                <constraint firstItem="clv-Yh-pqs" firstAttribute="centerY" secondItem="ZXG-e9-NQe" secondAttribute="centerY" id="8Vx-Om-ut7"/>
                                                 <constraint firstAttribute="bottom" secondItem="N5J-uy-DNf" secondAttribute="bottom" id="BXZ-H5-Fgn"/>
                                                 <constraint firstItem="UiV-DT-mMv" firstAttribute="centerY" secondItem="ZXG-e9-NQe" secondAttribute="centerY" id="GDD-uR-9Bf"/>
                                                 <constraint firstAttribute="trailing" secondItem="N5J-uy-DNf" secondAttribute="trailing" constant="15" id="Ieh-0b-Qur"/>
@@ -702,11 +714,13 @@
                                                 <constraint firstItem="4Sa-Ia-qta" firstAttribute="leading" secondItem="Xcg-Z5-m9q" secondAttribute="trailing" constant="9" id="cii-KR-a36"/>
                                                 <constraint firstItem="zlS-i2-z8B" firstAttribute="centerY" secondItem="ZXG-e9-NQe" secondAttribute="centerY" id="ioM-KW-jtz"/>
                                                 <constraint firstItem="Xcg-Z5-m9q" firstAttribute="centerY" secondItem="ZXG-e9-NQe" secondAttribute="centerY" id="lRo-ed-Jga"/>
+                                                <constraint firstAttribute="trailing" secondItem="clv-Yh-pqs" secondAttribute="trailing" constant="15" id="moK-7l-dVd"/>
                                                 <constraint firstItem="zlS-i2-z8B" firstAttribute="leading" secondItem="ZXG-e9-NQe" secondAttribute="leading" constant="64" id="t9r-0S-E7U"/>
                                                 <constraint firstAttribute="trailing" secondItem="4Sa-Ia-qta" secondAttribute="trailing" constant="15" id="uOI-9r-8ct"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bioAccessSwitch" destination="clv-Yh-pqs" id="lTe-Ud-YpA"/>
                                             <outlet property="cellIndicator" destination="4Sa-Ia-qta" id="qTP-ik-vuA"/>
                                             <outlet property="currencyLabel" destination="Xcg-Z5-m9q" id="QbL-en-BaY"/>
                                             <outlet property="logo" destination="UiV-DT-mMv" id="NU4-Wn-bYO"/>

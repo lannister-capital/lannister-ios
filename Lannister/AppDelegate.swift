@@ -8,6 +8,7 @@
 
 import UIKit
 import MagicalRecord
+import BiometricAuthentication
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         MagicalRecord.setupCoreDataStack(withAutoMigratingSqliteStoreNamed: "db")
-
+        
+        checkAuthentication()
+        
         return true
     }
 
@@ -34,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        checkAuthentication()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -52,5 +56,36 @@ extension AppDelegate {
     var rootViewController: RootController {
         return window!.rootViewController as! RootController
     }
+    
+    func checkAuthentication() {
+        if let bioAccess = UserDefaults.standard.object(forKey: "bioAccess") as? Bool {
+            if bioAccess == true {
+                BioMetricAuthenticator.authenticateWithBioMetrics(reason: "") { (result) in
+                    
+                    switch result {
+                    case .success( _):
+                        print("Authentication Successful")
+                    case .failure(let error):
+                        print("Authentication Failed")
+                        self.showPasscodeAuthentication(message: error.message())
+                    }
+                }
+            }
+        }
+    }
+    
+    func showPasscodeAuthentication(message: String) {
+        
+        BioMetricAuthenticator.authenticateWithPasscode(reason: message) { [weak self] (result) in
+            switch result {
+            case .success( _):
+                print("Authentication Successful")
+            case .failure(let error):
+                print(error.message())
+                self!.showPasscodeAuthentication(message: message)
+            }
+        }
+    }
+
 }
 

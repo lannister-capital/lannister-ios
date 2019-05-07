@@ -8,6 +8,7 @@
 
 import UIKit
 import MagicalRecord
+import BiometricAuthentication
 
 class CreateHoldingController: UIViewController {
     
@@ -81,7 +82,56 @@ class CreateHoldingController: UIViewController {
             newHolding!.hex_color = colorCell.colorCodeLabel.text
         }
         
+        var askBioAccess = false
+        if HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())?.count == 0 {
+            askBioAccess = true
+        }
+        
         NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+        
+        if askBioAccess {
+            let alert = UIAlertController(title: "Biometric access", message: "Enable authentication.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title:  NSLocalizedString("Yes, please!", comment: ""), style: .cancel, handler: { _ in
+                
+                BioMetricAuthenticator.authenticateWithBioMetrics(reason: "") { (result) in
+                    switch result {
+                    case .success( _):
+                        UserDefaults.standard.set(true, forKey: "bioAccess")
+                        UserDefaults.standard.synchronize()
+
+                    case .failure(let error):
+                        switch error {
+                            
+                        // device does not support biometric (face id or touch id) authentication
+                        case .biometryNotAvailable:
+                            self.showErrorAlert(message: error.message())
+                            
+                        // No biometry enrolled in this device, ask user to register fingerprint or face
+                        case .biometryNotEnrolled:
+                            self.showGotoSettingsAlert(message: error.message())
+                            
+                        // do nothing on canceled by system or user
+                        case .fallback, .biometryLockedout, .canceledBySystem, .canceledByUser:
+                            self.showPasscodeAuthentication(message: error.message())
+                            
+                        // show error for any other reason
+                        default:
+                            self.showErrorAlert(message: error.message())
+                        }
+                    }
+                }
+            }))
+            alert.addAction(UIAlertAction(title:  NSLocalizedString("No, thank you!", comment: ""), style: .default, handler: { _ in
+                self.dismiss()
+            }))
+            self.present(alert, animated: true, completion: nil)
+
+        } else {
+            dismiss()
+        }
+    }
+    
+    func dismiss() {
         
         if holding == nil {
             dismiss(animated: true, completion: nil)
