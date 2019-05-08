@@ -12,8 +12,9 @@ import BiometricAuthentication
 
 class CreateHoldingController: UIViewController {
     
-    var holding : Holding!
-    @IBOutlet weak var tableView : UITableView!
+    var holding                     : Holding!
+    @IBOutlet weak var tableView    : UITableView!
+    var tap                         : UITapGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,23 @@ class CreateHoldingController: UIViewController {
             let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
             navigationItem.leftBarButtonItem = cancelButton
         }
+        
+        if tap == nil {
+            tap = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
+            navigationController!.view.addGestureRecognizer(tap)
+            tableView.addGestureRecognizer(tap)
+        }
     }
+    
+    @objc func removeKeyboard() {
+        if tap != nil {
+            navigationController!.view.removeGestureRecognizer(tap)
+            tableView.addGestureRecognizer(tap)
+        }
+        tap = nil
+        self.view.endEditing(true)
+    }
+
     
     @objc func dismissVC() {
 
@@ -205,5 +222,13 @@ extension CreateHoldingController : ColorCodesDelegate {
         let colorCodeCell = tableView.cellForRow(at: indexPath) as! ColorCodeCell
         colorCodeCell.colorCodeLabel.text = hex
         colorCodeCell.colorCodeView.backgroundColor = Colors.hexStringToUIColor(hex: hex)
+    }
+}
+
+extension CreateHoldingController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
 }

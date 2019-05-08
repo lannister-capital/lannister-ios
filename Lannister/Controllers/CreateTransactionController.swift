@@ -14,6 +14,7 @@ class CreateTransactionController: UIViewController {
     @IBOutlet weak var tableView    : UITableView!
     var transaction                 : Transaction!
     var holding                     : Holding!
+    var tap                         : UITapGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,23 @@ class CreateTransactionController: UIViewController {
             [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+        
+        if tap == nil {
+            tap = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
+            navigationController!.view.addGestureRecognizer(tap)
+            tableView.addGestureRecognizer(tap)
+        }
     }
+    
+    @objc func removeKeyboard() {
+        if tap != nil {
+            navigationController!.view.removeGestureRecognizer(tap)
+            tableView.addGestureRecognizer(tap)
+        }
+        tap = nil
+        self.view.endEditing(true)
+    }
+
     
     @IBAction func save() {
         
@@ -106,3 +123,10 @@ extension CreateTransactionController : UITableViewDelegate {
     }
 }
 
+extension CreateTransactionController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+}
