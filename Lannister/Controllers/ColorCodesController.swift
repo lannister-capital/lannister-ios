@@ -16,6 +16,7 @@ class ColorCodesController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     var delegate                 : ColorCodesDelegate!
+    var activeField: UITextField?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,47 @@ class ColorCodesController: UIViewController {
             [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+        
+        registerForKeyboardNotifications()
     }
+    
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWasShown(aNotification:)),
+                                               name: UIResponder.keyboardDidShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillBeHidden(aNotification:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWasShown(aNotification: NSNotification) {
+        let info = aNotification.userInfo as! [String: AnyObject],
+        kbSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue.size,
+        contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
+        
+        self.tableView.contentInset = contentInsets
+        self.tableView.scrollIndicatorInsets = contentInsets
+        
+        // If active text field is hidden by keyboard, scroll it so it's visible
+        // Your app might not need or want this behavior.
+        var aRect = self.view.frame
+        aRect.size.height -= kbSize.height
+        
+        if !aRect.contains(activeField!.frame.origin) {
+            self.tableView.scrollRectToVisible(activeField!.frame, animated: true)
+        }
+    }
+    
+    @objc func keyboardWillBeHidden(aNotification: NSNotification) {
+        let contentInsets = UIEdgeInsets.zero
+        self.tableView.contentInset = contentInsets
+        self.tableView.scrollIndicatorInsets = contentInsets
+    }
+
 }
+
 
 extension ColorCodesController : UITableViewDataSource {
     
@@ -89,8 +129,19 @@ extension ColorCodesController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
-        delegate.newColorCode(hex: textField.text!)
-        navigationController?.popViewController(animated: true)
+        if textField.text! != "" {
+            delegate.newColorCode(hex: textField.text!)
+            navigationController?.popViewController(animated: true)
+        }
         return true
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeField = nil
+    }
+
 }
