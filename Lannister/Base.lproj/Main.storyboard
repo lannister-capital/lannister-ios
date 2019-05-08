@@ -979,6 +979,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="percentageLabel" destination="H44-LX-T5n" id="F1I-ff-cpf"/>
                                             <outlet property="totalValueTextField" destination="Abr-U8-d23" id="HGf-7G-16d"/>
                                         </connections>
                                     </tableViewCell>

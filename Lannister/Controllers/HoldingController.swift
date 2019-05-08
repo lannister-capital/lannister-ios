@@ -11,6 +11,7 @@ import MagicalRecord
 
 class HoldingController: UIViewController {
 
+    var totalValue                      : Double!
     @IBOutlet weak var barView          : UIView!
     @IBOutlet weak var valueLabel       : UILabel!
     @IBOutlet weak var tableView        : UITableView!
@@ -66,6 +67,7 @@ class HoldingController: UIViewController {
         
         let createHoldingVC = storyboard?.instantiateViewController(withIdentifier: "createHoldingVC") as! CreateHoldingController
         createHoldingVC.holding = holding
+        createHoldingVC.totalValue = totalValue
         navigationController?.pushViewController(createHoldingVC, animated: true)
     }
     

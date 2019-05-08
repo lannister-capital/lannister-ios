@@ -158,6 +158,7 @@ extension DashboardController : UICollectionViewDelegate {
             
             let holdingVC = storyboard?.instantiateViewController(withIdentifier: "holdingVC") as! HoldingController
             holdingVC.holding = holding
+            holdingVC.totalValue = totalValue
             navigationController?.pushViewController(holdingVC, animated: true)
         }
     }

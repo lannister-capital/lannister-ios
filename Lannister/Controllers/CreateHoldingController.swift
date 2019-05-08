@@ -12,6 +12,7 @@ import BiometricAuthentication
 
 class CreateHoldingController: UIViewController {
     
+    var totalValue                  : Double!
     var holding                     : Holding!
     @IBOutlet weak var tableView    : UITableView!
     var tap                         : UITapGestureRecognizer!
@@ -179,6 +180,7 @@ extension CreateHoldingController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "totalValueCellId", for: indexPath) as! TotalValueCell
             if holding != nil {
                 cell.totalValueTextField.text = String(format: "%.2f", holding.value!)
+                cell.percentageLabel.text = "\(String(format: "%.2f", holding.value!/totalValue*100))%"
             }
             return cell
 

@@ -11,4 +11,5 @@ import UIKit
 class TotalValueCell: UITableViewCell {
 
     @IBOutlet weak var totalValueTextField : UITextField!
+    @IBOutlet weak var percentageLabel  : UILabel!
 }
