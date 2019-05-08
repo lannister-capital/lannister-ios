@@ -36,14 +36,12 @@ class CreateHoldingController: UIViewController {
         if tap == nil {
             tap = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
             navigationController!.view.addGestureRecognizer(tap)
-            tableView.addGestureRecognizer(tap)
         }
     }
     
     @objc func removeKeyboard() {
         if tap != nil {
             navigationController!.view.removeGestureRecognizer(tap)
-            tableView.addGestureRecognizer(tap)
         }
         tap = nil
         self.view.endEditing(true)
@@ -206,6 +204,8 @@ extension CreateHoldingController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        removeKeyboard()
      
         if indexPath.row == 3 {
             let colorCodeVC = storyboard?.instantiateViewController(withIdentifier: "colorCodesVC") as! ColorCodesController

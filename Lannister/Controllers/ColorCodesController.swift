@@ -84,3 +84,13 @@ extension ColorCodesController : UITableViewDelegate {
         navigationController?.popViewController(animated: true)
     }
 }
+
+extension ColorCodesController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        delegate.newColorCode(hex: textField.text!)
+        navigationController?.popViewController(animated: true)
+        return true
+    }
+}

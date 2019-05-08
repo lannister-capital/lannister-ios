@@ -27,14 +27,12 @@ class CreateTransactionController: UIViewController {
         if tap == nil {
             tap = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
             navigationController!.view.addGestureRecognizer(tap)
-            tableView.addGestureRecognizer(tap)
         }
     }
     
     @objc func removeKeyboard() {
         if tap != nil {
             navigationController!.view.removeGestureRecognizer(tap)
-            tableView.addGestureRecognizer(tap)
         }
         tap = nil
         self.view.endEditing(true)
@@ -120,6 +118,7 @@ extension CreateTransactionController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        removeKeyboard()
     }
 }
 
