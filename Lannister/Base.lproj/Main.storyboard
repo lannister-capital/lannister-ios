@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-y8-CAs">
-                                <rect key="frame" x="108.5" y="350.5" width="197" height="195"/>
+                                <rect key="frame" x="108.5" y="350.5" width="197.00000000000006" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="Zb2-zU-X0s"/>
                                     <constraint firstAttribute="width" constant="197" id="hip-JA-0qp"/>
@@ -401,7 +401,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4i-DF-Fyq">
-                                                    <rect key="frame" x="254" y="8.5" width="145" height="30"/>
+                                                    <rect key="frame" x="254" y="9" width="145" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="145" id="0t7-ko-uaJ"/>
                                                         <constraint firstAttribute="height" constant="30" id="jRr-jD-2he"/>
@@ -431,7 +431,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zqt-bn-0kO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="6" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="6" height="44"/>
                                                     <color key="backgroundColor" red="0.0" green="0.70196078431372544" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="6" id="0KK-N3-z3I"/>
@@ -456,7 +456,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUG-dF-Pkp">
-                                                    <rect key="frame" x="0.0" y="42.5" width="414" height="1"/>
+                                                    <rect key="frame" x="0.0" y="43" width="414" height="1"/>
                                                     <color key="backgroundColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="kqz-sT-WdX"/>
@@ -523,7 +523,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="5a5-OH-OBA">
-                                <rect key="frame" x="108.5" y="350.5" width="197" height="195"/>
+                                <rect key="frame" x="108.5" y="350.5" width="197.00000000000006" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="CtT-zN-hGP"/>
                                     <constraint firstAttribute="width" constant="197" id="PQw-6M-FsJ"/>
@@ -854,7 +854,7 @@
                                 <rect key="frame" x="0.0" y="4" width="414" height="432"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="holdingNameCellId" id="9zv-JU-XWk" customClass="HoldingNameCell" customModule="Lannister" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="holdingNameCellId" id="9zv-JU-XWk" customClass="HoldingNameCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9zv-JU-XWk" id="3nH-Fu-YWo">
@@ -903,7 +903,7 @@
                                             <outlet property="holdingNameTextField" destination="IPK-Ve-Qcz" id="0D7-FI-w97"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="totalValueCellId" id="hS5-HL-rXx" customClass="TotalValueCell" customModule="Lannister" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="totalValueCellId" id="hS5-HL-rXx" customClass="TotalValueCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="137" width="414" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hS5-HL-rXx" id="I2Q-Tz-gyL">
@@ -1338,7 +1338,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionNameCellId" id="Uqo-Yr-DE6" customClass="TransactionNameCell" customModule="Lannister" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="transactionNameCellId" id="Uqo-Yr-DE6" customClass="TransactionNameCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uqo-Yr-DE6" id="7ax-dr-rGl">
@@ -1442,7 +1442,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="valueCellId" id="lq4-bu-rIa" customClass="TotalValueCell" customModule="Lannister" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="valueCellId" id="lq4-bu-rIa" customClass="TotalValueCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="246" width="414" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lq4-bu-rIa" id="U6T-1u-u3f">
