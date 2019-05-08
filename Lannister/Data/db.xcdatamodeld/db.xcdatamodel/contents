@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CurrencyManagedObject" representedClassName="CurrencyManagedObject" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="euro_rate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="symbol" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="holdings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HoldingManagedObject" inverseName="currency" inverseEntity="HoldingManagedObject" syncable="YES"/>
+    </entity>
     <entity name="HoldingManagedObject" representedClassName=".HoldingManagedObject" syncable="YES" codeGenerationType="class">
-        <attribute name="currency" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="JSONKeyPath" value="currency"/>
-            </userInfo>
-        </attribute>
         <attribute name="hex_color" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="hex_color"/>
@@ -21,6 +23,7 @@
                 <entry key="JSONKeyPath" value="value"/>
             </userInfo>
         </attribute>
+        <relationship name="currency" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyManagedObject" inverseName="holdings" inverseEntity="CurrencyManagedObject" syncable="YES"/>
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TransactionManagedObject" inverseName="holding" inverseEntity="TransactionManagedObject" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="transactions"/>
@@ -51,7 +54,8 @@
         <relationship name="holding" maxCount="1" deletionRule="Nullify" destinationEntity="HoldingManagedObject" inverseName="transactions" inverseEntity="HoldingManagedObject" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HoldingManagedObject" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="TransactionManagedObject" positionX="-54" positionY="18" width="128" height="120"/>
+        <element name="HoldingManagedObject" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="TransactionManagedObject" positionX="-311.4921875" positionY="116.125" width="128" height="120"/>
+        <element name="CurrencyManagedObject" positionX="-377.32421875" positionY="-52.68359375" width="128" height="118"/>
     </elements>
 </model>

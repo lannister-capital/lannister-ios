@@ -47,7 +47,6 @@ class CreateHoldingController: UIViewController {
         tap = nil
         self.view.endEditing(true)
     }
-
     
     @objc func dismissVC() {
 
@@ -79,7 +78,7 @@ class CreateHoldingController: UIViewController {
                 newHolding = HoldingManagedObject(context: NSManagedObjectContext.mr_default())
             }
             newHolding!.name = holdingNameTextField!.text
-            newHolding!.currency = "€"
+//            newHolding!.currency = "€"
             
             let indexPath = IndexPath(row: 1, section: 0)
             let cell = tableView.cellForRow(at: indexPath) as! TotalValueCell

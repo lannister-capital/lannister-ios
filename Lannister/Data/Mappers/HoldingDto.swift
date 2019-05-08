@@ -16,8 +16,8 @@ class HoldingDto : NSObject {
         var holding = Holding(with: nil)
         holding.name = managedObject.name
         holding.value = managedObject.value
-        holding.currency = managedObject.currency
         holding.hexColor = managedObject.hex_color
+        holding.currency = CurrencyDto().currency(from: managedObject.currency!)
         return holding
     }
     

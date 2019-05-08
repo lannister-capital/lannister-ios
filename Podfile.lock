@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.8.0)
   - BiometricAuthentication (3.0)
   - Blockstack (0.5.4):
     - CryptoSwift
@@ -15,6 +16,7 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - Alamofire (= 4.8.0)
   - BiometricAuthentication
   - Blockstack
   - Charts
@@ -24,6 +26,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - BiometricAuthentication
     - Blockstack
     - Charts
@@ -42,6 +45,7 @@ CHECKOUT OPTIONS:
     :tag: v2.3.3
 
 SPEC CHECKSUMS:
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   BiometricAuthentication: e39b1a55040d679d5dbc4fa90d76e067c432de7f
   Blockstack: 872c6a86c8fe80487f439966303dd2cb8d888603
   Charts: ec1f57f9340054155691e84d4544a1d239d382c5
@@ -50,6 +54,6 @@ SPEC CHECKSUMS:
   MagicalRecord: e3dfdee87c234c6d460dbd5d8a32e3cb4de223aa
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 6a7a9f7f552058533f1f69079944727b5928e253
+PODFILE CHECKSUM: 8c442bd907b35bd24ea220ea32679ebe4c681417
 
 COCOAPODS: 1.6.1

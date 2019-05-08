@@ -5,6 +5,7 @@ import Foundation
 import CoreData
 
 public enum TransactionManagedObjectAttributes: String {
+    case identifier = "identifier"
     case name = "name"
     case type = "type"
     case value = "value"
@@ -45,13 +46,16 @@ open class _TransactionManagedObject: NSManagedObject {
     // MARK: - Properties
 
     @NSManaged open
-    var name: String?
+    var identifier: String!
 
     @NSManaged open
-    var type: String?
+    var name: String!
 
     @NSManaged open
-    var value: Double // Optional scalars not supported
+    var type: String!
+
+    @NSManaged open
+    var value: Double
 
     // MARK: - Relationships
 

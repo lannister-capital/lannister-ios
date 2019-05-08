@@ -13,7 +13,7 @@ struct Holding {
     var name        : String!
     var hexColor    : String!
     var value       : Double!
-    var currency    : String!
+    var currency    : Currency!
     
     init(with dictionary: [String : Any]?) {
 

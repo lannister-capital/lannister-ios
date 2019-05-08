@@ -13,6 +13,11 @@
 		700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF6227A28F300276068 /* HoldingHeaderView.swift */; };
 		700BDDF9227A297600276068 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF8227A297600276068 /* TransactionCell.swift */; };
 		7016B4AA2282EBC3000C49B8 /* TransactionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4A92282EBC3000C49B8 /* TransactionTypeCell.swift */; };
+		7016B4AD2283070B000C49B8 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4AC2283070B000C49B8 /* ApiManager.swift */; };
+		7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4AE22830737000C49B8 /* BaseApiService.swift */; };
+		7016B4B12283076D000C49B8 /* CurrencyApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B02283076D000C49B8 /* CurrencyApiService.swift */; };
+		7016B4B322830880000C49B8 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B222830880000C49B8 /* Currency.swift */; };
+		7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B422830B0E000C49B8 /* CurrencyDto.swift */; };
 		702B2D17227F6798005C0B64 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D15227F6798005C0B64 /* db.xcdatamodeld */; };
 		702B2D19227F6832005C0B64 /* Holding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D18227F6832005C0B64 /* Holding.swift */; };
 		702B2D1B227F683F005C0B64 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D1A227F683F005C0B64 /* Transaction.swift */; };
@@ -73,6 +78,11 @@
 		700BDDF6227A28F300276068 /* HoldingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingHeaderView.swift; sourceTree = "<group>"; };
 		700BDDF8227A297600276068 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		7016B4A92282EBC3000C49B8 /* TransactionTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTypeCell.swift; sourceTree = "<group>"; };
+		7016B4AC2283070B000C49B8 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		7016B4AE22830737000C49B8 /* BaseApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiService.swift; sourceTree = "<group>"; };
+		7016B4B02283076D000C49B8 /* CurrencyApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyApiService.swift; sourceTree = "<group>"; };
+		7016B4B222830880000C49B8 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		7016B4B422830B0E000C49B8 /* CurrencyDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDto.swift; sourceTree = "<group>"; };
 		702B2D16227F6798005C0B64 /* db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db.xcdatamodel; sourceTree = "<group>"; };
 		702B2D18227F6832005C0B64 /* Holding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Holding.swift; sourceTree = "<group>"; };
 		702B2D1A227F683F005C0B64 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -168,6 +178,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7016B4AB228306DB000C49B8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7016B4AC2283070B000C49B8 /* ApiManager.swift */,
+				7016B4AE22830737000C49B8 /* BaseApiService.swift */,
+				7016B4B02283076D000C49B8 /* CurrencyApiService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		702B2D12227F6745005C0B64 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +216,7 @@
 		702B2D21227F7C90005C0B64 /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
+				7016B4B422830B0E000C49B8 /* CurrencyDto.swift */,
 				702B2D22227F7CA1005C0B64 /* HoldingDto.swift */,
 				7073A69A22806BAE00049A2E /* TransactionDto.swift */,
 			);
@@ -250,6 +271,7 @@
 		70572CB72273A15900297421 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				7016B4B222830880000C49B8 /* Currency.swift */,
 				702B2D18227F6832005C0B64 /* Holding.swift */,
 				702B2D1A227F683F005C0B64 /* Transaction.swift */,
 			);
@@ -284,6 +306,7 @@
 				70572CB52273A14500297421 /* Controllers */,
 				702B2D12227F6745005C0B64 /* Data */,
 				70572CB72273A15900297421 /* Entities */,
+				7016B4AB228306DB000C49B8 /* Services */,
 				70572CB62273A15100297421 /* Views */,
 				702B2D24227F9C96005C0B64 /* Utilities */,
 				70E96B352272E7F700A5EB54 /* AppDelegate.swift */,
@@ -504,7 +527,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# mogenerator -m Lannister/Data/db.xcdatamodeld/db.xcdatamodel -O Lannister/Data/Models/Generated --swift --template-var arc=true\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nmogenerator -m Lannister/Data/db.xcdatamodeld/db.xcdatamodel -O Lannister/Data/Models/Generated --swift --template-var arc=true\n";
 		};
 		AAF2164A70343FDBBD0481DA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -537,6 +560,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lannister/Pods-Lannister-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BiometricAuthentication/BiometricAuthentication.framework",
 				"${BUILT_PRODUCTS_DIR}/Blockstack/Blockstack.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
@@ -549,6 +573,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BiometricAuthentication.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Blockstack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
@@ -584,20 +609,25 @@
 				700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */,
 				702B2D17227F6798005C0B64 /* db.xcdatamodeld in Sources */,
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
+				7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */,
 				707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */,
 				70572CC12273A1E100297421 /* HoldingController.swift in Sources */,
 				707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */,
 				70572CBD2273A1B400297421 /* DashboardController.swift in Sources */,
 				70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */,
 				70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */,
+				7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */,
 				7073A69B22806BAE00049A2E /* TransactionDto.swift in Sources */,
 				7073A69922806A6600049A2E /* TransactionNameCell.swift in Sources */,
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
+				7016B4B12283076D000C49B8 /* CurrencyApiService.swift in Sources */,
 				702B2D26227F9CAA005C0B64 /* Colors.swift in Sources */,
 				70572CB92273A19500297421 /* LaunchController.swift in Sources */,
 				70572CC72273A28700297421 /* ColorCodesController.swift in Sources */,
 				700BDDF9227A297600276068 /* TransactionCell.swift in Sources */,
+				7016B4B322830880000C49B8 /* Currency.swift in Sources */,
 				7016B4AA2282EBC3000C49B8 /* TransactionTypeCell.swift in Sources */,
+				7016B4AD2283070B000C49B8 /* ApiManager.swift in Sources */,
 				70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,13 +5,13 @@ import Foundation
 import CoreData
 
 public enum HoldingManagedObjectAttributes: String {
-    case currency = "currency"
     case hex_color = "hex_color"
     case name = "name"
     case value = "value"
 }
 
 public enum HoldingManagedObjectRelationships: String {
+    case currency = "currency"
     case transactions = "transactions"
 }
 
@@ -46,18 +46,18 @@ open class _HoldingManagedObject: NSManagedObject {
     // MARK: - Properties
 
     @NSManaged open
-    var currency: String?
-
-    @NSManaged open
     var hex_color: String?
 
     @NSManaged open
-    var name: String?
+    var name: String!
 
     @NSManaged open
     var value: Double // Optional scalars not supported
 
     // MARK: - Relationships
+
+    @NSManaged open
+    var currency: CurrencyManagedObject
 
     @NSManaged open
     var transactions: NSSet
