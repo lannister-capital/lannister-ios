@@ -1399,13 +1399,22 @@
                                             <outlet property="transactionNameTextField" destination="ohU-yE-3zD" id="9BR-o7-YYO"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="typeCellId" id="NqY-P8-WM7" customClass="TotalValueCell" customModule="Lannister" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="typeCellId" id="NqY-P8-WM7" customClass="TransactionTypeCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="137" width="414" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NqY-P8-WM7" id="GLW-iR-BcG">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Credit" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WK4-Fh-Dpe">
+                                                    <rect key="frame" x="15" y="47" width="362" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="RVZ-NA-M0b"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.16470588235294117" green="0.21176470588235294" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYv-eu-U2r">
                                                     <rect key="frame" x="15" y="15" width="384" height="21"/>
                                                     <constraints>
@@ -1429,30 +1438,24 @@
                                                         <constraint firstAttribute="height" constant="8" id="iik-lb-9KQ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJV-aY-xoT">
-                                                    <rect key="frame" x="15" y="51" width="147" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="Dne-z3-YlC"/>
-                                                        <constraint firstAttribute="width" constant="147" id="G0m-VN-XOy"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="YYv-eu-U2r" firstAttribute="leading" secondItem="GLW-iR-BcG" secondAttribute="leading" constant="15" id="5ym-kd-vpS"/>
                                                 <constraint firstAttribute="trailing" secondItem="DsP-3C-WwI" secondAttribute="trailing" constant="15" id="9Fl-yA-yVL"/>
                                                 <constraint firstItem="l2S-sp-F3F" firstAttribute="top" secondItem="YYv-eu-U2r" secondAttribute="bottom" constant="43" id="9Pf-DY-9Zd"/>
-                                                <constraint firstItem="QJV-aY-xoT" firstAttribute="top" secondItem="YYv-eu-U2r" secondAttribute="bottom" constant="15" id="JOD-CR-7ZZ"/>
-                                                <constraint firstItem="QJV-aY-xoT" firstAttribute="leading" secondItem="GLW-iR-BcG" secondAttribute="leading" constant="15" id="Lgw-cb-scd"/>
+                                                <constraint firstItem="WK4-Fh-Dpe" firstAttribute="leading" secondItem="GLW-iR-BcG" secondAttribute="leading" constant="15" id="Ay1-9P-MT2"/>
                                                 <constraint firstAttribute="trailing" secondItem="l2S-sp-F3F" secondAttribute="trailing" constant="15" id="OPz-Ez-FcH"/>
+                                                <constraint firstItem="DsP-3C-WwI" firstAttribute="leading" secondItem="WK4-Fh-Dpe" secondAttribute="trailing" constant="8" id="Ow3-iF-zpF"/>
                                                 <constraint firstItem="YYv-eu-U2r" firstAttribute="top" secondItem="GLW-iR-BcG" secondAttribute="top" constant="15" id="aKC-Y0-R29"/>
+                                                <constraint firstItem="WK4-Fh-Dpe" firstAttribute="top" secondItem="YYv-eu-U2r" secondAttribute="bottom" constant="11" id="fy6-fq-S4H"/>
                                                 <constraint firstItem="l2S-sp-F3F" firstAttribute="leading" secondItem="GLW-iR-BcG" secondAttribute="leading" constant="15" id="gt4-V4-0Hj"/>
                                                 <constraint firstItem="l2S-sp-F3F" firstAttribute="top" secondItem="DsP-3C-WwI" secondAttribute="bottom" constant="11.5" id="juZ-kR-Mpf"/>
                                                 <constraint firstAttribute="trailing" secondItem="YYv-eu-U2r" secondAttribute="trailing" constant="15" id="x9m-pk-njU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="transactionTypeTextField" destination="WK4-Fh-Dpe" id="jys-Nk-kvy"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="valueCellId" id="lq4-bu-rIa" customClass="TotalValueCell" customModule="Lannister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="246" width="414" height="109"/>
@@ -1551,7 +1554,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aS-IG-mHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7830" y="739"/>
+            <point key="canvasLocation" x="7828.985507246377" y="738.61607142857144"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ael-ZW-0X1">

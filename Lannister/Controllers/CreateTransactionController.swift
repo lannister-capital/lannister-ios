@@ -14,7 +14,10 @@ class CreateTransactionController: UIViewController {
     @IBOutlet weak var tableView    : UITableView!
     var transaction                 : Transaction!
     var holding                     : Holding!
-    var tap                         : UITapGestureRecognizer!
+    var transactionType             = ["Credit", "Debit"]
+    var selectedTransaction         : String!
+    var transactionPickerView       : UIPickerView!
+    var toolBar                     = UIToolbar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,20 +27,24 @@ class CreateTransactionController: UIViewController {
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
         
-        if tap == nil {
-            tap = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
-            navigationController!.view.addGestureRecognizer(tap)
-        }
+        transactionPickerView = UIPickerView(frame: CGRect(x: 0, y: view.frame.size.height, width: view.frame.size.width, height: 200))
+        transactionPickerView.delegate = self
+        transactionPickerView.dataSource = self as UIPickerViewDataSource
+        transactionPickerView.showsSelectionIndicator = true
+        
+        let btnDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(removeKeyboard))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        toolBar.isUserInteractionEnabled = true
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = false
+        toolBar.items = [spaceButton, btnDone]
     }
     
     @objc func removeKeyboard() {
-        if tap != nil {
-            navigationController!.view.removeGestureRecognizer(tap)
-        }
-        tap = nil
         self.view.endEditing(true)
     }
-
     
     @IBAction func save() {
         
@@ -61,7 +68,11 @@ class CreateTransactionController: UIViewController {
             newTransaction = TransactionManagedObject.mr_findFirst(byAttribute: "id", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())!
         }
         newTransaction.name = transactionNameTextField!.text
-        newTransaction.type = "credit"
+        if selectedTransaction == "Credit" {
+            newTransaction.type = "credit"
+        } else {
+            newTransaction.type = "debit"
+        }
         let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())
         newTransaction.holding = holdingManagedObject
         
@@ -101,8 +112,12 @@ extension CreateTransactionController : UITableViewDataSource {
             return cell
             
         } else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "typeCellId", for: indexPath) as! TotalValueCell
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "typeCellId", for: indexPath) as! TransactionTypeCell
+            if transaction?.type == "debit" {
+                cell.transactionTypeTextField.text = "Debit"
+            }
+            cell.transactionTypeTextField.inputView = transactionPickerView
+            cell.transactionTypeTextField.inputAccessoryView = toolBar
             return cell
             
         } else {
@@ -118,7 +133,11 @@ extension CreateTransactionController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        removeKeyboard()
+        if indexPath.row == 1 {
+//            showPickerView()
+        } else {
+            removeKeyboard()
+        }
     }
 }
 
@@ -127,5 +146,29 @@ extension CreateTransactionController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
+    }
+}
+
+extension CreateTransactionController : UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return transactionType.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return transactionType[row]
+    }
+}
+
+extension CreateTransactionController : UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! TransactionTypeCell
+        cell.transactionTypeTextField.text = transactionType[row]
+        selectedTransaction = transactionType[row]
     }
 }
