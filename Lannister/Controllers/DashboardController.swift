@@ -43,10 +43,10 @@ class DashboardController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         if UIScreen.main.bounds.size.width < 375 {
             if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                let itemWidth = 345*UIScreen.main.bounds.size.width/345
+                let itemWidth = UIScreen.main.bounds.size.width/375*345
                 let itemHeight = layout.itemSize.height
                 layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
                 layout.invalidateLayout()
