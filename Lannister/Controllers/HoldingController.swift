@@ -55,7 +55,6 @@ class HoldingController: UIViewController {
         
         let transactionsManagedObjects = TransactionManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
         transactions = TransactionDto().transactions(from: transactionsManagedObjects as! [TransactionManagedObject])
-        print("updateTransactions \(transactions.count)")
         tableView.reloadData()
     }
     
@@ -68,6 +67,7 @@ class HoldingController: UIViewController {
         let createHoldingVC = storyboard?.instantiateViewController(withIdentifier: "createHoldingVC") as! CreateHoldingController
         createHoldingVC.holding = holding
         createHoldingVC.totalValue = totalValue
+        createHoldingVC.delegate = self
         navigationController?.pushViewController(createHoldingVC, animated: true)
     }
     
@@ -146,3 +146,13 @@ extension HoldingController : UITableViewDelegate {
     }
 }
 
+extension HoldingController : EditHoldingDelegate {
+    
+    func updateHolding(newHolding: Holding) {
+        
+        holding = newHolding
+        navigationItem.title = holding.name
+        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
+        valueLabel.text =  String(format: "€%.2f", holding.value)
+    }
+}

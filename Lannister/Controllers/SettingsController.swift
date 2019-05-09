@@ -32,12 +32,13 @@ class SettingsController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingsCell
-        cell.bioAccessSwitch.addTarget(self, action: #selector(stateChanged), for: .valueChanged)
-        
-        if let bioAccess = UserDefaults.standard.object(forKey: "bioAccess") as? Bool {
-            if bioAccess == true {
-                cell.bioAccessSwitch.setOn(true, animated: true)
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? SettingsCell {
+            cell.bioAccessSwitch.addTarget(self, action: #selector(stateChanged), for: .valueChanged)
+            
+            if let bioAccess = UserDefaults.standard.object(forKey: "bioAccess") as? Bool {
+                if bioAccess == true {
+                    cell.bioAccessSwitch.setOn(true, animated: true)
+                }
             }
         }
     }
@@ -109,7 +110,7 @@ extension SettingsController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 3
+            return 2
         } else if section == 1 {
 //            return 2
             if BioMetricAuthenticator.shared.faceIDAvailable() || BioMetricAuthenticator.shared.touchIDAvailable() {
@@ -135,7 +136,11 @@ extension SettingsController : UITableViewDataSource {
         if section == 0 {
             titleLabel.text = "LOCAL"
         } else if section == 1 {
-            titleLabel.text = "SECURITY"
+            if BioMetricAuthenticator.shared.faceIDAvailable() || BioMetricAuthenticator.shared.touchIDAvailable() {
+                titleLabel.text = "SECURITY"
+            } else {
+                titleLabel.text = ""
+            }
         } else {
             titleLabel.text = "ABOUT"
         }
@@ -152,14 +157,16 @@ extension SettingsController : UITableViewDataSource {
                 cell.cellIndicator.isHidden = false
                 cell.currencyLabel.isHidden = false
                 return cell
-            } else if indexPath.row == 1 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
-                cell.logo.image = UIImage(named: "settings-sync")
-                cell.nameLabel.text = "Sync with Blockstack"
-                cell.cellIndicator.isHidden = true
-                cell.currencyLabel.isHidden = true
-                return cell
-            } else {
+            }
+//            else if indexPath.row == 1 {
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
+//                cell.logo.image = UIImage(named: "settings-sync")
+//                cell.nameLabel.text = "Sync with Blockstack"
+//                cell.cellIndicator.isHidden = true
+//                cell.currencyLabel.isHidden = true
+//                return cell
+//            }
+            else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
                 cell.logo.image = UIImage(named: "settings-export")
                 cell.nameLabel.text = "Export data"
@@ -226,9 +233,11 @@ extension SettingsController : UITableViewDelegate {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
 
-            } else if indexPath.row == 1 {
-
-            } else {
+            }
+//            else if indexPath.row == 1 {
+//
+//            }
+            else {
                 let lannisterManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
                 let lannisterData = json(fromObjects: lannisterManagedObjects)
                 guard let data = try? JSONSerialization.data(withJSONObject: lannisterData, options: []) else {

@@ -79,7 +79,7 @@ class CreateTransactionController: UIViewController {
         let indexPathValue = IndexPath(row: 2, section: 0)
         let cellForValue = tableView.cellForRow(at: indexPathValue) as! TotalValueCell
         let valueTextField = cellForValue.totalValueTextField
-        if let totalValue = Double(valueTextField!.text!) {
+        if let totalValue = valueTextField!.text!.doubleValue {
             newTransaction.value = totalValue
         } else {
             let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)

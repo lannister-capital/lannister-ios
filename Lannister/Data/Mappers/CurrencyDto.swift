@@ -16,9 +16,9 @@ class CurrencyDto: NSObject {
         currency.name = managedObject.name
         currency.euroRate = managedObject.euro_rate
         currency.symbol = managedObject.symbol
-        if let holdings = managedObject.holdings {
-            currency.holdings = HoldingDto().holdings(from: Array(holdings) as! [HoldingManagedObject])
-        }
+//        if let holdings = managedObject.holdings {
+//            currency.holdings = HoldingDto().holdings(from: Array(holdings) as! [HoldingManagedObject])
+//        }
         return currency
     }
     

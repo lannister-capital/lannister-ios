@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
 		26264CB5BB29C1179D830205 /* Pods_LannisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */; };
+		6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550D4702284536F0059C643 /* NumberFormatter.swift */; };
+		657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B69302284354500D7A5AF /* CurrenciesController.swift */; };
+		657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B6932228436A800D7A5AF /* CurrencyCell.swift */; };
 		70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007208F227ADA3A003F3DEF /* SettingsCell.swift */; };
 		700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF6227A28F300276068 /* HoldingHeaderView.swift */; };
 		700BDDF9227A297600276068 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF8227A297600276068 /* TransactionCell.swift */; };
@@ -39,7 +42,6 @@
 		7073A6A12281FCFE00049A2E /* BioAccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073A6A02281FCFE00049A2E /* BioAccessController.swift */; };
 		707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */; };
 		707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20D22773DE0005B29A2 /* TotalValueCell.swift */; };
-		707FB21022773DEC005B29A2 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20F22773DEC005B29A2 /* CurrencyCell.swift */; };
 		707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB21122773DF8005B29A2 /* ColorCodeCell.swift */; };
 		70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */; };
 		70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */; };
@@ -73,6 +75,9 @@
 		40B65A67EE973FEA42828D95 /* Pods-Lannister.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister.debug.xcconfig"; path = "Target Support Files/Pods-Lannister/Pods-Lannister.debug.xcconfig"; sourceTree = "<group>"; };
 		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6550D4702284536F0059C643 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
+		657B69302284354500D7A5AF /* CurrenciesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesController.swift; sourceTree = "<group>"; };
+		657B6932228436A800D7A5AF /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		6B7F6DB0CF0AE1E4D5DD38C4 /* Pods-LannisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7007208F227ADA3A003F3DEF /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		700BDDF6227A28F300276068 /* HoldingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingHeaderView.swift; sourceTree = "<group>"; };
@@ -104,7 +109,6 @@
 		7073A6A02281FCFE00049A2E /* BioAccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioAccessController.swift; sourceTree = "<group>"; };
 		707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingNameCell.swift; sourceTree = "<group>"; };
 		707FB20D22773DE0005B29A2 /* TotalValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalValueCell.swift; sourceTree = "<group>"; };
-		707FB20F22773DEC005B29A2 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		707FB21122773DF8005B29A2 /* ColorCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCell.swift; sourceTree = "<group>"; };
 		70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCustomCell.swift; sourceTree = "<group>"; };
 		70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodePresetCell.swift; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 			children = (
 				702B2D25227F9CAA005C0B64 /* Colors.swift */,
 				7073A6A02281FCFE00049A2E /* BioAccessController.swift */,
+				6550D4702284536F0059C643 /* NumberFormatter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				70572CC22273A25600297421 /* CreateHoldingController.swift */,
 				70572CC42273A26F00297421 /* CreateTransactionController.swift */,
 				70572CC62273A28700297421 /* ColorCodesController.swift */,
+				657B69302284354500D7A5AF /* CurrenciesController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -259,11 +265,11 @@
 				700BDDF8227A297600276068 /* TransactionCell.swift */,
 				707FB20D22773DE0005B29A2 /* TotalValueCell.swift */,
 				7016B4A92282EBC3000C49B8 /* TransactionTypeCell.swift */,
-				707FB20F22773DEC005B29A2 /* CurrencyCell.swift */,
 				707FB21122773DF8005B29A2 /* ColorCodeCell.swift */,
 				70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */,
 				70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */,
 				7007208F227ADA3A003F3DEF /* SettingsCell.swift */,
+				657B6932228436A800D7A5AF /* CurrencyCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -594,12 +600,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				707FB21022773DEC005B29A2 /* CurrencyCell.swift in Sources */,
 				7073A6A12281FCFE00049A2E /* BioAccessController.swift in Sources */,
 				702B2D19227F6832005C0B64 /* Holding.swift in Sources */,
 				702B2D23227F7CA1005C0B64 /* HoldingDto.swift in Sources */,
 				702B2D1B227F683F005C0B64 /* Transaction.swift in Sources */,
 				707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */,
+				6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */,
 				70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */,
 				70572CBF2273A1D600297421 /* SettingsController.swift in Sources */,
 				70572CC52273A26F00297421 /* CreateTransactionController.swift in Sources */,
@@ -610,6 +616,7 @@
 				702B2D17227F6798005C0B64 /* db.xcdatamodeld in Sources */,
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
 				7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */,
+				657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */,
 				707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */,
 				70572CC12273A1E100297421 /* HoldingController.swift in Sources */,
 				707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */,
@@ -618,6 +625,7 @@
 				70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */,
 				7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */,
 				7073A69B22806BAE00049A2E /* TransactionDto.swift in Sources */,
+				657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */,
 				7073A69922806A6600049A2E /* TransactionNameCell.swift in Sources */,
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
 				7016B4B12283076D000C49B8 /* CurrencyApiService.swift in Sources */,

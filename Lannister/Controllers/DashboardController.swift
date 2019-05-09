@@ -61,6 +61,7 @@ class DashboardController: UIViewController {
             emptyStateContainerView.isHidden = false
             view.bringSubviewToFront(emptyStateContainerView)
         } else {
+            emptyStateContainerView.isHidden = true
             holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
             totalValue = 0
             for holding in holdings {

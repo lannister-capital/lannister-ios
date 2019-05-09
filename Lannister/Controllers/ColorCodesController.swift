@@ -120,7 +120,7 @@ extension ColorCodesController : UITableViewDelegate {
      
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath) as! ColorCodePresetCell
-        delegate.newColorCode(hex: String(cell.colorCodeLabel.text!.suffix(7)))
+        delegate.newColorCode(hex: cell.colorCodeLabel.text!)
         navigationController?.popViewController(animated: true)
     }
 }

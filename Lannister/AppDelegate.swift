@@ -42,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if (UserDefaults.standard.object(forKey: "Auth") != nil) {
+            updateCurrencies()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -86,6 +89,98 @@ extension AppDelegate {
             }
         }
     }
+    
+    func updateCurrencies() {
+        
+        let currencies = CurrencyManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
+        
+        let showAlert = currencies!.count == 0
 
+        var euroCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "euro")
+        if euroCurrency == nil {
+            euroCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+            euroCurrency!.name = "euro"
+            euroCurrency!.symbol = "€"
+            euroCurrency!.code = "EUR"
+            euroCurrency!.euro_rate = 1
+        }
+        
+//        var dollarCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "dollar")
+//        if dollarCurrency == nil {
+//            dollarCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+//            dollarCurrency!.name = "dollar"
+//            dollarCurrency!.symbol = "$"
+//            dollarCurrency!.code = "USD"
+//        }
+//
+//        var poundCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "pound")
+//        if poundCurrency == nil {
+//            poundCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+//            poundCurrency!.name = "pound"
+//            poundCurrency!.symbol = "£"
+//            poundCurrency!.code = "GBP"
+//        }
+
+        
+        // fetch euro_rate
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        CurrencyApiService().getCurrencies { (response) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+            switch (response!.result) {
+            case .success(let JSON):
+                print("JSON \(JSON)")
+//                let currenciesArray = (JSON as AnyObject).object(forKey: "rates")! as! [String: Any]
+//                if let dollarValue = currenciesArray["USD"] as? Double {
+//                    dollarCurrency?.euro_rate = dollarValue
+//                }
+//                if let poundValue = currenciesArray["GBP"] as? Double {
+//                    poundCurrency?.euro_rate = poundValue
+//                }
+                
+                NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+                
+                print("saved currencies")
+
+            case .failure(let error):
+                print("error fetching currencies \(error.localizedDescription)")
+                if showAlert {
+                    if let rootController = UIApplication.topViewController() {
+                        let alert = UIAlertController(title: "Oops!", message: "Unable to fetch currencies", preferredStyle: .alert)
+                        rootController.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+
+    }
+    
 }
+
+extension UIApplication {
+    class func topViewController(_ base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        
+        if let nav = base as? UINavigationController {
+            return topViewController(nav.visibleViewController)
+        }
+        
+        if let tab = base as? UITabBarController {
+            
+            let moreNavigationController = tab.moreNavigationController
+            
+            if let top = moreNavigationController.topViewController, top.view.window != nil {
+                return topViewController(top)
+            } else if let selected = tab.selectedViewController {
+                return topViewController(selected)
+            }
+        }
+        
+        if let presented = base?.presentedViewController {
+            return topViewController(presented)
+        }
+        
+        return base
+    }
+}
+
 

@@ -10,12 +10,17 @@ import UIKit
 import MagicalRecord
 import BiometricAuthentication
 
+protocol EditHoldingDelegate {
+    func updateHolding(newHolding: Holding)
+}
+
 class CreateHoldingController: UIViewController {
     
     var totalValue                  : Double!
     var holding                     : Holding!
     @IBOutlet weak var tableView    : UITableView!
     var tap                         : UITapGestureRecognizer!
+    var delegate                    : EditHoldingDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +31,7 @@ class CreateHoldingController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
         
         if holding != nil {
+            navigationItem.title = "Edit Holding"
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
@@ -66,6 +72,7 @@ class CreateHoldingController: UIViewController {
             return
         }
         
+        
         if holding == nil && HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holdingNameTextField!.text!) != nil  {
             let alert = UIAlertController(title: "Oops!", message: "A holding with this name already exists.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
@@ -73,18 +80,23 @@ class CreateHoldingController: UIViewController {
 
         } else {
             
-            var newHolding = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holdingNameTextField!.text!)
-            if newHolding == nil {
-                newHolding = HoldingManagedObject(context: NSManagedObjectContext.mr_default())
+            var newHoldingManagedObject : HoldingManagedObject
+
+            if holding == nil {
+                newHoldingManagedObject = HoldingManagedObject(context: NSManagedObjectContext.mr_default())
+            } else {
+                newHoldingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!)!
             }
-            newHolding!.name = holdingNameTextField!.text
+            newHoldingManagedObject.name = holdingNameTextField!.text
+            let euroCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "euro")
+            newHoldingManagedObject.currency = euroCurrency!
 //            newHolding!.currency = "€"
             
             let indexPath = IndexPath(row: 1, section: 0)
             let cell = tableView.cellForRow(at: indexPath) as! TotalValueCell
             let valueTextField = cell.totalValueTextField
-            if let totalValue = Double(valueTextField!.text!) {
-                newHolding!.value = totalValue
+            if let totalValue = valueTextField!.text!.doubleValue {
+                newHoldingManagedObject.value = totalValue
             } else {
                 let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
@@ -94,15 +106,20 @@ class CreateHoldingController: UIViewController {
             
             let colorIndexPath = IndexPath(row: 3, section: 0)
             let colorCell = tableView.cellForRow(at: colorIndexPath) as! ColorCodeCell
-            newHolding!.hex_color = colorCell.colorCodeLabel.text
+            newHoldingManagedObject.hex_color = String(colorCell.colorCodeLabel.text!.suffix(7))
+            
+            NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+            
+            if holding != nil {
+                let newHolding = HoldingDto().holding(from: newHoldingManagedObject)
+                delegate.updateHolding(newHolding: newHolding)
+            }
         }
         
         var askBioAccess = false
         if HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())?.count == 0 {
             askBioAccess = true
         }
-        
-        NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
         
         if askBioAccess {
             let alert = UIAlertController(title: "Biometric access", message: "Enable authentication.", preferredStyle: .alert)
@@ -222,7 +239,7 @@ extension CreateHoldingController : ColorCodesDelegate {
         let indexPath = IndexPath(row: 3, section: 0)
         let colorCodeCell = tableView.cellForRow(at: indexPath) as! ColorCodeCell
         colorCodeCell.colorCodeLabel.text = hex
-        colorCodeCell.colorCodeView.backgroundColor = Colors.hexStringToUIColor(hex: hex)
+        colorCodeCell.colorCodeView.backgroundColor = Colors.hexStringToUIColor(hex: String(hex.suffix(7)))
     }
 }
 

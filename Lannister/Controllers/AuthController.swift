@@ -28,6 +28,7 @@ class AuthController: UIViewController {
             
             UserDefaults.standard.setValue("auth", forKey: "Auth")
             AppDelegate.shared.rootViewController.switchToMainScreen()
+            AppDelegate.shared.updateCurrencies()
         })
     }
     
@@ -37,6 +38,7 @@ class AuthController: UIViewController {
             
             UserDefaults.standard.setValue("skippedAuth", forKey: "Auth")
             AppDelegate.shared.rootViewController.switchToMainScreen()
+            AppDelegate.shared.updateCurrencies()
         })
     }
 }

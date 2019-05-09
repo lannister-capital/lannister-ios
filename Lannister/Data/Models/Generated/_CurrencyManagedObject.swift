@@ -52,10 +52,10 @@ open class _CurrencyManagedObject: NSManagedObject {
     var euro_rate: Double // Optional scalars not supported
 
     @NSManaged open
-    var name: String?
+    var name: String!
 
     @NSManaged open
-    var symbol: String?
+    var symbol: String!
 
     // MARK: - Relationships
 
