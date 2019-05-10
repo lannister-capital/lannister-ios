@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-y8-CAs">
-                                <rect key="frame" x="108.5" y="350.5" width="197" height="195"/>
+                                <rect key="frame" x="108.5" y="350.5" width="197.00000000000006" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="Zb2-zU-X0s"/>
                                     <constraint firstAttribute="width" constant="197" id="hip-JA-0qp"/>
@@ -525,7 +525,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="5a5-OH-OBA">
-                                <rect key="frame" x="108.5" y="350.5" width="197" height="195"/>
+                                <rect key="frame" x="108.5" y="350.5" width="197.00000000000006" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="CtT-zN-hGP"/>
                                     <constraint firstAttribute="width" constant="197" id="PQw-6M-FsJ"/>
@@ -556,7 +556,7 @@
                                     <constraint firstAttribute="height" constant="60" id="hG9-c5-LoM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                <state key="normal" title="Let's go">
+                                <state key="normal" title="Login with Blockstack">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -568,7 +568,7 @@
                                     <action selector="signIn" destination="cF9-ua-Wd4" eventType="touchUpInside" id="Reb-zg-1ia"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uO1-X6-y2a">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uO1-X6-y2a">
                                 <rect key="frame" x="117.5" y="797" width="179" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="179" id="Uxj-P0-7DE"/>
@@ -592,6 +592,7 @@
                             <constraint firstItem="aoL-95-y2J" firstAttribute="centerX" secondItem="HJ9-f2-4FD" secondAttribute="centerX" id="VqZ-Pp-hcX"/>
                             <constraint firstItem="5a5-OH-OBA" firstAttribute="centerX" secondItem="HJ9-f2-4FD" secondAttribute="centerX" id="Wdp-sF-Xqu"/>
                             <constraint firstItem="uO1-X6-y2a" firstAttribute="centerX" secondItem="HJ9-f2-4FD" secondAttribute="centerX" id="XMZ-PO-FwD"/>
+                            <constraint firstItem="5ap-Qk-TjV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5a5-OH-OBA" secondAttribute="bottom" constant="30" id="efz-mQ-NeF"/>
                             <constraint firstItem="dbZ-Hr-YxP" firstAttribute="top" secondItem="cCj-sO-SFY" secondAttribute="top" constant="82" id="kNT-L3-f9d"/>
                             <constraint firstItem="5ap-Qk-TjV" firstAttribute="leading" secondItem="cCj-sO-SFY" secondAttribute="leading" constant="50" id="qhN-tH-lQY"/>
                             <constraint firstItem="dbZ-Hr-YxP" firstAttribute="centerX" secondItem="HJ9-f2-4FD" secondAttribute="centerX" id="s6W-jW-m2w"/>
