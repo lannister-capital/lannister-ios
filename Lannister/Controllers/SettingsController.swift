@@ -110,9 +110,8 @@ extension SettingsController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 2
+            return 3
         } else if section == 1 {
-//            return 2
             if BioMetricAuthenticator.shared.faceIDAvailable() || BioMetricAuthenticator.shared.touchIDAvailable() {
                 return 1
             }
@@ -156,16 +155,17 @@ extension SettingsController : UITableViewDataSource {
                 cell.nameLabel.text = "Currency"
                 cell.cellIndicator.isHidden = false
                 cell.currencyLabel.isHidden = false
+                cell.currencyLabel.text = Currencies.getDefaultCurrencySymbol()
                 return cell
             }
-//            else if indexPath.row == 1 {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
-//                cell.logo.image = UIImage(named: "settings-sync")
-//                cell.nameLabel.text = "Sync with Blockstack"
-//                cell.cellIndicator.isHidden = true
-//                cell.currencyLabel.isHidden = true
-//                return cell
-//            }
+            else if indexPath.row == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
+                cell.logo.image = UIImage(named: "settings-sync")
+                cell.nameLabel.text = "Sync with Blockstack"
+                cell.cellIndicator.isHidden = true
+                cell.currencyLabel.isHidden = true
+                return cell
+            }
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
                 cell.logo.image = UIImage(named: "settings-export")
@@ -232,11 +232,14 @@ extension SettingsController : UITableViewDelegate {
         
         if indexPath.section == 0 {
             if indexPath.row == 0 {
+                let currenciesVC = storyboard?.instantiateViewController(withIdentifier: "currenciesVC") as! CurrenciesController
+                currenciesVC.delegate = self
+                currenciesVC.shouldSetGlobalCurrency = true
+                navigationController?.pushViewController(currenciesVC, animated: true)
+            }
+            else if indexPath.row == 1 {
 
             }
-//            else if indexPath.row == 1 {
-//
-//            }
             else {
                 let lannisterManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
                 let lannisterData = json(fromObjects: lannisterManagedObjects)
@@ -273,5 +276,14 @@ extension SettingsController : UITableViewDelegate {
                 UIApplication.shared.open(URL(string: "https://github.com/lannister-capital")!, options: [:], completionHandler: nil)
             }
         }
+    }
+}
+
+extension SettingsController : CurrenciesDelegate {
+    
+    func selectedCurrency(currency: Currency) {
+        let indexPath = IndexPath(row: 0, section: 0)
+        let settingsCell = tableView.cellForRow(at: indexPath) as! SettingsCell
+        settingsCell.currencyLabel.text = currency.symbol
     }
 }

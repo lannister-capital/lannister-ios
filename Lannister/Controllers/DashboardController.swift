@@ -16,6 +16,7 @@ class DashboardController: UIViewController {
     @IBOutlet weak var emptyStateContainerView  : UIView!
     var holdings                                : [Holding]! = []
     var totalValue                              : Double! = 0
+    var euroTotalValue                          : Double! = 0
 
     
     override func viewDidLoad() {
@@ -59,14 +60,19 @@ class DashboardController: UIViewController {
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
         if holdingsManagedObjects?.count == 0 {
             emptyStateContainerView.isHidden = false
+            emptyStateContainerView.isUserInteractionEnabled = true
             view.bringSubviewToFront(emptyStateContainerView)
         } else {
             emptyStateContainerView.isHidden = true
+            emptyStateContainerView.isUserInteractionEnabled = false
+            view.sendSubviewToBack(emptyStateContainerView)
+            collectionView.isUserInteractionEnabled = true
             holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
-            totalValue = 0
+            euroTotalValue = 0
             for holding in holdings {
-                totalValue += holding.value
+                euroTotalValue += Currencies.getEuroValue(value: holding.value, currency: holding.currency)
             }
+            totalValue = euroTotalValue * Currencies.getDefaultCurrencyEuroRate()
             collectionView.reloadData()
         }
     }
@@ -103,9 +109,9 @@ extension DashboardController : UICollectionViewDataSource {
         
         if kind == UICollectionView.elementKindSectionHeader {
             if totalValue > 0 {
-                sectionHeader.totalValueLabel.text = String(format: "€%.0f", totalValue)
+                sectionHeader.totalValueLabel.text = String(format: "%@%.0f", Currencies.getDefaultCurrencySymbol(), totalValue)
             } else {
-                sectionHeader.totalValueLabel.text = "€ --"
+                sectionHeader.totalValueLabel.text = "$ --"
             }
             sectionHeader.numberOfHoldingsLabel.text = "\(holdings.count) holdings"
             return sectionHeader
@@ -121,11 +127,12 @@ extension DashboardController : UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "holdingCellId", for: indexPath) as! HoldingCell
             
             let holding = holdings[indexPath.row-1]
+            let currency = holding.currency
             cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
             cell.nameLabel.text = holding.name
             let value = String(format: "%.2f", holding.value!)
-            cell.valueLabel.text = "€\(value)"
-            let percentage = String(format: "%.2f", holding.value/totalValue*100)
+            cell.valueLabel.text = "\(currency!.symbol!)\(value)"
+            let percentage = String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100)
             cell.percentageLabel.text = "\(percentage)%"
             
             let path = UIBezierPath(roundedRect:cell.colorView.bounds,
@@ -159,7 +166,7 @@ extension DashboardController : UICollectionViewDelegate {
             
             let holdingVC = storyboard?.instantiateViewController(withIdentifier: "holdingVC") as! HoldingController
             holdingVC.holding = holding
-            holdingVC.totalValue = totalValue
+            holdingVC.euroTotalValue = euroTotalValue
             navigationController?.pushViewController(holdingVC, animated: true)
         }
     }

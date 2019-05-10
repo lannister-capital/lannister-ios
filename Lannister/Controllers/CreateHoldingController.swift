@@ -16,10 +16,9 @@ protocol EditHoldingDelegate {
 
 class CreateHoldingController: UIViewController {
     
-    var totalValue                  : Double!
+    var euroTotalValue                  : Double!
     var holding                     : Holding!
     @IBOutlet weak var tableView    : UITableView!
-    var tap                         : UITapGestureRecognizer!
     var delegate                    : EditHoldingDelegate!
 
     override func viewDidLoad() {
@@ -39,18 +38,10 @@ class CreateHoldingController: UIViewController {
             let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
             navigationItem.leftBarButtonItem = cancelButton
         }
-        
-        if tap == nil {
-            tap = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
-            navigationController!.view.addGestureRecognizer(tap)
-        }
     }
     
     @objc func removeKeyboard() {
-        if tap != nil {
-            navigationController!.view.removeGestureRecognizer(tap)
-        }
-        tap = nil
+
         self.view.endEditing(true)
     }
     
@@ -88,9 +79,11 @@ class CreateHoldingController: UIViewController {
                 newHoldingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!)!
             }
             newHoldingManagedObject.name = holdingNameTextField!.text
-            let euroCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "euro")
-            newHoldingManagedObject.currency = euroCurrency!
-//            newHolding!.currency = "€"
+            
+            let indexPathForCurrency = IndexPath(row: 2, section: 0)
+            let currencyCell = tableView.cellForRow(at: indexPathForCurrency) as! CurrencyCell
+            let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "symbol", withValue: currencyCell.currencyNameLabel.text!)
+            newHoldingManagedObject.currency = currencyManagedObject
             
             let indexPath = IndexPath(row: 1, section: 0)
             let cell = tableView.cellForRow(at: indexPath) as! TotalValueCell
@@ -112,7 +105,9 @@ class CreateHoldingController: UIViewController {
             
             if holding != nil {
                 let newHolding = HoldingDto().holding(from: newHoldingManagedObject)
-                delegate.updateHolding(newHolding: newHolding)
+                if delegate != nil {
+                    delegate.updateHolding(newHolding: newHolding)
+                }
             }
         }
         
@@ -196,13 +191,16 @@ extension CreateHoldingController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "totalValueCellId", for: indexPath) as! TotalValueCell
             if holding != nil {
                 cell.totalValueTextField.text = String(format: "%.2f", holding.value!)
-                cell.percentageLabel.text = "\(String(format: "%.2f", holding.value!/totalValue*100))%"
+                cell.percentageLabel.text = "\(String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100))%"
+                cell.currencyLabel.text = holding.currency.symbol
             }
             return cell
 
         } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCellId", for: indexPath) as! CurrencyCell
-
+            if holding != nil {
+                cell.currencyNameLabel.text = holding.currency.symbol
+            }
             return cell
 
         } else {
@@ -224,8 +222,18 @@ extension CreateHoldingController : UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         removeKeyboard()
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+        
+        if indexPath.row == 2 {
+            let currenciesVC = storyboard?.instantiateViewController(withIdentifier: "currenciesVC") as! CurrenciesController
+            currenciesVC.delegate = self
+            navigationController?.pushViewController(currenciesVC, animated: true)
+        }
      
-        if indexPath.row == 3 {
+        else if indexPath.row == 3 {
             let colorCodeVC = storyboard?.instantiateViewController(withIdentifier: "colorCodesVC") as! ColorCodesController
             colorCodeVC.delegate = self
             navigationController?.pushViewController(colorCodeVC, animated: true)
@@ -242,6 +250,20 @@ extension CreateHoldingController : ColorCodesDelegate {
         colorCodeCell.colorCodeView.backgroundColor = Colors.hexStringToUIColor(hex: String(hex.suffix(7)))
     }
 }
+
+extension CreateHoldingController : CurrenciesDelegate {
+    
+    func selectedCurrency(currency: Currency) {
+        let indexPath = IndexPath(row: 2, section: 0)
+        let currencyCell = tableView.cellForRow(at: indexPath) as! CurrencyCell
+        currencyCell.currencyNameLabel.text = currency.symbol
+        
+        let indexPathForTotalValue = IndexPath(row: 1, section: 0)
+        let totalValueCell = tableView.cellForRow(at: indexPathForTotalValue) as! TotalValueCell
+        totalValueCell.currencyLabel.text = currency.symbol
+    }
+}
+
 
 extension CreateHoldingController : UITextFieldDelegate {
     

@@ -11,7 +11,7 @@ import MagicalRecord
 
 class HoldingController: UIViewController {
 
-    var totalValue                      : Double!
+    var euroTotalValue                  : Double!
     @IBOutlet weak var barView          : UIView!
     @IBOutlet weak var valueLabel       : UILabel!
     @IBOutlet weak var tableView        : UITableView!
@@ -37,10 +37,10 @@ class HoldingController: UIViewController {
         let editButton = UIBarButtonItem()
         editButton.title = "Edit"
         editButton.target = self
-        editButton.action = #selector(edit)
+        editButton.action = #selector(editHolding)
         navigationItem.rightBarButtonItem = editButton
         
-        valueLabel.text =  String(format: "€%.2f", holding.value!)
+        valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value!)
         
         updateTransactions()
     }
@@ -62,11 +62,11 @@ class HoldingController: UIViewController {
         
     }
     
-    @objc func edit() {
+    @objc func editHolding() {
         
         let createHoldingVC = storyboard?.instantiateViewController(withIdentifier: "createHoldingVC") as! CreateHoldingController
         createHoldingVC.holding = holding
-        createHoldingVC.totalValue = totalValue
+        createHoldingVC.euroTotalValue = euroTotalValue
         createHoldingVC.delegate = self
         navigationController?.pushViewController(createHoldingVC, animated: true)
     }
@@ -153,6 +153,6 @@ extension HoldingController : EditHoldingDelegate {
         holding = newHolding
         navigationItem.title = holding.name
         barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
-        valueLabel.text =  String(format: "€%.2f", holding.value)
+        valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value)
     }
 }

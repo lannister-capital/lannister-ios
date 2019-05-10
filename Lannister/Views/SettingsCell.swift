@@ -14,6 +14,6 @@ class SettingsCell: UITableViewCell {
     @IBOutlet weak var nameLabel        : UILabel!
     @IBOutlet weak var cellIndicator    : UIImageView!
     @IBOutlet weak var currencyLabel    : UILabel!
-    @IBOutlet weak var bioAccessSwitch : UISwitch!
+    @IBOutlet weak var bioAccessSwitch  : UISwitch!
 
 }

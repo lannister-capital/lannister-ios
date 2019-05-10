@@ -46,7 +46,7 @@ open class _CurrencyManagedObject: NSManagedObject {
     // MARK: - Properties
 
     @NSManaged open
-    var code: String?
+    var code: String!
 
     @NSManaged open
     var euro_rate: Double // Optional scalars not supported

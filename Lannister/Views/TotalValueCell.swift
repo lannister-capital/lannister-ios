@@ -12,4 +12,5 @@ class TotalValueCell: UITableViewCell {
 
     @IBOutlet weak var totalValueTextField : UITextField!
     @IBOutlet weak var percentageLabel  : UILabel!
+    @IBOutlet weak var currencyLabel  : UILabel!
 }

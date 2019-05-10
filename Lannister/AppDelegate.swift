@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         MagicalRecord.setupCoreDataStack(withAutoMigratingSqliteStoreNamed: "db")
         
+        if CurrencyUserDefaults().getDefaultCurrencyName() == nil {
+            CurrencyUserDefaults().setDefaultCurrency(name: "dollar")
+        }
+        
         checkAuthentication()
         
         return true
@@ -105,22 +109,21 @@ extension AppDelegate {
             euroCurrency!.euro_rate = 1
         }
         
-//        var dollarCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "dollar")
-//        if dollarCurrency == nil {
-//            dollarCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
-//            dollarCurrency!.name = "dollar"
-//            dollarCurrency!.symbol = "$"
-//            dollarCurrency!.code = "USD"
-//        }
-//
-//        var poundCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "pound")
-//        if poundCurrency == nil {
-//            poundCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
-//            poundCurrency!.name = "pound"
-//            poundCurrency!.symbol = "£"
-//            poundCurrency!.code = "GBP"
-//        }
+        var dollarCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "dollar")
+        if dollarCurrency == nil {
+            dollarCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+            dollarCurrency!.name = "dollar"
+            dollarCurrency!.symbol = "$"
+            dollarCurrency!.code = "USD"
+        }
 
+        var poundCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "pound")
+        if poundCurrency == nil {
+            poundCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+            poundCurrency!.name = "pound"
+            poundCurrency!.symbol = "£"
+            poundCurrency!.code = "GBP"
+        }
         
         // fetch euro_rate
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -130,13 +133,13 @@ extension AppDelegate {
             switch (response!.result) {
             case .success(let JSON):
                 print("JSON \(JSON)")
-//                let currenciesArray = (JSON as AnyObject).object(forKey: "rates")! as! [String: Any]
-//                if let dollarValue = currenciesArray["USD"] as? Double {
-//                    dollarCurrency?.euro_rate = dollarValue
-//                }
-//                if let poundValue = currenciesArray["GBP"] as? Double {
-//                    poundCurrency?.euro_rate = poundValue
-//                }
+                let currenciesArray = (JSON as AnyObject).object(forKey: "rates")! as! [String: Any]
+                if let dollarValue = currenciesArray["USD"] as? Double {
+                    dollarCurrency?.euro_rate = dollarValue
+                }
+                if let poundValue = currenciesArray["GBP"] as? Double {
+                    poundCurrency?.euro_rate = poundValue
+                }
                 
                 NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
                 
