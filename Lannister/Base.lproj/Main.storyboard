@@ -1114,6 +1114,34 @@
                                             <outlet property="colorCodeView" destination="HQH-iE-0vW" id="ADD-g3-bYG"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="deleteCellId" id="VXX-pe-Gfn">
+                                        <rect key="frame" x="0.0" y="464" width="414" height="109"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VXX-pe-Gfn" id="zRw-dy-mK0">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVL-S8-5HJ">
+                                                    <rect key="frame" x="20" y="32.5" width="374" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="nGN-vE-8b5"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                    <state key="normal" title="Delete">
+                                                        <color key="titleColor" red="0.1647058824" green="0.21176470589999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteHolding" destination="VTP-QL-0sM" eventType="touchUpInside" id="8tv-VW-pok"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="SVL-S8-5HJ" firstAttribute="leading" secondItem="zRw-dy-mK0" secondAttribute="leading" constant="20" id="BpP-j0-lDU"/>
+                                                <constraint firstItem="SVL-S8-5HJ" firstAttribute="centerY" secondItem="zRw-dy-mK0" secondAttribute="centerY" id="MFT-Zj-6Hg"/>
+                                                <constraint firstAttribute="trailing" secondItem="SVL-S8-5HJ" secondAttribute="trailing" constant="20" id="dMQ-Ym-5cH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="VTP-QL-0sM" id="KhW-xN-fqV"/>

@@ -158,6 +158,20 @@ class CreateHoldingController: UIViewController {
         }
     }
     
+    @IBAction func deleteHolding() {
+        
+        let alert = UIAlertController(title: "Delete Holding", message: "Are you sure?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler:nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: self.holding.name!)!
+            holdingManagedObject.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
+            NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+            self.navigationController?.popToRootViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        return
+    }
+    
     func dismiss() {
         
         if holding == nil {
@@ -175,8 +189,14 @@ extension CreateHoldingController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 4 {
+//            return 200
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -203,7 +223,7 @@ extension CreateHoldingController : UITableViewDataSource {
             }
             return cell
 
-        } else {
+        } else if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "colorCodeCellId", for: indexPath) as! ColorCodeCell
             if holding != nil {
                 cell.colorCodeLabel.text = holding.hexColor
@@ -211,6 +231,12 @@ extension CreateHoldingController : UITableViewDataSource {
             }
             return cell
 
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "deleteCellId", for: indexPath)
+            if holding == nil {
+                cell.contentView.isHidden = true
+            }
+            return cell
         }
     }
 }
