@@ -54,6 +54,7 @@ class AuthController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
             
             UserDefaults.standard.setValue("skippedAuth", forKey: "Auth")
+            UserDefaults.standard.synchronize()
             AppDelegate.shared.rootViewController.switchToMainScreen()
             AppDelegate.shared.updateCurrencies()
         })

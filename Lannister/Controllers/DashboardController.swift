@@ -17,7 +17,7 @@ class DashboardController: UIViewController {
     var holdings                                : [Holding]! = []
     var totalValue                              : Double! = 0
     var euroTotalValue                          : Double! = 0
-
+    var sortKey                                 = "amount"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,10 @@ class DashboardController: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        if UserDefaults.standard.object(forKey: "sortKey") != nil {
+            sortKey = UserDefaults.standard.object(forKey: "sortKey") as! String
+        }
         
         updateHoldings()
     }
@@ -68,6 +72,11 @@ class DashboardController: UIViewController {
             view.sendSubviewToBack(emptyStateContainerView)
             collectionView.isUserInteractionEnabled = true
             holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
+            if sortKey == "amount" {
+                holdings = holdings.sorted { $0.value! > $1.value! }
+            } else {
+                holdings = holdings.sorted { $0.name! < $1.name! }
+            }
             euroTotalValue = 0
             for holding in holdings {
                 euroTotalValue += Currencies.getEuroValue(value: holding.value, currency: holding.currency)
@@ -87,6 +96,29 @@ class DashboardController: UIViewController {
         
         let settingsNavVC = storyboard?.instantiateViewController(withIdentifier: "settingsNavVC")
         navigationController?.present(settingsNavVC!, animated: true, completion: nil)
+    }
+    
+    @IBAction func showSortOptions() {
+        
+        let alert = UIAlertController(title: "",
+                                      message: "Sort Holdings",
+                                      preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "By Name", style: UIAlertAction.Style.default, handler: { _ in
+            self.sortKey = "name"
+            UserDefaults.standard.setValue("name", forKey: "sortKey")
+            UserDefaults.standard.synchronize()
+            self.holdings = self.holdings.sorted { $0.name! < $1.name! }
+            self.collectionView.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "By Amount", style: UIAlertAction.Style.default, handler: { _ in
+            self.sortKey = "amount"
+            UserDefaults.standard.setValue("amount", forKey: "sortKey")
+            UserDefaults.standard.synchronize()
+            self.holdings = self.holdings.sorted { $0.value! > $1.value! }
+            self.collectionView.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -121,7 +153,17 @@ extension DashboardController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "topCellId", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "topCellId", for: indexPath) as! DashboardTopCell
+            cell.sortButton.semanticContentAttribute = .forceRightToLeft
+            let attributedString = NSMutableAttributedString(string: "Sort by:",
+                                                             attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 42/255, green: 54/255, blue: 74/255, alpha: 1)])
+            var sortWord = "Amount"
+            if sortKey == "name" {
+                sortWord = "Name"
+            }
+            attributedString.append(NSMutableAttributedString(string: " \(sortWord)",
+                                                              attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]))
+            cell.sortButton.setAttributedTitle(attributedString, for: .normal)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "holdingCellId", for: indexPath) as! HoldingCell

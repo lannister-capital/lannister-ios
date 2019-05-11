@@ -42,6 +42,7 @@
 		7073A6A12281FCFE00049A2E /* BioAccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073A6A02281FCFE00049A2E /* BioAccessController.swift */; };
 		707E5E432285C85E00D4ED33 /* CurrencyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E5E422285C85E00D4ED33 /* CurrencyUserDefaults.swift */; };
 		707E5E452285C95800D4ED33 /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E5E442285C95800D4ED33 /* Currencies.swift */; };
+		707E5E492286C7D700D4ED33 /* DashboardTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E5E482286C7D700D4ED33 /* DashboardTopCell.swift */; };
 		707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */; };
 		707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20D22773DE0005B29A2 /* TotalValueCell.swift */; };
 		707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB21122773DF8005B29A2 /* ColorCodeCell.swift */; };
@@ -111,6 +112,7 @@
 		7073A6A02281FCFE00049A2E /* BioAccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioAccessController.swift; sourceTree = "<group>"; };
 		707E5E422285C85E00D4ED33 /* CurrencyUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyUserDefaults.swift; sourceTree = "<group>"; };
 		707E5E442285C95800D4ED33 /* Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currencies.swift; sourceTree = "<group>"; };
+		707E5E482286C7D700D4ED33 /* DashboardTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTopCell.swift; sourceTree = "<group>"; };
 		707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingNameCell.swift; sourceTree = "<group>"; };
 		707FB20D22773DE0005B29A2 /* TotalValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalValueCell.swift; sourceTree = "<group>"; };
 		707FB21122773DF8005B29A2 /* ColorCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCell.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				70572CCC2274788D00297421 /* DashboardHeaderView.swift */,
+				707E5E482286C7D700D4ED33 /* DashboardTopCell.swift */,
 				700BDDF6227A28F300276068 /* HoldingHeaderView.swift */,
 				70572CCA227475E800297421 /* HoldingCell.swift */,
 				707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */,
@@ -642,6 +645,7 @@
 				7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */,
 				7073A69B22806BAE00049A2E /* TransactionDto.swift in Sources */,
 				657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */,
+				707E5E492286C7D700D4ED33 /* DashboardTopCell.swift in Sources */,
 				7073A69922806A6600049A2E /* TransactionNameCell.swift in Sources */,
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
 				7016B4B12283076D000C49B8 /* CurrencyApiService.swift in Sources */,
