@@ -10,6 +10,7 @@ import UIKit
 import Groot
 import MagicalRecord
 import BiometricAuthentication
+import Blockstack
 
 class SettingsController: UIViewController {
     
@@ -161,7 +162,11 @@ extension SettingsController : UITableViewDataSource {
             else if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
                 cell.logo.image = UIImage(named: "settings-sync")
-                cell.nameLabel.text = "Sync with Blockstack"
+                if Blockstack.shared.isUserSignedIn() {
+                    cell.nameLabel.text = "Logout of Blockstack"
+                } else {
+                    cell.nameLabel.text = "Sync with Blockstack"
+                }
                 cell.cellIndicator.isHidden = true
                 cell.currencyLabel.isHidden = true
                 return cell
@@ -239,6 +244,28 @@ extension SettingsController : UITableViewDelegate {
             }
             else if indexPath.row == 1 {
 
+                let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SettingsCell
+                if Blockstack.shared.isUserSignedIn() {
+                    Blockstack.shared.signUserOut()
+                    cell.nameLabel.text = "Sync with Blockstack"
+                } else {
+                    Blockstack.shared.signIn(redirectURI: "https://lannister.capital/redirect-mobile.html",
+                                             appDomain: URL(string: "https://lannister.capital")!,
+                                             manifestURI: nil,
+                                             scopes: ["store_write", "publish_data"]) { authResult in
+                                                switch authResult {
+                                                case .success(let userData):
+                                                    print("Sign in SUCCESS", userData.profile?.name as Any)
+                                                    DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                                                        cell.nameLabel.text = "Logout of Blockstack"
+                                                    })
+                                                case .cancelled:
+                                                    print("Sign in CANCELLED")
+                                                case .failed(let error):
+                                                    print("Sign in FAILED, error: ", error ?? "n/a")
+                                                }
+                    }
+                }
             }
             else {
                 let lannisterManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
