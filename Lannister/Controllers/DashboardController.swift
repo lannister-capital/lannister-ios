@@ -8,6 +8,7 @@
 
 import UIKit
 import MagicalRecord
+import Charts
 
 class DashboardController: UIViewController {
     
@@ -18,6 +19,10 @@ class DashboardController: UIViewController {
     var totalValue                              : Double! = 0
     var euroTotalValue                          : Double! = 0
     var sortKey                                 = "amount"
+    var pieChartDataEntries                     = [PieChartDataEntry]()
+    var pieChartDataColors                      = [UIColor]()
+    var pieChartLegendEntries                   = [LegendEntry]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,8 +83,25 @@ class DashboardController: UIViewController {
                 holdings = holdings.sorted { $0.name! < $1.name! }
             }
             euroTotalValue = 0
+            pieChartDataEntries.removeAll()
+            pieChartDataColors.removeAll()
+            pieChartLegendEntries.removeAll()
             for holding in holdings {
                 euroTotalValue += Currencies.getEuroValue(value: holding.value, currency: holding.currency)
+                var legendTitle = holding.name
+                if pieChartDataEntries.count > 7 {
+                    legendTitle = "..."
+                }
+                let pieChartDataEntry = PieChartDataEntry(value: holding.value, label: legendTitle)
+                pieChartDataEntries.append(pieChartDataEntry)
+                pieChartDataColors.append(Colors.hexStringToUIColor(hex: holding.hexColor))
+//                if pieChartLegendEntries.count < 7 {
+//                    let legendEntry = LegendEntry(label: holding.name, form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: Colors.hexStringToUIColor(hex: holding.hexColor))
+//                    pieChartLegendEntries.append(legendEntry)
+//                } else if pieChartLegendEntries.count == 7 {
+//                    let legendEntry = LegendEntry(label: "...", form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1))
+//                    pieChartLegendEntries.append(legendEntry)
+//                }
             }
             totalValue = euroTotalValue * Currencies.getDefaultCurrencyEuroRate()
             collectionView.reloadData()
@@ -146,6 +168,36 @@ extension DashboardController : UICollectionViewDataSource {
                 sectionHeader.totalValueLabel.text = "$ --"
             }
             sectionHeader.numberOfHoldingsLabel.text = "\(holdings.count) holdings"
+            sectionHeader.pieChartView.chartDescription?.text = ""
+            let attributedString = NSAttributedString(string: "%",
+                                                             attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
+                                                                           NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
+            sectionHeader.pieChartView.centerAttributedText = attributedString
+            sectionHeader.pieChartView.drawHoleEnabled = true
+            sectionHeader.pieChartView.holeColor = UIColor.clear
+            sectionHeader.pieChartView.drawEntryLabelsEnabled = false
+            sectionHeader.pieChartView.holeRadiusPercent = 0.80
+            
+            let legend = sectionHeader.pieChartView.legend
+//            legend.entries = pieChartLegendEntries
+            legend.font = UIFont(name: "AvenirNext-DemiBold", size: 12)!
+            legend.textColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+            sectionHeader.pieChartView.legend.wordWrapEnabled = false
+
+            sectionHeader.pieChartView.legend.form = .square //Illustration: original, square, line
+            sectionHeader.pieChartView.legend.formSize = 6 // icon size
+            sectionHeader.pieChartView.legend.formToTextSpace = 8 //text interval
+//            sectionHeader.pieChartView.legend.yEntrySpace = 11 //text interval
+            sectionHeader.pieChartView.legend.horizontalAlignment = .right
+            sectionHeader.pieChartView.legend.verticalAlignment = .center
+            sectionHeader.pieChartView.legend.orientation = .vertical
+
+            let chartDataSet = PieChartDataSet(entries: pieChartDataEntries, label: nil)
+            chartDataSet.colors = pieChartDataColors
+            chartDataSet.drawValuesEnabled = false
+            let chartData = PieChartData(dataSet: chartDataSet)
+            sectionHeader.pieChartView.data = chartData
+            
             return sectionHeader
         }
         return UICollectionReusableView()

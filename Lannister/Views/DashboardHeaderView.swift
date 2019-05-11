@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Charts
 
 class DashboardHeaderView: UICollectionReusableView {
  
     @IBOutlet weak var numberOfHoldingsLabel    : UILabel!
     @IBOutlet weak var totalValueLabel          : UILabel!
+    @IBOutlet weak var pieChartView             : PieChartView!
 }

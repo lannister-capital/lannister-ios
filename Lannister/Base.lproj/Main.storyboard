@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-y8-CAs">
-                                <rect key="frame" x="108.5" y="350.5" width="197.00000000000006" height="195"/>
+                                <rect key="frame" x="108.5" y="350.5" width="197" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="Zb2-zU-X0s"/>
                                     <constraint firstAttribute="width" constant="197" id="hip-JA-0qp"/>
@@ -278,6 +278,10 @@
                                                 <constraint firstAttribute="height" constant="42" id="4yB-sF-kY7"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="43a-Ee-rG7" customClass="PieChartView" customModule="Charts">
+                                            <rect key="frame" x="0.0" y="122" width="414" height="128"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -285,13 +289,18 @@
                                         <constraint firstItem="QSS-L2-RCc" firstAttribute="top" secondItem="cWK-66-D1z" secondAttribute="top" id="Daq-vU-K7m"/>
                                         <constraint firstItem="aCD-Z3-PdB" firstAttribute="top" secondItem="QSS-L2-RCc" secondAttribute="bottom" constant="20" id="F10-yH-REq"/>
                                         <constraint firstItem="aCD-Z3-PdB" firstAttribute="leading" secondItem="cWK-66-D1z" secondAttribute="leading" id="Fpi-aM-hfb"/>
+                                        <constraint firstItem="43a-Ee-rG7" firstAttribute="top" secondItem="aCD-Z3-PdB" secondAttribute="bottom" constant="10" id="Kdx-VX-1C3"/>
+                                        <constraint firstAttribute="trailing" secondItem="43a-Ee-rG7" secondAttribute="trailing" id="PpW-rn-2fA"/>
                                         <constraint firstItem="QSS-L2-RCc" firstAttribute="centerX" secondItem="cWK-66-D1z" secondAttribute="centerX" id="R5B-n1-fg5"/>
                                         <constraint firstAttribute="trailing" secondItem="Jg0-BY-s5M" secondAttribute="trailing" id="aqp-WE-2sp"/>
+                                        <constraint firstItem="43a-Ee-rG7" firstAttribute="leading" secondItem="cWK-66-D1z" secondAttribute="leading" id="b3F-jp-tSY"/>
+                                        <constraint firstAttribute="bottom" secondItem="43a-Ee-rG7" secondAttribute="bottom" id="gJd-VQ-cB5"/>
                                         <constraint firstItem="Jg0-BY-s5M" firstAttribute="leading" secondItem="aCD-Z3-PdB" secondAttribute="trailing" id="uNx-yH-A9p"/>
                                         <constraint firstItem="Jg0-BY-s5M" firstAttribute="top" secondItem="aCD-Z3-PdB" secondAttribute="top" id="wtF-Hz-01r"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="numberOfHoldingsLabel" destination="c6i-P3-dkF" id="dYO-92-8Ww"/>
+                                        <outlet property="pieChartView" destination="43a-Ee-rG7" id="1jf-mM-pfJ"/>
                                         <outlet property="totalValueLabel" destination="QSS-L2-RCc" id="6LC-kn-Mgy"/>
                                     </connections>
                                 </collectionReusableView>
@@ -359,7 +368,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="250"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ --" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0sA-nP-e11">
-                                        <rect key="frame" x="180" y="0.0" width="54" height="50"/>
+                                        <rect key="frame" x="180" y="17" width="54" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="jGM-p4-AXK"/>
                                         </constraints>
@@ -368,14 +377,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9r-wo-nU7">
-                                        <rect key="frame" x="0.0" y="50" width="207.5" height="42"/>
+                                        <rect key="frame" x="0.0" y="67" width="207.5" height="42"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="bAW-Be-D5D"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0vk-Bd-dcz">
-                                        <rect key="frame" x="206.5" y="50" width="207.5" height="42"/>
+                                        <rect key="frame" x="206.5" y="67" width="207.5" height="42"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReF-VU-ud9">
                                                 <rect key="frame" x="53" y="18" width="8" height="8"/>
@@ -398,7 +407,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="0sA-nP-e11" firstAttribute="top" secondItem="RVF-bE-PKQ" secondAttribute="top" id="4PR-q2-fai"/>
+                                    <constraint firstItem="0sA-nP-e11" firstAttribute="top" secondItem="RVF-bE-PKQ" secondAttribute="top" constant="17" id="4PR-q2-fai"/>
                                     <constraint firstItem="S9r-wo-nU7" firstAttribute="width" secondItem="0vk-Bd-dcz" secondAttribute="width" id="7bb-lh-ZoI"/>
                                     <constraint firstAttribute="height" constant="250" id="EKp-hJ-nFW"/>
                                     <constraint firstItem="S9r-wo-nU7" firstAttribute="top" secondItem="0sA-nP-e11" secondAttribute="bottom" id="U4U-54-c4w"/>
@@ -543,7 +552,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="5a5-OH-OBA">
-                                <rect key="frame" x="108.5" y="350.5" width="197.00000000000006" height="195"/>
+                                <rect key="frame" x="108.5" y="350.5" width="197" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="CtT-zN-hGP"/>
                                     <constraint firstAttribute="width" constant="197" id="PQw-6M-FsJ"/>
