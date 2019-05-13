@@ -364,7 +364,7 @@
                                 <rect key="frame" x="0.0" y="298" width="414" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="topCellId" id="OyB-pc-vol">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="topCellId" id="OyB-pc-vol">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OyB-pc-vol" id="ywo-ch-UJr">
@@ -1520,6 +1520,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="currencyLabel" destination="FCZ-ew-sts" id="4Od-fo-zPo"/>
                                             <outlet property="totalValueTextField" destination="5WM-JV-9qO" id="Mif-b8-DNb"/>
                                         </connections>
                                     </tableViewCell>

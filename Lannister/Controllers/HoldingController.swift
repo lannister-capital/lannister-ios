@@ -40,6 +40,10 @@ class HoldingController: UIViewController {
         editButton.action = #selector(editHolding)
         navigationItem.rightBarButtonItem = editButton
         
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+        
         valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value!)
         
         updateTransactions()

@@ -213,6 +213,9 @@ extension CreateHoldingController : UITableViewDataSource {
                 cell.totalValueTextField.text = String(format: "%.2f", holding.value!)
                 cell.percentageLabel.text = "\(String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100))%"
                 cell.currencyLabel.text = holding.currency.symbol
+            } else {
+                let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: CurrencyUserDefaults().getDefaultCurrencyName()!, in: NSManagedObjectContext.mr_default())
+                cell.currencyLabel.text = currency!.symbol
             }
             return cell
 
@@ -220,6 +223,9 @@ extension CreateHoldingController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCellId", for: indexPath) as! CurrencyCell
             if holding != nil {
                 cell.currencyNameLabel.text = holding.currency.symbol
+            } else {
+                let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: CurrencyUserDefaults().getDefaultCurrencyName()!, in: NSManagedObjectContext.mr_default())
+                cell.currencyNameLabel.text = currency!.symbol
             }
             return cell
 

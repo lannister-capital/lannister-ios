@@ -122,7 +122,7 @@ extension CreateTransactionController : UITableViewDataSource {
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "valueCellId", for: indexPath) as! TotalValueCell
-            
+            cell.currencyLabel.text = holding.currency.symbol
             return cell
         }
     }
