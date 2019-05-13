@@ -31,7 +31,7 @@ struct Currencies {
     
     static func getEuroValue(value: Double, currency: Currency) -> Double {
         
-        return value / currency.euroRate
+        return value * currency.euroRate
     }
 
 }

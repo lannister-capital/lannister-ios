@@ -103,32 +103,48 @@ extension AppDelegate {
         var euroCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "euro")
         if euroCurrency == nil {
             euroCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
-            euroCurrency!.name = "euro"
-            euroCurrency!.symbol = "€"
-            euroCurrency!.code = "EUR"
-            euroCurrency!.euro_rate = 1
         }
+        euroCurrency!.name = "euro"
+        euroCurrency!.symbol = "€"
+        euroCurrency!.code = "EUR"
+        euroCurrency!.euro_rate = 1
         
         var dollarCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "dollar")
         if dollarCurrency == nil {
             dollarCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
-            dollarCurrency!.name = "dollar"
-            dollarCurrency!.symbol = "$"
-            dollarCurrency!.code = "USD"
         }
+        dollarCurrency!.name = "dollar"
+        dollarCurrency!.symbol = "$"
+        dollarCurrency!.code = "USD"
 
         var poundCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "pound")
         if poundCurrency == nil {
             poundCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
-            poundCurrency!.name = "pound"
-            poundCurrency!.symbol = "£"
-            poundCurrency!.code = "GBP"
         }
+        poundCurrency!.name = "pound"
+        poundCurrency!.symbol = "£"
+        poundCurrency!.code = "GBP"
+        
+        var bitcoinCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "bitcoin")
+        if bitcoinCurrency == nil {
+            bitcoinCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        bitcoinCurrency!.name = "bitcoin"
+        bitcoinCurrency!.symbol = "Ƀ"
+        bitcoinCurrency!.code = "BTC"
+
+        var ethereumCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "ethereum")
+        if ethereumCurrency == nil {
+            ethereumCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        ethereumCurrency!.name = "ethereum"
+        ethereumCurrency!.symbol = "⬨"
+        ethereumCurrency!.code = "ETH"
+
         
         // fetch euro_rate
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         CurrencyApiService().getCurrencies { (response) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
             switch (response!.result) {
             case .success(let JSON):
@@ -141,21 +157,70 @@ extension AppDelegate {
                     poundCurrency?.euro_rate = poundValue
                 }
                 
-                NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
-                
-                print("saved currencies")
+                CurrencyApiService().getBTCfromEur(returns: { response in
+                    switch (response!.result) {
+                    case .success(let JSON):
+                        
+                        print("btc json \(JSON)")
+                        
+                        let ticker = (JSON as AnyObject).object(forKey: "ticker")! as! [String: Any]
+                        print("btc ticker \(ticker)")
 
+                        if let btcValue = ticker["price"] as? String {
+                            print("btc btcValue \(btcValue)")
+
+                            bitcoinCurrency?.euro_rate = btcValue.doubleValue!
+                        }
+
+                        CurrencyApiService().getETHfromEur(returns: { response in
+                            switch (response!.result) {
+                            case .success(let JSON):
+                                
+                                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                                
+                                let ticker = (JSON as AnyObject).object(forKey: "ticker")! as! [String: Any]
+                                if let ethValue = ticker["price"] as? String {
+                                    ethereumCurrency?.euro_rate = ethValue.doubleValue!
+                                }
+
+                                print("saved currencies")
+
+                                NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+
+                            case .failure(let error):
+                                print("error fetching eth \(error.localizedDescription)")
+                                if showAlert {
+                                    self.showError(errorTitle: "Oops!", errorMessage: "Unable to fetch currencies")
+                                }
+                            }
+                        })
+                        
+                    case .failure(let error):
+                        print("error fetching btc \(error.localizedDescription)")
+                        if showAlert {
+                            self.showError(errorTitle: "Oops!", errorMessage: "Unable to fetch currencies")
+                        }
+                    }
+                })
+                
             case .failure(let error):
                 print("error fetching currencies \(error.localizedDescription)")
                 if showAlert {
-                    if let rootController = UIApplication.topViewController() {
-                        let alert = UIAlertController(title: "Oops!", message: "Unable to fetch currencies", preferredStyle: .alert)
-                        rootController.present(alert, animated: true, completion: nil)
-                    }
+                    self.showError(errorTitle: "Oops!", errorMessage: "Unable to fetch currencies")
                 }
             }
         }
 
+    }
+    
+    func showError(errorTitle: String, errorMessage: String) {
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+
+        if let rootController = UIApplication.topViewController() {
+            let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+            rootController.present(alert, animated: true, completion: nil)
+        }
     }
     
 }

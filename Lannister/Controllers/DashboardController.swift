@@ -87,6 +87,7 @@ class DashboardController: UIViewController {
             pieChartDataColors.removeAll()
             pieChartLegendEntries.removeAll()
             for holding in holdings {
+
                 euroTotalValue += Currencies.getEuroValue(value: holding.value, currency: holding.currency)
                 var legendTitle = holding.name
                 if pieChartDataEntries.count > 7 {
@@ -163,6 +164,7 @@ extension DashboardController : UICollectionViewDataSource {
         
         if kind == UICollectionView.elementKindSectionHeader {
             if totalValue > 0 {
+                print("Currencies.getDefaultCurrencySymbol() \(Currencies.getDefaultCurrencySymbol())")
                 sectionHeader.totalValueLabel.text = String(format: "%@%.0f", Currencies.getDefaultCurrencySymbol(), totalValue)
             } else {
                 sectionHeader.totalValueLabel.text = "$ --"

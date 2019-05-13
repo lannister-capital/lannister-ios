@@ -14,4 +14,5 @@ import Groot
 class BaseApiService: NSObject {
         
     let currencyBaseUrl = "https://api.exchangeratesapi.io"
+    let currencyCryptoBaseUrl = "https://api.cryptonator.com/api/ticker"
 }
