@@ -352,11 +352,19 @@
                                         <color key="textColor" red="0.1647058824" green="0.21176470589999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uez-jX-kUU" customClass="PieChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="82" width="406" height="153"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="0sA-nP-e11" firstAttribute="top" secondItem="RVF-bE-PKQ" secondAttribute="top" constant="17" id="4PR-q2-fai"/>
                                     <constraint firstAttribute="height" constant="250" id="EKp-hJ-nFW"/>
+                                    <constraint firstAttribute="bottom" secondItem="uez-jX-kUU" secondAttribute="bottom" constant="15" id="Ep3-TF-AFz"/>
+                                    <constraint firstItem="uez-jX-kUU" firstAttribute="top" secondItem="0sA-nP-e11" secondAttribute="bottom" constant="15" id="e6Q-5V-fPJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="uez-jX-kUU" secondAttribute="trailing" constant="8" id="lLL-NG-Gbp"/>
+                                    <constraint firstItem="uez-jX-kUU" firstAttribute="leading" secondItem="RVF-bE-PKQ" secondAttribute="leading" id="ocg-Vc-pb5"/>
                                     <constraint firstItem="0sA-nP-e11" firstAttribute="centerX" secondItem="RVF-bE-PKQ" secondAttribute="centerX" id="qcw-Y4-Ply"/>
                                 </constraints>
                             </view>
@@ -477,13 +485,14 @@
                     </view>
                     <connections>
                         <outlet property="barView" destination="FKj-iX-4aU" id="BqF-nV-i3x"/>
+                        <outlet property="pieChartView" destination="uez-jX-kUU" id="n3K-dj-lQ8"/>
                         <outlet property="tableView" destination="j8o-5O-M9v" id="YdS-t7-HGg"/>
                         <outlet property="valueLabel" destination="0sA-nP-e11" id="RdA-Wl-Tyc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JgD-6K-n77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6954" y="739"/>
+            <point key="canvasLocation" x="6953.6231884057979" y="738.61607142857144"/>
         </scene>
         <!--Auth Controller-->
         <scene sceneID="3hZ-0C-PUh">

@@ -92,7 +92,7 @@ class DashboardController: UIViewController {
                 if pieChartDataEntries.count > 7 {
                     legendTitle = "..."
                 }
-                let pieChartDataEntry = PieChartDataEntry(value: holding.value, label: legendTitle)
+                let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holding.value, currency: holding.currency), label: legendTitle)
                 pieChartDataEntries.append(pieChartDataEntry)
                 pieChartDataColors.append(Colors.hexStringToUIColor(hex: holding.hexColor))
 //                if pieChartLegendEntries.count < 7 {

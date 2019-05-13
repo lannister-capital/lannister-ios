@@ -8,15 +8,19 @@
 
 import UIKit
 import MagicalRecord
+import Charts
 
 class HoldingController: UIViewController {
 
     var euroTotalValue                  : Double!
     @IBOutlet weak var barView          : UIView!
     @IBOutlet weak var valueLabel       : UILabel!
+    @IBOutlet weak var pieChartView     : PieChartView!
     @IBOutlet weak var tableView        : UITableView!
     var holding                         : Holding!
     var transactions                    : [Transaction]!
+    var pieChartDataEntries             = [PieChartDataEntry]()
+    var pieChartDataColors              = [UIColor]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +50,8 @@ class HoldingController: UIViewController {
         
         valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value!)
         
+        updatePieChart()
+        
         updateTransactions()
     }
     
@@ -53,6 +59,40 @@ class HoldingController: UIViewController {
         super.viewWillAppear(animated)
         
         updateTransactions()
+    }
+    
+    func updatePieChart() {
+        
+        pieChartDataEntries.removeAll()
+        pieChartDataColors.removeAll()
+
+        let euroValue = Currencies.getEuroValue(value: holding.value, currency: holding.currency)
+
+        let pieChartDataEntry = PieChartDataEntry(value: euroValue, label: nil)
+        pieChartDataEntries.append(pieChartDataEntry)
+        pieChartDataColors.append(Colors.hexStringToUIColor(hex: holding.hexColor))
+
+        let secondPieChartDataEntry = PieChartDataEntry(value: euroTotalValue-euroValue, label: nil)
+        pieChartDataEntries.append(secondPieChartDataEntry)
+        pieChartDataColors.append(UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 0.7))
+        
+        pieChartView.chartDescription?.text = ""
+        let percentage = String(format: "%.2f", euroValue/euroTotalValue*100)
+        let attributedString = NSAttributedString(string: "\(percentage)%",
+                                                  attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
+                                                                NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
+        pieChartView.centerAttributedText = attributedString
+        pieChartView.drawHoleEnabled = true
+        pieChartView.holeColor = UIColor.clear
+        pieChartView.drawEntryLabelsEnabled = false
+        pieChartView.holeRadiusPercent = 0.80
+        pieChartView.legend.enabled = false
+        
+        let chartDataSet = PieChartDataSet(entries: pieChartDataEntries, label: nil)
+        chartDataSet.colors = pieChartDataColors
+        chartDataSet.drawValuesEnabled = false
+        let chartData = PieChartData(dataSet: chartDataSet)
+        pieChartView.data = chartData
     }
     
     func updateTransactions() {
