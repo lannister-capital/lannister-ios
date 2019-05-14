@@ -56,6 +56,8 @@
 		70E96B562272E7F900A5EB54 /* LannisterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B552272E7F900A5EB54 /* LannisterUITests.swift */; };
 		70FBB962228AF4700086E208 /* DonationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB961228AF4700086E208 /* DonationsController.swift */; };
 		70FBB964228B01480086E208 /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB963228B01480086E208 /* DonationCell.swift */; };
+		70FBB966228B08790086E208 /* BlockstackApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB965228B08790086E208 /* BlockstackApiService.swift */; };
+		70FBB96A228B14610086E208 /* HoldingTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB969228B14610086E208 /* HoldingTopCell.swift */; };
 		E0239ED7BE77EB6A2BF985AB /* Pods_LannisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +136,8 @@
 		70E96B572272E7F900A5EB54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70FBB961228AF4700086E208 /* DonationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationsController.swift; sourceTree = "<group>"; };
 		70FBB963228B01480086E208 /* DonationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
+		70FBB965228B08790086E208 /* BlockstackApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockstackApiService.swift; sourceTree = "<group>"; };
+		70FBB969228B14610086E208 /* HoldingTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingTopCell.swift; sourceTree = "<group>"; };
 		7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LannisterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		986DDED2C135F4193BC8B943 /* Pods-LannisterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterUITests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterUITests/Pods-LannisterUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C54D0B245B43BB9320917656 /* Pods-LannisterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterUITests.release.xcconfig"; path = "Target Support Files/Pods-LannisterUITests/Pods-LannisterUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				7016B4AC2283070B000C49B8 /* ApiManager.swift */,
 				7016B4AE22830737000C49B8 /* BaseApiService.swift */,
 				7016B4B02283076D000C49B8 /* CurrencyApiService.swift */,
+				70FBB965228B08790086E208 /* BlockstackApiService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				7073A69822806A6500049A2E /* TransactionNameCell.swift */,
 				700BDDF8227A297600276068 /* TransactionCell.swift */,
 				707FB20D22773DE0005B29A2 /* TotalValueCell.swift */,
+				70FBB969228B14610086E208 /* HoldingTopCell.swift */,
 				7016B4A92282EBC3000C49B8 /* TransactionTypeCell.swift */,
 				707FB21122773DF8005B29A2 /* ColorCodeCell.swift */,
 				70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */,
@@ -642,12 +648,14 @@
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
 				7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */,
 				657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */,
+				70FBB96A228B14610086E208 /* HoldingTopCell.swift in Sources */,
 				707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */,
 				70572CC12273A1E100297421 /* HoldingController.swift in Sources */,
 				707E5E432285C85E00D4ED33 /* CurrencyUserDefaults.swift in Sources */,
 				707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */,
 				707E5E452285C95800D4ED33 /* Currencies.swift in Sources */,
 				70572CBD2273A1B400297421 /* DashboardController.swift in Sources */,
+				70FBB966228B08790086E208 /* BlockstackApiService.swift in Sources */,
 				70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */,
 				70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */,
 				7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */,

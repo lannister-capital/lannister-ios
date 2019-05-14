@@ -9,6 +9,7 @@
 import UIKit
 import MagicalRecord
 import Charts
+import Blockstack
 
 class HoldingController: UIViewController {
 
@@ -102,6 +103,7 @@ class HoldingController: UIViewController {
         
         let transactionsManagedObjects = TransactionManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
         transactions = TransactionDto().transactions(from: transactionsManagedObjects as! [TransactionManagedObject])
+        transactions = transactions.filter { $0.holding!.name == self.holding!.name }
         tableView.reloadData()
     }
     
@@ -155,6 +157,19 @@ extension HoldingController : UITableViewDataSource {
             let transactionManagedObject = TransactionManagedObject.mr_findFirst(byAttribute: "identifier", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())
             transactionManagedObject?.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+            
+            if Blockstack.shared.isUserSignedIn() {
+                BlockstackApiService().send { error in
+                    if error != nil {
+                        let msg = error!.localizedDescription
+                        let alert = UIAlertController(title: "Error",
+                                                      message: msg,
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
 
             transactions.remove(at: indexPath.row-1)
             
@@ -170,7 +185,8 @@ extension HoldingController : UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "topCellId", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "topCellId", for: indexPath) as! HoldingTopCell
+            cell.addButton.layer.cornerRadius = 4
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCellId", for: indexPath) as! TransactionCell

@@ -186,7 +186,7 @@ extension AppDelegate {
                                 print("saved currencies")
 
                                 NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
-
+                                
                             case .failure(let error):
                                 print("error fetching eth \(error.localizedDescription)")
                                 if showAlert {

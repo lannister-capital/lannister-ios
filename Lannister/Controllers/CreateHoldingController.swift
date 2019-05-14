@@ -9,6 +9,7 @@
 import UIKit
 import MagicalRecord
 import BiometricAuthentication
+import Blockstack
 
 protocol EditHoldingDelegate {
     func updateHolding(newHolding: Holding)
@@ -103,6 +104,19 @@ class CreateHoldingController: UIViewController {
             
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
             
+            if Blockstack.shared.isUserSignedIn() {
+                BlockstackApiService().send { error in
+                    if error != nil {
+                        let msg = error!.localizedDescription
+                        let alert = UIAlertController(title: "Error",
+                                                      message: msg,
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+
             if holding != nil {
                 let newHolding = HoldingDto().holding(from: newHoldingManagedObject)
                 if delegate != nil {
@@ -166,6 +180,18 @@ class CreateHoldingController: UIViewController {
             let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: self.holding.name!)!
             holdingManagedObject.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+            if Blockstack.shared.isUserSignedIn() {
+                BlockstackApiService().send { error in
+                    if error != nil {
+                        let msg = error!.localizedDescription
+                        let alert = UIAlertController(title: "Error",
+                                                      message: msg,
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
             self.navigationController?.popToRootViewController(animated: true)
         }))
         self.present(alert, animated: true, completion: nil)

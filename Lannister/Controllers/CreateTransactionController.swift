@@ -8,6 +8,7 @@
 
 import UIKit
 import MagicalRecord
+import Blockstack
 
 protocol CreateTransactionDelegate {
     func newTransaction(newHolding: Holding)
@@ -124,6 +125,19 @@ class CreateTransactionController: UIViewController {
         }
         
         NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+        
+        if Blockstack.shared.isUserSignedIn() {
+            BlockstackApiService().send { error in
+                if error != nil {
+                    let msg = error!.localizedDescription
+                    let alert = UIAlertController(title: "Error",
+                                                  message: msg,
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
         
         print("holdingManagedObject!.value \(holdingManagedObject!.value)")
         

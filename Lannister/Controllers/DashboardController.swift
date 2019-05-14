@@ -209,6 +209,7 @@ extension DashboardController : UICollectionViewDataSource {
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "topCellId", for: indexPath) as! DashboardTopCell
             cell.sortButton.semanticContentAttribute = .forceRightToLeft
+            cell.addButton.layer.cornerRadius = 4
             let attributedString = NSMutableAttributedString(string: "Sort by:",
                                                              attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 42/255, green: 54/255, blue: 74/255, alpha: 1)])
             var sortWord = "Amount"
