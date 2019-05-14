@@ -54,6 +54,8 @@
 		70E96B402272E7F900A5EB54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3E2272E7F900A5EB54 /* LaunchScreen.storyboard */; };
 		70E96B4B2272E7F900A5EB54 /* LannisterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B4A2272E7F900A5EB54 /* LannisterTests.swift */; };
 		70E96B562272E7F900A5EB54 /* LannisterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B552272E7F900A5EB54 /* LannisterUITests.swift */; };
+		70FBB962228AF4700086E208 /* DonationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB961228AF4700086E208 /* DonationsController.swift */; };
+		70FBB964228B01480086E208 /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB963228B01480086E208 /* DonationCell.swift */; };
 		E0239ED7BE77EB6A2BF985AB /* Pods_LannisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +132,8 @@
 		70E96B512272E7F900A5EB54 /* LannisterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LannisterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E96B552272E7F900A5EB54 /* LannisterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LannisterUITests.swift; sourceTree = "<group>"; };
 		70E96B572272E7F900A5EB54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70FBB961228AF4700086E208 /* DonationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationsController.swift; sourceTree = "<group>"; };
+		70FBB963228B01480086E208 /* DonationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
 		7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LannisterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		986DDED2C135F4193BC8B943 /* Pods-LannisterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterUITests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterUITests/Pods-LannisterUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C54D0B245B43BB9320917656 /* Pods-LannisterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterUITests.release.xcconfig"; path = "Target Support Files/Pods-LannisterUITests/Pods-LannisterUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				70572CC42273A26F00297421 /* CreateTransactionController.swift */,
 				70572CC62273A28700297421 /* ColorCodesController.swift */,
 				657B69302284354500D7A5AF /* CurrenciesController.swift */,
+				70FBB961228AF4700086E208 /* DonationsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */,
 				7007208F227ADA3A003F3DEF /* SettingsCell.swift */,
 				657B6932228436A800D7A5AF /* CurrencyCell.swift */,
+				70FBB963228B01480086E208 /* DonationCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -619,8 +625,10 @@
 			files = (
 				7073A6A12281FCFE00049A2E /* BioAccessController.swift in Sources */,
 				702B2D19227F6832005C0B64 /* Holding.swift in Sources */,
+				70FBB962228AF4700086E208 /* DonationsController.swift in Sources */,
 				702B2D23227F7CA1005C0B64 /* HoldingDto.swift in Sources */,
 				702B2D1B227F683F005C0B64 /* Transaction.swift in Sources */,
+				70FBB964228B01480086E208 /* DonationCell.swift in Sources */,
 				707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */,
 				6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */,
 				70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */,

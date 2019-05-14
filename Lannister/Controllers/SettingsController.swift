@@ -23,6 +23,10 @@ class SettingsController: UIViewController {
             [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
     @IBAction func dismiss() {
@@ -106,7 +110,7 @@ class SettingsController: UIViewController {
 extension SettingsController : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,6 +121,8 @@ extension SettingsController : UITableViewDataSource {
                 return 1
             }
             return 0
+        } else if section == 2 {
+            return 1
         } else {
             return 3
         }
@@ -141,10 +147,33 @@ extension SettingsController : UITableViewDataSource {
             } else {
                 titleLabel.text = ""
             }
+        } else if section == 2 {
+            titleLabel.text = "DONATE"
         } else {
             titleLabel.text = "ABOUT"
         }
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 3 {
+            return 60
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 58))
+        footerView.backgroundColor = UIColor.white
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 20, width: tableView.frame.size.width, height: 20))
+        footerView.addSubview(titleLabel)
+        titleLabel.textColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+        titleLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 14)
+        titleLabel.textAlignment = .center
+        let versionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        let buildString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+        titleLabel.text = "Version \(versionString)(\(buildString))"
+        return footerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -202,6 +231,13 @@ extension SettingsController : UITableViewDataSource {
                 cell.bioAccessSwitch.isUserInteractionEnabled = true
                 return cell
 //            }
+        } else if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
+            cell.logo.image = UIImage(named: "donations")
+            cell.nameLabel.text = "Donations"
+            cell.cellIndicator.isHidden = false
+            cell.currencyLabel.isHidden = true
+            return cell
         } else {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
@@ -294,6 +330,9 @@ extension SettingsController : UITableViewDelegate {
             } else {
 
             }
+        } else if indexPath.section == 2 {
+            let donationsVC = storyboard?.instantiateViewController(withIdentifier: "donationsVC")
+            navigationController!.pushViewController(donationsVC!, animated: true)
         } else {
             if indexPath.row == 0 {
                 UIApplication.shared.open(URL(string: "https://twitter.com/lannistercap")!, options: [:], completionHandler: nil)
