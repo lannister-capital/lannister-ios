@@ -78,7 +78,7 @@ class DashboardController: UIViewController {
             collectionView.isUserInteractionEnabled = true
             holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
             if sortKey == "amount" {
-                holdings = holdings.sorted { $0.value! > $1.value! }
+                holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
             } else {
                 holdings = holdings.sorted { $0.name! < $1.name! }
             }
@@ -137,7 +137,7 @@ class DashboardController: UIViewController {
             self.sortKey = "amount"
             UserDefaults.standard.setValue("amount", forKey: "sortKey")
             UserDefaults.standard.synchronize()
-            self.holdings = self.holdings.sorted { $0.value! > $1.value! }
+            self.holdings = self.holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
             self.collectionView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
