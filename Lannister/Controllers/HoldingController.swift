@@ -178,12 +178,12 @@ extension HoldingController : UITableViewDataSource {
             cell.nameLabel.text = transaction.name
             if(transaction.type == "credit") {
                 let value = String(format: "%.2f", transaction.value!)
-                cell.valueLabel.text = "\(holding.currency.symbol!)\(value)"
+                cell.valueLabel.text = "+ \(holding.currency.symbol!)\(value)"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "00B382")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "00B382")
             } else {
                 let value = String(format: "%.2f", transaction.value!)
-                cell.valueLabel.text = "\(holding.currency.symbol!)\(value)"
+                cell.valueLabel.text = "- \(holding.currency.symbol!)\(value)"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "E60243")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "E60243")
             }
