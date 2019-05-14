@@ -9,15 +9,20 @@
 import UIKit
 import MagicalRecord
 
+protocol CreateTransactionDelegate {
+    func newTransaction(newHolding: Holding)
+}
+
 class CreateTransactionController: UIViewController {
 
     @IBOutlet weak var tableView    : UITableView!
     var transaction                 : Transaction!
     var holding                     : Holding!
     var transactionType             = ["Credit", "Debit"]
-    var selectedTransaction         : String!
+    var selectedTransaction         : String! = "Credit"
     var transactionPickerView       : UIPickerView!
     var toolBar                     = UIToolbar()
+    var delegate                    : CreateTransactionDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,28 +64,58 @@ class CreateTransactionController: UIViewController {
             return
         }
         
+        print("save")
+        
         var newTransaction : TransactionManagedObject
         if transaction == nil {
             newTransaction = TransactionManagedObject(context: NSManagedObjectContext.mr_default())
             let totalNumberOfTransactions = TransactionManagedObject.mr_findAll()
             newTransaction.identifier = "\(totalNumberOfTransactions!.count)"
         } else {
-            newTransaction = TransactionManagedObject.mr_findFirst(byAttribute: "id", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())!
+            newTransaction = TransactionManagedObject.mr_findFirst(byAttribute: "identifier", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())!
         }
+//        print("transaction.identifier! \(transaction.identifier!)")
+//        print("newTransaction id \(newTransaction.identifier!)")
+
         newTransaction.name = transactionNameTextField!.text
+        
+        let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())
+        newTransaction.holding = holdingManagedObject
+
         if selectedTransaction == "Credit" {
             newTransaction.type = "credit"
         } else {
             newTransaction.type = "debit"
         }
-        let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())
-        newTransaction.holding = holdingManagedObject
         
         let indexPathValue = IndexPath(row: 2, section: 0)
         let cellForValue = tableView.cellForRow(at: indexPathValue) as! TotalValueCell
         let valueTextField = cellForValue.totalValueTextField
         if let totalValue = valueTextField!.text!.doubleValue {
             newTransaction.value = totalValue
+            if selectedTransaction == "Credit" {
+                print("totalValue \(totalValue)")
+                if transaction == nil {
+                    holdingManagedObject!.value = holdingManagedObject!.value + totalValue
+                } else {
+                    if transaction.type == "credit" {
+                        holdingManagedObject!.value = holdingManagedObject!.value + (totalValue-transaction.value)
+                    } else {
+                        holdingManagedObject!.value = holdingManagedObject!.value + (totalValue+transaction.value)
+                    }
+                }
+            } else {
+                if transaction == nil {
+                    holdingManagedObject!.value = holdingManagedObject!.value - totalValue
+                } else {
+                    if transaction.type == "debit" {
+                        holdingManagedObject!.value = holdingManagedObject!.value - (totalValue-transaction.value)
+                    } else {
+                        holdingManagedObject!.value = holdingManagedObject!.value - (totalValue+transaction.value)
+                    }
+                }
+            }
+
         } else {
             let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
@@ -89,6 +124,12 @@ class CreateTransactionController: UIViewController {
         }
         
         NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+        
+        print("holdingManagedObject!.value \(holdingManagedObject!.value)")
+        
+        if delegate != nil {
+            delegate.newTransaction(newHolding: HoldingDto().holding(from: holdingManagedObject!))
+        }
         
         navigationController?.popViewController(animated: true)
     }
@@ -108,7 +149,9 @@ extension CreateTransactionController : UITableViewDataSource {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionNameCellId", for: indexPath) as! TransactionNameCell
-            
+            if transaction != nil {
+                cell.transactionNameTextField.text = transaction.name
+            }
             return cell
             
         } else if indexPath.row == 1 {
@@ -123,6 +166,9 @@ extension CreateTransactionController : UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "valueCellId", for: indexPath) as! TotalValueCell
             cell.currencyLabel.text = holding.currency.symbol
+            if transaction != nil {
+                cell.totalValueTextField.text = "\(transaction.value!)"
+            }
             return cell
         }
     }
@@ -133,11 +179,11 @@ extension CreateTransactionController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 1 {
-//            showPickerView()
-        } else {
+//        if indexPath.row == 1 {
+////            showPickerView()
+//        } else {
             removeKeyboard()
-        }
+//        }
     }
 }
 

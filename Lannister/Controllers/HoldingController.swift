@@ -48,10 +48,8 @@ class HoldingController: UIViewController {
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
         
-        valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value!)
-        
+        updateHoldingValue()
         updatePieChart()
-        
         updateTransactions()
     }
     
@@ -59,6 +57,11 @@ class HoldingController: UIViewController {
         super.viewWillAppear(animated)
         
         updateTransactions()
+    }
+    
+    func updateHoldingValue() {
+        
+        valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value!)
     }
     
     func updatePieChart() {
@@ -119,6 +122,7 @@ class HoldingController: UIViewController {
         if segue.identifier == "createTransaction" {
             let destinationVC = segue.destination as! CreateTransactionController
             destinationVC.holding = holding
+            destinationVC.delegate = self
         }
     }
 }
@@ -141,11 +145,23 @@ extension HoldingController : UITableViewDataSource {
             
             let transaction = transactions[indexPath.row-1]
             
+            let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())
+            if transaction.type == "credit" {
+                holdingManagedObject!.value = holdingManagedObject!.value - transaction.value!
+            } else {
+                holdingManagedObject!.value = holdingManagedObject!.value + transaction.value!
+            }
+            
             let transactionManagedObject = TransactionManagedObject.mr_findFirst(byAttribute: "identifier", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())
             transactionManagedObject?.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
 
             transactions.remove(at: indexPath.row-1)
+            
+            holding = HoldingDto().holding(from: holdingManagedObject!)
+            
+            updateHoldingValue()
+            updatePieChart()
 
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -161,11 +177,15 @@ extension HoldingController : UITableViewDataSource {
             let transaction = transactions[indexPath.row-1]
             cell.nameLabel.text = transaction.name
             if(transaction.type == "credit") {
-                cell.valueLabel.text = String(format: "€%.2f", transaction.value!)
+                let value = String(format: "%.2f", transaction.value!)
+                cell.valueLabel.text = "\(holding.currency.symbol!)\(value)"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "00B382")
+                cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "00B382")
             } else {
-                cell.valueLabel.text = String(format: "€%.2f", transaction.value!)
+                let value = String(format: "%.2f", transaction.value!)
+                cell.valueLabel.text = "\(holding.currency.symbol!)\(value)"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "E60243")
+                cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "E60243")
             }
             return cell
         }
@@ -185,6 +205,7 @@ extension HoldingController : UITableViewDelegate {
             let transactionVC = storyboard?.instantiateViewController(withIdentifier: "transactionVC") as! CreateTransactionController
             transactionVC.transaction = transaction
             transactionVC.holding = holding
+            transactionVC.delegate = self
             navigationController?.pushViewController(transactionVC, animated: true)
         }
     }
@@ -193,6 +214,17 @@ extension HoldingController : UITableViewDelegate {
 extension HoldingController : EditHoldingDelegate {
     
     func updateHolding(newHolding: Holding) {
+        
+        holding = newHolding
+        navigationItem.title = holding.name
+        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
+        valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value)
+    }
+}
+
+extension HoldingController : CreateTransactionDelegate {
+    
+    func newTransaction(newHolding: Holding) {
         
         holding = newHolding
         navigationItem.title = holding.name
