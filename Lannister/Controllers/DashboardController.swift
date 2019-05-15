@@ -84,11 +84,7 @@ class DashboardController: UIViewController {
             emptyStateContainerView.isUserInteractionEnabled = false
             view.sendSubviewToBack(emptyStateContainerView)
             collectionView.isUserInteractionEnabled = true
-            if sortKey == "amount" {
-                holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
-            } else {
-                holdings = holdings.sorted { $0.name! < $1.name! }
-            }
+            
             for holding in holdings {
 
                 euroTotalValue += Currencies.getEuroValue(value: holding.value, currency: holding.currency)
@@ -108,8 +104,14 @@ class DashboardController: UIViewController {
 //                }
             }
             totalValue = euroTotalValue * Currencies.getDefaultCurrencyEuroRate()
+            
+            if sortKey == "amount" {
+                self.holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
+            } else {
+                self.holdings = holdings.sorted { $0.name! < $1.name! }
+            }
         }
-        collectionView.reloadData()
+        self.collectionView.reloadData()
     }
     
     @IBAction func createHolding() {
