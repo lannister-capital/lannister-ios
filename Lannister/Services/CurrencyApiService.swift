@@ -26,13 +26,13 @@ class CurrencyApiService: BaseApiService {
     }
     
     func getBTCfromEur(returns: @escaping(Response) -> Void) {
-        sharedManager.request("\(currencyCryptoBaseUrl)/btc-eur", method: .get, parameters: nil)
+        sharedManager.request("\(currencyCryptoBaseUrl)/eur-btc", method: .get, parameters: nil)
             .validate()
             .responseJSON { (response) in returns(response) }
     }
     
     func getETHfromEur(returns: @escaping(Response) -> Void) {
-        sharedManager.request("\(currencyCryptoBaseUrl)/eth-eur", method: .get, parameters: nil)
+        sharedManager.request("\(currencyCryptoBaseUrl)/eur-eth", method: .get, parameters: nil)
             .validate()
             .responseJSON { (response) in returns(response) }
     }

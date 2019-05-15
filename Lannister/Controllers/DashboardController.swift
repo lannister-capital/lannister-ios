@@ -67,25 +67,28 @@ class DashboardController: UIViewController {
     func updateHoldings() {
         
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
+        holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
+
+        euroTotalValue = 0
+        pieChartDataEntries.removeAll()
+        pieChartDataColors.removeAll()
+        pieChartLegendEntries.removeAll()
+
         if holdingsManagedObjects?.count == 0 {
             emptyStateContainerView.isHidden = false
             emptyStateContainerView.isUserInteractionEnabled = true
             view.bringSubviewToFront(emptyStateContainerView)
+            totalValue = 0
         } else {
             emptyStateContainerView.isHidden = true
             emptyStateContainerView.isUserInteractionEnabled = false
             view.sendSubviewToBack(emptyStateContainerView)
             collectionView.isUserInteractionEnabled = true
-            holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
             if sortKey == "amount" {
                 holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
             } else {
                 holdings = holdings.sorted { $0.name! < $1.name! }
             }
-            euroTotalValue = 0
-            pieChartDataEntries.removeAll()
-            pieChartDataColors.removeAll()
-            pieChartLegendEntries.removeAll()
             for holding in holdings {
 
                 euroTotalValue += Currencies.getEuroValue(value: holding.value, currency: holding.currency)
@@ -105,8 +108,8 @@ class DashboardController: UIViewController {
 //                }
             }
             totalValue = euroTotalValue * Currencies.getDefaultCurrencyEuroRate()
-            collectionView.reloadData()
         }
+        collectionView.reloadData()
     }
     
     @IBAction func createHolding() {
@@ -157,48 +160,52 @@ extension DashboardController : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
+                
         var sectionHeader = DashboardHeaderView()
         
         sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "dashboardHeaderId", for: indexPath) as! DashboardHeaderView
         
         if kind == UICollectionView.elementKindSectionHeader {
             if totalValue > 0 {
-                print("Currencies.getDefaultCurrencySymbol() \(Currencies.getDefaultCurrencySymbol())")
                 sectionHeader.totalValueLabel.text = String(format: "%@%.0f", Currencies.getDefaultCurrencySymbol(), totalValue)
+                sectionHeader.pieChartView.isHidden = false
+                
+                sectionHeader.numberOfHoldingsLabel.text = "\(holdings.count) holdings"
+                sectionHeader.pieChartView.chartDescription?.text = ""
+                let attributedString = NSAttributedString(string: "%",
+                                                          attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
+                                                                        NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
+                sectionHeader.pieChartView.centerAttributedText = attributedString
+                sectionHeader.pieChartView.drawHoleEnabled = true
+                sectionHeader.pieChartView.holeColor = UIColor.clear
+                sectionHeader.pieChartView.drawEntryLabelsEnabled = false
+                sectionHeader.pieChartView.holeRadiusPercent = 0.80
+                
+                let legend = sectionHeader.pieChartView.legend
+                //            legend.entries = pieChartLegendEntries
+                legend.font = UIFont(name: "AvenirNext-DemiBold", size: 12)!
+                legend.textColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
+                sectionHeader.pieChartView.legend.wordWrapEnabled = false
+                
+                sectionHeader.pieChartView.legend.form = .square //Illustration: original, square, line
+                sectionHeader.pieChartView.legend.formSize = 6 // icon size
+                sectionHeader.pieChartView.legend.formToTextSpace = 8 //text interval
+                //            sectionHeader.pieChartView.legend.yEntrySpace = 11 //text interval
+                sectionHeader.pieChartView.legend.horizontalAlignment = .right
+                sectionHeader.pieChartView.legend.verticalAlignment = .center
+                sectionHeader.pieChartView.legend.orientation = .vertical
+                
+                let chartDataSet = PieChartDataSet(entries: pieChartDataEntries, label: nil)
+                chartDataSet.colors = pieChartDataColors
+                chartDataSet.drawValuesEnabled = false
+                let chartData = PieChartData(dataSet: chartDataSet)
+                sectionHeader.pieChartView.data = chartData
+
             } else {
                 sectionHeader.totalValueLabel.text = "$ --"
+                sectionHeader.numberOfHoldingsLabel.text = "- holdings"
+                sectionHeader.pieChartView.isHidden = true
             }
-            sectionHeader.numberOfHoldingsLabel.text = "\(holdings.count) holdings"
-            sectionHeader.pieChartView.chartDescription?.text = ""
-            let attributedString = NSAttributedString(string: "%",
-                                                             attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
-                                                                           NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
-            sectionHeader.pieChartView.centerAttributedText = attributedString
-            sectionHeader.pieChartView.drawHoleEnabled = true
-            sectionHeader.pieChartView.holeColor = UIColor.clear
-            sectionHeader.pieChartView.drawEntryLabelsEnabled = false
-            sectionHeader.pieChartView.holeRadiusPercent = 0.80
-            
-            let legend = sectionHeader.pieChartView.legend
-//            legend.entries = pieChartLegendEntries
-            legend.font = UIFont(name: "AvenirNext-DemiBold", size: 12)!
-            legend.textColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
-            sectionHeader.pieChartView.legend.wordWrapEnabled = false
-
-            sectionHeader.pieChartView.legend.form = .square //Illustration: original, square, line
-            sectionHeader.pieChartView.legend.formSize = 6 // icon size
-            sectionHeader.pieChartView.legend.formToTextSpace = 8 //text interval
-//            sectionHeader.pieChartView.legend.yEntrySpace = 11 //text interval
-            sectionHeader.pieChartView.legend.horizontalAlignment = .right
-            sectionHeader.pieChartView.legend.verticalAlignment = .center
-            sectionHeader.pieChartView.legend.orientation = .vertical
-
-            let chartDataSet = PieChartDataSet(entries: pieChartDataEntries, label: nil)
-            chartDataSet.colors = pieChartDataColors
-            chartDataSet.drawValuesEnabled = false
-            let chartData = PieChartData(dataSet: chartDataSet)
-            sectionHeader.pieChartView.data = chartData
             
             return sectionHeader
         }
