@@ -196,14 +196,13 @@ extension HoldingController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCellId", for: indexPath) as! TransactionCell
             let transaction = transactions[indexPath.row-1]
             cell.nameLabel.text = transaction.name
+            let formattedNumber = numberFormatter.string(for: NSNumber(value: transaction.value!))
             if(transaction.type == "credit") {
-                let value = String(format: "%.2f", transaction.value!)
-                cell.valueLabel.text = "+ \(holding.currency.symbol!)\(value)"
+                cell.valueLabel.text = "+ \(holding.currency.symbol!)\(formattedNumber ?? "--")"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "00B382")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "00B382")
             } else {
-                let value = String(format: "%.2f", transaction.value!)
-                cell.valueLabel.text = "- \(holding.currency.symbol!)\(value)"
+                cell.valueLabel.text = "- \(holding.currency.symbol!)\(formattedNumber ?? "--")"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "E60243")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "E60243")
             }
