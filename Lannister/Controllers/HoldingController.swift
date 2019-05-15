@@ -22,11 +22,15 @@ class HoldingController: UIViewController {
     var transactions                    : [Transaction]!
     var pieChartDataEntries             = [PieChartDataEntry]()
     var pieChartDataColors              = [UIColor]()
+    var numberFormatter                 = NumberFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "Holding"
+        
+        // Set number formatter display
+        numberFormatter.numberStyle = .decimal
 
         navigationController!.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
@@ -61,8 +65,8 @@ class HoldingController: UIViewController {
     }
     
     func updateHoldingValue() {
-        
-        valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value!)
+        let formattedNumber = numberFormatter.string(for: NSNumber(value: holding.value!))
+        valueLabel.text =  String(format: "%@%@", holding.currency.symbol, formattedNumber ?? "--")
     }
     
     func updatePieChart() {

@@ -22,6 +22,8 @@ class DashboardController: UIViewController {
     var pieChartDataEntries                     = [PieChartDataEntry]()
     var pieChartDataColors                      = [UIColor]()
     var pieChartLegendEntries                   = [LegendEntry]()
+    
+    var numberFormatter                         = NumberFormatter()
 
     
     override func viewDidLoad() {
@@ -37,6 +39,9 @@ class DashboardController: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        // Set number formatter display
+        numberFormatter.numberStyle = .decimal
         
         if UserDefaults.standard.object(forKey: "sortKey") != nil {
             sortKey = UserDefaults.standard.object(forKey: "sortKey") as! String
@@ -169,7 +174,9 @@ extension DashboardController : UICollectionViewDataSource {
         
         if kind == UICollectionView.elementKindSectionHeader {
             if totalValue > 0 {
-                sectionHeader.totalValueLabel.text = String(format: "%@%.0f", Currencies.getDefaultCurrencySymbol(), totalValue)
+                let formattedNumber = numberFormatter.string(for: NSNumber(value: totalValue))
+                
+                sectionHeader.totalValueLabel.text = String(format: "%@%@", Currencies.getDefaultCurrencySymbol(), formattedNumber ?? "--")
                 sectionHeader.pieChartView.isHidden = false
                 
                 sectionHeader.numberOfHoldingsLabel.text = "\(holdings.count) holdings"
@@ -236,7 +243,8 @@ extension DashboardController : UICollectionViewDataSource {
             let currency = holding.currency
             cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
             cell.nameLabel.text = holding.name
-            let value = String(format: "%.2f", holding.value!)
+            let formattedNumber = numberFormatter.string(for: NSNumber(value: holding.value!))
+            let value = String(format: "%@", formattedNumber ?? "--")
             cell.valueLabel.text = "\(currency!.symbol!)\(value)"
             let percentage = String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100)
             cell.percentageLabel.text = "\(percentage)%"
