@@ -29,6 +29,12 @@ class DashboardController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.updateHoldings),
+            name: NSNotification.Name(rawValue: "updateHoldings"),
+            object: nil)
+        
         navigationController!.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
@@ -69,8 +75,8 @@ class DashboardController: UIViewController {
         }
     }
     
-    func updateHoldings() {
-        
+    @objc func updateHoldings() {
+                
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
         holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
 

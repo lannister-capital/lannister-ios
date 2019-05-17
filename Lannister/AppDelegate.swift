@@ -95,7 +95,7 @@ extension AppDelegate {
     }
     
     func updateCurrencies() {
-        
+                
         let currencies = CurrencyManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
         
         let showAlert = currencies!.count == 0
@@ -185,7 +185,12 @@ extension AppDelegate {
 
                                 print("saved currencies")
 
-                                NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+                                NSManagedObjectContext.mr_default().mr_saveToPersistentStore(completion: { (_, error) in
+                                    
+                                    if error == nil {
+                                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateHoldings"), object: nil)
+                                    }
+                                })
                                 
                             case .failure(let error):
                                 print("error fetching eth \(error.localizedDescription)")
