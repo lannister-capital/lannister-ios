@@ -69,7 +69,7 @@ class CreateHoldingController: UIViewController {
             let alert = UIAlertController(title: "Oops!", message: "A holding with this name already exists.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-
+            return
         } else {
             
             var newHoldingManagedObject : HoldingManagedObject
@@ -217,13 +217,7 @@ extension CreateHoldingController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 4 {
-//            return 200
-//        }
-//    }
-    
+        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {

@@ -83,6 +83,7 @@ extension ColorCodesController : UITableViewDataSource {
         
         if indexPath.row == 6 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "colorCodeCustomCellId", for: indexPath) as! ColorCodeCustomCell
+            cell.selectionStyle = .none
             cell.colorCodeView.layer.borderWidth = 1
             cell.colorCodeView.layer.borderColor = UIColor(red: 151/255, green: 151/255, blue: 151/255, alpha: 1).cgColor
             return cell
@@ -117,11 +118,16 @@ extension ColorCodesController : UITableViewDataSource {
 extension ColorCodesController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     
-        tableView.deselectRow(at: indexPath, animated: true)
-        let cell = tableView.cellForRow(at: indexPath) as! ColorCodePresetCell
-        delegate.newColorCode(hex: cell.colorCodeLabel.text!)
-        navigationController?.popViewController(animated: true)
+        
+        if indexPath.row < 6 {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let cell = tableView.cellForRow(at: indexPath) as! ColorCodePresetCell
+            delegate.newColorCode(hex: cell.colorCodeLabel.text!)
+            navigationController?.popViewController(animated: true)
+        } else {
+            let cell = tableView.cellForRow(at: indexPath) as! ColorCodeCustomCell
+            cell.colorCodeTextField.becomeFirstResponder()
+        }
     }
 }
 
