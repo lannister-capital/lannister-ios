@@ -13,8 +13,8 @@ import BiometricAuthentication
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
-
+    var window              : UIWindow?
+    var backgroundBlurView  : UIView?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -67,11 +67,14 @@ extension AppDelegate {
     func checkAuthentication() {
         if let bioAccess = UserDefaults.standard.object(forKey: "bioAccess") as? Bool {
             if bioAccess == true {
+                
+                blurBackground()
                 BioMetricAuthenticator.authenticateWithBioMetrics(reason: "") { (result) in
                     
                     switch result {
                     case .success( _):
                         print("Authentication Successful")
+                        self.removeBackgroundBlur()
                     case .failure(let error):
                         print("Authentication Failed")
                         self.showPasscodeAuthentication(message: error.message())
@@ -81,12 +84,29 @@ extension AppDelegate {
         }
     }
     
+    func blurBackground() {
+        
+        if backgroundBlurView == nil {
+            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+            backgroundBlurView = UIVisualEffectView(effect: blurEffect)
+            backgroundBlurView!.frame = rootViewController.view.bounds
+            backgroundBlurView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            rootViewController.view.addSubview(backgroundBlurView!)
+        }
+    }
+    
+    func removeBackgroundBlur() {
+        backgroundBlurView?.removeFromSuperview()
+        backgroundBlurView = nil
+    }
+    
     func showPasscodeAuthentication(message: String) {
         
         BioMetricAuthenticator.authenticateWithPasscode(reason: message) { [weak self] (result) in
             switch result {
             case .success( _):
                 print("Authentication Successful")
+                self!.removeBackgroundBlur()
             case .failure(let error):
                 print(error.message())
                 self!.showPasscodeAuthentication(message: message)
