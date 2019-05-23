@@ -238,6 +238,7 @@ extension HoldingController : EditHoldingDelegate {
         navigationItem.title = holding.name
         barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
         valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value)
+        updatePieChart()
     }
 }
 
@@ -249,5 +250,6 @@ extension HoldingController : CreateTransactionDelegate {
         navigationItem.title = holding.name
         barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
         valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value)
+        updatePieChart()
     }
 }
