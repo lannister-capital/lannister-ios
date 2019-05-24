@@ -3,103 +3,103 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "AppIcon copy-5.png",
+      "filename" : "AppIcon copy-12.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
-      "idiom" : "iphone",
-      "filename" : "AppIcon copy 2-3.png",
-      "scale" : "3x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "iphone",
-      "filename" : "AppIcon copy-10.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "iphone",
-      "filename" : "AppIcon copy-8.png",
-      "scale" : "3x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "AppIcon-1.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "AppIcon copy.png",
-      "scale" : "3x"
-    },
-    {
-      "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "AppIcon copy-1.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "60x60",
       "idiom" : "iphone",
       "filename" : "AppIcon copy-7.png",
       "scale" : "3x"
     },
     {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "AppIcon copy-9.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "AppIcon copy-3.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "AppIcon copy-4.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "AppIcon copy-2.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "AppIcon-3.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "AppIcon-2.png",
+      "scale" : "3x"
+    },
+    {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "AppIcon copy-6.png",
+      "filename" : "AppIcon copy-14.png",
       "scale" : "1x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "AppIcon copy-3.png",
+      "filename" : "AppIcon copy-10.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "AppIcon copy-13.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "AppIcon copy-8.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "40x40",
       "idiom" : "ipad",
       "filename" : "AppIcon copy-11.png",
       "scale" : "1x"
     },
     {
-      "size" : "29x29",
-      "idiom" : "ipad",
-      "filename" : "AppIcon copy-9.png",
-      "scale" : "2x"
-    },
-    {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "AppIcon copy-4.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "ipad",
-      "filename" : "AppIcon copy-2.png",
+      "filename" : "AppIcon copy-5.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "AppIcon copy 2-2.png",
+      "filename" : "AppIcon copy-6.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "AppIcon copy 2-1.png",
+      "filename" : "AppIcon copy-1.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "AppIcon copy 2.png",
+      "filename" : "AppIcon copy.png",
       "scale" : "2x"
     },
     {
