@@ -72,6 +72,17 @@ class CreateHoldingController: UIViewController {
             return
         } else {
             
+            let indexPath = IndexPath(row: 1, section: 0)
+            let cell = tableView.cellForRow(at: indexPath) as! TotalValueCell
+            let valueTextField = cell.totalValueTextField
+
+            if valueTextField?.text?.doubleValue == nil {
+                let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
             var newHoldingManagedObject : HoldingManagedObject
 
             if holding == nil {
@@ -86,16 +97,8 @@ class CreateHoldingController: UIViewController {
             let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "symbol", withValue: currencyCell.currencyNameLabel.text!)
             newHoldingManagedObject.currency = currencyManagedObject
             
-            let indexPath = IndexPath(row: 1, section: 0)
-            let cell = tableView.cellForRow(at: indexPath) as! TotalValueCell
-            let valueTextField = cell.totalValueTextField
             if let totalValue = valueTextField!.text!.doubleValue {
                 newHoldingManagedObject.value = totalValue
-            } else {
-                let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                return
             }
             
             let colorIndexPath = IndexPath(row: 3, section: 0)
