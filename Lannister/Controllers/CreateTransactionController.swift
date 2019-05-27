@@ -65,6 +65,16 @@ class CreateTransactionController: UIViewController {
             return
         }
         
+        let indexPathValue = IndexPath(row: 2, section: 0)
+        let cellForValue = tableView.cellForRow(at: indexPathValue) as! TotalValueCell
+        let valueTextField = cellForValue.totalValueTextField
+        if valueTextField?.text?.doubleValue == nil || valueTextField?.text?.doubleValue == 0 {
+            let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         print("save")
         
         var newTransaction : TransactionManagedObject
@@ -89,9 +99,6 @@ class CreateTransactionController: UIViewController {
             newTransaction.type = "debit"
         }
         
-        let indexPathValue = IndexPath(row: 2, section: 0)
-        let cellForValue = tableView.cellForRow(at: indexPathValue) as! TotalValueCell
-        let valueTextField = cellForValue.totalValueTextField
         if let totalValue = valueTextField!.text!.doubleValue {
             newTransaction.value = totalValue
             if selectedTransaction == "Credit" {
@@ -117,11 +124,6 @@ class CreateTransactionController: UIViewController {
                 }
             }
 
-        } else {
-            let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            return
         }
         
         NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
@@ -193,11 +195,18 @@ extension CreateTransactionController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-//        if indexPath.row == 1 {
-////            showPickerView()
-//        } else {
+        if indexPath.row == 1 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "typeCellId", for: indexPath) as! TransactionTypeCell
+//            print("cell transactionTypeTextField \(String(describing: cell.transactionTypeTextField))")
+//            print("transactionPickerView \(String(describing: transactionPickerView))")
+////            userInput.keyboardType = UIKeyboardType.numberPad
+////            cell.transactionTypeTextField.inputView = transactionPickerView
+////            cell.transactionTypeTextField.inputAccessoryView = toolBar
+//            transactionPickerView.frame = CGRect(x: 0, y: view.frame.size.height-200, width: view.frame.size.width, height: 200)
+//            cell.transactionTypeTextField.becomeFirstResponder()
+        } else {
             removeKeyboard()
-//        }
+        }
     }
 }
 
