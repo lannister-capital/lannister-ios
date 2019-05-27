@@ -97,10 +97,19 @@ class DashboardController: UIViewController {
             collectionView.isUserInteractionEnabled = true
             
             for holding in holdings {
-
                 euroTotalValue += Currencies.getEuroValue(value: holding.value, currency: holding.currency)
+            }
+            
+            if sortKey == "amount" {
+                self.holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
+            } else {
+                self.holdings = holdings.sorted { $0.name! < $1.name! }
+            }
+            
+            for holding in holdings {
+
                 var legendTitle = holding.name
-                if pieChartDataEntries.count > 7 {
+                if pieChartDataEntries.count >= 7 {
                     legendTitle = "..."
                 }
                 let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holding.value, currency: holding.currency), label: legendTitle)
@@ -109,18 +118,14 @@ class DashboardController: UIViewController {
 //                if pieChartLegendEntries.count < 7 {
 //                    let legendEntry = LegendEntry(label: holding.name, form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: Colors.hexStringToUIColor(hex: holding.hexColor))
 //                    pieChartLegendEntries.append(legendEntry)
-//                } else if pieChartLegendEntries.count == 7 {
+//                } else if pieChartLegendEntries.count >= 7 {
+//                    print("legend ")
 //                    let legendEntry = LegendEntry(label: "...", form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1))
 //                    pieChartLegendEntries.append(legendEntry)
 //                }
             }
             totalValue = euroTotalValue * Currencies.getDefaultCurrencyEuroRate()
             
-            if sortKey == "amount" {
-                self.holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
-            } else {
-                self.holdings = holdings.sorted { $0.name! < $1.name! }
-            }
         }
         self.collectionView.reloadData()
     }
@@ -146,15 +151,13 @@ class DashboardController: UIViewController {
             self.sortKey = "name"
             UserDefaults.standard.setValue("name", forKey: "sortKey")
             UserDefaults.standard.synchronize()
-            self.holdings = self.holdings.sorted { $0.name! < $1.name! }
-            self.collectionView.reloadData()
+            self.updateHoldings()
         }))
         alert.addAction(UIAlertAction(title: "By Amount", style: UIAlertAction.Style.default, handler: { _ in
             self.sortKey = "amount"
             UserDefaults.standard.setValue("amount", forKey: "sortKey")
             UserDefaults.standard.synchronize()
-            self.holdings = self.holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
-            self.collectionView.reloadData()
+            self.updateHoldings()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -184,6 +187,7 @@ extension DashboardController : UICollectionViewDataSource {
                 
                 sectionHeader.totalValueLabel.text = String(format: "%@%@", Currencies.getDefaultCurrencySymbol(), formattedNumber ?? "--")
                 sectionHeader.pieChartView.isHidden = false
+                sectionHeader.pieChartView.delegate = self
                 
                 sectionHeader.numberOfHoldingsLabel.text = "\(holdings.count) holdings"
                 sectionHeader.pieChartView.chartDescription?.text = ""
@@ -197,7 +201,7 @@ extension DashboardController : UICollectionViewDataSource {
                 sectionHeader.pieChartView.holeRadiusPercent = 0.80
                 
                 let legend = sectionHeader.pieChartView.legend
-                //            legend.entries = pieChartLegendEntries
+//                legend.entries = pieChartLegendEntries
                 legend.font = UIFont(name: "AvenirNext-DemiBold", size: 12)!
                 legend.textColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
                 sectionHeader.pieChartView.legend.wordWrapEnabled = false
@@ -209,6 +213,9 @@ extension DashboardController : UICollectionViewDataSource {
                 sectionHeader.pieChartView.legend.horizontalAlignment = .right
                 sectionHeader.pieChartView.legend.verticalAlignment = .center
                 sectionHeader.pieChartView.legend.orientation = .vertical
+                if pieChartDataEntries.count > 8 {
+                    sectionHeader.pieChartView.legend.yOffset = CGFloat((pieChartDataEntries.count-8)*16)
+                }
                 
                 let chartDataSet = PieChartDataSet(entries: pieChartDataEntries, label: nil)
                 chartDataSet.colors = pieChartDataColors
@@ -289,5 +296,13 @@ extension DashboardController : UICollectionViewDelegate {
             holdingVC.euroTotalValue = euroTotalValue
             navigationController?.pushViewController(holdingVC, animated: true)
         }
+    }
+}
+
+extension DashboardController : ChartViewDelegate {
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        
+        print("chartValueSelected entry \(entry)")
     }
 }

@@ -65,13 +65,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="NyI-Xy-BB5">
                                     <size key="itemSize" width="345" height="65"/>
-                                    <size key="headerReferenceSize" width="50" height="250"/>
+                                    <size key="headerReferenceSize" width="50" height="255"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topCellId" id="MFD-im-pUF" customClass="DashboardTopCell" customModule="Lannister" customModuleProvider="target">
-                                        <rect key="frame" x="34.5" y="250" width="345" height="65"/>
+                                        <rect key="frame" x="34.5" y="255" width="345" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="65"/>
@@ -131,7 +131,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="holdingCellId" id="9oP-wl-Cse" customClass="HoldingCell" customModule="Lannister" customModuleProvider="target">
-                                        <rect key="frame" x="34.5" y="325" width="345" height="65"/>
+                                        <rect key="frame" x="34.5" y="330" width="345" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="65"/>
@@ -225,7 +225,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dashboardHeaderId" id="cWK-66-D1z" customClass="DashboardHeaderView" customModule="Lannister" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="255"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ --" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSS-L2-RCc">
@@ -238,7 +238,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="43a-Ee-rG7" customClass="PieChartView" customModule="Charts">
-                                            <rect key="frame" x="0.0" y="122" width="414" height="128"/>
+                                            <rect key="frame" x="0.0" y="122" width="414" height="133"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCD-Z3-PdB">
@@ -268,11 +268,11 @@
                                     <constraints>
                                         <constraint firstItem="QSS-L2-RCc" firstAttribute="top" secondItem="cWK-66-D1z" secondAttribute="top" id="Daq-vU-K7m"/>
                                         <constraint firstItem="aCD-Z3-PdB" firstAttribute="top" secondItem="QSS-L2-RCc" secondAttribute="bottom" constant="20" id="F10-yH-REq"/>
+                                        <constraint firstAttribute="bottom" secondItem="43a-Ee-rG7" secondAttribute="bottom" id="KEQ-HM-Sz5"/>
                                         <constraint firstItem="43a-Ee-rG7" firstAttribute="top" secondItem="aCD-Z3-PdB" secondAttribute="bottom" constant="10" id="Kdx-VX-1C3"/>
                                         <constraint firstAttribute="trailing" secondItem="43a-Ee-rG7" secondAttribute="trailing" id="PpW-rn-2fA"/>
                                         <constraint firstItem="QSS-L2-RCc" firstAttribute="centerX" secondItem="cWK-66-D1z" secondAttribute="centerX" id="R5B-n1-fg5"/>
                                         <constraint firstItem="43a-Ee-rG7" firstAttribute="leading" secondItem="cWK-66-D1z" secondAttribute="leading" id="b3F-jp-tSY"/>
-                                        <constraint firstAttribute="bottom" secondItem="43a-Ee-rG7" secondAttribute="bottom" id="gJd-VQ-cB5"/>
                                         <constraint firstItem="aCD-Z3-PdB" firstAttribute="centerX" secondItem="cWK-66-D1z" secondAttribute="centerX" id="oxl-Fv-hOJ"/>
                                     </constraints>
                                     <connections>
