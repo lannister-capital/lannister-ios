@@ -112,7 +112,7 @@ class DashboardController: UIViewController {
                 if pieChartDataEntries.count >= 7 {
                     legendTitle = "..."
                 }
-                let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holding.value, currency: holding.currency), label: legendTitle)
+                let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holding.value, currency: holding.currency)/self.euroTotalValue*100, label: legendTitle)
                 pieChartDataEntries.append(pieChartDataEntry)
                 pieChartDataColors.append(Colors.hexStringToUIColor(hex: holding.hexColor))
 //                if pieChartLegendEntries.count < 7 {
@@ -304,5 +304,24 @@ extension DashboardController : ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
         print("chartValueSelected entry \(entry)")
+
+        let pieChartEntry = entry as! PieChartDataEntry
+        let sectionHeader = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0)) as! DashboardHeaderView
+        let percentage = String(format: "%.2f", pieChartEntry.value)
+        let attributedString = NSAttributedString(string: "\(percentage)%",
+                                                  attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
+                                                                NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
+        sectionHeader.pieChartView.centerAttributedText = attributedString
+        sectionHeader.pieChartView.notifyDataSetChanged()
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        
+        let sectionHeader = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0)) as! DashboardHeaderView
+        let attributedString = NSAttributedString(string: "%",
+            attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
+                          NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
+        sectionHeader.pieChartView.centerAttributedText = attributedString
+        sectionHeader.pieChartView.notifyDataSetChanged()
     }
 }
