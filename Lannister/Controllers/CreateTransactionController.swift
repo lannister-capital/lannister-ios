@@ -196,14 +196,8 @@ extension CreateTransactionController : UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 1 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "typeCellId", for: indexPath) as! TransactionTypeCell
-//            print("cell transactionTypeTextField \(String(describing: cell.transactionTypeTextField))")
-//            print("transactionPickerView \(String(describing: transactionPickerView))")
-////            userInput.keyboardType = UIKeyboardType.numberPad
-////            cell.transactionTypeTextField.inputView = transactionPickerView
-////            cell.transactionTypeTextField.inputAccessoryView = toolBar
-//            transactionPickerView.frame = CGRect(x: 0, y: view.frame.size.height-200, width: view.frame.size.width, height: 200)
-//            cell.transactionTypeTextField.becomeFirstResponder()
+            let cell = tableView.cellForRow(at: indexPath) as! TransactionTypeCell
+            cell.transactionTypeTextField.becomeFirstResponder()
         } else {
             removeKeyboard()
         }
