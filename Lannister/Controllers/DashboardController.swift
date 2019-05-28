@@ -115,6 +115,9 @@ class DashboardController: UIViewController {
                 let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holding.value, currency: holding.currency)/self.euroTotalValue*100, label: legendTitle)
                 pieChartDataEntries.append(pieChartDataEntry)
                 pieChartDataColors.append(Colors.hexStringToUIColor(hex: holding.hexColor))
+                let legendEntry = LegendEntry(label: legendTitle, form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: Colors.hexStringToUIColor(hex: holding.hexColor))
+                pieChartLegendEntries.append(legendEntry)
+
 //                if pieChartLegendEntries.count < 7 {
 //                    let legendEntry = LegendEntry(label: holding.name, form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: Colors.hexStringToUIColor(hex: holding.hexColor))
 //                    pieChartLegendEntries.append(legendEntry)
@@ -306,13 +309,26 @@ extension DashboardController : ChartViewDelegate {
         print("chartValueSelected entry \(entry)")
 
         let pieChartEntry = entry as! PieChartDataEntry
-        let sectionHeader = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0)) as! DashboardHeaderView
-        let percentage = String(format: "%.2f", pieChartEntry.value)
-        let attributedString = NSAttributedString(string: "\(percentage)%",
-                                                  attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
-                                                                NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
-        sectionHeader.pieChartView.centerAttributedText = attributedString
-        sectionHeader.pieChartView.notifyDataSetChanged()
+        
+        if let dataSet = chartView.data?.dataSets[highlight.dataSetIndex] {
+            
+            let sliceIndex: Int = dataSet.entryIndex( entry: entry)
+
+            let holding = holdings[sliceIndex]
+
+            let sectionHeader = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0)) as! DashboardHeaderView
+            let percentage = String(format: "%.2f", pieChartEntry.value)
+            let attributedString = NSAttributedString(string: "\(percentage)%",
+                attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
+                              NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
+            sectionHeader.pieChartView.centerAttributedText = attributedString
+            
+            let legendEntry = LegendEntry(label: holding.name, form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: Colors.hexStringToUIColor(hex: holding.hexColor))
+            sectionHeader.pieChartView.legend.setCustom(entries: [legendEntry])
+            sectionHeader.pieChartView.legend.yOffset = CGFloat(0)
+            
+            sectionHeader.pieChartView.notifyDataSetChanged()
+        }        
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
@@ -322,6 +338,11 @@ extension DashboardController : ChartViewDelegate {
             attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
                           NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
         sectionHeader.pieChartView.centerAttributedText = attributedString
+        
+        sectionHeader.pieChartView.legend.setCustom(entries: pieChartLegendEntries)
+        if pieChartDataEntries.count > 8 {
+            sectionHeader.pieChartView.legend.yOffset = CGFloat((pieChartDataEntries.count-8)*16)
+        }
         sectionHeader.pieChartView.notifyDataSetChanged()
     }
 }
