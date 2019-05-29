@@ -23,7 +23,7 @@
         </attribute>
         <relationship name="holdings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HoldingManagedObject" inverseName="currency" inverseEntity="HoldingManagedObject" syncable="YES"/>
         <userInfo>
-            <entry key="identityAttributes" value="name"/>
+            <entry key="identityAttributes" value="code"/>
         </userInfo>
     </entity>
     <entity name="HoldingManagedObject" representedClassName=".HoldingManagedObject" syncable="YES" codeGenerationType="class">
@@ -82,7 +82,7 @@
         <relationship name="holding" maxCount="1" deletionRule="Nullify" destinationEntity="HoldingManagedObject" inverseName="transactions" inverseEntity="HoldingManagedObject" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CurrencyManagedObject" positionX="-377.32421875" positionY="-52.68359375" width="128" height="120"/>
+        <element name="CurrencyManagedObject" positionX="-377.32421875" positionY="-52.68359375" width="128" height="118"/>
         <element name="HoldingManagedObject" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="TransactionManagedObject" positionX="-311.4921875" positionY="116.125" width="128" height="120"/>
     </elements>

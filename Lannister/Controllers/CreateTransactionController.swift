@@ -80,8 +80,7 @@ class CreateTransactionController: UIViewController {
         var newTransaction : TransactionManagedObject
         if transaction == nil {
             newTransaction = TransactionManagedObject(context: NSManagedObjectContext.mr_default())
-            let totalNumberOfTransactions = TransactionManagedObject.mr_findAll()
-            newTransaction.id = "\(totalNumberOfTransactions!.count+1)"
+            newTransaction.id = newTransaction.objectID.uriRepresentation().lastPathComponent
         } else {
             newTransaction = TransactionManagedObject.mr_findFirst(byAttribute: "id", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())!
         }
