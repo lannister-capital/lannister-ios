@@ -14,7 +14,7 @@ class TransactionDto : NSObject {
     func transaction(from managedObject: TransactionManagedObject) -> Transaction {
         
         var transaction = Transaction(with: nil)
-        transaction.identifier = managedObject.identifier
+        transaction.identifier = managedObject.id
         transaction.name = managedObject.name
         transaction.type = managedObject.type
         transaction.value = managedObject.value

@@ -6,6 +6,7 @@ import CoreData
 
 public enum HoldingManagedObjectAttributes: String {
     case hex_color = "hex_color"
+    case id = "id"
     case name = "name"
     case value = "value"
 }
@@ -47,6 +48,9 @@ open class _HoldingManagedObject: NSManagedObject {
 
     @NSManaged open
     var hex_color: String?
+
+    @NSManaged open
+    var id: String?
 
     @NSManaged open
     var name: String!

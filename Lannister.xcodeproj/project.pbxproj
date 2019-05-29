@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
 		26264CB5BB29C1179D830205 /* Pods_LannisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */; };
+		653D70DD229EC54E000A4049 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D70DC229EC54E000A4049 /* Parser.swift */; };
 		6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550D4702284536F0059C643 /* NumberFormatter.swift */; };
 		657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B69302284354500D7A5AF /* CurrenciesController.swift */; };
 		657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B6932228436A800D7A5AF /* CurrencyCell.swift */; };
@@ -82,6 +83,9 @@
 		40B65A67EE973FEA42828D95 /* Pods-Lannister.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister.debug.xcconfig"; path = "Target Support Files/Pods-Lannister/Pods-Lannister.debug.xcconfig"; sourceTree = "<group>"; };
 		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		653D70DC229EC54E000A4049 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		653D70DE229EC615000A4049 /* db 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "db 2.xcdatamodel"; sourceTree = "<group>"; };
+		653D70DF229ECB60000A4049 /* db 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "db 3.xcdatamodel"; sourceTree = "<group>"; };
 		6550D4702284536F0059C643 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		657B69302284354500D7A5AF /* CurrenciesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesController.swift; sourceTree = "<group>"; };
 		657B6932228436A800D7A5AF /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				7073A6A02281FCFE00049A2E /* BioAccessController.swift */,
 				6550D4702284536F0059C643 /* NumberFormatter.swift */,
 				707E5E442285C95800D4ED33 /* Currencies.swift */,
+				653D70DC229EC54E000A4049 /* Parser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -661,6 +666,7 @@
 				7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */,
 				7073A69B22806BAE00049A2E /* TransactionDto.swift in Sources */,
 				657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */,
+				653D70DD229EC54E000A4049 /* Parser.swift in Sources */,
 				707E5E492286C7D700D4ED33 /* DashboardTopCell.swift in Sources */,
 				7073A69922806A6600049A2E /* TransactionNameCell.swift in Sources */,
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
@@ -1012,9 +1018,11 @@
 		702B2D15227F6798005C0B64 /* db.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				653D70DF229ECB60000A4049 /* db 3.xcdatamodel */,
+				653D70DE229EC615000A4049 /* db 2.xcdatamodel */,
 				702B2D16227F6798005C0B64 /* db.xcdatamodel */,
 			);
-			currentVersion = 702B2D16227F6798005C0B64 /* db.xcdatamodel */;
+			currentVersion = 653D70DF229ECB60000A4049 /* db 3.xcdatamodel */;
 			path = db.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

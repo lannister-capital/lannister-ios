@@ -33,7 +33,35 @@ class BlockstackApiService: NSObject {
         })
     }
     
-//    func sync(returns: @escaping(Response) -> Void) {
-//
-//    }
+    func sync(returns: @escaping(Error?) -> Void) {
+
+        Blockstack.shared.getFile(at: "db.json", decrypt: true) { (response, error) in
+            if let decryptedResponse = response as? DecryptedValue {
+                let responseString = decryptedResponse.plainText
+                if let parsedHoldings = responseString!.parseJSONString as? Array<Any> {
+                    print("parsedHoldings \(String(describing: parsedHoldings))")
+                    let holdings = self.parseHoldings(holdings: parsedHoldings as NSArray)
+                    print("new holdings \(String(describing: holdings))")
+                    NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+                }
+                returns(error)
+            }
+        }
+    }
+    
+    internal func parseHoldings(holdings: NSArray) -> Array<HoldingManagedObject>? {
+        
+        var newHoldings : Array<HoldingManagedObject>? = Array<HoldingManagedObject>()
+        for holding in holdings {
+            let holdingJson : JSONDictionary = holding as! JSONDictionary
+            do {
+                let newHolding: HoldingManagedObject = try object(fromJSONDictionary: holdingJson, inContext: NSManagedObjectContext.mr_default())
+                newHoldings?.append(newHolding)
+            } catch let error as NSError {
+                print("error parsing holdings \(error)")
+            }
+        }
+        return newHoldings
+    }
+
 }

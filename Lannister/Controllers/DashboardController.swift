@@ -53,6 +53,16 @@ class DashboardController: UIViewController {
             sortKey = UserDefaults.standard.object(forKey: "sortKey") as! String
         }
         
+//        BlockstackApiService().sync { error in
+//            if error == nil {
+//                DispatchQueue.main.async {
+//                    self.updateHoldings()
+//                }
+//            } else {
+//                print("error \(String(describing: error))")
+//            }
+//        }
+        
         updateHoldings()
     }
     

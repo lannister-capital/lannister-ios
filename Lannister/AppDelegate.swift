@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         MagicalRecord.setupCoreDataStack(withAutoMigratingSqliteStoreNamed: "db")
         
+        updateHoldingsAttributes()
+        
         if CurrencyUserDefaults().getDefaultCurrencyName() == nil {
             CurrencyUserDefaults().setDefaultCurrency(name: "dollar")
         }
@@ -119,6 +121,19 @@ extension AppDelegate {
         }
     }
     
+    func updateHoldingsAttributes() {
+        
+        let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
+        var i = 1
+        for holdingManagedObject in holdingsManagedObjects {
+            if holdingManagedObject.id == nil {
+                holdingManagedObject.id = "\(i)"
+            }
+            i += 1
+        }
+        NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+    }
+    
     func updateCurrencies() {
                 
         let currencies = CurrencyManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
@@ -150,6 +165,79 @@ extension AppDelegate {
         poundCurrency!.symbol = "£"
         poundCurrency!.code = "GBP"
         
+        var australianDollarCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "australian dollar")
+        if australianDollarCurrency == nil {
+            australianDollarCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        australianDollarCurrency!.name = "australian dollar"
+        australianDollarCurrency!.symbol = "$"
+        australianDollarCurrency!.code = "AUD"
+
+        var canadianDollarCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "canadian dollar")
+        if canadianDollarCurrency == nil {
+            canadianDollarCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        canadianDollarCurrency!.name = "canadian dollar"
+        canadianDollarCurrency!.symbol = "$"
+        canadianDollarCurrency!.code = "CAD"
+
+        var danishKroneCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "danish krone")
+        if danishKroneCurrency == nil {
+            danishKroneCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        danishKroneCurrency!.name = "danish krone"
+        danishKroneCurrency!.symbol = "kr"
+        danishKroneCurrency!.code = "DKK"
+
+        var japaneseYenCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "japanese yen")
+        if japaneseYenCurrency == nil {
+            japaneseYenCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        japaneseYenCurrency!.name = "japanese yen"
+        japaneseYenCurrency!.symbol = "¥"
+        japaneseYenCurrency!.code = "JPY"
+
+        var newZealandDollarCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "new Zealand dollar")
+        if newZealandDollarCurrency == nil {
+            newZealandDollarCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        newZealandDollarCurrency!.name = "new Zealand dollar"
+        newZealandDollarCurrency!.symbol = "$"
+        newZealandDollarCurrency!.code = "NZD"
+
+        var norwegianKroneCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "norwegian krone")
+        if norwegianKroneCurrency == nil {
+            norwegianKroneCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        norwegianKroneCurrency!.name = "norwegian krone"
+        norwegianKroneCurrency!.symbol = "kr"
+        norwegianKroneCurrency!.code = "NOK"
+
+        var singaporeDollarCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "singapore dollar")
+        if singaporeDollarCurrency == nil {
+            singaporeDollarCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        singaporeDollarCurrency!.name = "singapore dollar"
+        singaporeDollarCurrency!.symbol = "$"
+        singaporeDollarCurrency!.code = "SGD"
+
+        var swedishKronaCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "swedish krona")
+        if swedishKronaCurrency == nil {
+            swedishKronaCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        swedishKronaCurrency!.name = "swedish krona"
+        swedishKronaCurrency!.symbol = "kr"
+        swedishKronaCurrency!.code = "SEK"
+
+        var swissFrancCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "swiss franc")
+        if swissFrancCurrency == nil {
+            swissFrancCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        }
+        swissFrancCurrency!.name = "swiss franc"
+        swissFrancCurrency!.symbol = "Fr"
+        swissFrancCurrency!.code = "CHF"
+
+        
         var bitcoinCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "bitcoin")
         if bitcoinCurrency == nil {
             bitcoinCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
@@ -158,13 +246,16 @@ extension AppDelegate {
         bitcoinCurrency!.symbol = "Ƀ"
         bitcoinCurrency!.code = "BTC"
 
-        var ethereumCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "ethereum")
-        if ethereumCurrency == nil {
-            ethereumCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+        var etherCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "ethereum")
+        if etherCurrency == nil {
+            etherCurrency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: "ether")
+            if etherCurrency == nil {
+                etherCurrency = CurrencyManagedObject(context: NSManagedObjectContext.mr_default())
+            }
         }
-        ethereumCurrency!.name = "ethereum"
-        ethereumCurrency!.symbol = "⬨"
-        ethereumCurrency!.code = "ETH"
+        etherCurrency!.name = "ether"
+        etherCurrency!.symbol = "⬨"
+        etherCurrency!.code = "ETH"
 
         
         // fetch euro_rate
@@ -180,6 +271,33 @@ extension AppDelegate {
                 }
                 if let poundValue = currenciesArray["GBP"] as? Double {
                     poundCurrency?.euro_rate = poundValue
+                }
+                if let australianDollarValue = currenciesArray["AUD"] as? Double {
+                    australianDollarCurrency?.euro_rate = australianDollarValue
+                }
+                if let canadianDollarValue = currenciesArray["CAD"] as? Double {
+                    canadianDollarCurrency?.euro_rate = canadianDollarValue
+                }
+                if let danishKroneValue = currenciesArray["DKK"] as? Double {
+                    danishKroneCurrency?.euro_rate = danishKroneValue
+                }
+                if let japaneseYenValue = currenciesArray["JPY"] as? Double {
+                    japaneseYenCurrency?.euro_rate = japaneseYenValue
+                }
+                if let newZealandDollarValue = currenciesArray["NZD"] as? Double {
+                    newZealandDollarCurrency?.euro_rate = newZealandDollarValue
+                }
+                if let norwegianKroneValue = currenciesArray["NOK"] as? Double {
+                    norwegianKroneCurrency?.euro_rate = norwegianKroneValue
+                }
+                if let singaporeDollarValue = currenciesArray["SGD"] as? Double {
+                    singaporeDollarCurrency?.euro_rate = singaporeDollarValue
+                }
+                if let swedishKronaValue = currenciesArray["SEK"] as? Double {
+                    swedishKronaCurrency?.euro_rate = swedishKronaValue
+                }
+                if let swissFrancValue = currenciesArray["CHF"] as? Double {
+                    swissFrancCurrency?.euro_rate = swissFrancValue
                 }
                 
                 CurrencyApiService().getBTCfromEur(returns: { response in
@@ -205,7 +323,7 @@ extension AppDelegate {
                                 
                                 let ticker = (JSON as AnyObject).object(forKey: "ticker")! as! [String: Any]
                                 if let ethValue = ticker["price"] as? String {
-                                    ethereumCurrency?.euro_rate = ethValue.doubleValue!
+                                    etherCurrency?.euro_rate = ethValue.doubleValue!
                                 }
 
                                 print("saved currencies")

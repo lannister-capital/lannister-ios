@@ -81,7 +81,7 @@ class CreateTransactionController: UIViewController {
         if transaction == nil {
             newTransaction = TransactionManagedObject(context: NSManagedObjectContext.mr_default())
             let totalNumberOfTransactions = TransactionManagedObject.mr_findAll()
-            newTransaction.identifier = "\(totalNumberOfTransactions!.count)"
+            newTransaction.id = "\(totalNumberOfTransactions!.count)"
         } else {
             newTransaction = TransactionManagedObject.mr_findFirst(byAttribute: "identifier", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())!
         }
