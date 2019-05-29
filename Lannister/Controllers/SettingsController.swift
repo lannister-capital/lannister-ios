@@ -203,7 +203,7 @@ extension SettingsController : UITableViewDataSource {
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellId", for: indexPath) as! SettingsCell
                 cell.logo.image = UIImage(named: "settings-export")
-                cell.nameLabel.text = "Export data"
+                cell.nameLabel.text = "Backup data"
                 cell.cellIndicator.isHidden = true
                 cell.currencyLabel.isHidden = true
                 return cell
