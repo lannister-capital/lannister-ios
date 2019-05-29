@@ -87,6 +87,8 @@ class CreateHoldingController: UIViewController {
 
             if holding == nil {
                 newHoldingManagedObject = HoldingManagedObject(context: NSManagedObjectContext.mr_default())
+                let totalNumberOfHoldings = HoldingManagedObject.mr_findAll()
+                newHoldingManagedObject.id = "\(totalNumberOfHoldings!.count+1)"
             } else {
                 newHoldingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!)!
             }

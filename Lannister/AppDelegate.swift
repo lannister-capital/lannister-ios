@@ -124,7 +124,7 @@ extension AppDelegate {
     func updateHoldingsAttributes() {
         
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
-        var i = 1
+        var i = holdingsManagedObjects.count+1
         for holdingManagedObject in holdingsManagedObjects {
             if holdingManagedObject.id == nil {
                 holdingManagedObject.id = "\(i)"

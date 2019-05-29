@@ -74,7 +74,12 @@ class HoldingController: UIViewController {
         pieChartDataEntries.removeAll()
         pieChartDataColors.removeAll()
 
-        let euroValue = Currencies.getEuroValue(value: holding.value, currency: holding.currency)
+        var holdingValue = holding.value
+        if holding.value < 0 {
+            holdingValue = 0
+        }
+
+        let euroValue = Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)
 
         let pieChartDataEntry = PieChartDataEntry(value: euroValue, label: nil)
         pieChartDataEntries.append(pieChartDataEntry)
@@ -158,7 +163,7 @@ extension HoldingController : UITableViewDataSource {
                 holdingManagedObject!.value = holdingManagedObject!.value + transaction.value!
             }
             
-            let transactionManagedObject = TransactionManagedObject.mr_findFirst(byAttribute: "identifier", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())
+            let transactionManagedObject = TransactionManagedObject.mr_findFirst(byAttribute: "id", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())
             transactionManagedObject?.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
             

@@ -107,7 +107,11 @@ class DashboardController: UIViewController {
             collectionView.isUserInteractionEnabled = true
             
             for holding in holdings {
-                euroTotalValue += Currencies.getEuroValue(value: holding.value, currency: holding.currency)
+                var holdingValue = holding.value
+                if holding.value < 0 {
+                    holdingValue = 0
+                }
+                euroTotalValue += Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)
             }
             
             if sortKey == "amount" {
@@ -118,11 +122,15 @@ class DashboardController: UIViewController {
             
             for holding in holdings {
 
+                var holdingValue = holding.value
+                if holding.value < 0 {
+                    holdingValue = 0
+                }
                 var legendTitle = holding.name
                 if pieChartDataEntries.count >= 7 {
                     legendTitle = "..."
                 }
-                let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holding.value, currency: holding.currency)/self.euroTotalValue*100, label: legendTitle)
+                let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)/self.euroTotalValue*100, label: legendTitle)
                 pieChartDataEntries.append(pieChartDataEntry)
                 pieChartDataColors.append(Colors.hexStringToUIColor(hex: holding.hexColor))
                 let legendEntry = LegendEntry(label: legendTitle, form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: Colors.hexStringToUIColor(hex: holding.hexColor))
@@ -272,7 +280,11 @@ extension DashboardController : UICollectionViewDataSource {
             let formattedNumber = numberFormatter.string(for: NSNumber(value: holding.value!))
             let value = String(format: "%@", formattedNumber ?? "--")
             cell.valueLabel.text = "\(currency!.symbol!)\(value)"
-            let percentage = String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100)
+            var holdingValue = holding.value
+            if holding.value < 0 {
+                holdingValue = 0
+            }
+            let percentage = String(format: "%.2f", Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)/euroTotalValue*100)
             cell.percentageLabel.text = "\(percentage)%"
             
             let path = UIBezierPath(roundedRect:cell.colorView.bounds,
