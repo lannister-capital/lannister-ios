@@ -46,7 +46,7 @@ open class _TransactionManagedObject: NSManagedObject {
     // MARK: - Properties
 
     @NSManaged open
-    var id: String!
+    var id: String?
 
     @NSManaged open
     var name: String!

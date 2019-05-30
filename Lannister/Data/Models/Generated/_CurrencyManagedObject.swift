@@ -15,6 +15,10 @@ public enum CurrencyManagedObjectRelationships: String {
     case holdings = "holdings"
 }
 
+public enum CurrencyManagedObjectUserInfo: String {
+    case identityAttributes = "identityAttributes"
+}
+
 open class _CurrencyManagedObject: NSManagedObject {
 
     // MARK: - Class methods

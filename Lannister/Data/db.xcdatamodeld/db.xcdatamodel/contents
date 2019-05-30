@@ -22,6 +22,9 @@
             </userInfo>
         </attribute>
         <relationship name="holdings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HoldingManagedObject" inverseName="currency" inverseEntity="HoldingManagedObject" syncable="YES"/>
+        <userInfo>
+            <entry key="identityAttributes" value="code"/>
+        </userInfo>
     </entity>
     <entity name="HoldingManagedObject" representedClassName=".HoldingManagedObject" syncable="YES" codeGenerationType="class">
         <attribute name="hex_color" optional="YES" attributeType="String" syncable="YES">
@@ -29,7 +32,11 @@
                 <entry key="JSONKeyPath" value="hex_color"/>
             </userInfo>
         </attribute>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+            </userInfo>
+        </attribute>
         <attribute name="name" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="name"/>
@@ -52,9 +59,9 @@
         </relationship>
     </entity>
     <entity name="TransactionManagedObject" representedClassName=".TransactionManagedObject" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="String" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
-                <entry key="JSONKeyPath" value="identifier"/>
+                <entry key="JSONKeyPath" value="id"/>
             </userInfo>
         </attribute>
         <attribute name="name" attributeType="String" syncable="YES">
@@ -76,7 +83,7 @@
     </entity>
     <elements>
         <element name="CurrencyManagedObject" positionX="-377.32421875" positionY="-52.68359375" width="128" height="120"/>
-        <element name="HoldingManagedObject" positionX="-63" positionY="-18" width="128" height="133"/>
-        <element name="TransactionManagedObject" positionX="-311.4921875" positionY="116.125" width="128" height="118"/>
+        <element name="HoldingManagedObject" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="TransactionManagedObject" positionX="-311.4921875" positionY="116.125" width="128" height="120"/>
     </elements>
 </model>

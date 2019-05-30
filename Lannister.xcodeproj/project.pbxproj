@@ -13,6 +13,7 @@
 		6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550D4702284536F0059C643 /* NumberFormatter.swift */; };
 		657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B69302284354500D7A5AF /* CurrenciesController.swift */; };
 		657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B6932228436A800D7A5AF /* CurrencyCell.swift */; };
+		65E95BEA229FCA6B00E9A442 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */; };
 		70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007208F227ADA3A003F3DEF /* SettingsCell.swift */; };
 		700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF6227A28F300276068 /* HoldingHeaderView.swift */; };
 		700BDDF9227A297600276068 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF8227A297600276068 /* TransactionCell.swift */; };
@@ -22,7 +23,6 @@
 		7016B4B12283076D000C49B8 /* CurrencyApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B02283076D000C49B8 /* CurrencyApiService.swift */; };
 		7016B4B322830880000C49B8 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B222830880000C49B8 /* Currency.swift */; };
 		7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B422830B0E000C49B8 /* CurrencyDto.swift */; };
-		702B2D17227F6798005C0B64 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D15227F6798005C0B64 /* db.xcdatamodeld */; };
 		702B2D19227F6832005C0B64 /* Holding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D18227F6832005C0B64 /* Holding.swift */; };
 		702B2D1B227F683F005C0B64 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D1A227F683F005C0B64 /* Transaction.swift */; };
 		702B2D23227F7CA1005C0B64 /* HoldingDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D22227F7CA1005C0B64 /* HoldingDto.swift */; };
@@ -84,11 +84,10 @@
 		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		653D70DC229EC54E000A4049 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		653D70DE229EC615000A4049 /* db 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "db 2.xcdatamodel"; sourceTree = "<group>"; };
-		653D70DF229ECB60000A4049 /* db 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "db 3.xcdatamodel"; sourceTree = "<group>"; };
 		6550D4702284536F0059C643 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		657B69302284354500D7A5AF /* CurrenciesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesController.swift; sourceTree = "<group>"; };
 		657B6932228436A800D7A5AF /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
+		65E95BE9229FCA6B00E9A442 /* db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db.xcdatamodel; sourceTree = "<group>"; };
 		6B7F6DB0CF0AE1E4D5DD38C4 /* Pods-LannisterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7007208F227ADA3A003F3DEF /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		700BDDF6227A28F300276068 /* HoldingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingHeaderView.swift; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 		7016B4B02283076D000C49B8 /* CurrencyApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyApiService.swift; sourceTree = "<group>"; };
 		7016B4B222830880000C49B8 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		7016B4B422830B0E000C49B8 /* CurrencyDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDto.swift; sourceTree = "<group>"; };
-		702B2D16227F6798005C0B64 /* db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db.xcdatamodel; sourceTree = "<group>"; };
 		702B2D18227F6832005C0B64 /* Holding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Holding.swift; sourceTree = "<group>"; };
 		702B2D1A227F683F005C0B64 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		702B2D22227F7CA1005C0B64 /* HoldingDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingDto.swift; sourceTree = "<group>"; };
@@ -214,7 +212,7 @@
 		702B2D12227F6745005C0B64 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				702B2D15227F6798005C0B64 /* db.xcdatamodeld */,
+				65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */,
 				702B2D21227F7C90005C0B64 /* Mappers */,
 				702B2D13227F674A005C0B64 /* Models */,
 				707E5E412285C84100D4ED33 /* User defaults */,
@@ -649,7 +647,6 @@
 				70572CBB2273A1A300297421 /* AuthController.swift in Sources */,
 				70572CCD2274788D00297421 /* DashboardHeaderView.swift in Sources */,
 				700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */,
-				702B2D17227F6798005C0B64 /* db.xcdatamodeld in Sources */,
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
 				7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */,
 				657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */,
@@ -679,6 +676,7 @@
 				7016B4AA2282EBC3000C49B8 /* TransactionTypeCell.swift in Sources */,
 				7016B4AD2283070B000C49B8 /* ApiManager.swift in Sources */,
 				70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */,
+				65E95BEA229FCA6B00E9A442 /* db.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,14 +1013,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		702B2D15227F6798005C0B64 /* db.xcdatamodeld */ = {
+		65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				653D70DF229ECB60000A4049 /* db 3.xcdatamodel */,
-				653D70DE229EC615000A4049 /* db 2.xcdatamodel */,
-				702B2D16227F6798005C0B64 /* db.xcdatamodel */,
+				65E95BE9229FCA6B00E9A442 /* db.xcdatamodel */,
 			);
-			currentVersion = 653D70DF229ECB60000A4049 /* db 3.xcdatamodel */;
+			currentVersion = 65E95BE9229FCA6B00E9A442 /* db.xcdatamodel */;
 			path = db.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
