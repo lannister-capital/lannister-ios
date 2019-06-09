@@ -133,7 +133,7 @@ extension AppDelegate {
     }
     
     func updateCurrencies() {
-                
+        
         let currencies = CurrencyManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
         
         let showAlert = currencies!.count == 0
@@ -302,14 +302,9 @@ extension AppDelegate {
                     switch (response!.result) {
                     case .success(let JSON):
                         
-                        print("btc json \(JSON)")
-                        
                         let ticker = (JSON as AnyObject).object(forKey: "ticker")! as! [String: Any]
-                        print("btc ticker \(ticker)")
 
                         if let btcValue = ticker["price"] as? String {
-                            print("btc btcValue \(btcValue)")
-
                             bitcoinCurrency?.euro_rate = btcValue.doubleValue!
                         }
 
@@ -323,8 +318,6 @@ extension AppDelegate {
                                 if let ethValue = ticker["price"] as? String {
                                     etherCurrency?.euro_rate = ethValue.doubleValue!
                                 }
-
-                                print("saved currencies")
 
                                 NSManagedObjectContext.mr_default().mr_saveToPersistentStore(completion: { (_, error) in
                                     

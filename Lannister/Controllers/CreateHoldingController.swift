@@ -17,8 +17,9 @@ protocol EditHoldingDelegate {
 
 class CreateHoldingController: UIViewController {
     
-    var euroTotalValue                  : Double!
+    var euroTotalValue              : Double!
     var holding                     : Holding!
+    var selectedCurrency            : Currency!
     @IBOutlet weak var tableView    : UITableView!
     var delegate                    : EditHoldingDelegate!
 
@@ -35,9 +36,12 @@ class CreateHoldingController: UIViewController {
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
+            selectedCurrency = holding.currency
         } else {
             let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
             navigationItem.leftBarButtonItem = cancelButton
+            let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: CurrencyUserDefaults().getDefaultCurrencyName()!, in: NSManagedObjectContext.mr_default())
+            selectedCurrency = CurrencyDto().currency(from: currency!)
         }
     }
     
@@ -89,15 +93,12 @@ class CreateHoldingController: UIViewController {
                 newHoldingManagedObject = HoldingManagedObject(context: NSManagedObjectContext.mr_default())
                 newHoldingManagedObject.id = newHoldingManagedObject.objectID.uriRepresentation().lastPathComponent
             } else {
-                newHoldingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!)!
+                newHoldingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())!
             }
             newHoldingManagedObject.name = holdingNameTextField!.text
             
-            let indexPathForCurrency = IndexPath(row: 2, section: 0)
-            let currencyCell = tableView.cellForRow(at: indexPathForCurrency) as! CurrencyCell
-            let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "symbol", withValue: currencyCell.currencyNameLabel.text!)
+            let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: selectedCurrency.code!, in: NSManagedObjectContext.mr_default())
             newHoldingManagedObject.currency = currencyManagedObject
-            
             if let totalValue = valueTextField!.text!.doubleValue {
                 newHoldingManagedObject.value = totalValue
             }
@@ -245,12 +246,7 @@ extension CreateHoldingController : UITableViewDataSource {
 
         } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCellId", for: indexPath) as! CurrencyCell
-            if holding != nil {
-                cell.currencyNameLabel.text = holding.currency.symbol
-            } else {
-                let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: CurrencyUserDefaults().getDefaultCurrencyName()!, in: NSManagedObjectContext.mr_default())
-                cell.currencyNameLabel.text = currency!.symbol
-            }
+            cell.currencyNameLabel.text = selectedCurrency.symbol
             return cell
 
         } else if indexPath.row == 3 {
@@ -310,6 +306,9 @@ extension CreateHoldingController : ColorCodesDelegate {
 extension CreateHoldingController : CurrenciesDelegate {
     
     func selectedCurrency(currency: Currency) {
+        
+        selectedCurrency = currency
+        
         let indexPath = IndexPath(row: 2, section: 0)
         let currencyCell = tableView.cellForRow(at: indexPath) as! CurrencyCell
         currencyCell.currencyNameLabel.text = currency.symbol

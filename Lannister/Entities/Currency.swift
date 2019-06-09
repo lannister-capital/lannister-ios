@@ -10,6 +10,7 @@ import UIKit
 
 struct Currency {
 
+    var code        : String!
     var name        : String!
     var symbol      : String!
     var euroRate    : Double!
