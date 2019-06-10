@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window              : UIWindow?
     var backgroundBlurView  : UIView?
+    var isCheckingAuth      = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -53,6 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if backgroundBlurView != nil {
+            checkAuthentication()
+        }
         if (UserDefaults.standard.object(forKey: "Auth") != nil) {
             updateCurrencies()
         }
@@ -73,14 +77,16 @@ extension AppDelegate {
     
     func checkAuthentication() {
         if let bioAccess = UserDefaults.standard.object(forKey: "bioAccess") as? Bool {
-            if bioAccess == true {
+            if bioAccess == true && !isCheckingAuth {
                 
+                isCheckingAuth = true
                 blurBackground()
                 BioMetricAuthenticator.authenticateWithBioMetrics(reason: "") { (result) in
                     
                     switch result {
                     case .success( _):
                         print("Authentication Successful")
+                        self.isCheckingAuth = false
                         self.removeBackgroundBlur()
                     case .failure(let error):
                         print("Authentication Failed")
@@ -113,6 +119,7 @@ extension AppDelegate {
             switch result {
             case .success( _):
                 print("Authentication Successful")
+                self!.isCheckingAuth = false
                 self!.removeBackgroundBlur()
             case .failure(let error):
                 print(error.message())
