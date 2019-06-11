@@ -2,6 +2,8 @@
 
 Lannister allows anyone to keep track and analyze the distribution of their holdings both in crypto and fiat (banks, deposits, savings, etc).
 
+![Lannister Showcase](https://user-images.githubusercontent.com/407470/59254807-c8fb3e80-8c28-11e9-8a14-dbe686d236c5.jpg)
+
 💭 Inspiration
 We started building Lannister because we needed a way to keep track of our holdings both in crypto and fiat (banks, deposits, savings, etc). It was also fundamental to have security and privacy in mind. No central server that could compromise our identity and financial data.
 
@@ -45,7 +47,7 @@ Work in progress 🏗
 
 lannister-ios is under the GPLv3 and the MPLv2 license.
 
-See [LICENSE](https://github.com/lannister-capital/lannister-ios/blob/master/LICENSE) for more license info.
+See [LICENSE](https://github.com/lannister-capital/lannister-ios/blob/master/LICENSE.md) for more license info.
 
 ---
 
