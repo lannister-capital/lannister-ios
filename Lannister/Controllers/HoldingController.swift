@@ -13,17 +13,20 @@ import Blockstack
 
 class HoldingController: UIViewController {
 
-    var euroTotalValue                  : Double!
-    @IBOutlet weak var barView          : UIView!
-    @IBOutlet weak var valueLabel       : UILabel!
-    @IBOutlet weak var pieChartView     : PieChartView!
-    @IBOutlet weak var tableView        : UITableView!
-    var holding                         : Holding!
-    var transactions                    : [Transaction]!
-    var pieChartDataEntries             = [PieChartDataEntry]()
-    var pieChartDataColors              = [UIColor]()
-    var numberFormatter                 = NumberFormatter()
+    var euroTotalValue                              : Double!
+    @IBOutlet weak var barView                      : UIView!
+    @IBOutlet weak var valueLabel                   : UILabel!
+    @IBOutlet weak var defaultCurrencyValueLabel    : UILabel!
+    @IBOutlet weak var pieChartViewTopConstraint    : NSLayoutConstraint!
+    @IBOutlet weak var pieChartView                 : PieChartView!
+    @IBOutlet weak var tableView                    : UITableView!
+    var holding                                     : Holding!
+    var transactions                                : [Transaction]!
+    var pieChartDataEntries                         = [PieChartDataEntry]()
+    var pieChartDataColors                          = [UIColor]()
+    var numberFormatter                             = NumberFormatter()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,6 +70,17 @@ class HoldingController: UIViewController {
     func updateHoldingValue() {
         let formattedNumber = numberFormatter.string(for: NSNumber(value: holding.value!))
         valueLabel.text =  String(format: "%@%@", holding.currency.symbol, formattedNumber ?? "--")
+        if holding.currency.symbol == Currencies.getDefaultCurrencySymbol() {
+            // remove label
+            defaultCurrencyValueLabel.removeFromSuperview()
+            defaultCurrencyValueLabel = nil
+            pieChartViewTopConstraint.constant = 8
+        } else {
+            let euroValue = Currencies.getEuroValue(value: holding.value, currency: holding.currency)
+            let currencyValue = euroValue * Currencies.getDefaultCurrencyEuroRate()
+            let formattedNumber = numberFormatter.string(for: NSNumber(value: currencyValue))
+            defaultCurrencyValueLabel.text = String(format: "%@%@", Currencies.getDefaultCurrencySymbol(), formattedNumber ?? "--")
+        }
     }
     
     func updatePieChart() {

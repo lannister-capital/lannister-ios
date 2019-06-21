@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-y8-CAs">
-                                <rect key="frame" x="108.5" y="350.5" width="197" height="195"/>
+                                <rect key="frame" x="108.5" y="350.5" width="197.00000000000006" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="Zb2-zU-X0s"/>
                                     <constraint firstAttribute="width" constant="197" id="hip-JA-0qp"/>
@@ -342,7 +342,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVF-bE-PKQ">
-                                <rect key="frame" x="0.0" y="48" width="414" height="250"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="273"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ --" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0sA-nP-e11">
                                         <rect key="frame" x="180" y="17" width="54" height="50"/>
@@ -353,24 +353,39 @@
                                         <color key="textColor" red="0.1647058824" green="0.21176470589999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ --" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80Z-eJ-W3p">
+                                        <rect key="frame" x="192" y="72" width="30" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="7tb-dS-RtS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <color key="textColor" red="0.1647058824" green="0.21176470589999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uez-jX-kUU" customClass="PieChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="82" width="406" height="153"/>
+                                        <rect key="frame" x="0.0" y="104" width="406" height="154"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="154" id="Oci-mo-hSo"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="0sA-nP-e11" firstAttribute="top" secondItem="RVF-bE-PKQ" secondAttribute="top" constant="17" id="4PR-q2-fai"/>
-                                    <constraint firstAttribute="height" constant="250" id="EKp-hJ-nFW"/>
                                     <constraint firstAttribute="bottom" secondItem="uez-jX-kUU" secondAttribute="bottom" constant="15" id="Ep3-TF-AFz"/>
-                                    <constraint firstItem="uez-jX-kUU" firstAttribute="top" secondItem="0sA-nP-e11" secondAttribute="bottom" constant="15" id="e6Q-5V-fPJ"/>
+                                    <constraint firstItem="80Z-eJ-W3p" firstAttribute="top" secondItem="0sA-nP-e11" secondAttribute="bottom" constant="5" id="aG6-95-tYm"/>
+                                    <constraint firstItem="80Z-eJ-W3p" firstAttribute="centerX" secondItem="RVF-bE-PKQ" secondAttribute="centerX" id="ast-sr-Np6"/>
+                                    <constraint firstItem="uez-jX-kUU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0sA-nP-e11" secondAttribute="bottom" constant="15" id="e6Q-5V-fPJ"/>
                                     <constraint firstAttribute="trailing" secondItem="uez-jX-kUU" secondAttribute="trailing" constant="8" id="lLL-NG-Gbp"/>
                                     <constraint firstItem="uez-jX-kUU" firstAttribute="leading" secondItem="RVF-bE-PKQ" secondAttribute="leading" id="ocg-Vc-pb5"/>
                                     <constraint firstItem="0sA-nP-e11" firstAttribute="centerX" secondItem="RVF-bE-PKQ" secondAttribute="centerX" id="qcw-Y4-Ply"/>
+                                    <constraint firstItem="uez-jX-kUU" firstAttribute="top" secondItem="80Z-eJ-W3p" secondAttribute="bottom" constant="8" id="tnU-Na-vE7"/>
+                                    <constraint firstItem="uez-jX-kUU" firstAttribute="top" relation="lessThanOrEqual" secondItem="0sA-nP-e11" secondAttribute="bottom" constant="38" id="vnr-af-lFU"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j8o-5O-M9v">
-                                <rect key="frame" x="0.0" y="298" width="414" height="598"/>
+                                <rect key="frame" x="0.0" y="321" width="414" height="575"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="topCellId" id="OyB-pc-vol" customClass="HoldingTopCell" customModule="Lannister" customModuleProvider="target">
@@ -489,7 +504,9 @@
                     </view>
                     <connections>
                         <outlet property="barView" destination="FKj-iX-4aU" id="BqF-nV-i3x"/>
+                        <outlet property="defaultCurrencyValueLabel" destination="80Z-eJ-W3p" id="Ncr-Qg-0P8"/>
                         <outlet property="pieChartView" destination="uez-jX-kUU" id="n3K-dj-lQ8"/>
+                        <outlet property="pieChartViewTopConstraint" destination="vnr-af-lFU" id="500-9k-dSP"/>
                         <outlet property="tableView" destination="j8o-5O-M9v" id="YdS-t7-HGg"/>
                         <outlet property="valueLabel" destination="0sA-nP-e11" id="RdA-Wl-Tyc"/>
                     </connections>
@@ -507,7 +524,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="5a5-OH-OBA">
-                                <rect key="frame" x="108.5" y="350.5" width="197" height="195"/>
+                                <rect key="frame" x="108.5" y="350.5" width="197.00000000000006" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="CtT-zN-hGP"/>
                                     <constraint firstAttribute="width" constant="197" id="PQw-6M-FsJ"/>
