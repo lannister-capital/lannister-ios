@@ -16,7 +16,8 @@ class ColorCodesController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     var delegate                 : ColorCodesDelegate!
-    var activeField: UITextField?
+    var activeField              : UITextField?
+    var hexString                : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,18 @@ class ColorCodesController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
         
         registerForKeyboardNotifications()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if hexString != nil {
+            if Colors.isCustomColor(hex: hexString!) {
+                if let cell = tableView.cellForRow(at: IndexPath(row: 6, section: 0)) as? ColorCodeCustomCell {
+                    cell.colorCodeTextField.becomeFirstResponder()
+                }
+            }
+        }
     }
     
     func registerForKeyboardNotifications() {
@@ -86,6 +99,16 @@ extension ColorCodesController : UITableViewDataSource {
             cell.selectionStyle = .none
             cell.colorCodeView.layer.borderWidth = 1
             cell.colorCodeView.layer.borderColor = UIColor(red: 151/255, green: 151/255, blue: 151/255, alpha: 1).cgColor
+            if hexString != nil {
+                if Colors.isCustomColor(hex: hexString!) {
+                    var hex = hexString!
+                    if (hex.hasPrefix("#")) {
+                        hex.remove(at: hex.startIndex)
+                    }
+                    cell.colorCodeTextField.text = "#\(hex)"
+                    cell.colorCodeView.backgroundColor = Colors.hexStringToUIColor(hex: hex)
+                }
+            }
             return cell
 
         } else {

@@ -288,6 +288,9 @@ extension CreateHoldingController : UITableViewDelegate {
         else if indexPath.row == 3 {
             let colorCodeVC = storyboard?.instantiateViewController(withIdentifier: "colorCodesVC") as! ColorCodesController
             colorCodeVC.delegate = self
+            if holding?.hexColor != nil {
+                colorCodeVC.hexString = holding.hexColor
+            }
             navigationController?.pushViewController(colorCodeVC, animated: true)
         }
     }

@@ -31,4 +31,29 @@ struct Colors {
             alpha: CGFloat(1.0)
         )
     }
+    
+    static func isCustomColor(hex: String) -> Bool {
+        
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if cString == "FFBF00" {
+            return false
+        } else if cString == "7C8288" {
+            return false
+        } else if cString == "E51522" {
+            return false
+        } else if cString == "00B382" {
+            return false
+        } else if cString == "1538C0" {
+            return false
+        } else if cString == "6F0DBE" {
+            return false
+        }
+        
+        return true
+    }
 }
