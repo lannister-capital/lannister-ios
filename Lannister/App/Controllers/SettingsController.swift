@@ -292,25 +292,36 @@ extension SettingsController : UITableViewDelegate {
                 }
             }
             else {
-                let lannisterManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
-                let lannisterData = json(fromObjects: lannisterManagedObjects)
-                guard let data = try? JSONSerialization.data(withJSONObject: lannisterData, options: []) else {
-                    return
-                }
-                let jsonString = String(data: data, encoding: String.Encoding.utf8)
-                
-                if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                    let fileName = "Lannister"
-                    let fileURL = dir.appendingPathComponent(fileName).appendingPathExtension("json")
-                    do {
-                        try jsonString!.write(to: fileURL, atomically: false, encoding: .utf8)
-                    } catch {
-                        print("Error fetching results for container")
+                // show action sheet
+                let alert = UIAlertController(title: "",
+                                              message: "Export as:",
+                                              preferredStyle: .actionSheet)
+                alert.addAction(UIAlertAction(title: "CSV", style: UIAlertAction.Style.default, handler: { _ in
+
+                }))
+                alert.addAction(UIAlertAction(title: "JSON", style: UIAlertAction.Style.default, handler: { _ in
+                    let lannisterManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
+                    let lannisterData = json(fromObjects: lannisterManagedObjects)
+                    guard let data = try? JSONSerialization.data(withJSONObject: lannisterData, options: []) else {
+                        return
                     }
-                    let items = [fileURL]
-                    let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                    present(ac, animated: true)
-                }
+                    let jsonString = String(data: data, encoding: String.Encoding.utf8)
+                    
+                    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                        let fileName = "Lannister"
+                        let fileURL = dir.appendingPathComponent(fileName).appendingPathExtension("json")
+                        do {
+                            try jsonString!.write(to: fileURL, atomically: false, encoding: .utf8)
+                        } catch {
+                            print("Error fetching results for container")
+                        }
+                        let items = [fileURL]
+                        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                        self.present(ac, animated: true)
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {

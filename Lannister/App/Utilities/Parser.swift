@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension String {
     
@@ -27,4 +28,10 @@ extension String {
             return nil
         }
     }
+    
+    func writeCoreDataObjectToCSV(objects: [NSManagedObject], named: String) -> String? {
+        
+        return nil
+    }
+
 }
