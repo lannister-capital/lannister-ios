@@ -14,7 +14,8 @@ import Blockstack
 
 class SettingsController: UIViewController {
     
-    @IBOutlet weak var tableView : UITableView!
+    @IBOutlet weak var tableView    : UITableView!
+    let selection                   = UISelectionFeedbackGenerator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,7 @@ class SettingsController: UIViewController {
     }
     
     @objc func stateChanged(switchState: UISwitch) {
+        selection.selectionChanged()
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingsCell
         if cell.bioAccessSwitch.isOn {
             askBioAccess()
