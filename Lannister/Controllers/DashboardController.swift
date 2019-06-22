@@ -22,7 +22,8 @@ class DashboardController: UIViewController {
     var pieChartDataEntries                     = [PieChartDataEntry]()
     var pieChartDataColors                      = [UIColor]()
     var pieChartLegendEntries                   = [LegendEntry]()
-    
+    let impact                                  = UIImpactFeedbackGenerator()
+
     var numberFormatter                         = NumberFormatter()
 
     
@@ -159,6 +160,7 @@ class DashboardController: UIViewController {
     
     @IBAction func settings() {
         
+        impact.impactOccurred()
         let settingsNavVC = storyboard?.instantiateViewController(withIdentifier: "settingsNavVC")
         navigationController?.present(settingsNavVC!, animated: true, completion: nil)
     }

@@ -14,10 +14,11 @@ protocol ColorCodesDelegate {
 
 class ColorCodesController: UIViewController {
     
-    @IBOutlet weak var tableView : UITableView!
-    var delegate                 : ColorCodesDelegate!
-    var activeField              : UITextField?
-    var hexString                : String?
+    @IBOutlet weak var tableView    : UITableView!
+    var delegate                    : ColorCodesDelegate!
+    var activeField                 : UITextField?
+    var hexString                   : String?
+    let selection                   = UISelectionFeedbackGenerator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,6 +146,7 @@ extension ColorCodesController : UITableViewDelegate {
         if indexPath.row < 6 {
             tableView.deselectRow(at: indexPath, animated: true)
             let cell = tableView.cellForRow(at: indexPath) as! ColorCodePresetCell
+            selection.selectionChanged()
             delegate.newColorCode(hex: cell.colorCodeLabel.text!)
             navigationController?.popViewController(animated: true)
         } else {
@@ -159,6 +161,7 @@ extension ColorCodesController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         if textField.text! != "" {
+            selection.selectionChanged()
             delegate.newColorCode(hex: textField.text!)
             navigationController?.popViewController(animated: true)
         }

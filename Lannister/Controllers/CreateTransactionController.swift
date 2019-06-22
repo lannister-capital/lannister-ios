@@ -24,6 +24,8 @@ class CreateTransactionController: UIViewController {
     var transactionPickerView       : UIPickerView!
     var toolBar                     = UIToolbar()
     var delegate                    : CreateTransactionDelegate!
+    let impact                      = UIImpactFeedbackGenerator()
+    let selection                   = UISelectionFeedbackGenerator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,7 @@ class CreateTransactionController: UIViewController {
         let transactionNameTextField = cell.transactionNameTextField
         
         if transactionNameTextField!.text == "" {
+            impact.impactOccurred()
             let alert = UIAlertController(title: "Oops!", message: "Enter a name for this transaction.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -69,6 +72,7 @@ class CreateTransactionController: UIViewController {
         let cellForValue = tableView.cellForRow(at: indexPathValue) as! TotalValueCell
         let valueTextField = cellForValue.totalValueTextField
         if valueTextField?.text?.doubleValue == nil || valueTextField?.text?.doubleValue == 0 {
+            impact.impactOccurred()
             let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -124,10 +128,12 @@ class CreateTransactionController: UIViewController {
         }
         
         NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+        selection.selectionChanged()
         
         if Blockstack.shared.isUserSignedIn() {
             BlockstackApiService().send { error in
                 if error != nil {
+                    self.impact.impactOccurred()
                     let msg = error!.localizedDescription
                     let alert = UIAlertController(title: "Error",
                                                   message: msg,

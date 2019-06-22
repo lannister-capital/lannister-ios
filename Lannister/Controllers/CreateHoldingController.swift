@@ -22,6 +22,8 @@ class CreateHoldingController: UIViewController {
     var selectedCurrency            : Currency!
     @IBOutlet weak var tableView    : UITableView!
     var delegate                    : EditHoldingDelegate!
+    let impact                      = UIImpactFeedbackGenerator()
+    let selection                   = UISelectionFeedbackGenerator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +64,7 @@ class CreateHoldingController: UIViewController {
         let holdingNameTextField = cell.holdingNameTextField
         
         if holdingNameTextField!.text == "" {
+            impact.impactOccurred()
             let alert = UIAlertController(title: "Oops!", message: "Enter a name for this holding.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -70,6 +73,7 @@ class CreateHoldingController: UIViewController {
         
         
         if holding == nil && HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holdingNameTextField!.text!) != nil  {
+            impact.impactOccurred()
             let alert = UIAlertController(title: "Oops!", message: "A holding with this name already exists.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -81,6 +85,7 @@ class CreateHoldingController: UIViewController {
             let valueTextField = cell.totalValueTextField
 
             if valueTextField?.text?.doubleValue == nil {
+                impact.impactOccurred()
                 let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -108,10 +113,12 @@ class CreateHoldingController: UIViewController {
             newHoldingManagedObject.hex_color = String(colorCell.colorCodeLabel.text!.suffix(7))
             
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
-            
+            selection.selectionChanged()
+
             if Blockstack.shared.isUserSignedIn() {
                 BlockstackApiService().send { error in
                     if error != nil {
+                        self.impact.impactOccurred()
                         let msg = error!.localizedDescription
                         let alert = UIAlertController(title: "Error",
                                                       message: msg,
@@ -179,6 +186,7 @@ class CreateHoldingController: UIViewController {
     
     @IBAction func deleteHolding() {
         
+        impact.impactOccurred()
         let alert = UIAlertController(title: "Delete Holding", message: "Are you sure?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .default, handler:nil))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
@@ -188,6 +196,7 @@ class CreateHoldingController: UIViewController {
             if Blockstack.shared.isUserSignedIn() {
                 BlockstackApiService().send { error in
                     if error != nil {
+                        self.impact.impactOccurred()
                         let msg = error!.localizedDescription
                         let alert = UIAlertController(title: "Error",
                                                       message: msg,
