@@ -42,7 +42,7 @@ class CreateHoldingController: UIViewController {
         } else {
             let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
             navigationItem.leftBarButtonItem = cancelButton
-            let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: CurrencyUserDefaults().getDefaultCurrencyName()!, in: NSManagedObjectContext.mr_default())
+            let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: CurrencyUserDefaults().getDefaultCurrencyCode()!, in: NSManagedObjectContext.mr_default())
             selectedCurrency = CurrencyDto().currency(from: currency!)
         }
     }
@@ -248,7 +248,7 @@ extension CreateHoldingController : UITableViewDataSource {
                 cell.percentageLabel.text = "\(String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100))%"
                 cell.currencyLabel.text = holding.currency.symbol
             } else {
-                let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: CurrencyUserDefaults().getDefaultCurrencyName()!, in: NSManagedObjectContext.mr_default())
+                let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: CurrencyUserDefaults().getDefaultCurrencyCode()!, in: NSManagedObjectContext.mr_default())
                 cell.currencyLabel.text = currency!.symbol
             }
             return cell

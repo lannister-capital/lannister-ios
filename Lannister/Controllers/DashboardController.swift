@@ -247,7 +247,7 @@ extension DashboardController : UICollectionViewDataSource {
                 sectionHeader.pieChartView.data = chartData
 
             } else {
-                sectionHeader.totalValueLabel.text = "$ --"
+                sectionHeader.totalValueLabel.text = String(format: "%@ %@", Currencies.getDefaultCurrencySymbol(), "--")
                 sectionHeader.numberOfHoldingsLabel.text = "- holdings"
                 sectionHeader.pieChartView.isHidden = true
             }

@@ -23,8 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         updateHoldingsAttributes()
         
-        if CurrencyUserDefaults().getDefaultCurrencyName() == nil {
-            CurrencyUserDefaults().setDefaultCurrency(name: "dollar")
+        if CurrencyUserDefaults().getDefaultCurrencyCode() == nil {
+            // we were saving default currency with the "name" attribute on first versions
+            if CurrencyUserDefaults().getDefaultCurrencyName() != nil {
+                if let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: CurrencyUserDefaults().getDefaultCurrencyName()!, in: NSManagedObjectContext.mr_default()) {
+                    CurrencyUserDefaults().setDefaultCurrency(code: currency.code!)
+                } else {
+                    CurrencyUserDefaults().setDefaultCurrency(code: "USD")
+                }
+            } else {
+                CurrencyUserDefaults().setDefaultCurrency(code: "USD")
+            }
         }
         
         checkAuthentication()

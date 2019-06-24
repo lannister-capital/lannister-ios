@@ -37,8 +37,8 @@ class AuthController: UIViewController {
                                         case .success(let userData):
                                             print("Sign in SUCCESS", userData.profile?.name as Any)
                                             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
-                                                AppDelegate.shared.rootViewController.switchToMainScreen()
                                                 AppDelegate.shared.updateCurrencies()
+                                                AppDelegate.shared.rootViewController.switchToMainScreen()
                                             })
                                         case .cancelled:
                                             print("Sign in CANCELLED")
@@ -55,8 +55,8 @@ class AuthController: UIViewController {
             
             UserDefaults.standard.setValue("skippedAuth", forKey: "Auth")
             UserDefaults.standard.synchronize()
-            AppDelegate.shared.rootViewController.switchToMainScreen()
             AppDelegate.shared.updateCurrencies()
+            AppDelegate.shared.rootViewController.switchToMainScreen()
         })
     }
 }

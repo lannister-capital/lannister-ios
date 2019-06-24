@@ -69,7 +69,7 @@ extension CurrenciesController : UITableViewDelegate {
         let currency = currencies[indexPath.row]
 
         if shouldSetGlobalCurrency {
-            CurrencyUserDefaults().setDefaultCurrency(name: currency.name)
+            CurrencyUserDefaults().setDefaultCurrency(code: currency.code)
         }
         
         delegate.selectedCurrency(currency: currency)

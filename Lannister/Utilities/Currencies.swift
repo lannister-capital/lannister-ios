@@ -13,8 +13,8 @@ struct Currencies {
     
     static func getDefaultCurrencySymbol() -> String {
         
-        let currencyName = CurrencyUserDefaults().getDefaultCurrencyName()!
-        let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: currencyName, in: NSManagedObjectContext.mr_default())!
+        let currencyCode = CurrencyUserDefaults().getDefaultCurrencyCode()!
+        let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: currencyCode, in: NSManagedObjectContext.mr_default())!
         let currency = CurrencyDto().currency(from: currencyManagedObject)
         
         return currency.symbol
@@ -22,8 +22,8 @@ struct Currencies {
     
     static func getDefaultCurrencyEuroRate() -> Double {
         
-        let currencyName = CurrencyUserDefaults().getDefaultCurrencyName()!
-        let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "name", withValue: currencyName, in: NSManagedObjectContext.mr_default())!
+        let currencyCode = CurrencyUserDefaults().getDefaultCurrencyCode()!
+        let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: currencyCode, in: NSManagedObjectContext.mr_default())!
         let currency = CurrencyDto().currency(from: currencyManagedObject)
         
         return currency.euroRate

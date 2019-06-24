@@ -21,5 +21,17 @@ class CurrencyUserDefaults: NSObject {
         }
         return nil
     }
+    
+    func setDefaultCurrency(code: String) {
+        UserDefaults.standard.set(code, forKey: "defaultCurrencyCode")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getDefaultCurrencyCode() -> String? {
+        if let currency = UserDefaults.standard.value(forKey: "defaultCurrencyCode") as? String {
+            return currency
+        }
+        return nil
+    }
 
 }
