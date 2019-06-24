@@ -91,7 +91,7 @@ class DashboardController: UIViewController {
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
         holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
 
-        euroTotalValue = 0
+        euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
         pieChartDataEntries.removeAll()
         pieChartDataColors.removeAll()
         pieChartLegendEntries.removeAll()
@@ -106,14 +106,6 @@ class DashboardController: UIViewController {
             emptyStateContainerView.isUserInteractionEnabled = false
             view.sendSubviewToBack(emptyStateContainerView)
             collectionView.isUserInteractionEnabled = true
-            
-            for holding in holdings {
-                var holdingValue = holding.value
-                if holding.value < 0 {
-                    holdingValue = 0
-                }
-                euroTotalValue += Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)
-            }
             
             if sortKey == "amount" {
                 self.holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }

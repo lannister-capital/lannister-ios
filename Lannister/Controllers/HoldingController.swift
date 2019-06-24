@@ -72,8 +72,10 @@ class HoldingController: UIViewController {
         valueLabel.text =  String(format: "%@%@", holding.currency.symbol, formattedNumber ?? "--")
         if holding.currency.symbol == Currencies.getDefaultCurrencySymbol() {
             // remove label
-            defaultCurrencyValueLabel.removeFromSuperview()
-            defaultCurrencyValueLabel = nil
+            if defaultCurrencyValueLabel != nil {
+                defaultCurrencyValueLabel.removeFromSuperview()
+                defaultCurrencyValueLabel = nil
+            }
             pieChartViewTopConstraint.constant = 8
         } else {
             let euroValue = Currencies.getEuroValue(value: holding.value, currency: holding.currency)
@@ -198,6 +200,7 @@ extension HoldingController : UITableViewDataSource {
             
             holding = HoldingDto().holding(from: holdingManagedObject!)
             
+            euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
             updateHoldingValue()
             updatePieChart()
 
@@ -257,6 +260,7 @@ extension HoldingController : EditHoldingDelegate {
         navigationItem.title = holding.name
         barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
         valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value)
+        euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
         updatePieChart()
     }
 }
@@ -269,6 +273,7 @@ extension HoldingController : CreateTransactionDelegate {
         navigationItem.title = holding.name
         barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
         valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value)
+        euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
         updatePieChart()
     }
 }

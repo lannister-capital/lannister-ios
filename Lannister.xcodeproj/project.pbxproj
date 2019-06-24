@@ -95,6 +95,14 @@
 		70A6D08922C13FAC008F1F1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3C2272E7F900A5EB54 /* Assets.xcassets */; };
 		70A6D08A22C13FAC008F1F1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B392272E7F700A5EB54 /* Main.storyboard */; };
 		70A6D09322C14007008F1F1A /* Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70A6D09222C14007008F1F1A /* Info-dev.plist */; };
+		70A6D09722C14BB5008F1F1A /* PortfolioRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09622C14BB5008F1F1A /* PortfolioRepository.swift */; };
+		70A6D09822C14BB5008F1F1A /* PortfolioRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09622C14BB5008F1F1A /* PortfolioRepository.swift */; };
+		70A6D09A22C14BD8008F1F1A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09922C14BD8008F1F1A /* Repository.swift */; };
+		70A6D09B22C14BD8008F1F1A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09922C14BD8008F1F1A /* Repository.swift */; };
+		70A6D09E22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09D22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift */; };
+		70A6D09F22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09D22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift */; };
+		70A6D0A222C14C6F008F1F1A /* PortfolioUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D0A122C14C6F008F1F1A /* PortfolioUseCase.swift */; };
+		70A6D0A322C14C6F008F1F1A /* PortfolioUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D0A122C14C6F008F1F1A /* PortfolioUseCase.swift */; };
 		70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */; };
 		70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */; };
 		70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B352272E7F700A5EB54 /* AppDelegate.swift */; };
@@ -175,6 +183,10 @@
 		707FB21122773DF8005B29A2 /* ColorCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCell.swift; sourceTree = "<group>"; };
 		70A6D09022C13FAC008F1F1A /* Lannister Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lannister Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A6D09222C14007008F1F1A /* Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-dev.plist"; sourceTree = "<group>"; };
+		70A6D09622C14BB5008F1F1A /* PortfolioRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioRepository.swift; sourceTree = "<group>"; };
+		70A6D09922C14BD8008F1F1A /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		70A6D09D22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioRepositoryImpl.swift; sourceTree = "<group>"; };
+		70A6D0A122C14C6F008F1F1A /* PortfolioUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioUseCase.swift; sourceTree = "<group>"; };
 		70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCustomCell.swift; sourceTree = "<group>"; };
 		70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodePresetCell.swift; sourceTree = "<group>"; };
 		70E96B322272E7F700A5EB54 /* Lannister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lannister.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,6 +296,7 @@
 				702B2D21227F7C90005C0B64 /* Mappers */,
 				702B2D13227F674A005C0B64 /* Models */,
 				707E5E412285C84100D4ED33 /* User defaults */,
+				70A6D09C22C14C02008F1F1A /* Repositories Implementations */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -384,6 +397,41 @@
 			path = "User defaults";
 			sourceTree = "<group>";
 		};
+		70A6D09422C14B79008F1F1A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				70572CB72273A15900297421 /* Entities */,
+				70A6D09522C14B8A008F1F1A /* Repositories */,
+				70A6D0A022C14C4C008F1F1A /* Use cases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		70A6D09522C14B8A008F1F1A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				70A6D09922C14BD8008F1F1A /* Repository.swift */,
+				70A6D09622C14BB5008F1F1A /* PortfolioRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		70A6D09C22C14C02008F1F1A /* Repositories Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				70A6D09D22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift */,
+			);
+			path = "Repositories Implementations";
+			sourceTree = "<group>";
+		};
+		70A6D0A022C14C4C008F1F1A /* Use cases */ = {
+			isa = PBXGroup;
+			children = (
+				70A6D0A122C14C6F008F1F1A /* PortfolioUseCase.swift */,
+			);
+			path = "Use cases";
+			sourceTree = "<group>";
+		};
 		70E96B292272E7F700A5EB54 = {
 			isa = PBXGroup;
 			children = (
@@ -412,7 +460,7 @@
 			children = (
 				70572CB52273A14500297421 /* Controllers */,
 				702B2D12227F6745005C0B64 /* Data */,
-				70572CB72273A15900297421 /* Entities */,
+				70A6D09422C14B79008F1F1A /* Domain */,
 				7016B4AB228306DB000C49B8 /* Services */,
 				70572CB62273A15100297421 /* Views */,
 				702B2D24227F9C96005C0B64 /* Utilities */,
@@ -826,12 +874,14 @@
 				70A6D06622C13FAC008F1F1A /* HoldingHeaderView.swift in Sources */,
 				70A6D06722C13FAC008F1F1A /* HoldingCell.swift in Sources */,
 				70A6D06822C13FAC008F1F1A /* CurrencyDto.swift in Sources */,
+				70A6D09B22C14BD8008F1F1A /* Repository.swift in Sources */,
 				70A6D06922C13FAC008F1F1A /* CurrenciesController.swift in Sources */,
 				70A6D06A22C13FAC008F1F1A /* HoldingTopCell.swift in Sources */,
 				70A6D06B22C13FAC008F1F1A /* ColorCodeCell.swift in Sources */,
 				70A6D06C22C13FAC008F1F1A /* HoldingController.swift in Sources */,
 				70A6D06D22C13FAC008F1F1A /* CurrencyUserDefaults.swift in Sources */,
 				70A6D06E22C13FAC008F1F1A /* TotalValueCell.swift in Sources */,
+				70A6D09F22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift in Sources */,
 				70A6D06F22C13FAC008F1F1A /* Currencies.swift in Sources */,
 				70A6D07022C13FAC008F1F1A /* DashboardController.swift in Sources */,
 				70A6D07122C13FAC008F1F1A /* BlockstackApiService.swift in Sources */,
@@ -841,6 +891,8 @@
 				70A6D07522C13FAC008F1F1A /* TransactionDto.swift in Sources */,
 				70A6D07622C13FAC008F1F1A /* CurrencyCell.swift in Sources */,
 				70A6D07722C13FAC008F1F1A /* Parser.swift in Sources */,
+				70A6D0A322C14C6F008F1F1A /* PortfolioUseCase.swift in Sources */,
+				70A6D09822C14BB5008F1F1A /* PortfolioRepository.swift in Sources */,
 				70A6D07822C13FAC008F1F1A /* DashboardTopCell.swift in Sources */,
 				70A6D07922C13FAC008F1F1A /* TransactionNameCell.swift in Sources */,
 				70A6D07A22C13FAC008F1F1A /* CreateHoldingController.swift in Sources */,
@@ -878,12 +930,14 @@
 				700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */,
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
 				7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */,
+				70A6D09A22C14BD8008F1F1A /* Repository.swift in Sources */,
 				657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */,
 				70FBB96A228B14610086E208 /* HoldingTopCell.swift in Sources */,
 				707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */,
 				70572CC12273A1E100297421 /* HoldingController.swift in Sources */,
 				707E5E432285C85E00D4ED33 /* CurrencyUserDefaults.swift in Sources */,
 				707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */,
+				70A6D09E22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift in Sources */,
 				707E5E452285C95800D4ED33 /* Currencies.swift in Sources */,
 				70572CBD2273A1B400297421 /* DashboardController.swift in Sources */,
 				70FBB966228B08790086E208 /* BlockstackApiService.swift in Sources */,
@@ -893,6 +947,8 @@
 				7073A69B22806BAE00049A2E /* TransactionDto.swift in Sources */,
 				657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */,
 				653D70DD229EC54E000A4049 /* Parser.swift in Sources */,
+				70A6D0A222C14C6F008F1F1A /* PortfolioUseCase.swift in Sources */,
+				70A6D09722C14BB5008F1F1A /* PortfolioRepository.swift in Sources */,
 				707E5E492286C7D700D4ED33 /* DashboardTopCell.swift in Sources */,
 				7073A69922806A6600049A2E /* TransactionNameCell.swift in Sources */,
 				70572CC32273A25600297421 /* CreateHoldingController.swift in Sources */,
