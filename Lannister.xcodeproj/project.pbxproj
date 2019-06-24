@@ -295,8 +295,9 @@
 				65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */,
 				702B2D21227F7C90005C0B64 /* Mappers */,
 				702B2D13227F674A005C0B64 /* Models */,
-				707E5E412285C84100D4ED33 /* User defaults */,
 				70A6D09C22C14C02008F1F1A /* Repositories Implementations */,
+				7016B4AB228306DB000C49B8 /* Services */,
+				707E5E412285C84100D4ED33 /* User defaults */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -432,6 +433,16 @@
 			path = "Use cases";
 			sourceTree = "<group>";
 		};
+		70A6D0A422C15057008F1F1A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				70572CB52273A14500297421 /* Controllers */,
+				70572CB62273A15100297421 /* Views */,
+				702B2D24227F9C96005C0B64 /* Utilities */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		70E96B292272E7F700A5EB54 = {
 			isa = PBXGroup;
 			children = (
@@ -458,12 +469,9 @@
 		70E96B342272E7F700A5EB54 /* Lannister */ = {
 			isa = PBXGroup;
 			children = (
-				70572CB52273A14500297421 /* Controllers */,
+				70A6D0A422C15057008F1F1A /* App */,
 				702B2D12227F6745005C0B64 /* Data */,
 				70A6D09422C14B79008F1F1A /* Domain */,
-				7016B4AB228306DB000C49B8 /* Services */,
-				70572CB62273A15100297421 /* Views */,
-				702B2D24227F9C96005C0B64 /* Utilities */,
 				70E96B352272E7F700A5EB54 /* AppDelegate.swift */,
 				70E96B392272E7F700A5EB54 /* Main.storyboard */,
 				70E96B3C2272E7F900A5EB54 /* Assets.xcassets */,
