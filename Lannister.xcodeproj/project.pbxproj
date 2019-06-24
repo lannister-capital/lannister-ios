@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
-		26264CB5BB29C1179D830205 /* Pods_LannisterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */; };
 		653D70DD229EC54E000A4049 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D70DC229EC54E000A4049 /* Parser.swift */; };
 		6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550D4702284536F0059C643 /* NumberFormatter.swift */; };
 		657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B69302284354500D7A5AF /* CurrenciesController.swift */; };
@@ -47,6 +46,55 @@
 		707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */; };
 		707FB20E22773DE0005B29A2 /* TotalValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20D22773DE0005B29A2 /* TotalValueCell.swift */; };
 		707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB21122773DF8005B29A2 /* ColorCodeCell.swift */; };
+		70A6D05822C13FAC008F1F1A /* BioAccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073A6A02281FCFE00049A2E /* BioAccessController.swift */; };
+		70A6D05922C13FAC008F1F1A /* Holding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D18227F6832005C0B64 /* Holding.swift */; };
+		70A6D05A22C13FAC008F1F1A /* DonationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB961228AF4700086E208 /* DonationsController.swift */; };
+		70A6D05B22C13FAC008F1F1A /* HoldingDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D22227F7CA1005C0B64 /* HoldingDto.swift */; };
+		70A6D05C22C13FAC008F1F1A /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D1A227F683F005C0B64 /* Transaction.swift */; };
+		70A6D05D22C13FAC008F1F1A /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB963228B01480086E208 /* DonationCell.swift */; };
+		70A6D05E22C13FAC008F1F1A /* HoldingNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */; };
+		70A6D05F22C13FAC008F1F1A /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550D4702284536F0059C643 /* NumberFormatter.swift */; };
+		70A6D06022C13FAC008F1F1A /* ColorCodeCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */; };
+		70A6D06122C13FAC008F1F1A /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBE2273A1D600297421 /* SettingsController.swift */; };
+		70A6D06222C13FAC008F1F1A /* CreateTransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC42273A26F00297421 /* CreateTransactionController.swift */; };
+		70A6D06322C13FAC008F1F1A /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC82273A2A800297421 /* RootController.swift */; };
+		70A6D06422C13FAC008F1F1A /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBA2273A1A300297421 /* AuthController.swift */; };
+		70A6D06522C13FAC008F1F1A /* DashboardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CCC2274788D00297421 /* DashboardHeaderView.swift */; };
+		70A6D06622C13FAC008F1F1A /* HoldingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF6227A28F300276068 /* HoldingHeaderView.swift */; };
+		70A6D06722C13FAC008F1F1A /* HoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CCA227475E800297421 /* HoldingCell.swift */; };
+		70A6D06822C13FAC008F1F1A /* CurrencyDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B422830B0E000C49B8 /* CurrencyDto.swift */; };
+		70A6D06922C13FAC008F1F1A /* CurrenciesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B69302284354500D7A5AF /* CurrenciesController.swift */; };
+		70A6D06A22C13FAC008F1F1A /* HoldingTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB969228B14610086E208 /* HoldingTopCell.swift */; };
+		70A6D06B22C13FAC008F1F1A /* ColorCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB21122773DF8005B29A2 /* ColorCodeCell.swift */; };
+		70A6D06C22C13FAC008F1F1A /* HoldingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC02273A1E100297421 /* HoldingController.swift */; };
+		70A6D06D22C13FAC008F1F1A /* CurrencyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E5E422285C85E00D4ED33 /* CurrencyUserDefaults.swift */; };
+		70A6D06E22C13FAC008F1F1A /* TotalValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FB20D22773DE0005B29A2 /* TotalValueCell.swift */; };
+		70A6D06F22C13FAC008F1F1A /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E5E442285C95800D4ED33 /* Currencies.swift */; };
+		70A6D07022C13FAC008F1F1A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CBC2273A1B400297421 /* DashboardController.swift */; };
+		70A6D07122C13FAC008F1F1A /* BlockstackApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB965228B08790086E208 /* BlockstackApiService.swift */; };
+		70A6D07222C13FAC008F1F1A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007208F227ADA3A003F3DEF /* SettingsCell.swift */; };
+		70A6D07322C13FAC008F1F1A /* ColorCodePresetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */; };
+		70A6D07422C13FAC008F1F1A /* BaseApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4AE22830737000C49B8 /* BaseApiService.swift */; };
+		70A6D07522C13FAC008F1F1A /* TransactionDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073A69A22806BAE00049A2E /* TransactionDto.swift */; };
+		70A6D07622C13FAC008F1F1A /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B6932228436A800D7A5AF /* CurrencyCell.swift */; };
+		70A6D07722C13FAC008F1F1A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D70DC229EC54E000A4049 /* Parser.swift */; };
+		70A6D07822C13FAC008F1F1A /* DashboardTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E5E482286C7D700D4ED33 /* DashboardTopCell.swift */; };
+		70A6D07922C13FAC008F1F1A /* TransactionNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073A69822806A6500049A2E /* TransactionNameCell.swift */; };
+		70A6D07A22C13FAC008F1F1A /* CreateHoldingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC22273A25600297421 /* CreateHoldingController.swift */; };
+		70A6D07B22C13FAC008F1F1A /* CurrencyApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B02283076D000C49B8 /* CurrencyApiService.swift */; };
+		70A6D07C22C13FAC008F1F1A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B2D25227F9CAA005C0B64 /* Colors.swift */; };
+		70A6D07D22C13FAC008F1F1A /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CB82273A19500297421 /* LaunchController.swift */; };
+		70A6D07E22C13FAC008F1F1A /* ColorCodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70572CC62273A28700297421 /* ColorCodesController.swift */; };
+		70A6D07F22C13FAC008F1F1A /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF8227A297600276068 /* TransactionCell.swift */; };
+		70A6D08022C13FAC008F1F1A /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B222830880000C49B8 /* Currency.swift */; };
+		70A6D08122C13FAC008F1F1A /* TransactionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4A92282EBC3000C49B8 /* TransactionTypeCell.swift */; };
+		70A6D08222C13FAC008F1F1A /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4AC2283070B000C49B8 /* ApiManager.swift */; };
+		70A6D08322C13FAC008F1F1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B352272E7F700A5EB54 /* AppDelegate.swift */; };
+		70A6D08422C13FAC008F1F1A /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */; };
+		70A6D08822C13FAC008F1F1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3E2272E7F900A5EB54 /* LaunchScreen.storyboard */; };
+		70A6D08922C13FAC008F1F1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3C2272E7F900A5EB54 /* Assets.xcassets */; };
+		70A6D08A22C13FAC008F1F1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B392272E7F700A5EB54 /* Main.storyboard */; };
+		70A6D09322C14007008F1F1A /* Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70A6D09222C14007008F1F1A /* Info-dev.plist */; };
 		70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */; };
 		70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */; };
 		70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B352272E7F700A5EB54 /* AppDelegate.swift */; };
@@ -59,7 +107,10 @@
 		70FBB964228B01480086E208 /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB963228B01480086E208 /* DonationCell.swift */; };
 		70FBB966228B08790086E208 /* BlockstackApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB965228B08790086E208 /* BlockstackApiService.swift */; };
 		70FBB96A228B14610086E208 /* HoldingTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBB969228B14610086E208 /* HoldingTopCell.swift */; };
-		E0239ED7BE77EB6A2BF985AB /* Pods_LannisterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */; };
+		7674ADE78216BE424F07379C /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
+		A140793BDF04C82E7363B0E1 /* libPods-LannisterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3B9FCBB19A0E6AEE19DB42 /* libPods-LannisterTests.a */; };
+		AAC9B989BA06FF1AC2072206 /* libPods-LannisterUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DA3D20193A81C5CBB7B0C22 /* libPods-LannisterUITests.a */; };
+		CD24E0C90E6B6EEECB315057 /* Pods_Lannister_Beta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49B1DFDEAD9E11624CD5F3E /* Pods_Lannister_Beta.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +131,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		40B65A67EE973FEA42828D95 /* Pods-Lannister.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister.debug.xcconfig"; path = "Target Support Files/Pods-Lannister/Pods-Lannister.debug.xcconfig"; sourceTree = "<group>"; };
+		2BEADF46EA2A6A926563CD08 /* Pods-Lannister Beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister Beta.release.xcconfig"; path = "Target Support Files/Pods-Lannister Beta/Pods-Lannister Beta.release.xcconfig"; sourceTree = "<group>"; };
 		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		653D70DC229EC54E000A4049 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -122,6 +173,8 @@
 		707FB20B22773DD1005B29A2 /* HoldingNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingNameCell.swift; sourceTree = "<group>"; };
 		707FB20D22773DE0005B29A2 /* TotalValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalValueCell.swift; sourceTree = "<group>"; };
 		707FB21122773DF8005B29A2 /* ColorCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCell.swift; sourceTree = "<group>"; };
+		70A6D09022C13FAC008F1F1A /* Lannister Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lannister Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		70A6D09222C14007008F1F1A /* Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-dev.plist"; sourceTree = "<group>"; };
 		70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCustomCell.swift; sourceTree = "<group>"; };
 		70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodePresetCell.swift; sourceTree = "<group>"; };
 		70E96B322272E7F700A5EB54 /* Lannister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lannister.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,19 +193,31 @@
 		70FBB963228B01480086E208 /* DonationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
 		70FBB965228B08790086E208 /* BlockstackApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockstackApiService.swift; sourceTree = "<group>"; };
 		70FBB969228B14610086E208 /* HoldingTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingTopCell.swift; sourceTree = "<group>"; };
-		7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LannisterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DA3D20193A81C5CBB7B0C22 /* libPods-LannisterUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LannisterUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		884045C1090CD49292E75A83 /* Pods-Lannister.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister.release.xcconfig"; path = "Target Support Files/Pods-Lannister/Pods-Lannister.release.xcconfig"; sourceTree = "<group>"; };
+		8E3B9FCBB19A0E6AEE19DB42 /* libPods-LannisterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LannisterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		986DDED2C135F4193BC8B943 /* Pods-LannisterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterUITests.debug.xcconfig"; path = "Target Support Files/Pods-LannisterUITests/Pods-LannisterUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B85A37E13DD7230EC18E5F9F /* Pods-Lannister Beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister Beta.debug.xcconfig"; path = "Target Support Files/Pods-Lannister Beta/Pods-Lannister Beta.debug.xcconfig"; sourceTree = "<group>"; };
+		BD3C1907A3685BF77BB6A161 /* Pods-Lannister.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister.debug.xcconfig"; path = "Target Support Files/Pods-Lannister/Pods-Lannister.debug.xcconfig"; sourceTree = "<group>"; };
 		C54D0B245B43BB9320917656 /* Pods-LannisterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterUITests.release.xcconfig"; path = "Target Support Files/Pods-LannisterUITests/Pods-LannisterUITests.release.xcconfig"; sourceTree = "<group>"; };
-		CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LannisterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA49CCB3B4D43C05281E5A73 /* Pods-Lannister.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister.release.xcconfig"; path = "Target Support Files/Pods-Lannister/Pods-Lannister.release.xcconfig"; sourceTree = "<group>"; };
+		E49B1DFDEAD9E11624CD5F3E /* Pods_Lannister_Beta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister_Beta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		70A6D08522C13FAC008F1F1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD24E0C90E6B6EEECB315057 /* Pods_Lannister_Beta.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70E96B2F2272E7F700A5EB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */,
+				7674ADE78216BE424F07379C /* Pods_Lannister.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0239ED7BE77EB6A2BF985AB /* Pods_LannisterTests.framework in Frameworks */,
+				A140793BDF04C82E7363B0E1 /* libPods-LannisterTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26264CB5BB29C1179D830205 /* Pods_LannisterUITests.framework in Frameworks */,
+				AAC9B989BA06FF1AC2072206 /* libPods-LannisterUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,12 +243,14 @@
 		29DABE590C69861C677144B1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				40B65A67EE973FEA42828D95 /* Pods-Lannister.debug.xcconfig */,
-				DA49CCB3B4D43C05281E5A73 /* Pods-Lannister.release.xcconfig */,
 				6B7F6DB0CF0AE1E4D5DD38C4 /* Pods-LannisterTests.debug.xcconfig */,
 				47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */,
 				986DDED2C135F4193BC8B943 /* Pods-LannisterUITests.debug.xcconfig */,
 				C54D0B245B43BB9320917656 /* Pods-LannisterUITests.release.xcconfig */,
+				BD3C1907A3685BF77BB6A161 /* Pods-Lannister.debug.xcconfig */,
+				884045C1090CD49292E75A83 /* Pods-Lannister.release.xcconfig */,
+				B85A37E13DD7230EC18E5F9F /* Pods-Lannister Beta.debug.xcconfig */,
+				2BEADF46EA2A6A926563CD08 /* Pods-Lannister Beta.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -192,8 +259,9 @@
 			isa = PBXGroup;
 			children = (
 				58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */,
-				7A903F79183457C0BFF23BE1 /* Pods_LannisterTests.framework */,
-				CC01267F4BB585457DDEDBD2 /* Pods_LannisterUITests.framework */,
+				E49B1DFDEAD9E11624CD5F3E /* Pods_Lannister_Beta.framework */,
+				8E3B9FCBB19A0E6AEE19DB42 /* libPods-LannisterTests.a */,
+				7DA3D20193A81C5CBB7B0C22 /* libPods-LannisterUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -334,6 +402,7 @@
 				70E96B322272E7F700A5EB54 /* Lannister.app */,
 				70E96B462272E7F900A5EB54 /* LannisterTests.xctest */,
 				70E96B512272E7F900A5EB54 /* LannisterUITests.xctest */,
+				70A6D09022C13FAC008F1F1A /* Lannister Beta.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -352,6 +421,7 @@
 				70E96B3C2272E7F900A5EB54 /* Assets.xcassets */,
 				70E96B3E2272E7F900A5EB54 /* LaunchScreen.storyboard */,
 				70E96B412272E7F900A5EB54 /* Info.plist */,
+				70A6D09222C14007008F1F1A /* Info-dev.plist */,
 			);
 			path = Lannister;
 			sourceTree = "<group>";
@@ -377,6 +447,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		70A6D05522C13FAC008F1F1A /* Lannister Beta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70A6D08D22C13FAC008F1F1A /* Build configuration list for PBXNativeTarget "Lannister Beta" */;
+			buildPhases = (
+				9392A79BA68B6FBF2856CB14 /* [CP] Check Pods Manifest.lock */,
+				70A6D05722C13FAC008F1F1A /* Sources */,
+				70A6D08522C13FAC008F1F1A /* Frameworks */,
+				70A6D08722C13FAC008F1F1A /* Resources */,
+				70A6D08C22C13FAC008F1F1A /* ShellScript */,
+				BF427FB69F6340B422A42378 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Lannister Beta";
+			productName = Lannister;
+			productReference = 70A6D09022C13FAC008F1F1A /* Lannister Beta.app */;
+			productType = "com.apple.product-type.application";
+		};
 		70E96B312272E7F700A5EB54 /* Lannister */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70E96B5A2272E7F900A5EB54 /* Build configuration list for PBXNativeTarget "Lannister" */;
@@ -474,11 +564,23 @@
 				70E96B312272E7F700A5EB54 /* Lannister */,
 				70E96B452272E7F900A5EB54 /* LannisterTests */,
 				70E96B502272E7F900A5EB54 /* LannisterUITests */,
+				70A6D05522C13FAC008F1F1A /* Lannister Beta */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		70A6D08722C13FAC008F1F1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70A6D09322C14007008F1F1A /* Info-dev.plist in Resources */,
+				70A6D08822C13FAC008F1F1A /* LaunchScreen.storyboard in Resources */,
+				70A6D08922C13FAC008F1F1A /* Assets.xcassets in Resources */,
+				70A6D08A22C13FAC008F1F1A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70E96B302272E7F700A5EB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -567,6 +669,45 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# mogenerator -m Lannister/Data/db.xcdatamodeld/db.xcdatamodel -O Lannister/Data/Models/Generated --swift --template-var arc=true\n";
 		};
+		70A6D08C22C13FAC008F1F1A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# mogenerator -m Lannister/Data/db.xcdatamodeld/db.xcdatamodel -O Lannister/Data/Models/Generated --swift --template-var arc=true\n";
+		};
+		9392A79BA68B6FBF2856CB14 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lannister Beta-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AAF2164A70343FDBBD0481DA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -625,9 +766,97 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lannister/Pods-Lannister-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BF427FB69F6340B422A42378 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lannister Beta/Pods-Lannister Beta-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BiometricAuthentication/BiometricAuthentication.framework",
+				"${BUILT_PRODUCTS_DIR}/Blockstack/Blockstack.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Groot/Groot.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BiometricAuthentication.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Blockstack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Groot.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lannister Beta/Pods-Lannister Beta-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		70A6D05722C13FAC008F1F1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70A6D05822C13FAC008F1F1A /* BioAccessController.swift in Sources */,
+				70A6D05922C13FAC008F1F1A /* Holding.swift in Sources */,
+				70A6D05A22C13FAC008F1F1A /* DonationsController.swift in Sources */,
+				70A6D05B22C13FAC008F1F1A /* HoldingDto.swift in Sources */,
+				70A6D05C22C13FAC008F1F1A /* Transaction.swift in Sources */,
+				70A6D05D22C13FAC008F1F1A /* DonationCell.swift in Sources */,
+				70A6D05E22C13FAC008F1F1A /* HoldingNameCell.swift in Sources */,
+				70A6D05F22C13FAC008F1F1A /* NumberFormatter.swift in Sources */,
+				70A6D06022C13FAC008F1F1A /* ColorCodeCustomCell.swift in Sources */,
+				70A6D06122C13FAC008F1F1A /* SettingsController.swift in Sources */,
+				70A6D06222C13FAC008F1F1A /* CreateTransactionController.swift in Sources */,
+				70A6D06322C13FAC008F1F1A /* RootController.swift in Sources */,
+				70A6D06422C13FAC008F1F1A /* AuthController.swift in Sources */,
+				70A6D06522C13FAC008F1F1A /* DashboardHeaderView.swift in Sources */,
+				70A6D06622C13FAC008F1F1A /* HoldingHeaderView.swift in Sources */,
+				70A6D06722C13FAC008F1F1A /* HoldingCell.swift in Sources */,
+				70A6D06822C13FAC008F1F1A /* CurrencyDto.swift in Sources */,
+				70A6D06922C13FAC008F1F1A /* CurrenciesController.swift in Sources */,
+				70A6D06A22C13FAC008F1F1A /* HoldingTopCell.swift in Sources */,
+				70A6D06B22C13FAC008F1F1A /* ColorCodeCell.swift in Sources */,
+				70A6D06C22C13FAC008F1F1A /* HoldingController.swift in Sources */,
+				70A6D06D22C13FAC008F1F1A /* CurrencyUserDefaults.swift in Sources */,
+				70A6D06E22C13FAC008F1F1A /* TotalValueCell.swift in Sources */,
+				70A6D06F22C13FAC008F1F1A /* Currencies.swift in Sources */,
+				70A6D07022C13FAC008F1F1A /* DashboardController.swift in Sources */,
+				70A6D07122C13FAC008F1F1A /* BlockstackApiService.swift in Sources */,
+				70A6D07222C13FAC008F1F1A /* SettingsCell.swift in Sources */,
+				70A6D07322C13FAC008F1F1A /* ColorCodePresetCell.swift in Sources */,
+				70A6D07422C13FAC008F1F1A /* BaseApiService.swift in Sources */,
+				70A6D07522C13FAC008F1F1A /* TransactionDto.swift in Sources */,
+				70A6D07622C13FAC008F1F1A /* CurrencyCell.swift in Sources */,
+				70A6D07722C13FAC008F1F1A /* Parser.swift in Sources */,
+				70A6D07822C13FAC008F1F1A /* DashboardTopCell.swift in Sources */,
+				70A6D07922C13FAC008F1F1A /* TransactionNameCell.swift in Sources */,
+				70A6D07A22C13FAC008F1F1A /* CreateHoldingController.swift in Sources */,
+				70A6D07B22C13FAC008F1F1A /* CurrencyApiService.swift in Sources */,
+				70A6D07C22C13FAC008F1F1A /* Colors.swift in Sources */,
+				70A6D07D22C13FAC008F1F1A /* LaunchController.swift in Sources */,
+				70A6D07E22C13FAC008F1F1A /* ColorCodesController.swift in Sources */,
+				70A6D07F22C13FAC008F1F1A /* TransactionCell.swift in Sources */,
+				70A6D08022C13FAC008F1F1A /* Currency.swift in Sources */,
+				70A6D08122C13FAC008F1F1A /* TransactionTypeCell.swift in Sources */,
+				70A6D08222C13FAC008F1F1A /* ApiManager.swift in Sources */,
+				70A6D08322C13FAC008F1F1A /* AppDelegate.swift in Sources */,
+				70A6D08422C13FAC008F1F1A /* db.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70E96B2E2272E7F700A5EB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -731,6 +960,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		70A6D08E22C13FAC008F1F1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B85A37E13DD7230EC18E5F9F /* Pods-Lannister Beta.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 57JMDA279Y;
+				INFOPLIST_FILE = "Lannister/Info-dev.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lannister-capital.Lannister-beta";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		70A6D08F22C13FAC008F1F1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BEADF46EA2A6A926563CD08 /* Pods-Lannister Beta.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 57JMDA279Y;
+				INFOPLIST_FILE = "Lannister/Info-dev.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lannister-capital.Lannister-beta";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		70E96B582272E7F900A5EB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -849,7 +1116,7 @@
 		};
 		70E96B5B2272E7F900A5EB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40B65A67EE973FEA42828D95 /* Pods-Lannister.debug.xcconfig */;
+			baseConfigurationReference = BD3C1907A3685BF77BB6A161 /* Pods-Lannister.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -868,7 +1135,7 @@
 		};
 		70E96B5C2272E7F900A5EB54 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA49CCB3B4D43C05281E5A73 /* Pods-Lannister.release.xcconfig */;
+			baseConfigurationReference = 884045C1090CD49292E75A83 /* Pods-Lannister.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -974,6 +1241,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		70A6D08D22C13FAC008F1F1A /* Build configuration list for PBXNativeTarget "Lannister Beta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70A6D08E22C13FAC008F1F1A /* Debug */,
+				70A6D08F22C13FAC008F1F1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		70E96B2D2272E7F700A5EB54 /* Build configuration list for PBXProject "Lannister" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
