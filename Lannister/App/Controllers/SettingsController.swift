@@ -112,7 +112,7 @@ class SettingsController: UIViewController {
 extension SettingsController : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,8 +125,10 @@ extension SettingsController : UITableViewDataSource {
             return 0
         } else if section == 2 {
             return 1
-        } else {
+        } else if section == 3 {
             return 3
+        } else {
+            return 0
         }
     }
     
@@ -137,7 +139,7 @@ extension SettingsController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 58))
         headerView.backgroundColor = UIColor.white
-        let titleLabel = UILabel(frame: CGRect(x: 15, y: 38, width: tableView.frame.size.width, height: 20))
+        let titleLabel = UILabel(frame: CGRect(x: 15, y: 38, width: tableView.frame.size.width-30, height: 20))
         headerView.addSubview(titleLabel)
         titleLabel.textColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
         titleLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 14)
@@ -151,33 +153,17 @@ extension SettingsController : UITableViewDataSource {
             }
         } else if section == 2 {
             titleLabel.text = "DONATE"
-        } else {
+        } else if section == 3 {
             titleLabel.text = "ABOUT"
+        } else {
+            titleLabel.textAlignment = .center
+            let versionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+            let buildString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+            titleLabel.text = "Version \(versionString)(\(buildString))"
         }
         return headerView
     }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 3 {
-            return 60
-        }
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 58))
-        footerView.backgroundColor = UIColor.white
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 20, width: tableView.frame.size.width, height: 20))
-        footerView.addSubview(titleLabel)
-        titleLabel.textColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
-        titleLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 14)
-        titleLabel.textAlignment = .center
-        let versionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
-        let buildString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
-        titleLabel.text = "Version \(versionString)(\(buildString))"
-        return footerView
-    }
-    
+        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.section == 0 {
@@ -335,7 +321,7 @@ extension SettingsController : UITableViewDelegate {
         } else if indexPath.section == 2 {
             let donationsVC = storyboard?.instantiateViewController(withIdentifier: "donationsVC")
             navigationController!.pushViewController(donationsVC!, animated: true)
-        } else {
+        } else if indexPath.section == 3 {
             if indexPath.row == 0 {
                 UIApplication.shared.open(URL(string: "https://twitter.com/lannistercap")!, options: [:], completionHandler: nil)
             } else if indexPath.row == 1 {
