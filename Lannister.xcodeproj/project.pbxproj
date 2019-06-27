@@ -94,7 +94,6 @@
 		70A6D08822C13FAC008F1F1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3E2272E7F900A5EB54 /* LaunchScreen.storyboard */; };
 		70A6D08922C13FAC008F1F1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3C2272E7F900A5EB54 /* Assets.xcassets */; };
 		70A6D08A22C13FAC008F1F1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B392272E7F700A5EB54 /* Main.storyboard */; };
-		70A6D09322C14007008F1F1A /* Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70A6D09222C14007008F1F1A /* Info-dev.plist */; };
 		70A6D09722C14BB5008F1F1A /* PortfolioRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09622C14BB5008F1F1A /* PortfolioRepository.swift */; };
 		70A6D09822C14BB5008F1F1A /* PortfolioRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09622C14BB5008F1F1A /* PortfolioRepository.swift */; };
 		70A6D09A22C14BD8008F1F1A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D09922C14BD8008F1F1A /* Repository.swift */; };
@@ -630,7 +629,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70A6D09322C14007008F1F1A /* Info-dev.plist in Resources */,
 				70A6D08822C13FAC008F1F1A /* LaunchScreen.storyboard in Resources */,
 				70A6D08922C13FAC008F1F1A /* Assets.xcassets in Resources */,
 				70A6D08A22C13FAC008F1F1A /* Main.storyboard in Resources */,
