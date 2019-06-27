@@ -25,7 +25,7 @@ class DashboardController: UIViewController {
     let impact                                  = UIImpactFeedbackGenerator()
 
     var numberFormatter                         = NumberFormatter()
-
+    var percentFormatter                        = NumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +49,12 @@ class DashboardController: UIViewController {
         
         // Set number formatter display
         numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
+        
+        percentFormatter.minimumFractionDigits = 0
+        percentFormatter.maximumFractionDigits = 2
+
         
         if UserDefaults.standard.object(forKey: "sortKey") != nil {
             sortKey = UserDefaults.standard.object(forKey: "sortKey") as! String
@@ -278,8 +284,8 @@ extension DashboardController : UICollectionViewDataSource {
             if holding.value < 0 {
                 holdingValue = 0
             }
-            let percentage = String(format: "%.2f", Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)/euroTotalValue*100)
-            cell.percentageLabel.text = "\(percentage)%"
+            let percentage = percentFormatter.string(for: NSNumber(value: Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)/euroTotalValue*100))
+            cell.percentageLabel.text = "\(percentage ?? "")%"
             
             let path = UIBezierPath(roundedRect:cell.colorView.bounds,
                                     byRoundingCorners:[.topLeft, .bottomLeft],
@@ -333,8 +339,8 @@ extension DashboardController : ChartViewDelegate {
             let holding = holdings[sliceIndex]
 
             let sectionHeader = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0)) as! DashboardHeaderView
-            let percentage = String(format: "%.2f", pieChartEntry.value)
-            let attributedString = NSAttributedString(string: "\(percentage)%",
+            let percentage = percentFormatter.string(for: NSNumber(value: pieChartEntry.value))
+            let attributedString = NSAttributedString(string: "\(percentage ?? "")%",
                 attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
                               NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
             sectionHeader.pieChartView.centerAttributedText = attributedString

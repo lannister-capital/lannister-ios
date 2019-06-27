@@ -25,6 +25,7 @@ class HoldingController: UIViewController {
     var pieChartDataEntries                         = [PieChartDataEntry]()
     var pieChartDataColors                          = [UIColor]()
     var numberFormatter                             = NumberFormatter()
+    var percentFormatter                            = NumberFormatter()
 
     
     override func viewDidLoad() {
@@ -34,15 +35,17 @@ class HoldingController: UIViewController {
         
         // Set number formatter display
         numberFormatter.numberStyle = .decimal
-
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
+        
+        percentFormatter.minimumFractionDigits = 0
+        percentFormatter.maximumFractionDigits = 2
+        
         navigationController!.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
         
-        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
-        navigationItem.title = holding.name
-
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -56,7 +59,7 @@ class HoldingController: UIViewController {
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
         
-        updateHoldingValue()
+        updateHolding()
         updatePieChart()
         updateTransactions()
     }
@@ -67,8 +70,14 @@ class HoldingController: UIViewController {
         updateTransactions()
     }
     
-    func updateHoldingValue() {
+    func updateHolding() {
+        
+        navigationItem.title = holding.name
+        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
+        euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
+
         let formattedNumber = numberFormatter.string(for: NSNumber(value: holding.value!))
+        
         valueLabel.text =  String(format: "%@%@", holding.currency.symbol, formattedNumber ?? "--")
         if holding.currency.symbol == Currencies.getDefaultCurrencySymbol() {
             // remove label
@@ -83,6 +92,8 @@ class HoldingController: UIViewController {
             let formattedNumber = numberFormatter.string(for: NSNumber(value: currencyValue))
             defaultCurrencyValueLabel.text = String(format: "%@%@", Currencies.getDefaultCurrencySymbol(), formattedNumber ?? "--")
         }
+        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
+        navigationItem.title = holding.name
     }
     
     func updatePieChart() {
@@ -106,8 +117,8 @@ class HoldingController: UIViewController {
         pieChartDataColors.append(UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 0.7))
         
         pieChartView.chartDescription?.text = ""
-        let percentage = String(format: "%.2f", euroValue/euroTotalValue*100)
-        let attributedString = NSAttributedString(string: "\(percentage)%",
+        let percentage = percentFormatter.string(for: NSNumber(value: euroValue/euroTotalValue*100))
+        let attributedString = NSAttributedString(string: "\(percentage ?? "")%",
                                                   attributes: [ NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 20)!,
                                                                 NSAttributedString.Key.foregroundColor: UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)])
         pieChartView.centerAttributedText = attributedString
@@ -201,7 +212,7 @@ extension HoldingController : UITableViewDataSource {
             holding = HoldingDto().holding(from: holdingManagedObject!)
             
             euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
-            updateHoldingValue()
+            updateHolding()
             updatePieChart()
 
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -257,10 +268,7 @@ extension HoldingController : EditHoldingDelegate {
     func updateHolding(newHolding: Holding) {
         
         holding = newHolding
-        navigationItem.title = holding.name
-        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
-        valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value)
-        euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
+        updateHolding()
         updatePieChart()
     }
 }
@@ -270,10 +278,7 @@ extension HoldingController : CreateTransactionDelegate {
     func newTransaction(newHolding: Holding) {
         
         holding = newHolding
-        navigationItem.title = holding.name
-        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
-        valueLabel.text =  String(format: "%@%.2f", holding.currency.symbol, holding.value)
-        euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
+        updateHolding()
         updatePieChart()
     }
 }
