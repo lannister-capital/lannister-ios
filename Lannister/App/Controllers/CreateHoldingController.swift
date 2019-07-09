@@ -302,6 +302,11 @@ extension CreateHoldingController : UITableViewDelegate {
 
             let ethCreateVC = storyboard?.instantiateViewController(withIdentifier: "ethCreateVC") as! ETHCreateHoldingController
             ethCreateVC.delegate = self
+            let indexPathForTotalValue = IndexPath(row: 1, section: 0)
+            let totalValueCell = tableView.cellForRow(at: indexPathForTotalValue) as! TotalValueCell
+            if let holdingValue = totalValueCell.currencyLabel.text?.doubleValue {
+                ethCreateVC.holdingValue = holdingValue
+            }
             navigationController?.pushViewController(ethCreateVC, animated: true)
         }
         
@@ -357,6 +362,7 @@ extension CreateHoldingController : CurrenciesDelegate {
             totalValueCell.currencyLabel.text = "Insert value or Import from Address"
         } else {
             totalValueCell.cellIndicatorImageView.isHidden = true
+            totalValueCell.changeLabel.isHidden = true
             totalValueCell.totalValueTextField.isHidden = false
             totalValueCell.percentageLabel.isHidden = false
             totalValueCell.currencyLabel.text = currency.symbol
@@ -368,10 +374,22 @@ extension CreateHoldingController : ETHDelegate {
     
     func importedAddress(address: String) {
         print("importedAddress \(address)")
+        let indexPathForTotalValue = IndexPath(row: 1, section: 0)
+        let totalValueCell = tableView.cellForRow(at: indexPathForTotalValue) as! TotalValueCell
+        totalValueCell.cellIndicatorImageView.isHidden = false
+        totalValueCell.totalValueTextField.isHidden = true
+        totalValueCell.percentageLabel.isHidden = true
+        totalValueCell.currencyLabel.text = "\(address.prefix(10))...\(address.suffix(4))"
+        totalValueCell.changeLabel.isHidden = false
     }
     
     func insertedValue(value: Double) {
         print("insertedValue \(value)")
+        let indexPathForTotalValue = IndexPath(row: 1, section: 0)
+        let totalValueCell = tableView.cellForRow(at: indexPathForTotalValue) as! TotalValueCell
+        totalValueCell.percentageLabel.isHidden = false
+        totalValueCell.currencyLabel.text = "\(value)"
+        totalValueCell.changeLabel.isHidden = false
     }
 }
 

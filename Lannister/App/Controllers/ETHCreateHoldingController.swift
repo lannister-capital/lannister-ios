@@ -20,6 +20,7 @@ class ETHCreateHoldingController: UIViewController {
     @IBOutlet weak var tableView        : UITableView!
     var toolBar                         = UIToolbar()
     var delegate                        : ETHDelegate!
+    var holdingValue                    : Double!
 
     
     override func viewDidLoad() {
@@ -34,6 +35,10 @@ class ETHCreateHoldingController: UIViewController {
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        
+        if holdingValue != nil {
+            valueTextField.text = "\(holdingValue!)"
+        }
         
         let btnDone = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveValue))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
