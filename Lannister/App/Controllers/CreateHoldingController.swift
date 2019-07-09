@@ -24,6 +24,8 @@ class CreateHoldingController: UIViewController {
     var delegate                    : EditHoldingDelegate!
     let impact                      = UIImpactFeedbackGenerator()
     let selection                   = UISelectionFeedbackGenerator()
+    var ethAddress                  : String!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -359,13 +361,23 @@ extension CreateHoldingController : CurrenciesDelegate {
             totalValueCell.cellIndicatorImageView.isHidden = false
             totalValueCell.totalValueTextField.isHidden = true
             totalValueCell.percentageLabel.isHidden = true
-            totalValueCell.currencyLabel.text = "Insert value or Import from Address"
+            if ethAddress != nil {
+                totalValueCell.changeLabel.isHidden = false
+                totalValueCell.titleLabel.text = "From Address"
+            } else {
+                totalValueCell.changeLabel.isHidden = true
+                totalValueCell.currencyLabel.text = "Insert value or Import from Address"
+                totalValueCell.titleLabel.text = "Total Value"
+            }
         } else {
+            ethAddress = nil
             totalValueCell.cellIndicatorImageView.isHidden = true
             totalValueCell.changeLabel.isHidden = true
             totalValueCell.totalValueTextField.isHidden = false
             totalValueCell.percentageLabel.isHidden = false
             totalValueCell.currencyLabel.text = currency.symbol
+            totalValueCell.changeLabel.isHidden = true
+            totalValueCell.titleLabel.text = "Total Value"
         }
     }
 }
@@ -374,8 +386,11 @@ extension CreateHoldingController : ETHDelegate {
     
     func importedAddress(address: String) {
         print("importedAddress \(address)")
+        ethAddress = address
+        
         let indexPathForTotalValue = IndexPath(row: 1, section: 0)
         let totalValueCell = tableView.cellForRow(at: indexPathForTotalValue) as! TotalValueCell
+        totalValueCell.titleLabel.text = "From address"
         totalValueCell.cellIndicatorImageView.isHidden = false
         totalValueCell.totalValueTextField.isHidden = true
         totalValueCell.percentageLabel.isHidden = true
@@ -385,8 +400,11 @@ extension CreateHoldingController : ETHDelegate {
     
     func insertedValue(value: Double) {
         print("insertedValue \(value)")
+        ethAddress = nil
+
         let indexPathForTotalValue = IndexPath(row: 1, section: 0)
         let totalValueCell = tableView.cellForRow(at: indexPathForTotalValue) as! TotalValueCell
+        totalValueCell.titleLabel.text = "Total Value"
         totalValueCell.percentageLabel.isHidden = false
         totalValueCell.currencyLabel.text = "\(value)"
         totalValueCell.changeLabel.isHidden = false

@@ -1332,6 +1332,7 @@
                                             <outlet property="changeLabel" destination="NNH-1C-v69" id="V6T-ww-R1V"/>
                                             <outlet property="currencyLabel" destination="4wH-R9-ifN" id="ac8-ND-Llu"/>
                                             <outlet property="percentageLabel" destination="H44-LX-T5n" id="F1I-ff-cpf"/>
+                                            <outlet property="titleLabel" destination="juC-ZV-Wa6" id="ti3-3x-aH4"/>
                                             <outlet property="totalValueTextField" destination="Abr-U8-d23" id="HGf-7G-16d"/>
                                         </connections>
                                     </tableViewCell>
