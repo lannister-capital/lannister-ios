@@ -244,9 +244,19 @@ extension CreateHoldingController : UITableViewDataSource {
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "totalValueCellId", for: indexPath) as! TotalValueCell
             if holding != nil {
-                cell.totalValueTextField.text = String(format: "%.2f", holding.value!)
-                cell.percentageLabel.text = "\(String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100))%"
-                cell.currencyLabel.text = holding.currency.symbol
+                if selectedCurrency.code == "ETH" {
+                    cell.cellIndicatorImageView.isHidden = false
+                    cell.totalValueTextField.isHidden = true
+                    cell.percentageLabel.isHidden = true
+                    cell.currencyLabel.text = "Insert value or Import from Address"
+                } else {
+                    cell.cellIndicatorImageView.isHidden = true
+                    cell.totalValueTextField.isHidden = false
+                    cell.percentageLabel.isHidden = false
+                    cell.totalValueTextField.text = String(format: "%.2f", holding.value!)
+                    cell.percentageLabel.text = "\(String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100))%"
+                    cell.currencyLabel.text = holding.currency.symbol
+                }
             } else {
                 let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: CurrencyUserDefaults().getDefaultCurrencyCode()!, in: NSManagedObjectContext.mr_default())
                 cell.currencyLabel.text = currency!.symbol
@@ -285,16 +295,29 @@ extension CreateHoldingController : UITableViewDelegate {
         removeKeyboard()
         
         let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
+
+        if indexPath.row == 1 && selectedCurrency.code == "ETH" {
+            backItem.title = "New Holding"
+            navigationItem.backBarButtonItem = backItem
+
+            let ethCreateVC = storyboard?.instantiateViewController(withIdentifier: "ethCreateVC") as! ETHCreateHoldingController
+            ethCreateVC.delegate = self
+            navigationController?.pushViewController(ethCreateVC, animated: true)
+        }
         
-        if indexPath.row == 2 {
+        else if indexPath.row == 2 {
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+
             let currenciesVC = storyboard?.instantiateViewController(withIdentifier: "currenciesVC") as! CurrenciesController
             currenciesVC.delegate = self
             navigationController?.pushViewController(currenciesVC, animated: true)
         }
      
         else if indexPath.row == 3 {
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+
             let colorCodeVC = storyboard?.instantiateViewController(withIdentifier: "colorCodesVC") as! ColorCodesController
             colorCodeVC.delegate = self
             if holding?.hexColor != nil {
@@ -327,10 +350,30 @@ extension CreateHoldingController : CurrenciesDelegate {
         
         let indexPathForTotalValue = IndexPath(row: 1, section: 0)
         let totalValueCell = tableView.cellForRow(at: indexPathForTotalValue) as! TotalValueCell
-        totalValueCell.currencyLabel.text = currency.symbol
+        if selectedCurrency.code == "ETH" {
+            totalValueCell.cellIndicatorImageView.isHidden = false
+            totalValueCell.totalValueTextField.isHidden = true
+            totalValueCell.percentageLabel.isHidden = true
+            totalValueCell.currencyLabel.text = "Insert value or Import from Address"
+        } else {
+            totalValueCell.cellIndicatorImageView.isHidden = true
+            totalValueCell.totalValueTextField.isHidden = false
+            totalValueCell.percentageLabel.isHidden = false
+            totalValueCell.currencyLabel.text = currency.symbol
+        }
     }
 }
 
+extension CreateHoldingController : ETHDelegate {
+    
+    func importedAddress(address: String) {
+        print("importedAddress \(address)")
+    }
+    
+    func insertedValue(value: Double) {
+        print("insertedValue \(value)")
+    }
+}
 
 extension CreateHoldingController : UITextFieldDelegate {
     

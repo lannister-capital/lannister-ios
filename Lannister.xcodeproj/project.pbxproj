@@ -104,6 +104,12 @@
 		70A6D0A322C14C6F008F1F1A /* PortfolioUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6D0A122C14C6F008F1F1A /* PortfolioUseCase.swift */; };
 		70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */; };
 		70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */; };
+		70D7F0B322D375A6004E8BAE /* ETHCreateHoldingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D7F0B222D375A6004E8BAE /* ETHCreateHoldingController.swift */; };
+		70D7F0B422D375A6004E8BAE /* ETHCreateHoldingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D7F0B222D375A6004E8BAE /* ETHCreateHoldingController.swift */; };
+		70D7F0B622D37AEC004E8BAE /* ETHCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D7F0B522D37AEC004E8BAE /* ETHCell.swift */; };
+		70D7F0B722D37AEC004E8BAE /* ETHCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D7F0B522D37AEC004E8BAE /* ETHCell.swift */; };
+		70D7F0B922D47903004E8BAE /* CustomQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D7F0B822D47903004E8BAE /* CustomQRCodeController.swift */; };
+		70D7F0BA22D47903004E8BAE /* CustomQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D7F0B822D47903004E8BAE /* CustomQRCodeController.swift */; };
 		70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B352272E7F700A5EB54 /* AppDelegate.swift */; };
 		70E96B3B2272E7F700A5EB54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B392272E7F700A5EB54 /* Main.storyboard */; };
 		70E96B3D2272E7F900A5EB54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3C2272E7F900A5EB54 /* Assets.xcassets */; };
@@ -188,6 +194,9 @@
 		70A6D0A122C14C6F008F1F1A /* PortfolioUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioUseCase.swift; sourceTree = "<group>"; };
 		70AD5C3F22790E9D00A9E164 /* ColorCodeCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeCustomCell.swift; sourceTree = "<group>"; };
 		70AD5C4122790EB000A9E164 /* ColorCodePresetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodePresetCell.swift; sourceTree = "<group>"; };
+		70D7F0B222D375A6004E8BAE /* ETHCreateHoldingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHCreateHoldingController.swift; sourceTree = "<group>"; };
+		70D7F0B522D37AEC004E8BAE /* ETHCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHCell.swift; sourceTree = "<group>"; };
+		70D7F0B822D47903004E8BAE /* CustomQRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomQRCodeController.swift; sourceTree = "<group>"; };
 		70E96B322272E7F700A5EB54 /* Lannister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lannister.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E96B352272E7F700A5EB54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70E96B3A2272E7F700A5EB54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -348,10 +357,12 @@
 				70572CBE2273A1D600297421 /* SettingsController.swift */,
 				70572CC02273A1E100297421 /* HoldingController.swift */,
 				70572CC22273A25600297421 /* CreateHoldingController.swift */,
+				70D7F0B222D375A6004E8BAE /* ETHCreateHoldingController.swift */,
 				70572CC42273A26F00297421 /* CreateTransactionController.swift */,
 				70572CC62273A28700297421 /* ColorCodesController.swift */,
 				657B69302284354500D7A5AF /* CurrenciesController.swift */,
 				70FBB961228AF4700086E208 /* DonationsController.swift */,
+				70D7F0B822D47903004E8BAE /* CustomQRCodeController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -375,6 +386,7 @@
 				7007208F227ADA3A003F3DEF /* SettingsCell.swift */,
 				657B6932228436A800D7A5AF /* CurrencyCell.swift */,
 				70FBB963228B01480086E208 /* DonationCell.swift */,
+				70D7F0B522D37AEC004E8BAE /* ETHCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -800,6 +812,7 @@
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Groot/Groot.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -813,6 +826,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Groot.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -836,6 +850,7 @@
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Groot/Groot.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -849,6 +864,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Groot.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -871,6 +887,8 @@
 				70A6D05D22C13FAC008F1F1A /* DonationCell.swift in Sources */,
 				70A6D05E22C13FAC008F1F1A /* HoldingNameCell.swift in Sources */,
 				70A6D05F22C13FAC008F1F1A /* NumberFormatter.swift in Sources */,
+				70D7F0BA22D47903004E8BAE /* CustomQRCodeController.swift in Sources */,
+				70D7F0B422D375A6004E8BAE /* ETHCreateHoldingController.swift in Sources */,
 				70A6D06022C13FAC008F1F1A /* ColorCodeCustomCell.swift in Sources */,
 				70A6D06122C13FAC008F1F1A /* SettingsController.swift in Sources */,
 				70A6D06222C13FAC008F1F1A /* CreateTransactionController.swift in Sources */,
@@ -910,6 +928,7 @@
 				70A6D08022C13FAC008F1F1A /* Currency.swift in Sources */,
 				70A6D08122C13FAC008F1F1A /* TransactionTypeCell.swift in Sources */,
 				70A6D08222C13FAC008F1F1A /* ApiManager.swift in Sources */,
+				70D7F0B722D37AEC004E8BAE /* ETHCell.swift in Sources */,
 				70A6D08322C13FAC008F1F1A /* AppDelegate.swift in Sources */,
 				70A6D08422C13FAC008F1F1A /* db.xcdatamodeld in Sources */,
 			);
@@ -927,6 +946,8 @@
 				70FBB964228B01480086E208 /* DonationCell.swift in Sources */,
 				707FB20C22773DD1005B29A2 /* HoldingNameCell.swift in Sources */,
 				6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */,
+				70D7F0B922D47903004E8BAE /* CustomQRCodeController.swift in Sources */,
+				70D7F0B322D375A6004E8BAE /* ETHCreateHoldingController.swift in Sources */,
 				70AD5C4022790E9D00A9E164 /* ColorCodeCustomCell.swift in Sources */,
 				70572CBF2273A1D600297421 /* SettingsController.swift in Sources */,
 				70572CC52273A26F00297421 /* CreateTransactionController.swift in Sources */,
@@ -966,6 +987,7 @@
 				7016B4B322830880000C49B8 /* Currency.swift in Sources */,
 				7016B4AA2282EBC3000C49B8 /* TransactionTypeCell.swift in Sources */,
 				7016B4AD2283070B000C49B8 /* ApiManager.swift in Sources */,
+				70D7F0B622D37AEC004E8BAE /* ETHCell.swift in Sources */,
 				70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */,
 				65E95BEA229FCA6B00E9A442 /* db.xcdatamodeld in Sources */,
 			);

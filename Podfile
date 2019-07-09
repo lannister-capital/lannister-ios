@@ -11,6 +11,7 @@ def all_pods
   pod 'MagicalRecord', :git => 'https://github.com/magicalpanda/MagicalRecord.git', :tag => 'v2.3.3'
   pod 'BiometricAuthentication'
   pod 'SVProgressHUD'
+  pod 'QRCodeReader.swift', '~> 10.0.0'
 end
 
 target 'Lannister' do
