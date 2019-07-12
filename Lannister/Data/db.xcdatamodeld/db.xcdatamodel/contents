@@ -22,11 +22,17 @@
             </userInfo>
         </attribute>
         <relationship name="holdings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HoldingManagedObject" inverseName="currency" inverseEntity="HoldingManagedObject" syncable="YES"/>
+        <relationship name="token" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Token" inverseName="currency" inverseEntity="Token" syncable="YES"/>
         <userInfo>
             <entry key="identityAttributes" value="code"/>
         </userInfo>
     </entity>
     <entity name="HoldingManagedObject" representedClassName=".HoldingManagedObject" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="address"/>
+            </userInfo>
+        </attribute>
         <attribute name="hex_color" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="hex_color"/>
@@ -58,6 +64,15 @@
             </userInfo>
         </relationship>
     </entity>
+    <entity name="Token" representedClassName="Token" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="address"/>
+            </userInfo>
+        </attribute>
+        <relationship name="currency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyManagedObject" inverseName="token" inverseEntity="CurrencyManagedObject" syncable="YES"/>
+    </entity>
     <entity name="TransactionManagedObject" representedClassName=".TransactionManagedObject" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -82,8 +97,9 @@
         <relationship name="holding" maxCount="1" deletionRule="Nullify" destinationEntity="HoldingManagedObject" inverseName="transactions" inverseEntity="HoldingManagedObject" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CurrencyManagedObject" positionX="-377.32421875" positionY="-52.68359375" width="128" height="120"/>
-        <element name="HoldingManagedObject" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="CurrencyManagedObject" positionX="-377.32421875" positionY="-52.68359375" width="128" height="133"/>
+        <element name="HoldingManagedObject" positionX="-63" positionY="-18" width="128" height="148"/>
         <element name="TransactionManagedObject" positionX="-311.4921875" positionY="116.125" width="128" height="120"/>
+        <element name="Token" positionX="-81.84765625" positionY="210.13671875" width="128" height="88"/>
     </elements>
 </model>

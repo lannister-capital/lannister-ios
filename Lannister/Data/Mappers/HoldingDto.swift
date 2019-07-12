@@ -14,6 +14,9 @@ class HoldingDto : NSObject {
     func holding(from managedObject: HoldingManagedObject) -> Holding {
         
         var holding = Holding(with: nil)
+        if(managedObject.address != nil) {
+            holding.address = managedObject.address
+        }
         holding.name = managedObject.name
         holding.value = managedObject.value
         holding.hexColor = managedObject.hex_color

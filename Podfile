@@ -12,6 +12,7 @@ def all_pods
   pod 'BiometricAuthentication'
   pod 'SVProgressHUD'
   pod 'QRCodeReader.swift', '~> 10.0.0'
+  pod 'web3swift', :git => 'https://github.com/pokettocash/web3swift.git'
 end
 
 target 'Lannister' do

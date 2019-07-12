@@ -86,7 +86,7 @@ class CreateHoldingController: UIViewController {
             let cell = tableView.cellForRow(at: indexPath) as! TotalValueCell
             let valueTextField = cell.totalValueTextField
 
-            if valueTextField?.text?.doubleValue == nil {
+            if valueTextField?.text?.doubleValue == nil && ethAddress == nil {
                 impact.impactOccurred()
                 let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
@@ -108,6 +108,8 @@ class CreateHoldingController: UIViewController {
             newHoldingManagedObject.currency = currencyManagedObject
             if let totalValue = valueTextField!.text!.doubleValue {
                 newHoldingManagedObject.value = totalValue
+            } else if let address = ethAddress {
+                newHoldingManagedObject.address = ethAddress
             }
             
             let colorIndexPath = IndexPath(row: 3, section: 0)
