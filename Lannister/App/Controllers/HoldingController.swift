@@ -10,6 +10,7 @@ import UIKit
 import MagicalRecord
 import Charts
 import Blockstack
+import web3swift
 
 class HoldingController: UIViewController {
 
@@ -21,7 +22,7 @@ class HoldingController: UIViewController {
     @IBOutlet weak var pieChartView                 : PieChartView!
     @IBOutlet weak var tableView                    : UITableView!
     var holding                                     : Holding!
-    var transactions                                : [Transaction]!
+    var transactions                                : [Transaction]! = []
     var pieChartDataEntries                         = [PieChartDataEntry]()
     var pieChartDataColors                          = [UIColor]()
     var numberFormatter                             = NumberFormatter()
@@ -58,6 +59,18 @@ class HoldingController: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+//        DispatchQueue.global(qos: .background).async {
+//
+//            WalletUseCase(with: WalletRepositoryImpl()).getBalance(address: self.holding.address!, success: { balance in
+//
+//                DispatchQueue.main.async {
+//                    print("balance \(balance)")
+//                }
+//            }) { error in
+//                print("could not get balance")
+//            }
+//        }
         
         updateHolding()
         updatePieChart()
