@@ -40,7 +40,18 @@ class CreateHoldingController: UIViewController {
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
-            selectedCurrency = holding.currency
+            if holding.address == nil {
+                selectedCurrency = holding.currency
+            } else {
+                // Get ETH
+                let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+                let predicateCode = NSPredicate(format: "code == %@", "ETH")
+                let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+                let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+                let token = TokenDto().token(from: tokenManagedObject)
+                selectedCurrency = token.currency
+                ethAddress = holding.address!
+            }
         } else {
             let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
             navigationItem.leftBarButtonItem = cancelButton
@@ -97,47 +108,89 @@ class CreateHoldingController: UIViewController {
             var newHoldingManagedObject : HoldingManagedObject
 
             if holding == nil {
+                // create holding
                 newHoldingManagedObject = HoldingManagedObject(context: NSManagedObjectContext.mr_default())
+                // set id
                 newHoldingManagedObject.id = newHoldingManagedObject.objectID.uriRepresentation().lastPathComponent
             } else {
+                // get holding
                 newHoldingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())!
             }
+            // set name
             newHoldingManagedObject.name = holdingNameTextField!.text
             
+            // set currency
             let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: selectedCurrency.code!, in: NSManagedObjectContext.mr_default())
-            newHoldingManagedObject.currency = currencyManagedObject
-            if let totalValue = valueTextField!.text!.doubleValue {
-                newHoldingManagedObject.value = totalValue
-            } else if let address = ethAddress {
-                newHoldingManagedObject.address = ethAddress
+            if ethAddress == nil {
+                newHoldingManagedObject.currency = currencyManagedObject
             }
             
+            // set hex_color
             let colorIndexPath = IndexPath(row: 3, section: 0)
             let colorCell = tableView.cellForRow(at: colorIndexPath) as! ColorCodeCell
             newHoldingManagedObject.hex_color = String(colorCell.colorCodeLabel.text!.suffix(7))
-            
-            NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
-            selection.selectionChanged()
 
-            if Blockstack.shared.isUserSignedIn() {
-                BlockstackApiService().send { error in
-                    if error != nil {
-                        self.impact.impactOccurred()
-                        let msg = error!.localizedDescription
-                        let alert = UIAlertController(title: "Error",
-                                                      message: msg,
-                                                      preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+            // set value
+            if let totalValue = valueTextField?.text?.doubleValue {
+                newHoldingManagedObject.value = totalValue as NSNumber
+            }
+            
+            // set address
+            if ethAddress != nil {
+                newHoldingManagedObject.address = ethAddress
+                newHoldingManagedObject.value = nil
+                // create token
+                let predicateAddress = NSPredicate(format: "address == %@", ethAddress)
+                let predicateCode = NSPredicate(format: "code == %@", "ETH")
+                let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+
+                var tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())
+                if tokenManagedObject == nil {
+                    tokenManagedObject = TokenManagedObject(context: NSManagedObjectContext.mr_default())
+                }
+                tokenManagedObject?.address = ethAddress
+                tokenManagedObject?.code = "ETH"
+                tokenManagedObject?.currency = currencyManagedObject
+                
+                WalletUseCase(with: WalletRepositoryImpl()).getBalance(address: ethAddress, success: { balance in
+                    DispatchQueue.main.async {
+                        tokenManagedObject?.value = balance
+                        self.saveHoldingAndDismiss(holdingManagedObject: newHoldingManagedObject)
                     }
+                }) { error in
+                    print("could not get balance")
+                    self.saveHoldingAndDismiss(holdingManagedObject: newHoldingManagedObject)
+                }
+            } else {
+                // save to local db
+                saveHoldingAndDismiss(holdingManagedObject: newHoldingManagedObject)
+            }
+        }
+    }
+    
+    func saveHoldingAndDismiss(holdingManagedObject: HoldingManagedObject) {
+        
+        NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+        selection.selectionChanged()
+        
+        if Blockstack.shared.isUserSignedIn() {
+            BlockstackApiService().send { error in
+                if error != nil {
+                    self.impact.impactOccurred()
+                    let msg = error!.localizedDescription
+                    let alert = UIAlertController(title: "Error",
+                                                  message: msg,
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
-
-            if holding != nil {
-                let newHolding = HoldingDto().holding(from: newHoldingManagedObject)
-                if delegate != nil {
-                    delegate.updateHolding(newHolding: newHolding)
-                }
+        }
+        
+        if holding != nil {
+            let newHolding = HoldingDto().holding(from: holdingManagedObject)
+            if delegate != nil {
+                delegate.updateHolding(newHolding: newHolding)
             }
         }
         
@@ -155,7 +208,7 @@ class CreateHoldingController: UIViewController {
                     case .success( _):
                         UserDefaults.standard.set(true, forKey: "bioAccess")
                         UserDefaults.standard.synchronize()
-
+                        
                     case .failure(let error):
                         switch error {
                             
@@ -182,7 +235,7 @@ class CreateHoldingController: UIViewController {
                 self.dismiss()
             }))
             self.present(alert, animated: true, completion: nil)
-
+            
         } else {
             dismiss()
         }
@@ -195,6 +248,15 @@ class CreateHoldingController: UIViewController {
         alert.addAction(UIAlertAction(title: "No", style: .default, handler:nil))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
             let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: self.holding.name!)!
+            let holding = HoldingDto().holding(from: holdingManagedObject)
+            
+            // Get token and delete
+            let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+            let predicateCode = NSPredicate(format: "code == %@", "ETH")
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+            let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+            tokenManagedObject.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
+            
             holdingManagedObject.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
             if Blockstack.shared.isUserSignedIn() {
@@ -249,17 +311,26 @@ extension CreateHoldingController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "totalValueCellId", for: indexPath) as! TotalValueCell
             if holding != nil {
                 if selectedCurrency.code == "ETH" {
-                    cell.cellIndicatorImageView.isHidden = false
-                    cell.totalValueTextField.isHidden = true
-                    cell.percentageLabel.isHidden = true
-                    cell.currencyLabel.text = "Insert value or Import from Address"
+                    if ethAddress != nil {
+                        cell.titleLabel.text = "From address"
+                        cell.cellIndicatorImageView.isHidden = false
+                        cell.totalValueTextField.isHidden = true
+                        cell.percentageLabel.isHidden = true
+                        cell.currencyLabel.text = "\(ethAddress.prefix(10))...\(ethAddress.suffix(4))"
+                        cell.changeLabel.isHidden = false
+                    } else {
+                        cell.cellIndicatorImageView.isHidden = false
+                        cell.totalValueTextField.isHidden = true
+                        cell.percentageLabel.isHidden = true
+                        cell.currencyLabel.text = "Insert value or Import from Address"
+                    }
                 } else {
                     cell.cellIndicatorImageView.isHidden = true
                     cell.totalValueTextField.isHidden = false
                     cell.percentageLabel.isHidden = false
                     cell.totalValueTextField.text = String(format: "%.2f", holding.value!)
-                    cell.percentageLabel.text = "\(String(format: "%.2f", Currencies.getEuroValue(value: holding.value, currency: holding.currency)/euroTotalValue*100))%"
-                    cell.currencyLabel.text = holding.currency.symbol
+                    cell.percentageLabel.text = "\(String(format: "%.2f", Currencies.getEuroValue(value: holding.value!, currency: holding.currency!)/euroTotalValue*100))%"
+                    cell.currencyLabel.text = holding.currency!.symbol
                 }
             } else {
                 let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: CurrencyUserDefaults().getDefaultCurrencyCode()!, in: NSManagedObjectContext.mr_default())

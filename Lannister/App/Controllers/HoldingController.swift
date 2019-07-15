@@ -60,18 +60,6 @@ class HoldingController: UIViewController {
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
         
-//        DispatchQueue.global(qos: .background).async {
-//
-//            WalletUseCase(with: WalletRepositoryImpl()).getBalance(address: self.holding.address!, success: { balance in
-//
-//                DispatchQueue.main.async {
-//                    print("balance \(balance)")
-//                }
-//            }) { error in
-//                print("could not get balance")
-//            }
-//        }
-        
         updateHolding()
         updatePieChart()
         updateTransactions()
@@ -88,11 +76,27 @@ class HoldingController: UIViewController {
         navigationItem.title = holding.name
         barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
         euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
+        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
+        navigationItem.title = holding.name
 
-        let formattedNumber = numberFormatter.string(for: NSNumber(value: holding.value!))
+        var holdingCurrency = holding.currency
+        var holdingValue : Double? = holding.value
+        if holding.address != nil {
+            // Get ETH
+            let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+            let predicateCode = NSPredicate(format: "code == %@", "ETH")
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+            
+            let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+            let token = TokenDto().token(from: tokenManagedObject)
+            holdingValue = token.value
+            holdingCurrency = token.currency
+        }
+
+        let formattedNumber = numberFormatter.string(for: NSNumber(value: holdingValue!))
+        valueLabel.text =  String(format: "%@%@", holdingCurrency!.symbol, formattedNumber ?? "--")
         
-        valueLabel.text =  String(format: "%@%@", holding.currency.symbol, formattedNumber ?? "--")
-        if holding.currency.symbol == Currencies.getDefaultCurrencySymbol() {
+        if holdingCurrency!.symbol == Currencies.getDefaultCurrencySymbol() {
             // remove label
             if defaultCurrencyValueLabel != nil {
                 defaultCurrencyValueLabel.removeFromSuperview()
@@ -100,13 +104,11 @@ class HoldingController: UIViewController {
             }
             pieChartViewTopConstraint.constant = 8
         } else {
-            let euroValue = Currencies.getEuroValue(value: holding.value, currency: holding.currency)
+            let euroValue = Currencies.getEuroValue(value: holdingValue!, currency: holdingCurrency!)
             let currencyValue = euroValue * Currencies.getDefaultCurrencyEuroRate()
             let formattedNumber = numberFormatter.string(for: NSNumber(value: currencyValue))
             defaultCurrencyValueLabel.text = String(format: "%@%@", Currencies.getDefaultCurrencySymbol(), formattedNumber ?? "--")
         }
-        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
-        navigationItem.title = holding.name
     }
     
     func updatePieChart() {
@@ -114,12 +116,24 @@ class HoldingController: UIViewController {
         pieChartDataEntries.removeAll()
         pieChartDataColors.removeAll()
 
-        var holdingValue = holding.value
-        if holding.value < 0 {
+        var holdingCurrency = holding.currency
+        var holdingValue : Double? = holding.value
+        if holding.address != nil {
+            // Get ETH
+            let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+            let predicateCode = NSPredicate(format: "code == %@", "ETH")
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+            
+            let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+            let token = TokenDto().token(from: tokenManagedObject)
+            holdingValue = token.value
+            holdingCurrency = token.currency
+        }
+        if holdingValue! < 0 {
             holdingValue = 0
         }
 
-        let euroValue = Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)
+        let euroValue = Currencies.getEuroValue(value: holdingValue!, currency: holdingCurrency!)
 
         let pieChartDataEntry = PieChartDataEntry(value: euroValue, label: nil)
         pieChartDataEntries.append(pieChartDataEntry)
@@ -168,7 +182,7 @@ class HoldingController: UIViewController {
         createHoldingVC.delegate = self
         navigationController?.pushViewController(createHoldingVC, animated: true)
     }
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createTransaction" {
             let destinationVC = segue.destination as! CreateTransactionController
@@ -198,9 +212,9 @@ extension HoldingController : UITableViewDataSource {
             
             let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())
             if transaction.type == "credit" {
-                holdingManagedObject!.value = holdingManagedObject!.value - transaction.value!
+                holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue - transaction.value! as NSNumber
             } else {
-                holdingManagedObject!.value = holdingManagedObject!.value + transaction.value!
+                holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue + transaction.value! as NSNumber
             }
             
             let transactionManagedObject = TransactionManagedObject.mr_findFirst(byAttribute: "id", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())
@@ -237,6 +251,10 @@ extension HoldingController : UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "topCellId", for: indexPath) as! HoldingTopCell
             cell.addButton.layer.cornerRadius = 4
+            if holding.address != nil {
+                cell.addButton.isHidden = true
+                cell.addButton.isUserInteractionEnabled = false
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCellId", for: indexPath) as! TransactionCell
@@ -244,11 +262,11 @@ extension HoldingController : UITableViewDataSource {
             cell.nameLabel.text = transaction.name
             let formattedNumber = numberFormatter.string(for: NSNumber(value: transaction.value!))
             if(transaction.type == "credit") {
-                cell.valueLabel.text = "+ \(holding.currency.symbol!)\(formattedNumber ?? "--")"
+                cell.valueLabel.text = "+ \(holding.currency!.symbol!)\(formattedNumber ?? "--")"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "00B382")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "00B382")
             } else {
-                cell.valueLabel.text = "- \(holding.currency.symbol!)\(formattedNumber ?? "--")"
+                cell.valueLabel.text = "- \(holding.currency!.symbol!)\(formattedNumber ?? "--")"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "E60243")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "E60243")
             }

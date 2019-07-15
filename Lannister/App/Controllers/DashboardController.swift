@@ -113,23 +113,35 @@ class DashboardController: UIViewController {
             view.sendSubviewToBack(emptyStateContainerView)
             collectionView.isUserInteractionEnabled = true
             
-            if sortKey == "amount" {
-                self.holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value, currency: $0.currency)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value, currency: $1.currency)/self.euroTotalValue*100 }
-            } else {
-                self.holdings = holdings.sorted { $0.name! < $1.name! }
-            }
+//            if sortKey == "amount" {
+//                self.holdings = holdings.sorted { Currencies.getEuroValue(value: $0.value!, currency: $0.currency!)/self.euroTotalValue*100 > Currencies.getEuroValue(value: $1.value!, currency: $1.currency!)/self.euroTotalValue*100 }
+//            } else {
+//                self.holdings = holdings.sorted { $0.name! < $1.name! }
+//            }
             
             for holding in holdings {
 
-                var holdingValue = holding.value
-                if holding.value < 0 {
+                var holdingValue : Double? = holding.value
+                var holdingCurrency = holding.currency
+                if holding.address != nil {
+                    // Get ETH
+                    let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+                    let predicateCode = NSPredicate(format: "code == %@", "ETH")
+                    let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+
+                    let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+                    let token = TokenDto().token(from: tokenManagedObject)
+                    holdingValue = token.value
+                    holdingCurrency = token.currency
+                }
+                if holdingValue! < 0 {
                     holdingValue = 0
                 }
                 var legendTitle = holding.name
                 if pieChartDataEntries.count >= 7 {
                     legendTitle = "..."
                 }
-                let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)/self.euroTotalValue*100, label: legendTitle)
+                let pieChartDataEntry = PieChartDataEntry(value: Currencies.getEuroValue(value: holdingValue!, currency: holdingCurrency!)/self.euroTotalValue*100, label: legendTitle)
                 pieChartDataEntries.append(pieChartDataEntry)
                 pieChartDataColors.append(Colors.hexStringToUIColor(hex: holding.hexColor))
                 let legendEntry = LegendEntry(label: legendTitle, form: .default, formSize: 6, formLineWidth: 0, formLineDashPhase: 0, formLineDashLengths: nil, formColor: Colors.hexStringToUIColor(hex: holding.hexColor))
@@ -274,17 +286,30 @@ extension DashboardController : UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "holdingCellId", for: indexPath) as! HoldingCell
             
             let holding = holdings[indexPath.row-1]
-            let currency = holding.currency
             cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
             cell.nameLabel.text = holding.name
-            let formattedNumber = numberFormatter.string(for: NSNumber(value: holding.value!))
-            let value = String(format: "%@", formattedNumber ?? "--")
-            cell.valueLabel.text = "\(currency!.symbol!)\(value)"
-            var holdingValue = holding.value
-            if holding.value < 0 {
+            var holdingValue : Double? = holding.value
+            var holdingCurrency = holding.currency
+            if holding.address != nil {
+                // Get ETH
+                let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+                let predicateCode = NSPredicate(format: "code == %@", "ETH")
+                let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+                
+                let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+                let token = TokenDto().token(from: tokenManagedObject)
+                holdingValue = token.value
+                holdingCurrency = token.currency
+            }
+            if holdingValue! < 0 {
                 holdingValue = 0
             }
-            let percentage = percentFormatter.string(for: NSNumber(value: Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)/euroTotalValue*100))
+
+            let formattedNumber = numberFormatter.string(for: NSNumber(value: holdingValue!))
+            let value = String(format: "%@", formattedNumber ?? "--")
+            cell.valueLabel.text = "\(holdingCurrency!.symbol!)\(value)"
+
+            let percentage = percentFormatter.string(for: NSNumber(value: Currencies.getEuroValue(value: holdingValue!, currency: holdingCurrency!)/euroTotalValue*100))
             cell.percentageLabel.text = "\(percentage ?? "")%"
             
             let path = UIBezierPath(roundedRect:cell.colorView.bounds,

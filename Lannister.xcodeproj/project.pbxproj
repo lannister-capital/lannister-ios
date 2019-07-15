@@ -10,6 +10,10 @@
 		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
 		653D70DD229EC54E000A4049 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D70DC229EC54E000A4049 /* Parser.swift */; };
 		6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550D4702284536F0059C643 /* NumberFormatter.swift */; };
+		65678AB422DCD05C0033E64B /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678AB322DCD05C0033E64B /* Token.swift */; };
+		65678AB522DCD05C0033E64B /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678AB322DCD05C0033E64B /* Token.swift */; };
+		65678AB722DCD0E20033E64B /* TokenDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678AB622DCD0E20033E64B /* TokenDto.swift */; };
+		65678AB822DCD0E20033E64B /* TokenDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678AB622DCD0E20033E64B /* TokenDto.swift */; };
 		657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B69302284354500D7A5AF /* CurrenciesController.swift */; };
 		657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B6932228436A800D7A5AF /* CurrencyCell.swift */; };
 		65E95BEA229FCA6B00E9A442 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */; };
@@ -155,6 +159,8 @@
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		653D70DC229EC54E000A4049 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		6550D4702284536F0059C643 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
+		65678AB322DCD05C0033E64B /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		65678AB622DCD0E20033E64B /* TokenDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDto.swift; sourceTree = "<group>"; };
 		657B69302284354500D7A5AF /* CurrenciesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesController.swift; sourceTree = "<group>"; };
 		657B6932228436A800D7A5AF /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		65E95BE9229FCA6B00E9A442 /* db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db.xcdatamodel; sourceTree = "<group>"; };
@@ -340,6 +346,7 @@
 				7016B4B422830B0E000C49B8 /* CurrencyDto.swift */,
 				702B2D22227F7CA1005C0B64 /* HoldingDto.swift */,
 				7073A69A22806BAE00049A2E /* TransactionDto.swift */,
+				65678AB622DCD0E20033E64B /* TokenDto.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -406,6 +413,7 @@
 				7016B4B222830880000C49B8 /* Currency.swift */,
 				702B2D18227F6832005C0B64 /* Holding.swift */,
 				702B2D1A227F683F005C0B64 /* Transaction.swift */,
+				65678AB322DCD05C0033E64B /* Token.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -916,6 +924,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70A6D05822C13FAC008F1F1A /* BioAccessController.swift in Sources */,
+				65678AB822DCD0E20033E64B /* TokenDto.swift in Sources */,
 				70A6D05922C13FAC008F1F1A /* Holding.swift in Sources */,
 				70A6D05A22C13FAC008F1F1A /* DonationsController.swift in Sources */,
 				70A6D05B22C13FAC008F1F1A /* HoldingDto.swift in Sources */,
@@ -930,6 +939,7 @@
 				70A6D06222C13FAC008F1F1A /* CreateTransactionController.swift in Sources */,
 				70A6D06322C13FAC008F1F1A /* RootController.swift in Sources */,
 				70A6D06422C13FAC008F1F1A /* AuthController.swift in Sources */,
+				65678AB522DCD05C0033E64B /* Token.swift in Sources */,
 				70A6D06522C13FAC008F1F1A /* DashboardHeaderView.swift in Sources */,
 				70A6D06622C13FAC008F1F1A /* HoldingHeaderView.swift in Sources */,
 				70A6D06722C13FAC008F1F1A /* HoldingCell.swift in Sources */,
@@ -978,6 +988,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7073A6A12281FCFE00049A2E /* BioAccessController.swift in Sources */,
+				65678AB722DCD0E20033E64B /* TokenDto.swift in Sources */,
 				702B2D19227F6832005C0B64 /* Holding.swift in Sources */,
 				70FBB962228AF4700086E208 /* DonationsController.swift in Sources */,
 				702B2D23227F7CA1005C0B64 /* HoldingDto.swift in Sources */,
@@ -992,6 +1003,7 @@
 				70572CC52273A26F00297421 /* CreateTransactionController.swift in Sources */,
 				70572CC92273A2A800297421 /* RootController.swift in Sources */,
 				70572CBB2273A1A300297421 /* AuthController.swift in Sources */,
+				65678AB422DCD05C0033E64B /* Token.swift in Sources */,
 				70572CCD2274788D00297421 /* DashboardHeaderView.swift in Sources */,
 				700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */,
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,

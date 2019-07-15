@@ -18,9 +18,11 @@ class HoldingDto : NSObject {
             holding.address = managedObject.address
         }
         holding.name = managedObject.name
-        holding.value = managedObject.value
+        holding.value = managedObject.value?.doubleValue
         holding.hexColor = managedObject.hex_color
-        holding.currency = CurrencyDto().currency(from: managedObject.currency!)
+        if managedObject.currency != nil {
+            holding.currency = CurrencyDto().currency(from: managedObject.currency!)
+        }
         return holding
     }
     
