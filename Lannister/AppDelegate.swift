@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if (UserDefaults.standard.object(forKey: "Auth") != nil) {
             updateCurrencies()
+            updateBalances()
         }
     }
 
@@ -366,6 +367,35 @@ extension AppDelegate {
             }
         }
 
+    }
+    
+    func updateBalances() {
+        
+        // Filter holdings with addresses
+        let predicate = NSPredicate(format: "address != nil")
+        let holdings = HoldingManagedObject.mr_findAll(with: predicate, in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
+        for holdingManagedObject in holdings {
+            let holding = HoldingDto().holding(from: holdingManagedObject)
+            // Get tokens from holding
+            let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+            let tokenManagedObjects = TokenManagedObject.mr_findAll(with: predicateAddress, in: NSManagedObjectContext.mr_default()) as! [TokenManagedObject]
+            for tokenManagedObject in tokenManagedObjects {
+                WalletUseCase(with: WalletRepositoryImpl()).getBalance(address: holding.address!, success: { balance in
+                    DispatchQueue.main.async {
+                        // Update token balance
+                        tokenManagedObject.value = balance
+                        NSManagedObjectContext.mr_default().mr_saveToPersistentStore(completion: { (_, error) in
+                            if error == nil {
+                                print("updated token")
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateHoldings"), object: nil)
+                            }
+                        })
+                    }
+                }) { error in
+                    print("could not get balance")
+                }
+            }
+        }
     }
     
     func showError(errorTitle: String, errorMessage: String) {
