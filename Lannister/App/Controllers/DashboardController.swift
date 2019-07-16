@@ -52,6 +52,7 @@ class DashboardController: UIViewController {
         numberFormatter.minimumFractionDigits = 2
         numberFormatter.maximumFractionDigits = 2
         
+        percentFormatter.numberStyle = .decimal
         percentFormatter.minimumFractionDigits = 0
         percentFormatter.maximumFractionDigits = 2
 
