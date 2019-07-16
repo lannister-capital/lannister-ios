@@ -25,6 +25,9 @@ class CreateHoldingController: UIViewController {
     let impact                      = UIImpactFeedbackGenerator()
     let selection                   = UISelectionFeedbackGenerator()
     var ethAddress                  : String!
+    var loadingButton : UIBarButtonItem!
+    var loadingSpinner : UIActivityIndicatorView!
+    var saveButton : UIBarButtonItem!
     
 
     override func viewDidLoad() {
@@ -35,6 +38,11 @@ class CreateHoldingController: UIViewController {
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
         navigationController?.navigationBar.tintColor = UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)
         
+        saveButton = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(save))
+        loadingSpinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        loadingSpinner.color = UIColor(red: 9/255, green: 56/255, blue: 211/255, alpha: 1)
+        loadingButton = UIBarButtonItem(customView: loadingSpinner)
+
         if holding != nil {
             navigationItem.title = "Edit Holding"
             let backItem = UIBarButtonItem()
@@ -72,6 +80,9 @@ class CreateHoldingController: UIViewController {
     
     @IBAction func save() {
         
+        navigationItem.setRightBarButton(loadingButton, animated: true)
+        loadingSpinner.startAnimating()
+        
         let indexPath = IndexPath(row: 0, section: 0)
         let cell = tableView.cellForRow(at: indexPath) as! HoldingNameCell
         let holdingNameTextField = cell.holdingNameTextField
@@ -81,6 +92,7 @@ class CreateHoldingController: UIViewController {
             let alert = UIAlertController(title: "Oops!", message: "Enter a name for this holding.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            navigationItem.setRightBarButton(saveButton, animated: true)
             return
         }
         
@@ -90,6 +102,7 @@ class CreateHoldingController: UIViewController {
             let alert = UIAlertController(title: "Oops!", message: "A holding with this name already exists.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            navigationItem.setRightBarButton(saveButton, animated: true)
             return
         } else {
             
@@ -102,6 +115,7 @@ class CreateHoldingController: UIViewController {
                 let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                navigationItem.setRightBarButton(saveButton, animated: true)
                 return
             }
             
