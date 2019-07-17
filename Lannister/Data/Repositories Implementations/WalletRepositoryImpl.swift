@@ -27,8 +27,62 @@ class WalletRepositoryImpl: WalletRepository {
         }
     }
     
-    func getTransactions(address: String, success: @escaping(_ transactions: Array<Any>) -> Void, failure: @escaping(_ error: Error) -> Void) {
+    func getTransactions(address: String, success: @escaping(_ transactions: Array<Transaction>?) -> Void, failure: @escaping(_ error: Error) -> Void) {
         
+        // module=account&action=txlist&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&startblock=0&endblock=99999999&sort=asc&apikey=YourApiKeyToken
+
+        let params = ["module": "account",
+                      "action": "txlist",
+                      "address": address,
+                      "startblock": 0,
+                      "block": 99999999,
+                      "sort": "asc",
+                      "apikey": "GP7SEQH5PPAX47AGETTCU3ZHCMD3WRUP3F"] as [String : Any]
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        let service = EtherScanApiService()
+        
+        service.getTransactions(params: params) { response in
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+            switch (response!.result) {
+            case .success(let JSON):
+                print("got transactions: \(JSON)")
+                
+                if let status = (JSON as AnyObject).object(forKey: "status") as? String {
+                    if status == "1" {
+                        let transactionsJSON = (JSON as AnyObject).object(forKey: "result") as! NSArray
+                        var transactions : [Transaction] = []
+                        for transactionJSON in transactionsJSON {
+                            if let transactionDic = transactionJSON as? [String: Any] {
+                                var transaction = Transaction(with: transactionDic)
+                                transaction.identifier = transactionDic["blockHash"] as? String
+                                transaction.value = ((transactionDic["value"] as? String)?.doubleValue)! / 1000000000000000000.0
+                                if (transactionDic["from"] as! String).lowercased() == address.lowercased() {
+                                    transaction.type = "debit"
+                                    transaction.name = transactionDic["to"] as? String
+                                } else {
+                                    transaction.type = "credit"
+                                    transaction.name = transactionDic["from"] as? String
+                                }
+                                transactions.append(transaction)
+                            }
+                        }
+                        success(transactions)
+                    } else {
+                        success(nil)
+                    }
+                } else {
+                    success(nil)
+                }
+                
+            case .failure(let error):
+                print("error getAppointments - > \n    \(error.localizedDescription) \n")
+                failure(error)
+            }
+        }
     }
 
 }

@@ -448,22 +448,22 @@
                                                         <constraint firstAttribute="width" constant="6" id="0KK-N3-z3I"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5a-wi-65Z">
-                                                    <rect key="frame" x="23" y="11.5" width="73" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="THs-3Y-Qre"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
-                                                    <color key="textColor" red="0.1647058824" green="0.21176470589999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+€500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlF-jA-eC8">
-                                                    <rect key="frame" x="357" y="13" width="42" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="+€500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlF-jA-eC8">
+                                                    <rect key="frame" x="109.5" y="13" width="289.5" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="jgr-ug-11O"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.70196078429999997" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Transaction " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5a-wi-65Z">
+                                                    <rect key="frame" x="23" y="11.5" width="76.5" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="THs-3Y-Qre"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
+                                                    <color key="textColor" red="0.1647058824" green="0.21176470589999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUG-dF-Pkp">
@@ -479,6 +479,7 @@
                                                 <constraint firstItem="Zqt-bn-0kO" firstAttribute="top" secondItem="NJf-xL-S1c" secondAttribute="top" id="L6k-nN-4qT"/>
                                                 <constraint firstItem="kUG-dF-Pkp" firstAttribute="leading" secondItem="NJf-xL-S1c" secondAttribute="leading" id="SEy-qf-1z4"/>
                                                 <constraint firstAttribute="trailing" secondItem="kUG-dF-Pkp" secondAttribute="trailing" id="WCB-jz-upl"/>
+                                                <constraint firstItem="tlF-jA-eC8" firstAttribute="leading" secondItem="A5a-wi-65Z" secondAttribute="trailing" constant="10" id="bMS-CU-rXQ"/>
                                                 <constraint firstItem="tlF-jA-eC8" firstAttribute="centerY" secondItem="NJf-xL-S1c" secondAttribute="centerY" id="f9A-aQ-IMv"/>
                                                 <constraint firstAttribute="trailing" secondItem="tlF-jA-eC8" secondAttribute="trailing" constant="15" id="fhv-Sg-lXR"/>
                                                 <constraint firstItem="A5a-wi-65Z" firstAttribute="centerY" secondItem="NJf-xL-S1c" secondAttribute="centerY" id="sOL-3N-c3N"/>

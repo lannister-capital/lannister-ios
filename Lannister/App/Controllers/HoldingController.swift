@@ -22,6 +22,7 @@ class HoldingController: UIViewController {
     @IBOutlet weak var pieChartView                 : PieChartView!
     @IBOutlet weak var tableView                    : UITableView!
     var holding                                     : Holding!
+    var currency                                    : Currency!
     var transactions                                : [Transaction]! = []
     var pieChartDataEntries                         = [PieChartDataEntry]()
     var pieChartDataColors                          = [UIColor]()
@@ -63,7 +64,6 @@ class HoldingController: UIViewController {
         
         updateHolding()
         updatePieChart()
-        updateTransactions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +92,9 @@ class HoldingController: UIViewController {
             let token = TokenDto().token(from: tokenManagedObject)
             holdingValue = token.value
             holdingCurrency = token.currency
+            currency = holdingCurrency
+        } else {
+            currency = holding.currency
         }
 
         let formattedNumber = numberFormatter.string(for: NSNumber(value: holdingValue!))
@@ -165,10 +168,79 @@ class HoldingController: UIViewController {
     
     func updateTransactions() {
         
-        let transactionsManagedObjects = TransactionManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
-        transactions = TransactionDto().transactions(from: transactionsManagedObjects as! [TransactionManagedObject])
-        transactions = transactions.filter { $0.holding!.name == self.holding!.name }
-        tableView.reloadData()
+        if holding.address == nil {
+            transactions = holding.transactions
+            tableView.reloadData()
+        } else {
+            // Get ETH token
+            let token = getToken()
+
+            if token.transactions != nil {
+                self.transactions = token.transactions
+                self.tableView.reloadData()
+            } else {
+                getTransactions()
+            }
+        }
+    }
+    
+    func getTransactions() {
+        
+        WalletUseCase(with: WalletRepositoryImpl()).getTransactions(address: holding.address!, success: { transactionsObjects in
+            DispatchQueue.main.async {
+                if transactionsObjects != nil {
+                    self.transactions = transactionsObjects
+                    self.tableView.reloadData()
+                    
+                    // save new transactions to local db
+                    let oldTransactions = self.getTokenManagedObject().transactions
+                    if (oldTransactions?.count)! > 0 {
+                        for transaction in oldTransactions! {
+                            (transaction as! TransactionManagedObject).mr_deleteEntity(in: NSManagedObjectContext.mr_default())
+                        }
+                    }
+                    for transaction in self.transactions {
+                        let newTransaction = TransactionManagedObject(context: NSManagedObjectContext.mr_default())
+                        newTransaction.name = transaction.name
+                        newTransaction.value = transaction.value
+                        newTransaction.type = transaction.type
+                        newTransaction.id = transaction.identifier
+                    }
+                    NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+
+                } else {
+                    let token = self.getToken()
+                    if token.transactions == nil {
+                        // Display warning to user
+                        let alert = UIAlertController(title: "Error",
+                                                      message: "Unable to fetch transactions this time. Try again by tapping on the \"Refresh\" button.",
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }) { error in
+            print("could not get transactions")
+        }
+    }
+    
+    func getTokenManagedObject() -> TokenManagedObject {
+        
+        let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+        let predicateCode = NSPredicate(format: "code == %@", "ETH")
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+        
+        let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+
+        return tokenManagedObject
+    }
+    
+    func getToken() -> Token {
+        
+        let token = TokenDto().token(from: getTokenManagedObject())
+
+        return token
     }
     
     @IBAction func createTransaction() {
@@ -180,6 +252,7 @@ class HoldingController: UIViewController {
     
     @IBAction func refreshTransactions() {
 
+        getTransactions()
     }
     
     @objc func editHolding() {
@@ -282,11 +355,11 @@ extension HoldingController : UITableViewDataSource {
             cell.nameLabel.text = transaction.name
             let formattedNumber = numberFormatter.string(for: NSNumber(value: transaction.value!))
             if(transaction.type == "credit") {
-                cell.valueLabel.text = "+ \(holding.currency!.symbol!)\(formattedNumber ?? "--")"
+                cell.valueLabel.text = "+ \(currency!.symbol!)\(formattedNumber ?? "--")"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "00B382")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "00B382")
             } else {
-                cell.valueLabel.text = "- \(holding.currency!.symbol!)\(formattedNumber ?? "--")"
+                cell.valueLabel.text = "- \(currency!.symbol!)\(formattedNumber ?? "--")"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "E60243")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "E60243")
             }

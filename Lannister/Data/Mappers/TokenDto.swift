@@ -22,6 +22,13 @@ class TokenDto: NSObject {
         }
         token.value = managedObject.value
         token.currency = CurrencyDto().currency(from: managedObject.currency!)
+        if managedObject.transactions != nil {
+            if (managedObject.transactions?.allObjects.count)! > 0 {
+                let transactionsManagedObjects = managedObject.transactions?.allObjects as! [TransactionManagedObject]
+                let transactions = TransactionDto().transactions(from: transactionsManagedObjects)
+                token.transactions = transactions
+            }
+        }
         return token
     }
     

@@ -16,6 +16,10 @@
 		65678AB822DCD0E20033E64B /* TokenDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678AB622DCD0E20033E64B /* TokenDto.swift */; };
 		657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B69302284354500D7A5AF /* CurrenciesController.swift */; };
 		657B6933228436A800D7A5AF /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B6932228436A800D7A5AF /* CurrencyCell.swift */; };
+		65B39D6222DF2C2B004761C9 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B39D6122DF2C2B004761C9 /* APIManager.swift */; };
+		65B39D6322DF2C2B004761C9 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B39D6122DF2C2B004761C9 /* APIManager.swift */; };
+		65B39D6822DF2CE0004761C9 /* EtherScanApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */; };
+		65B39D6922DF2CE0004761C9 /* EtherScanApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */; };
 		65E95BEA229FCA6B00E9A442 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */; };
 		65F195D522D90D33006EB861 /* WalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F195D422D90D33006EB861 /* WalletRepository.swift */; };
 		65F195D622D90D33006EB861 /* WalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F195D422D90D33006EB861 /* WalletRepository.swift */; };
@@ -163,6 +167,8 @@
 		65678AB622DCD0E20033E64B /* TokenDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDto.swift; sourceTree = "<group>"; };
 		657B69302284354500D7A5AF /* CurrenciesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesController.swift; sourceTree = "<group>"; };
 		657B6932228436A800D7A5AF /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
+		65B39D6122DF2C2B004761C9 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtherScanApiService.swift; sourceTree = "<group>"; };
 		65E95BE9229FCA6B00E9A442 /* db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db.xcdatamodel; sourceTree = "<group>"; };
 		65F195D422D90D33006EB861 /* WalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRepository.swift; sourceTree = "<group>"; };
 		65F195D722D90DA3006EB861 /* WalletUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUseCase.swift; sourceTree = "<group>"; };
@@ -301,6 +307,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		65B39D5F22DF2BE2004761C9 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				65B39D6122DF2C2B004761C9 /* APIManager.swift */,
+				65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		65B39D6022DF2C01004761C9 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */,
+				702B2D13227F674A005C0B64 /* Models */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		7016B4AB228306DB000C49B8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,9 +339,9 @@
 		702B2D12227F6745005C0B64 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */,
+				65B39D5F22DF2BE2004761C9 /* API */,
+				65B39D6022DF2C01004761C9 /* Database */,
 				702B2D21227F7C90005C0B64 /* Mappers */,
-				702B2D13227F674A005C0B64 /* Models */,
 				70A6D09C22C14C02008F1F1A /* Repositories Implementations */,
 				7016B4AB228306DB000C49B8 /* Services */,
 				707E5E412285C84100D4ED33 /* User defaults */,
@@ -957,7 +981,9 @@
 				70A6D07022C13FAC008F1F1A /* DashboardController.swift in Sources */,
 				65F195D622D90D33006EB861 /* WalletRepository.swift in Sources */,
 				70A6D07122C13FAC008F1F1A /* BlockstackApiService.swift in Sources */,
+				65B39D6322DF2C2B004761C9 /* APIManager.swift in Sources */,
 				65F195DC22D90EBF006EB861 /* WalletRepositoryImpl.swift in Sources */,
+				65B39D6922DF2CE0004761C9 /* EtherScanApiService.swift in Sources */,
 				70A6D07222C13FAC008F1F1A /* SettingsCell.swift in Sources */,
 				70A6D07322C13FAC008F1F1A /* ColorCodePresetCell.swift in Sources */,
 				70A6D07422C13FAC008F1F1A /* BaseApiService.swift in Sources */,
@@ -1021,7 +1047,9 @@
 				70572CBD2273A1B400297421 /* DashboardController.swift in Sources */,
 				65F195D522D90D33006EB861 /* WalletRepository.swift in Sources */,
 				70FBB966228B08790086E208 /* BlockstackApiService.swift in Sources */,
+				65B39D6222DF2C2B004761C9 /* APIManager.swift in Sources */,
 				65F195DB22D90EBF006EB861 /* WalletRepositoryImpl.swift in Sources */,
+				65B39D6822DF2CE0004761C9 /* EtherScanApiService.swift in Sources */,
 				70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */,
 				70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */,
 				7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */,

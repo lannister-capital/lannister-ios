@@ -23,6 +23,13 @@ class HoldingDto : NSObject {
         if managedObject.currency != nil {
             holding.currency = CurrencyDto().currency(from: managedObject.currency!)
         }
+        if managedObject.transactions != nil {
+            if (managedObject.transactions?.allObjects.count)! > 0 {
+                let transactionsManagedObjects = managedObject.transactions?.allObjects as! [TransactionManagedObject]
+                let transactions = TransactionDto().transactions(from: transactionsManagedObjects)
+                holding.transactions = transactions
+            }
+        }
         return holding
     }
     

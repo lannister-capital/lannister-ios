@@ -10,11 +10,15 @@ import UIKit
 
 struct Holding {
 
-    var address     : String?
-    var currency    : Currency?
-    var hexColor    : String!
-    var name        : String!
-    var value       : Double?
+    // attributes
+    var address         : String?
+    var hexColor        : String!
+    var name            : String!
+    var value           : Double?
+    
+    // relationships
+    var currency        : Currency?
+    var transactions    : [Transaction]?
     
     init(with dictionary: [String : Any]?) {
 

@@ -10,12 +10,16 @@ import UIKit
 
 struct Token {
     
-    var address     : String!
-    var name        : String?
-    var code        : String?
-    var value       : Double!
-    var currency    : Currency!
+    // attributes
+    var address         : String!
+    var name            : String?
+    var code            : String?
+    var value           : Double!
     
+    var currency        : Currency!
+    var transactions    : [Transaction]?
+
+    // relationships
     init(with dictionary: [String : Any]?) {
         
     }

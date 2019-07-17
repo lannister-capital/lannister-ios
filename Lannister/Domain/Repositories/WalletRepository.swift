@@ -11,5 +11,5 @@ import UIKit
 protocol WalletRepository : Repository {
     
     func getBalance(address: String, success: @escaping(Double) -> Void, failure: @escaping(_ error: Error) -> Void)
-    func getTransactions(address: String, success: @escaping(_ transactions: Array<Any>) -> Void, failure: @escaping(_ error: Error) -> Void)
+    func getTransactions(address: String, success: @escaping(_ transactions: Array<Transaction>?) -> Void, failure: @escaping(_ error: Error) -> Void)
 }
