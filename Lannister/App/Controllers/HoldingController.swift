@@ -172,7 +172,14 @@ class HoldingController: UIViewController {
     }
     
     @IBAction func createTransaction() {
-        
+        let createTransactionVC = storyboard?.instantiateViewController(withIdentifier: "transactionVC") as! CreateTransactionController
+        createTransactionVC.holding = holding
+        createTransactionVC.delegate = self
+        navigationController?.pushViewController(createTransactionVC, animated: true)
+    }
+    
+    @IBAction func refreshTransactions() {
+
     }
     
     @objc func editHolding() {
@@ -184,13 +191,6 @@ class HoldingController: UIViewController {
         navigationController?.pushViewController(createHoldingVC, animated: true)
     }
         
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "createTransaction" {
-            let destinationVC = segue.destination as! CreateTransactionController
-            destinationVC.holding = holding
-            destinationVC.delegate = self
-        }
-    }
 }
 
 extension HoldingController : UITableViewDataSource {
@@ -204,6 +204,20 @@ extension HoldingController : UITableViewDataSource {
             return 1
         }
         return transactions.count+1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 && holding.address != nil {
+            return 54
+        }
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if holding.address == nil {
+            return true
+        }
+        return false
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -252,9 +266,14 @@ extension HoldingController : UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "topCellId", for: indexPath) as! HoldingTopCell
             cell.addButton.layer.cornerRadius = 4
-            if holding.address != nil {
-                cell.addButton.isHidden = true
-                cell.addButton.isUserInteractionEnabled = false
+            if holding.address == nil {
+                if cell.poweredByLabel != nil {
+                    cell.poweredByLabel.removeFromSuperview()
+                }
+            } else {
+                cell.addButton.setTitle("Refresh Transactions", for: .normal)
+                cell.addButton.removeTarget(self, action: #selector(createTransaction), for: .touchUpInside)
+                cell.addButton.addTarget(self, action: #selector(refreshTransactions), for: .touchUpInside)
             }
             return cell
         } else {
@@ -281,7 +300,7 @@ extension HoldingController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row > 0 {
+        if indexPath.row > 0 && holding.address == nil {
             tableView.deselectRow(at: indexPath, animated: true)
             
             let transaction = transactions[indexPath.row-1]

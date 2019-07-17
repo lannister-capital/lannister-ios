@@ -388,11 +388,11 @@
                                 <rect key="frame" x="0.0" y="321" width="414" height="575"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="topCellId" id="OyB-pc-vol" customClass="HoldingTopCell" customModule="Lannister" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="topCellId" rowHeight="55" id="OyB-pc-vol" customClass="HoldingTopCell" customModule="Lannister" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OyB-pc-vol" id="ywo-ch-UJr">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4i-DF-Fyq">
@@ -408,21 +408,34 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="createTransaction" destination="ktT-16-rkg" eventType="touchUpInside" id="0vG-dh-gPh"/>
-                                                        <segue destination="EYU-vX-OkC" kind="show" identifier="createTransaction" id="8bz-Oq-1if"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Etherscan.io APIs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMk-yN-FTn">
+                                                    <rect key="frame" x="254" y="39" width="145" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="LXO-HO-4on"/>
+                                                        <constraint firstAttribute="width" constant="145" id="vrN-au-Gro"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-UltraLightItalic" family="Avenir Next" pointSize="9"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="EMk-yN-FTn" firstAttribute="top" secondItem="F4i-DF-Fyq" secondAttribute="bottom" id="74y-OZ-ZOs"/>
                                                 <constraint firstAttribute="trailing" secondItem="F4i-DF-Fyq" secondAttribute="trailing" constant="15" id="BNo-w2-cPx"/>
-                                                <constraint firstAttribute="bottom" secondItem="F4i-DF-Fyq" secondAttribute="bottom" constant="5" id="fRM-va-qjg"/>
+                                                <constraint firstAttribute="bottom" secondItem="EMk-yN-FTn" secondAttribute="bottom" id="Mbe-ab-fua"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="F4i-DF-Fyq" secondAttribute="bottom" constant="5" id="OtK-gX-TMs"/>
+                                                <constraint firstAttribute="trailing" secondItem="EMk-yN-FTn" secondAttribute="trailing" constant="15" id="gS0-Nz-bwB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addButton" destination="F4i-DF-Fyq" id="0lX-OV-cUt"/>
+                                            <outlet property="poweredByLabel" destination="EMk-yN-FTn" id="tmM-NR-ZOr"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionCellId" id="5kB-sm-prP" customClass="TransactionCell" customModule="Lannister" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="83" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5kB-sm-prP" id="NJf-xL-S1c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
