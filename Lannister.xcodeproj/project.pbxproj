@@ -21,6 +21,12 @@
 		65B39D6822DF2CE0004761C9 /* EtherScanApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */; };
 		65B39D6922DF2CE0004761C9 /* EtherScanApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */; };
 		65E95BEA229FCA6B00E9A442 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */; };
+		65EA323922E05BEE00B284DA /* HoldingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA323822E05BEE00B284DA /* HoldingsUseCase.swift */; };
+		65EA323A22E05BEE00B284DA /* HoldingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA323822E05BEE00B284DA /* HoldingsUseCase.swift */; };
+		65EA323C22E05C1800B284DA /* HoldingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA323B22E05C1800B284DA /* HoldingsRepository.swift */; };
+		65EA323D22E05C1800B284DA /* HoldingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA323B22E05C1800B284DA /* HoldingsRepository.swift */; };
+		65EA323F22E05CAB00B284DA /* HoldingsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA323E22E05CAB00B284DA /* HoldingsRepositoryImpl.swift */; };
+		65EA324022E05CAB00B284DA /* HoldingsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA323E22E05CAB00B284DA /* HoldingsRepositoryImpl.swift */; };
 		65F195D522D90D33006EB861 /* WalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F195D422D90D33006EB861 /* WalletRepository.swift */; };
 		65F195D622D90D33006EB861 /* WalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F195D422D90D33006EB861 /* WalletRepository.swift */; };
 		65F195D822D90DA3006EB861 /* WalletUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F195D722D90DA3006EB861 /* WalletUseCase.swift */; };
@@ -170,6 +176,9 @@
 		65B39D6122DF2C2B004761C9 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtherScanApiService.swift; sourceTree = "<group>"; };
 		65E95BE9229FCA6B00E9A442 /* db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db.xcdatamodel; sourceTree = "<group>"; };
+		65EA323822E05BEE00B284DA /* HoldingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsUseCase.swift; sourceTree = "<group>"; };
+		65EA323B22E05C1800B284DA /* HoldingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsRepository.swift; sourceTree = "<group>"; };
+		65EA323E22E05CAB00B284DA /* HoldingsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsRepositoryImpl.swift; sourceTree = "<group>"; };
 		65F195D422D90D33006EB861 /* WalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRepository.swift; sourceTree = "<group>"; };
 		65F195D722D90DA3006EB861 /* WalletUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUseCase.swift; sourceTree = "<group>"; };
 		65F195DA22D90EBF006EB861 /* WalletRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -464,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				70A6D09922C14BD8008F1F1A /* Repository.swift */,
+				65EA323B22E05C1800B284DA /* HoldingsRepository.swift */,
 				70A6D09622C14BB5008F1F1A /* PortfolioRepository.swift */,
 				65F195D422D90D33006EB861 /* WalletRepository.swift */,
 			);
@@ -473,6 +483,7 @@
 		70A6D09C22C14C02008F1F1A /* Repositories Implementations */ = {
 			isa = PBXGroup;
 			children = (
+				65EA323E22E05CAB00B284DA /* HoldingsRepositoryImpl.swift */,
 				70A6D09D22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift */,
 				65F195DA22D90EBF006EB861 /* WalletRepositoryImpl.swift */,
 			);
@@ -482,6 +493,7 @@
 		70A6D0A022C14C4C008F1F1A /* Use cases */ = {
 			isa = PBXGroup;
 			children = (
+				65EA323822E05BEE00B284DA /* HoldingsUseCase.swift */,
 				70A6D0A122C14C6F008F1F1A /* PortfolioUseCase.swift */,
 				65F195D722D90DA3006EB861 /* WalletUseCase.swift */,
 			);
@@ -968,6 +980,7 @@
 				70A6D06622C13FAC008F1F1A /* HoldingHeaderView.swift in Sources */,
 				70A6D06722C13FAC008F1F1A /* HoldingCell.swift in Sources */,
 				70A6D06822C13FAC008F1F1A /* CurrencyDto.swift in Sources */,
+				65EA323A22E05BEE00B284DA /* HoldingsUseCase.swift in Sources */,
 				70A6D09B22C14BD8008F1F1A /* Repository.swift in Sources */,
 				70A6D06922C13FAC008F1F1A /* CurrenciesController.swift in Sources */,
 				70A6D06A22C13FAC008F1F1A /* HoldingTopCell.swift in Sources */,
@@ -979,12 +992,14 @@
 				70A6D09F22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift in Sources */,
 				70A6D06F22C13FAC008F1F1A /* Currencies.swift in Sources */,
 				70A6D07022C13FAC008F1F1A /* DashboardController.swift in Sources */,
+				65EA324022E05CAB00B284DA /* HoldingsRepositoryImpl.swift in Sources */,
 				65F195D622D90D33006EB861 /* WalletRepository.swift in Sources */,
 				70A6D07122C13FAC008F1F1A /* BlockstackApiService.swift in Sources */,
 				65B39D6322DF2C2B004761C9 /* APIManager.swift in Sources */,
 				65F195DC22D90EBF006EB861 /* WalletRepositoryImpl.swift in Sources */,
 				65B39D6922DF2CE0004761C9 /* EtherScanApiService.swift in Sources */,
 				70A6D07222C13FAC008F1F1A /* SettingsCell.swift in Sources */,
+				65EA323D22E05C1800B284DA /* HoldingsRepository.swift in Sources */,
 				70A6D07322C13FAC008F1F1A /* ColorCodePresetCell.swift in Sources */,
 				70A6D07422C13FAC008F1F1A /* BaseApiService.swift in Sources */,
 				70A6D07522C13FAC008F1F1A /* TransactionDto.swift in Sources */,
@@ -1034,6 +1049,7 @@
 				700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */,
 				70572CCB227475E800297421 /* HoldingCell.swift in Sources */,
 				7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */,
+				65EA323922E05BEE00B284DA /* HoldingsUseCase.swift in Sources */,
 				70A6D09A22C14BD8008F1F1A /* Repository.swift in Sources */,
 				657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */,
 				70FBB96A228B14610086E208 /* HoldingTopCell.swift in Sources */,
@@ -1045,12 +1061,14 @@
 				70A6D09E22C14C1C008F1F1A /* PortfolioRepositoryImpl.swift in Sources */,
 				707E5E452285C95800D4ED33 /* Currencies.swift in Sources */,
 				70572CBD2273A1B400297421 /* DashboardController.swift in Sources */,
+				65EA323F22E05CAB00B284DA /* HoldingsRepositoryImpl.swift in Sources */,
 				65F195D522D90D33006EB861 /* WalletRepository.swift in Sources */,
 				70FBB966228B08790086E208 /* BlockstackApiService.swift in Sources */,
 				65B39D6222DF2C2B004761C9 /* APIManager.swift in Sources */,
 				65F195DB22D90EBF006EB861 /* WalletRepositoryImpl.swift in Sources */,
 				65B39D6822DF2CE0004761C9 /* EtherScanApiService.swift in Sources */,
 				70072090227ADA3A003F3DEF /* SettingsCell.swift in Sources */,
+				65EA323C22E05C1800B284DA /* HoldingsRepository.swift in Sources */,
 				70AD5C4222790EB000A9E164 /* ColorCodePresetCell.swift in Sources */,
 				7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */,
 				7073A69B22806BAE00049A2E /* TransactionDto.swift in Sources */,

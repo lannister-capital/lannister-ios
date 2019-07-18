@@ -20,6 +20,11 @@ struct Holding {
     var currency        : Currency?
     var transactions    : [Transaction]?
     
+    // computed properties
+    var representiveValue       : Double?
+    var representiveCurrency    : Currency?
+    var totalEuroValue          : Double?
+    
     init(with dictionary: [String : Any]?) {
 
     }

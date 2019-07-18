@@ -84,12 +84,7 @@ class HoldingController: UIViewController {
         var holdingValue : Double? = holding.value
         if holding.address != nil {
             // Get ETH
-            let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
-            let predicateCode = NSPredicate(format: "code == %@", "ETH")
-            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
-            
-            let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
-            let token = TokenDto().token(from: tokenManagedObject)
+            let token = getToken()
             holdingValue = token.value
             holdingCurrency = token.currency
             currency = holdingCurrency
@@ -124,12 +119,7 @@ class HoldingController: UIViewController {
         var holdingValue : Double? = holding.value
         if holding.address != nil {
             // Get ETH
-            let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
-            let predicateCode = NSPredicate(format: "code == %@", "ETH")
-            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
-            
-            let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
-            let token = TokenDto().token(from: tokenManagedObject)
+            let token = getToken()
             holdingValue = token.value
             holdingCurrency = token.currency
         }
