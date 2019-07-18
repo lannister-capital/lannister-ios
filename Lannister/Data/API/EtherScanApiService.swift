@@ -16,9 +16,8 @@ class EtherScanApiService: NSObject {
     var sharedManager = APIManager.sharedManager
     
     let baseURL = "https://api.etherscan.io/api"
-    
-    // module=account&action=txlist&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&startblock=0&endblock=99999999&sort=asc&apikey=YourApiKeyToken
-    
+    let apiKey = "GP7SEQH5PPAX47AGETTCU3ZHCMD3WRUP3F"
+        
     func getTransactions(params: Parameters?, returns: @escaping (Response) -> Void) {
         sharedManager.request("\(baseURL)", method: .get, parameters: params).validate().responseJSON { response in returns(response) }
     }

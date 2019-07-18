@@ -29,7 +29,7 @@ class WalletRepositoryImpl: WalletRepository {
     
     func getTransactions(address: String, success: @escaping(_ transactions: Array<Transaction>?) -> Void, failure: @escaping(_ error: Error) -> Void) {
         
-        // module=account&action=txlist&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&startblock=0&endblock=99999999&sort=asc&apikey=YourApiKeyToken
+        let service = EtherScanApiService()
 
         let params = ["module": "account",
                       "action": "txlist",
@@ -37,11 +37,9 @@ class WalletRepositoryImpl: WalletRepository {
                       "startblock": 0,
                       "block": 99999999,
                       "sort": "asc",
-                      "apikey": "GP7SEQH5PPAX47AGETTCU3ZHCMD3WRUP3F"] as [String : Any]
+                      "apikey": service.apiKey] as [String : Any]
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
-        let service = EtherScanApiService()
         
         service.getTransactions(params: params) { response in
             
