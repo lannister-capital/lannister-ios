@@ -15,15 +15,12 @@ class PortfolioRepositoryImpl: PortfolioRepository {
     func getEuroTotalValue() -> Double {
         
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
-        let holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
+        var holdings = HoldingDto().holdings(from: holdingsManagedObjects as! [HoldingManagedObject])
+        holdings = HoldingsUseCase(with: HoldingsRepositoryImpl()).updateHoldingsWithComputedProperties(holdings: holdings)
 
         var euroTotalValue : Double = 0
         for holding in holdings {
-            var holdingValue = holding.value
-            if holding.value < 0 {
-                holdingValue = 0
-            }
-            euroTotalValue += Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)
+            euroTotalValue += Currencies.getEuroValue(value: holding.representiveValue!, currency: holding.representiveCurrency!)
         }
         
         return euroTotalValue

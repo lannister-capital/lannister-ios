@@ -10,6 +10,7 @@ import UIKit
 import MagicalRecord
 import Charts
 import Blockstack
+import web3swift
 
 class HoldingController: UIViewController {
 
@@ -21,7 +22,8 @@ class HoldingController: UIViewController {
     @IBOutlet weak var pieChartView                 : PieChartView!
     @IBOutlet weak var tableView                    : UITableView!
     var holding                                     : Holding!
-    var transactions                                : [Transaction]!
+    var currency                                    : Currency!
+    var transactions                                : [Transaction]! = []
     var pieChartDataEntries                         = [PieChartDataEntry]()
     var pieChartDataColors                          = [UIColor]()
     var numberFormatter                             = NumberFormatter()
@@ -38,6 +40,7 @@ class HoldingController: UIViewController {
         numberFormatter.minimumFractionDigits = 2
         numberFormatter.maximumFractionDigits = 2
         
+        percentFormatter.numberStyle = .decimal
         percentFormatter.minimumFractionDigits = 0
         percentFormatter.maximumFractionDigits = 2
         
@@ -61,7 +64,6 @@ class HoldingController: UIViewController {
         
         updateHolding()
         updatePieChart()
-        updateTransactions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,11 +77,25 @@ class HoldingController: UIViewController {
         navigationItem.title = holding.name
         barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
         euroTotalValue = PortfolioUseCase(with: PortfolioRepositoryImpl()).getEuroTotalValue()
+        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
+        navigationItem.title = holding.name
 
-        let formattedNumber = numberFormatter.string(for: NSNumber(value: holding.value!))
+        var holdingCurrency = holding.currency
+        var holdingValue : Double? = holding.value
+        if holding.address != nil {
+            // Get ETH
+            let token = getToken()
+            holdingValue = token.value
+            holdingCurrency = token.currency
+            currency = holdingCurrency
+        } else {
+            currency = holding.currency
+        }
+
+        let formattedNumber = numberFormatter.string(for: NSNumber(value: holdingValue!))
+        valueLabel.text =  String(format: "%@%@", holdingCurrency!.symbol, formattedNumber ?? "--")
         
-        valueLabel.text =  String(format: "%@%@", holding.currency.symbol, formattedNumber ?? "--")
-        if holding.currency.symbol == Currencies.getDefaultCurrencySymbol() {
+        if holdingCurrency!.symbol == Currencies.getDefaultCurrencySymbol() {
             // remove label
             if defaultCurrencyValueLabel != nil {
                 defaultCurrencyValueLabel.removeFromSuperview()
@@ -87,13 +103,11 @@ class HoldingController: UIViewController {
             }
             pieChartViewTopConstraint.constant = 8
         } else {
-            let euroValue = Currencies.getEuroValue(value: holding.value, currency: holding.currency)
+            let euroValue = Currencies.getEuroValue(value: holdingValue!, currency: holdingCurrency!)
             let currencyValue = euroValue * Currencies.getDefaultCurrencyEuroRate()
             let formattedNumber = numberFormatter.string(for: NSNumber(value: currencyValue))
             defaultCurrencyValueLabel.text = String(format: "%@%@", Currencies.getDefaultCurrencySymbol(), formattedNumber ?? "--")
         }
-        barView.backgroundColor = Colors.hexStringToUIColor(hex: holding.hexColor)
-        navigationItem.title = holding.name
     }
     
     func updatePieChart() {
@@ -101,12 +115,19 @@ class HoldingController: UIViewController {
         pieChartDataEntries.removeAll()
         pieChartDataColors.removeAll()
 
-        var holdingValue = holding.value
-        if holding.value < 0 {
+        var holdingCurrency = holding.currency
+        var holdingValue : Double? = holding.value
+        if holding.address != nil {
+            // Get ETH
+            let token = getToken()
+            holdingValue = token.value
+            holdingCurrency = token.currency
+        }
+        if holdingValue! < 0 {
             holdingValue = 0
         }
 
-        let euroValue = Currencies.getEuroValue(value: holdingValue!, currency: holding.currency)
+        let euroValue = Currencies.getEuroValue(value: holdingValue!, currency: holdingCurrency!)
 
         let pieChartDataEntry = PieChartDataEntry(value: euroValue, label: nil)
         pieChartDataEntries.append(pieChartDataEntry)
@@ -137,14 +158,91 @@ class HoldingController: UIViewController {
     
     func updateTransactions() {
         
-        let transactionsManagedObjects = TransactionManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default())
-        transactions = TransactionDto().transactions(from: transactionsManagedObjects as! [TransactionManagedObject])
-        transactions = transactions.filter { $0.holding!.name == self.holding!.name }
-        tableView.reloadData()
+        if holding.address == nil {
+            transactions = holding.transactions
+            tableView.reloadData()
+        } else {
+            // Get ETH token
+            let token = getToken()
+
+            if token.transactions != nil {
+                self.transactions = token.transactions
+                self.tableView.reloadData()
+            } else {
+                getTransactions()
+            }
+        }
+    }
+    
+    func getTransactions() {
+        
+        WalletUseCase(with: WalletRepositoryImpl()).getTransactions(address: holding.address!, success: { transactionsObjects in
+            DispatchQueue.main.async {
+                if transactionsObjects != nil {
+                    self.transactions = transactionsObjects
+                    self.tableView.reloadData()
+                    
+                    // save new transactions to local db
+                    let oldTransactions = self.getTokenManagedObject().transactions
+                    if (oldTransactions?.count)! > 0 {
+                        for transaction in oldTransactions! {
+                            (transaction as! TransactionManagedObject).mr_deleteEntity(in: NSManagedObjectContext.mr_default())
+                        }
+                    }
+                    for transaction in self.transactions {
+                        let newTransaction = TransactionManagedObject(context: NSManagedObjectContext.mr_default())
+                        newTransaction.name = transaction.name
+                        newTransaction.value = transaction.value
+                        newTransaction.type = transaction.type
+                        newTransaction.id = transaction.identifier
+                    }
+                    NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+
+                } else {
+                    let token = self.getToken()
+                    if token.transactions == nil {
+                        // Display warning to user
+                        let alert = UIAlertController(title: "Error",
+                                                      message: "Unable to fetch transactions this time. Try again by tapping on the \"Refresh\" button.",
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }) { error in
+            print("could not get transactions")
+        }
+    }
+    
+    func getTokenManagedObject() -> TokenManagedObject {
+        
+        let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
+        let predicateCode = NSPredicate(format: "code == %@", "ETH")
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+        
+        let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+
+        return tokenManagedObject
+    }
+    
+    func getToken() -> Token {
+        
+        let token = TokenDto().token(from: getTokenManagedObject())
+
+        return token
     }
     
     @IBAction func createTransaction() {
-        
+        let createTransactionVC = storyboard?.instantiateViewController(withIdentifier: "transactionVC") as! CreateTransactionController
+        createTransactionVC.holding = holding
+        createTransactionVC.delegate = self
+        navigationController?.pushViewController(createTransactionVC, animated: true)
+    }
+    
+    @IBAction func refreshTransactions() {
+
+        getTransactions()
     }
     
     @objc func editHolding() {
@@ -155,14 +253,7 @@ class HoldingController: UIViewController {
         createHoldingVC.delegate = self
         navigationController?.pushViewController(createHoldingVC, animated: true)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "createTransaction" {
-            let destinationVC = segue.destination as! CreateTransactionController
-            destinationVC.holding = holding
-            destinationVC.delegate = self
-        }
-    }
+        
 }
 
 extension HoldingController : UITableViewDataSource {
@@ -178,6 +269,20 @@ extension HoldingController : UITableViewDataSource {
         return transactions.count+1
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 && holding.address != nil {
+            return 54
+        }
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if holding.address == nil {
+            return true
+        }
+        return false
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
@@ -185,9 +290,9 @@ extension HoldingController : UITableViewDataSource {
             
             let holdingManagedObject = HoldingManagedObject.mr_findFirst(byAttribute: "name", withValue: holding.name!, in: NSManagedObjectContext.mr_default())
             if transaction.type == "credit" {
-                holdingManagedObject!.value = holdingManagedObject!.value - transaction.value!
+                holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue - transaction.value! as NSNumber
             } else {
-                holdingManagedObject!.value = holdingManagedObject!.value + transaction.value!
+                holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue + transaction.value! as NSNumber
             }
             
             let transactionManagedObject = TransactionManagedObject.mr_findFirst(byAttribute: "id", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())
@@ -224,6 +329,15 @@ extension HoldingController : UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "topCellId", for: indexPath) as! HoldingTopCell
             cell.addButton.layer.cornerRadius = 4
+            if holding.address == nil {
+                if cell.poweredByLabel != nil {
+                    cell.poweredByLabel.removeFromSuperview()
+                }
+            } else {
+                cell.addButton.setTitle("Refresh Transactions", for: .normal)
+                cell.addButton.removeTarget(self, action: #selector(createTransaction), for: .touchUpInside)
+                cell.addButton.addTarget(self, action: #selector(refreshTransactions), for: .touchUpInside)
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCellId", for: indexPath) as! TransactionCell
@@ -231,11 +345,11 @@ extension HoldingController : UITableViewDataSource {
             cell.nameLabel.text = transaction.name
             let formattedNumber = numberFormatter.string(for: NSNumber(value: transaction.value!))
             if(transaction.type == "credit") {
-                cell.valueLabel.text = "+ \(holding.currency.symbol!)\(formattedNumber ?? "--")"
+                cell.valueLabel.text = "+ \(currency!.symbol!)\(formattedNumber ?? "--")"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "00B382")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "00B382")
             } else {
-                cell.valueLabel.text = "- \(holding.currency.symbol!)\(formattedNumber ?? "--")"
+                cell.valueLabel.text = "- \(currency!.symbol!)\(formattedNumber ?? "--")"
                 cell.colorView.backgroundColor = Colors.hexStringToUIColor(hex: "E60243")
                 cell.valueLabel.textColor = Colors.hexStringToUIColor(hex: "E60243")
             }
@@ -249,7 +363,7 @@ extension HoldingController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row > 0 {
+        if indexPath.row > 0 && holding.address == nil {
             tableView.deselectRow(at: indexPath, animated: true)
             
             let transaction = transactions[indexPath.row-1]

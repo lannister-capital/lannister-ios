@@ -10,5 +10,6 @@ import UIKit
 
 class HoldingTopCell: UITableViewCell {
 
-    @IBOutlet weak var addButton : UIButton!
+    @IBOutlet weak var addButton        : UIButton!
+    @IBOutlet weak var poweredByLabel   : UILabel!
 }

@@ -14,10 +14,22 @@ class HoldingDto : NSObject {
     func holding(from managedObject: HoldingManagedObject) -> Holding {
         
         var holding = Holding(with: nil)
+        if(managedObject.address != nil) {
+            holding.address = managedObject.address
+        }
         holding.name = managedObject.name
-        holding.value = managedObject.value
+        holding.value = managedObject.value?.doubleValue
         holding.hexColor = managedObject.hex_color
-        holding.currency = CurrencyDto().currency(from: managedObject.currency!)
+        if managedObject.currency != nil {
+            holding.currency = CurrencyDto().currency(from: managedObject.currency!)
+        }
+        if managedObject.transactions != nil {
+            if (managedObject.transactions?.allObjects.count)! > 0 {
+                let transactionsManagedObjects = managedObject.transactions?.allObjects as! [TransactionManagedObject]
+                let transactions = TransactionDto().transactions(from: transactionsManagedObjects)
+                holding.transactions = transactions
+            }
+        }
         return holding
     }
     

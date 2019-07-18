@@ -100,27 +100,27 @@ class CreateTransactionController: UIViewController {
             newTransaction.type = "debit"
         }
         
-        if let totalValue = valueTextField!.text!.doubleValue {
+        if let totalValue = valueTextField?.text?.doubleValue {
             newTransaction.value = totalValue
             if selectedTransaction == "Credit" {
                 print("totalValue \(totalValue)")
                 if transaction == nil {
-                    holdingManagedObject!.value = holdingManagedObject!.value + totalValue
+                    holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue + totalValue as NSNumber
                 } else {
                     if transaction.type == "credit" {
-                        holdingManagedObject!.value = holdingManagedObject!.value + (totalValue-transaction.value)
+                        holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue + (totalValue-transaction.value!) as NSNumber
                     } else {
-                        holdingManagedObject!.value = holdingManagedObject!.value + (totalValue+transaction.value)
+                        holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue + (totalValue+transaction.value) as NSNumber
                     }
                 }
             } else {
                 if transaction == nil {
-                    holdingManagedObject!.value = holdingManagedObject!.value - totalValue
+                    holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue - totalValue as NSNumber
                 } else {
                     if transaction.type == "debit" {
-                        holdingManagedObject!.value = holdingManagedObject!.value - (totalValue-transaction.value)
+                        holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue - (totalValue-transaction.value!) as NSNumber
                     } else {
-                        holdingManagedObject!.value = holdingManagedObject!.value - (totalValue+transaction.value)
+                        holdingManagedObject!.value = holdingManagedObject!.value!.doubleValue - (totalValue+transaction.value!) as NSNumber
                     }
                 }
             }
@@ -143,8 +143,6 @@ class CreateTransactionController: UIViewController {
                 }
             }
         }
-        
-        print("holdingManagedObject!.value \(holdingManagedObject!.value)")
         
         if delegate != nil {
             delegate.newTransaction(newHolding: HoldingDto().holding(from: holdingManagedObject!))
@@ -184,7 +182,7 @@ extension CreateTransactionController : UITableViewDataSource {
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "valueCellId", for: indexPath) as! TotalValueCell
-            cell.currencyLabel.text = holding.currency.symbol
+            cell.currencyLabel.text = holding.currency!.symbol
             if transaction != nil {
                 cell.totalValueTextField.text = "\(transaction.value!)"
             }

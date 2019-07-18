@@ -14,7 +14,8 @@ struct Transaction {
     var name        : String!
     var type        : String!
     var value       : Double!
-    var holding     : Holding!
+    var holding     : Holding?
+    var token       : Token?
     
     init(with dictionary: [String : Any]?) {
         

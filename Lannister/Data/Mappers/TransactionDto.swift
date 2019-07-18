@@ -18,7 +18,6 @@ class TransactionDto : NSObject {
         transaction.name = managedObject.name
         transaction.type = managedObject.type
         transaction.value = managedObject.value
-        transaction.holding = HoldingDto().holding(from: managedObject.holding!)
         return transaction
     }
     

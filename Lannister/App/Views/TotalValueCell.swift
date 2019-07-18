@@ -10,7 +10,10 @@ import UIKit
 
 class TotalValueCell: UITableViewCell {
 
-    @IBOutlet weak var totalValueTextField : UITextField!
-    @IBOutlet weak var percentageLabel  : UILabel!
-    @IBOutlet weak var currencyLabel  : UILabel!
+    @IBOutlet weak var titleLabel               : UILabel!
+    @IBOutlet weak var totalValueTextField      : UITextField!
+    @IBOutlet weak var percentageLabel          : UILabel!
+    @IBOutlet weak var currencyLabel            : UILabel!
+    @IBOutlet weak var changeLabel              : UILabel!
+    @IBOutlet weak var cellIndicatorImageView   : UIImageView!
 }
