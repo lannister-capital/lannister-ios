@@ -30,9 +30,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>18</string>
+	<string>19</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow access to camera to scan a QR code.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Keep your holdings information access secure with biometric authentication.</string>
 	<key>UILaunchStoryboardName</key>
@@ -54,7 +56,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Allow access to camera to scan a QR code.</string>
 </dict>
 </plist>
