@@ -263,7 +263,7 @@ extension HoldingController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if transactions.count == 0 {
+        if transactions == nil || transactions?.count == 0 {
             return 1
         }
         return transactions.count+1
