@@ -19,15 +19,17 @@ class BlockstackApiService: NSObject {
     
     func send(returns: @escaping(Error?) -> Void) {
         
-        let lannisterManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
-        let lannisterData = json(fromObjects: lannisterManagedObjects)
-        guard let data = try? JSONSerialization.data(withJSONObject: lannisterData, options: []) else {
+        let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
+        let holdingsArray = json(fromObjects: holdingsManagedObjects)
+        let versionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        let lannisterDictionary = ["db_version": versionString, "holdings": holdingsArray] as [String : Any]
+        guard let data = try? JSONSerialization.data(withJSONObject: lannisterDictionary, options: []) else {
             return
         }
         let jsonString = String(data: data, encoding: String.Encoding.utf8)!
-
+        
         Blockstack.shared.putFile(to: "db.json", text: jsonString, encrypt: true, completion: { (file, error) in
-            
+
             print("overwrite db json")
             returns(error)
         })
