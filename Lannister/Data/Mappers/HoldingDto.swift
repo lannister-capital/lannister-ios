@@ -20,9 +20,12 @@ class HoldingDto : NSObject {
         holding.name = managedObject.name
         holding.value = managedObject.value?.doubleValue
         holding.hexColor = managedObject.hex_color
-        if managedObject.currency != nil {
-            holding.currency = CurrencyDto().currency(from: managedObject.currency!)
-        }
+        let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: managedObject.currency_code!)
+        holding.currency = CurrencyDto().currency(from: currencyManagedObject!)
+
+//        if managedObject.currency != nil {
+//            holding.currency = CurrencyDto().currency(from: managedObject.currency!)
+//        }
         if managedObject.transactions != nil {
             if (managedObject.transactions?.allObjects.count)! > 0 {
                 let transactionsManagedObjects = managedObject.transactions?.allObjects as! [TransactionManagedObject]

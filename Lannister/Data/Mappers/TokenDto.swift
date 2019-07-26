@@ -21,7 +21,8 @@ class TokenDto: NSObject {
             token.code = managedObject.code
         }
         token.value = managedObject.value
-        token.currency = CurrencyDto().currency(from: managedObject.currency!)
+        let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: managedObject.currency_code!)
+        token.currency = CurrencyDto().currency(from: currencyManagedObject!)
         if managedObject.transactions != nil {
             if (managedObject.transactions?.allObjects.count)! > 0 {
                 let transactionsManagedObjects = managedObject.transactions?.allObjects as! [TransactionManagedObject]

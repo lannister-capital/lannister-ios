@@ -17,7 +17,7 @@ class CurrencyApiService: BaseApiService {
         super.init()
     }
     
-    var sharedManager = ApiManager.sharedManager
+    var sharedManager = APIManager.sharedManager
     
     func getCurrencies(returns: @escaping(Response) -> Void) {
         sharedManager.request("\(currencyBaseUrl)/latest", method: .get, parameters: nil)

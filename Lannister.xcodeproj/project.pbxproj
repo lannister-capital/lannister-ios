@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
+		651F1CA922E9A63F00B18327 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 651F1CA822E9A63F00B18327 /* Model.xcmappingmodel */; };
+		651F1CAA22E9A63F00B18327 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 651F1CA822E9A63F00B18327 /* Model.xcmappingmodel */; };
 		653D70DD229EC54E000A4049 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D70DC229EC54E000A4049 /* Parser.swift */; };
 		6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550D4702284536F0059C643 /* NumberFormatter.swift */; };
 		65678AB422DCD05C0033E64B /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678AB322DCD05C0033E64B /* Token.swift */; };
@@ -37,7 +39,6 @@
 		700BDDF7227A28F300276068 /* HoldingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF6227A28F300276068 /* HoldingHeaderView.swift */; };
 		700BDDF9227A297600276068 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF8227A297600276068 /* TransactionCell.swift */; };
 		7016B4AA2282EBC3000C49B8 /* TransactionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4A92282EBC3000C49B8 /* TransactionTypeCell.swift */; };
-		7016B4AD2283070B000C49B8 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4AC2283070B000C49B8 /* ApiManager.swift */; };
 		7016B4AF22830737000C49B8 /* BaseApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4AE22830737000C49B8 /* BaseApiService.swift */; };
 		7016B4B12283076D000C49B8 /* CurrencyApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B02283076D000C49B8 /* CurrencyApiService.swift */; };
 		7016B4B322830880000C49B8 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B222830880000C49B8 /* Currency.swift */; };
@@ -108,7 +109,6 @@
 		70A6D07F22C13FAC008F1F1A /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700BDDF8227A297600276068 /* TransactionCell.swift */; };
 		70A6D08022C13FAC008F1F1A /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4B222830880000C49B8 /* Currency.swift */; };
 		70A6D08122C13FAC008F1F1A /* TransactionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4A92282EBC3000C49B8 /* TransactionTypeCell.swift */; };
-		70A6D08222C13FAC008F1F1A /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016B4AC2283070B000C49B8 /* ApiManager.swift */; };
 		70A6D08322C13FAC008F1F1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E96B352272E7F700A5EB54 /* AppDelegate.swift */; };
 		70A6D08422C13FAC008F1F1A /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */; };
 		70A6D08822C13FAC008F1F1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70E96B3E2272E7F900A5EB54 /* LaunchScreen.storyboard */; };
@@ -167,6 +167,7 @@
 		2BEADF46EA2A6A926563CD08 /* Pods-Lannister Beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister Beta.release.xcconfig"; path = "Target Support Files/Pods-Lannister Beta/Pods-Lannister Beta.release.xcconfig"; sourceTree = "<group>"; };
 		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		651F1CA822E9A63F00B18327 /* Model.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model.xcmappingmodel; sourceTree = "<group>"; };
 		653D70DC229EC54E000A4049 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		6550D4702284536F0059C643 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		65678AB322DCD05C0033E64B /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -179,6 +180,7 @@
 		65EA323822E05BEE00B284DA /* HoldingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsUseCase.swift; sourceTree = "<group>"; };
 		65EA323B22E05C1800B284DA /* HoldingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsRepository.swift; sourceTree = "<group>"; };
 		65EA323E22E05CAB00B284DA /* HoldingsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsRepositoryImpl.swift; sourceTree = "<group>"; };
+		65EA326222E9A47F00B284DA /* db 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "db 2.xcdatamodel"; sourceTree = "<group>"; };
 		65F195D422D90D33006EB861 /* WalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRepository.swift; sourceTree = "<group>"; };
 		65F195D722D90DA3006EB861 /* WalletUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUseCase.swift; sourceTree = "<group>"; };
 		65F195DA22D90EBF006EB861 /* WalletRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -187,7 +189,6 @@
 		700BDDF6227A28F300276068 /* HoldingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingHeaderView.swift; sourceTree = "<group>"; };
 		700BDDF8227A297600276068 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		7016B4A92282EBC3000C49B8 /* TransactionTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTypeCell.swift; sourceTree = "<group>"; };
-		7016B4AC2283070B000C49B8 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		7016B4AE22830737000C49B8 /* BaseApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiService.swift; sourceTree = "<group>"; };
 		7016B4B02283076D000C49B8 /* CurrencyApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyApiService.swift; sourceTree = "<group>"; };
 		7016B4B222830880000C49B8 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
@@ -320,7 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				65B39D6122DF2C2B004761C9 /* APIManager.swift */,
-				65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */,
+				7016B4AB228306DB000C49B8 /* Services */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -329,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */,
+				651F1CA822E9A63F00B18327 /* Model.xcmappingmodel */,
 				702B2D13227F674A005C0B64 /* Models */,
 			);
 			path = Database;
@@ -337,10 +339,10 @@
 		7016B4AB228306DB000C49B8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7016B4AC2283070B000C49B8 /* ApiManager.swift */,
 				7016B4AE22830737000C49B8 /* BaseApiService.swift */,
-				7016B4B02283076D000C49B8 /* CurrencyApiService.swift */,
 				70FBB965228B08790086E208 /* BlockstackApiService.swift */,
+				7016B4B02283076D000C49B8 /* CurrencyApiService.swift */,
+				65B39D6722DF2CDF004761C9 /* EtherScanApiService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -352,7 +354,6 @@
 				65B39D6022DF2C01004761C9 /* Database */,
 				702B2D21227F7C90005C0B64 /* Mappers */,
 				70A6D09C22C14C02008F1F1A /* Repositories Implementations */,
-				7016B4AB228306DB000C49B8 /* Services */,
 				707E5E412285C84100D4ED33 /* User defaults */,
 			);
 			path = Data;
@@ -1017,10 +1018,10 @@
 				70A6D07F22C13FAC008F1F1A /* TransactionCell.swift in Sources */,
 				70A6D08022C13FAC008F1F1A /* Currency.swift in Sources */,
 				70A6D08122C13FAC008F1F1A /* TransactionTypeCell.swift in Sources */,
-				70A6D08222C13FAC008F1F1A /* ApiManager.swift in Sources */,
 				70D7F0B722D37AEC004E8BAE /* ETHCell.swift in Sources */,
 				70A6D08322C13FAC008F1F1A /* AppDelegate.swift in Sources */,
 				70A6D08422C13FAC008F1F1A /* db.xcdatamodeld in Sources */,
+				651F1CAA22E9A63F00B18327 /* Model.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1086,10 +1087,10 @@
 				700BDDF9227A297600276068 /* TransactionCell.swift in Sources */,
 				7016B4B322830880000C49B8 /* Currency.swift in Sources */,
 				7016B4AA2282EBC3000C49B8 /* TransactionTypeCell.swift in Sources */,
-				7016B4AD2283070B000C49B8 /* ApiManager.swift in Sources */,
 				70D7F0B622D37AEC004E8BAE /* ETHCell.swift in Sources */,
 				70E96B362272E7F700A5EB54 /* AppDelegate.swift in Sources */,
 				65E95BEA229FCA6B00E9A442 /* db.xcdatamodeld in Sources */,
+				651F1CA922E9A63F00B18327 /* Model.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1480,9 +1481,10 @@
 		65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				65EA326222E9A47F00B284DA /* db 2.xcdatamodel */,
 				65E95BE9229FCA6B00E9A442 /* db.xcdatamodel */,
 			);
-			currentVersion = 65E95BE9229FCA6B00E9A442 /* db.xcdatamodel */;
+			currentVersion = 65EA326222E9A47F00B284DA /* db 2.xcdatamodel */;
 			path = db.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

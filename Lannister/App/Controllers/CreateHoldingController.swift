@@ -136,7 +136,7 @@ class CreateHoldingController: UIViewController {
             // set currency
             let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: selectedCurrency.code!, in: NSManagedObjectContext.mr_default())
             if ethAddress == nil {
-                newHoldingManagedObject.currency = currencyManagedObject
+                newHoldingManagedObject.currency_code = currencyManagedObject?.code
             }
             
             // set hex_color
@@ -164,7 +164,7 @@ class CreateHoldingController: UIViewController {
                 }
                 tokenManagedObject?.address = ethAddress
                 tokenManagedObject?.code = "ETH"
-                tokenManagedObject?.currency = currencyManagedObject
+                tokenManagedObject?.currency_code = currencyManagedObject!.code!
                 
                 WalletUseCase(with: WalletRepositoryImpl()).getBalance(address: ethAddress, success: { balance in
                     DispatchQueue.main.async {

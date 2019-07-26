@@ -11,12 +11,13 @@ import Blockstack
 import MagicalRecord
 import Groot
 
-class BlockstackApiService: NSObject {
+class BlockstackApiService: BaseApiService {
 
     override init() {
         super.init()
+        super.setupValueTransformers()
     }
-    
+
     func send(returns: @escaping(Error?) -> Void) {
         
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
