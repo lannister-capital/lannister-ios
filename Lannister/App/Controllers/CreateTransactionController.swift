@@ -85,7 +85,11 @@ class CreateTransactionController: UIViewController {
         if transaction == nil {
             newTransaction = TransactionManagedObject(context: NSManagedObjectContext.mr_default())
             newTransaction.id = newTransaction.objectID.uriRepresentation().lastPathComponent
-            newTransaction.date = Date()
+            let transactionDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            let dateString = dateFormatter.string(from: transactionDate)
+            newTransaction.date = dateString
         } else {
             newTransaction = TransactionManagedObject.mr_findFirst(byAttribute: "id", withValue: transaction.identifier!, in: NSManagedObjectContext.mr_default())!
         }

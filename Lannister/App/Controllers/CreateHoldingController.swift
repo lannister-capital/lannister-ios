@@ -265,11 +265,13 @@ class CreateHoldingController: UIViewController {
             let holding = HoldingDto().holding(from: holdingManagedObject)
             
             // Get token and delete
-            let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
-            let predicateCode = NSPredicate(format: "code == %@", "ETH")
-            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
-            let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
-            tokenManagedObject.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
+            if let holdingAddress = holding.address {
+                let predicateAddress = NSPredicate(format: "address == %@", holdingAddress)
+                let predicateCode = NSPredicate(format: "code == %@", "ETH")
+                let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
+                let tokenManagedObject = TokenManagedObject.mr_findFirst(with: compoundPredicate, in: NSManagedObjectContext.mr_default())!
+                tokenManagedObject.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
+            }
             
             holdingManagedObject.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()

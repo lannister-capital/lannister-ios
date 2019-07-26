@@ -15,7 +15,6 @@ class BlockstackApiService: BaseApiService {
 
     override init() {
         super.init()
-        super.setupValueTransformers()
     }
 
     func send(returns: @escaping(Error?) -> Void) {
@@ -24,11 +23,14 @@ class BlockstackApiService: BaseApiService {
         let holdingsArray = json(fromObjects: holdingsManagedObjects)
         let versionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
         let lannisterDictionary = ["db_version": versionString, "holdings": holdingsArray] as [String : Any]
+        print("lannisterDictionary \(lannisterDictionary)")
         guard let data = try? JSONSerialization.data(withJSONObject: lannisterDictionary, options: []) else {
             return
         }
         let jsonString = String(data: data, encoding: String.Encoding.utf8)!
-        
+
+        print("jsonString \(jsonString)")
+
         Blockstack.shared.putFile(to: "db.json", text: jsonString, encrypt: true, completion: { (file, error) in
 
             print("overwrite db json")

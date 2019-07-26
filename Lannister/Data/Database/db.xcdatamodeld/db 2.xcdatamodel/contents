@@ -67,10 +67,9 @@
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TransactionManagedObject" inverseName="token" inverseEntity="TransactionManagedObject" syncable="YES"/>
     </entity>
     <entity name="TransactionManagedObject" representedClassName=".TransactionManagedObject" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="date"/>
-                <entry key="JSONTransformerName" value="StringToDate"/>
             </userInfo>
         </attribute>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES">

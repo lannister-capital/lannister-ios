@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0886B57A80C3DCD02F6C7B88 /* Pods_Lannister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */; };
-		651F1CAC22EAF96D00B18327 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 651F1CAB22EAF96D00B18327 /* Model.xcmappingmodel */; };
-		651F1CAD22EAF96D00B18327 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 651F1CAB22EAF96D00B18327 /* Model.xcmappingmodel */; };
+		651F1CAF22EB023400B18327 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 651F1CAE22EB023400B18327 /* Model.xcmappingmodel */; };
+		651F1CB022EB023400B18327 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 651F1CAE22EB023400B18327 /* Model.xcmappingmodel */; };
 		653D70DD229EC54E000A4049 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D70DC229EC54E000A4049 /* Parser.swift */; };
 		6550D4712284536F0059C643 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550D4702284536F0059C643 /* NumberFormatter.swift */; };
 		65678AB422DCD05C0033E64B /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678AB322DCD05C0033E64B /* Token.swift */; };
@@ -167,7 +167,7 @@
 		2BEADF46EA2A6A926563CD08 /* Pods-Lannister Beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lannister Beta.release.xcconfig"; path = "Target Support Files/Pods-Lannister Beta/Pods-Lannister Beta.release.xcconfig"; sourceTree = "<group>"; };
 		47B3E3B662D783585CF8FEEF /* Pods-LannisterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LannisterTests.release.xcconfig"; path = "Target Support Files/Pods-LannisterTests/Pods-LannisterTests.release.xcconfig"; sourceTree = "<group>"; };
 		58DA7B34CAF613A1E584131D /* Pods_Lannister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lannister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		651F1CAB22EAF96D00B18327 /* Model.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model.xcmappingmodel; sourceTree = "<group>"; };
+		651F1CAE22EB023400B18327 /* Model.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model.xcmappingmodel; sourceTree = "<group>"; };
 		653D70DC229EC54E000A4049 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		6550D4702284536F0059C643 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		65678AB322DCD05C0033E64B /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				65E95BE8229FCA6B00E9A442 /* db.xcdatamodeld */,
-				651F1CAB22EAF96D00B18327 /* Model.xcmappingmodel */,
+				651F1CAE22EB023400B18327 /* Model.xcmappingmodel */,
 				702B2D13227F674A005C0B64 /* Models */,
 			);
 			path = Database;
@@ -983,7 +983,7 @@
 				70A6D06822C13FAC008F1F1A /* CurrencyDto.swift in Sources */,
 				65EA323A22E05BEE00B284DA /* HoldingsUseCase.swift in Sources */,
 				70A6D09B22C14BD8008F1F1A /* Repository.swift in Sources */,
-				651F1CAD22EAF96D00B18327 /* Model.xcmappingmodel in Sources */,
+				651F1CB022EB023400B18327 /* Model.xcmappingmodel in Sources */,
 				70A6D06922C13FAC008F1F1A /* CurrenciesController.swift in Sources */,
 				70A6D06A22C13FAC008F1F1A /* HoldingTopCell.swift in Sources */,
 				70A6D06B22C13FAC008F1F1A /* ColorCodeCell.swift in Sources */,
@@ -1052,7 +1052,7 @@
 				7016B4B522830B0E000C49B8 /* CurrencyDto.swift in Sources */,
 				65EA323922E05BEE00B284DA /* HoldingsUseCase.swift in Sources */,
 				70A6D09A22C14BD8008F1F1A /* Repository.swift in Sources */,
-				651F1CAC22EAF96D00B18327 /* Model.xcmappingmodel in Sources */,
+				651F1CAF22EB023400B18327 /* Model.xcmappingmodel in Sources */,
 				657B69312284354500D7A5AF /* CurrenciesController.swift in Sources */,
 				70FBB96A228B14610086E208 /* HoldingTopCell.swift in Sources */,
 				707FB21222773DF8005B29A2 /* ColorCodeCell.swift in Sources */,
