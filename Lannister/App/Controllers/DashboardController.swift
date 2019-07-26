@@ -61,15 +61,20 @@ class DashboardController: UIViewController {
             sortKey = UserDefaults.standard.object(forKey: "sortKey") as! String
         }
         
-//        BlockstackApiService().sync { error in
-//            if error == nil {
-//                DispatchQueue.main.async {
-//                    self.updateHoldings()
-//                }
-//            } else {
-//                print("error \(String(describing: error))")
-//            }
-//        }
+        BlockstackApiService().sync { errorMessage in
+            if errorMessage == nil {
+                DispatchQueue.main.async {
+                    self.updateHoldings()
+                }
+            } else {
+                print("error \(String(describing: errorMessage))")
+                let alert = UIAlertController(title: "Error",
+                                              message: errorMessage,
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
         updateHoldings()
     }

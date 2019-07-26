@@ -31,7 +31,11 @@
                 <entry key="JSONKeyPath" value="address"/>
             </userInfo>
         </attribute>
-        <attribute name="currency_code" attributeType="String" syncable="YES"/>
+        <attribute name="currency_code" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="currency_code"/>
+            </userInfo>
+        </attribute>
         <attribute name="hex_color" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="hex_color"/>
