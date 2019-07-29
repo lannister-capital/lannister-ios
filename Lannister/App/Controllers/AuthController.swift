@@ -38,7 +38,7 @@ class AuthController: UIViewController {
                                             print("Sign in SUCCESS", userData.profile?.name as Any)
                                             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                                                 AppDelegate.shared.updateCurrencies()
-                                                AppDelegate.shared.rootViewController.switchToMainScreen()
+                                                self.checkUserData()
                                             })
                                         case .cancelled:
                                             print("Sign in CANCELLED")
@@ -59,4 +59,58 @@ class AuthController: UIViewController {
             AppDelegate.shared.rootViewController.switchToMainScreen()
         })
     }
+    
+    func checkUserData() {
+        
+        BlockstackApiService().checkUserData { hasData in
+            if hasData {
+                DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                    let alert = UIAlertController(title: "You already have holdings on your Blockstack account.",
+                                                  message: "You have to choose between keeping the ones you already have on your Blockstack account or overwrite them with the ones you have locally on the iPhone app right now.",
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Use local data", style: UIAlertAction.Style.default, handler: { _ in
+                        self.writeNewData()
+                    }))
+                    alert.addAction(UIAlertAction(title: "Use data from Blockstack", style: UIAlertAction.Style.default, handler: { _ in
+                        self.readData()
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                })
+            } else {
+                self.writeNewData()
+            }
+        }
+    }
+    
+    func writeNewData() {
+        
+        BlockstackApiService().send(returns: { errorMessage in
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                if errorMessage != nil {
+                    let alert = UIAlertController(title: "Error",
+                                                  message: errorMessage,
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                AppDelegate.shared.rootViewController.switchToMainScreen()
+            })
+        })
+    }
+    
+    func readData() {
+        BlockstackApiService().sync(returns: { errorMessage in
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                if errorMessage != nil {
+                    let alert = UIAlertController(title: "Error",
+                                                  message: errorMessage,
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                AppDelegate.shared.rootViewController.switchToMainScreen()
+            })
+        })
+    }
+
 }

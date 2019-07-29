@@ -107,6 +107,82 @@ class SettingsController: UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func turnOffSync() {
+        Blockstack.shared.signUserOut()
+    }
+    
+    func turnOnSync(cell: SettingsCell) {
+        
+        Blockstack.shared.signIn(redirectURI: "https://lannister.capital/redirect-mobile.html",
+                                 appDomain: URL(string: "https://lannister.capital")!,
+                                 manifestURI: nil,
+                                 scopes: ["store_write", "publish_data"]) { authResult in
+                                    switch authResult {
+                                    case .success(let userData):
+                                        print("Sign in SUCCESS", userData.profile?.name as Any)
+                                        DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                                            cell.nameLabel.text = "Logout of Blockstack"
+                                            self.checkUserData()
+                                        })
+                                    case .cancelled:
+                                        print("Sign in CANCELLED")
+                                    case .failed(let error):
+                                        print("Sign in FAILED, error: ", error ?? "n/a")
+                                    }
+        }
+    }
+    
+    func checkUserData() {
+        
+        BlockstackApiService().checkUserData { hasData in
+            if hasData {
+                DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                    let alert = UIAlertController(title: "You already have holdings on your Blockstack account.",
+                                                  message: "You have to choose between keeping the ones you already have on your Blockstack account or overwrite them with the ones you have locally on the iPhone app right now.",
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Use local data", style: UIAlertAction.Style.default, handler: { _ in
+                        self.writeNewData()
+                    }))
+                    alert.addAction(UIAlertAction(title: "Use data from Blockstack", style: UIAlertAction.Style.default, handler: { _ in
+                        self.readData()
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                })
+            } else {
+                self.writeNewData()
+            }
+        }
+    }
+    
+    func writeNewData() {
+        
+        BlockstackApiService().send(returns: { errorMessage in
+            if errorMessage != nil {
+                DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                    let alert = UIAlertController(title: "Error",
+                                                  message: errorMessage,
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                })
+            }
+        })
+    }
+    
+    func readData() {
+        BlockstackApiService().sync(returns: { errorMessage in
+            if errorMessage != nil {
+                DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                    let alert = UIAlertController(title: "Error",
+                                                  message: errorMessage,
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                })
+            }
+        })
+    }
 }
 
 extension SettingsController : UITableViewDataSource {
@@ -270,25 +346,10 @@ extension SettingsController : UITableViewDelegate {
 
                 let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SettingsCell
                 if Blockstack.shared.isUserSignedIn() {
-                    Blockstack.shared.signUserOut()
                     cell.nameLabel.text = "Sync with Blockstack"
+                    turnOffSync()
                 } else {
-                    Blockstack.shared.signIn(redirectURI: "https://lannister.capital/redirect-mobile.html",
-                                             appDomain: URL(string: "https://lannister.capital")!,
-                                             manifestURI: nil,
-                                             scopes: ["store_write", "publish_data"]) { authResult in
-                                                switch authResult {
-                                                case .success(let userData):
-                                                    print("Sign in SUCCESS", userData.profile?.name as Any)
-                                                    DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
-                                                        cell.nameLabel.text = "Logout of Blockstack"
-                                                    })
-                                                case .cancelled:
-                                                    print("Sign in CANCELLED")
-                                                case .failed(let error):
-                                                    print("Sign in FAILED, error: ", error ?? "n/a")
-                                                }
-                    }
+                    turnOnSync(cell: cell)
                 }
             }
             else {

@@ -17,7 +17,7 @@ class BlockstackApiService: BaseApiService {
         super.init()
     }
 
-    func send(returns: @escaping(Error?) -> Void) {
+    func send(returns: @escaping(String?) -> Void) {
         
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
         let holdingsArray = json(fromObjects: holdingsManagedObjects)
@@ -31,7 +31,12 @@ class BlockstackApiService: BaseApiService {
         Blockstack.shared.putFile(to: "db.json", text: jsonString, encrypt: true, completion: { (file, error) in
 
             print("overwrite db json")
-            returns(error)
+            if error != nil {
+                print("error \(String(describing: error?.localizedDescription))")
+                returns(error?.localizedDescription)
+            } else {
+                returns(nil)
+            }
         })
     }
     
@@ -54,11 +59,24 @@ class BlockstackApiService: BaseApiService {
                                 let holdings = self.parseHoldings(holdings: parsedHoldings as NSArray)
                                 print("new holdings \(String(describing: holdings))")
                                 NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+                                returns(nil)
                             }
                         }
                     }
                 }
+                print("error \(String(describing: error?.localizedDescription))")
                 returns(error?.localizedDescription)
+            }
+        }
+    }
+    
+    func checkUserData(returns: @escaping(Bool) -> Void) {
+        
+        Blockstack.shared.getFile(at: "db.json", decrypt: true) { (response, error) in
+            if (response as? DecryptedValue) != nil {
+                returns(true)
+            } else {
+                returns(false)
             }
         }
     }

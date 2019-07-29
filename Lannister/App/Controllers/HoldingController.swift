@@ -300,11 +300,10 @@ extension HoldingController : UITableViewDataSource {
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
             
             if Blockstack.shared.isUserSignedIn() {
-                BlockstackApiService().send { error in
-                    if error != nil {
-                        let msg = error!.localizedDescription
+                BlockstackApiService().send { errorMessage in
+                    if errorMessage != nil {
                         let alert = UIAlertController(title: "Error",
-                                                      message: msg,
+                                                      message: errorMessage,
                                                       preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
