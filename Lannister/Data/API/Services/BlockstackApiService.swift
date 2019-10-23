@@ -20,7 +20,16 @@ class BlockstackApiService: BaseApiService {
     func send(returns: @escaping(String?) -> Void) {
         
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
-        let holdingsArray = json(fromObjects: holdingsManagedObjects)
+        var holdingsArray : [Any] = []
+        for holding in holdingsManagedObjects {
+            let holdingDic =
+                ["hex_color" : holding.hex_color!,
+                 "id": holding.id!,
+                 "name": holding.name!,
+                 "value": holding.value!.doubleValue,
+                 "currency_code": holding.currency!.code!] as [String : Any]
+            holdingsArray.append(holdingDic)
+        }
         let versionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
         let lannisterDictionary = ["db_version": versionString, "holdings": holdingsArray] as [String : Any]
         guard let data = try? JSONSerialization.data(withJSONObject: lannisterDictionary, options: []) else {
@@ -55,9 +64,7 @@ class BlockstackApiService: BaseApiService {
                             returns(errorMessage)
                         } else {
                             if let parsedHoldings = parsedResponse["holdings"] as? Array<Any> {
-                                print("parsedHoldings \(String(describing: parsedHoldings))")
-                                let holdings = self.parseHoldings(holdings: parsedHoldings as NSArray)
-                                print("new holdings \(String(describing: holdings))")
+                                _ = self.parseHoldings(holdings: parsedHoldings as NSArray)
                                 NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
                                 returns(nil)
                             }
@@ -66,6 +73,9 @@ class BlockstackApiService: BaseApiService {
                 }
                 print("error \(String(describing: error?.localizedDescription))")
                 returns(error?.localizedDescription)
+            }
+            if error != nil {
+                print("error \(String(describing: error?.localizedDescription))")
             }
         }
     }
@@ -86,12 +96,22 @@ class BlockstackApiService: BaseApiService {
         var newHoldings : Array<HoldingManagedObject>? = Array<HoldingManagedObject>()
         for holding in holdings {
             let holdingJson : JSONDictionary = holding as! JSONDictionary
-            do {
-                let newHolding: HoldingManagedObject = try object(fromJSONDictionary: holdingJson, inContext: NSManagedObjectContext.mr_default())
-                newHoldings?.append(newHolding)
-            } catch let error as NSError {
-                print("error parsing holdings \(error)")
+//                let newHolding: HoldingManagedObject = try object(fromJSONDictionary: holdingJson, inContext: NSManagedObjectContext.mr_default())
+            var newHolding = HoldingManagedObject.mr_findFirst(byAttribute: "id", withValue: holdingJson["id"]!, in: NSManagedObjectContext.mr_default())
+            if newHolding == nil {
+                newHolding = HoldingManagedObject(context: NSManagedObjectContext.mr_default())
             }
+            if let address = holdingJson["address"] as? String {
+               newHolding!.address = address
+            }
+            newHolding!.id = holdingJson["id"] as? String
+            newHolding!.hex_color = holdingJson["hex_color"] as? String
+            newHolding!.name = holdingJson["name"] as? String
+            newHolding!.value = holdingJson["value"] as? NSNumber
+            let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: holdingJson["currency_code"]!, in: NSManagedObjectContext.mr_default())
+            newHolding!.currency = currency
+
+            newHoldings?.append(newHolding!)
         }
         return newHoldings
     }
