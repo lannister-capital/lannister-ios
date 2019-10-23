@@ -183,6 +183,8 @@ class SettingsController: UIViewController {
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 })
+            } else {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateHoldings"), object: nil)
             }
         })
     }
