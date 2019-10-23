@@ -5,14 +5,14 @@ def all_pods
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'Alamofire', '4.8.0'
-  pod 'Blockstack'
+  pod 'Blockstack', '1.0.1'
   pod 'Charts'
   pod 'Groot', '3.0.1'
   pod 'MagicalRecord', :git => 'https://github.com/magicalpanda/MagicalRecord.git', :tag => 'v2.3.3'
   pod 'BiometricAuthentication'
   pod 'SVProgressHUD'
   pod 'QRCodeReader.swift', '~> 10.0.0'
-  pod 'web3swift', :git => 'https://github.com/pokettocash/web3swift.git'
+  pod 'web3swift'
 end
 
 target 'Lannister' do

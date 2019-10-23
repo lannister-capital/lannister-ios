@@ -10,7 +10,7 @@ import UIKit
 import MagicalRecord
 import Charts
 import Blockstack
-import web3swift
+import Web3swift
 
 class HoldingController: UIViewController {
 

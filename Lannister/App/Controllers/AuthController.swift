@@ -28,11 +28,13 @@ class AuthController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
             
             UserDefaults.standard.setValue("auth", forKey: "Auth")
-            
-            Blockstack.shared.signIn(redirectURI: "https://lannister.capital/redirect-mobile.html",
+            let writeAuthScope = AuthScope(rawValue: "store_write")
+            let publishDataAuthScope = AuthScope(rawValue: "publish_data")
+
+            Blockstack.shared.signIn(redirectURI: URL(string: "https://lannister.capital/redirect-mobile.html")!,
                                      appDomain: URL(string: "https://lannister.capital")!,
                                      manifestURI: nil,
-                                     scopes: ["store_write", "publish_data"]) { authResult in
+                                     scopes: [writeAuthScope!, publishDataAuthScope!]) { authResult in
                                         switch authResult {
                                         case .success(let userData):
                                             print("Sign in SUCCESS", userData.profile?.name as Any)

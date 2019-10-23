@@ -9,7 +9,8 @@
 import UIKit
 import MagicalRecord
 import CoreData
-import web3swift
+import Web3swift
+import EthereumAddress
 
 class WalletRepositoryImpl: WalletRepository {
     
