@@ -36,6 +36,12 @@ class DashboardController: UIViewController {
             name: NSNotification.Name(rawValue: "updateHoldings"),
             object: nil)
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.applicationDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
+        
         navigationController!.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18)!,
              NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 134/255, blue: 162/255, alpha: 1)]
@@ -61,22 +67,9 @@ class DashboardController: UIViewController {
             sortKey = UserDefaults.standard.object(forKey: "sortKey") as! String
         }
         
-        BlockstackApiService().sync { errorMessage in
-            if errorMessage == nil {
-                DispatchQueue.main.async {
-                    self.updateHoldings()
-                }
-            } else {
-                print("error \(String(describing: errorMessage))")
-                let alert = UIAlertController(title: "Error",
-                                              message: errorMessage,
-                                              preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
         
         updateHoldings()
+        syncHoldings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +87,28 @@ class DashboardController: UIViewController {
                 let itemHeight = layout.itemSize.height
                 layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
                 layout.invalidateLayout()
+            }
+        }
+    }
+    
+    @objc func applicationDidBecomeActive() {
+        updateHoldings()
+        syncHoldings()
+    }
+    
+    func syncHoldings() {
+        BlockstackApiService().sync { errorMessage in
+            if errorMessage == nil {
+                DispatchQueue.main.async {
+                    self.updateHoldings()
+                }
+            } else {
+                print("error \(String(describing: errorMessage))")
+                let alert = UIAlertController(title: "Error",
+                                              message: errorMessage,
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
