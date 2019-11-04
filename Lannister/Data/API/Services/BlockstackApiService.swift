@@ -24,12 +24,19 @@ class BlockstackApiService: BaseApiService {
         let holdingsManagedObjects = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
         var holdingsArray : [Any] = []
         for holding in holdingsManagedObjects {
-            let holdingDic =
+            var holdingDic =
                 ["hex_color" : holding.hex_color!,
                  "id": holding.id!,
-                 "name": holding.name!,
-                 "value": holding.value!.doubleValue,
-                 "currency_code": holding.currency!.code!] as [String : Any]
+                 "name": holding.name!] as [String : Any]
+            if holding.value != nil {
+                holdingDic["value"] = holding.value!.doubleValue
+            }
+            if holding.currency?.code != nil {
+                holdingDic["currency_code"] = holding.currency!.code!
+            }
+            if holding.address != nil {
+                holdingDic["address"] = holding.address!
+            }
             holdingsArray.append(holdingDic)
         }
         let versionString = dbVersion
@@ -63,8 +70,14 @@ class BlockstackApiService: BaseApiService {
                         } else {
                             if let parsedHoldings = parsedResponse["holdings"] as? Array<Any> {
                                 let localHoldings = HoldingManagedObject.mr_findAll(in: NSManagedObjectContext.mr_default()) as! [HoldingManagedObject]
+                                let remoteHoldings = parsedHoldings as! Array<JSONDictionary>
+                                let remoteHoldingsIds = remoteHoldings.map({ (holding: JSONDictionary) -> String in
+                                    holding["id"] as! String
+                                })
                                 for holding in localHoldings {
-                                    holding.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
+                                    if holding.address == nil && !remoteHoldingsIds.contains(holding.id!) {
+                                        holding.mr_deleteEntity(in: NSManagedObjectContext.mr_default())
+                                    }
                                 }
                                 _ = self.parseHoldings(holdings: parsedHoldings as NSArray)
                                 NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
@@ -109,8 +122,10 @@ class BlockstackApiService: BaseApiService {
             newHolding!.hex_color = holdingJson["hex_color"] as? String
             newHolding!.name = holdingJson["name"] as? String
             newHolding!.value = holdingJson["value"] as? NSNumber
-            let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: holdingJson["currency_code"]!, in: NSManagedObjectContext.mr_default())
-            newHolding!.currency = currency
+            if holdingJson["currency_code"] != nil {
+                let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: holdingJson["currency_code"]!, in: NSManagedObjectContext.mr_default())
+                newHolding!.currency = currency
+            }
 
             newHoldings?.append(newHolding!)
         }
