@@ -11,4 +11,5 @@ import UIKit
 protocol HoldingsRepository: Repository {
 
     func updateHoldingsWithComputedProperties(holdings: [Holding]) -> [Holding]
+    func updateHoldingWithComputedProperties(holding: Holding) -> Holding
 }

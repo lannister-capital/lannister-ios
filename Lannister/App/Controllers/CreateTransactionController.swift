@@ -149,7 +149,9 @@ class CreateTransactionController: UIViewController {
         }
         
         if delegate != nil {
-            delegate.newTransaction(newHolding: HoldingDto().holding(from: holdingManagedObject!))
+            var newHolding = HoldingDto().holding(from: holdingManagedObject!)
+            newHolding = HoldingsUseCase(with: HoldingsRepositoryImpl()).updateHoldingWithComputedProperties(holding: newHolding)
+            delegate.newTransaction(newHolding: newHolding)
         }
         
         navigationController?.popViewController(animated: true)

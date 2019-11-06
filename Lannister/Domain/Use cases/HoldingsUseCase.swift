@@ -22,4 +22,10 @@ class HoldingsUseCase: NSObject {
         let repo = self.repository as! HoldingsRepository
         return repo.updateHoldingsWithComputedProperties(holdings: holdings)
     }
+    
+    func updateHoldingWithComputedProperties(holding: Holding) -> Holding {
+        
+        let repo = self.repository as! HoldingsRepository
+        return repo.updateHoldingWithComputedProperties(holding: holding)
+    }
 }

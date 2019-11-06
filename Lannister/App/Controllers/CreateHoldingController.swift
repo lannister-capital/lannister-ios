@@ -25,6 +25,7 @@ class CreateHoldingController: UIViewController {
     let impact                      = UIImpactFeedbackGenerator()
     let selection                   = UISelectionFeedbackGenerator()
     var ethAddress                  : String!
+    var ethValue                    : Double!
     var loadingButton : UIBarButtonItem!
     var loadingSpinner : UIActivityIndicatorView!
     var saveButton : UIBarButtonItem!
@@ -50,6 +51,9 @@ class CreateHoldingController: UIViewController {
             navigationItem.backBarButtonItem = backItem
             if holding.address == nil {
                 selectedCurrency = holding.currency
+                if selectedCurrency.code == "ETH" {
+                    ethValue = holding.value
+                }
             } else {
                 // Get ETH
                 let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
@@ -110,7 +114,7 @@ class CreateHoldingController: UIViewController {
             let cell = tableView.cellForRow(at: indexPath) as! TotalValueCell
             let valueTextField = cell.totalValueTextField
 
-            if valueTextField?.text?.doubleValue == nil && ethAddress == nil {
+            if valueTextField?.text?.doubleValue == nil && ethAddress == nil && ethValue == nil {
                 impact.impactOccurred()
                 let alert = UIAlertController(title: "Oops!", message: "Invalid value.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title:  NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
@@ -146,6 +150,8 @@ class CreateHoldingController: UIViewController {
 
             // set value
             if let totalValue = valueTextField?.text?.doubleValue {
+                newHoldingManagedObject.value = totalValue as NSNumber
+            } else if let totalValue = ethValue {
                 newHoldingManagedObject.value = totalValue as NSNumber
             }
             
@@ -201,7 +207,9 @@ class CreateHoldingController: UIViewController {
         }
         
         if holding != nil {
-            let newHolding = HoldingDto().holding(from: holdingManagedObject)
+            var newHolding = HoldingDto().holding(from: holdingManagedObject)
+            newHolding = HoldingsUseCase(with: HoldingsRepositoryImpl()).updateHoldingWithComputedProperties(holding: newHolding)
+
             if delegate != nil {
                 delegate.updateHolding(newHolding: newHolding)
             }
@@ -328,25 +336,24 @@ extension CreateHoldingController : UITableViewDataSource {
                 if selectedCurrency.code == "ETH" {
                     if ethAddress != nil {
                         cell.titleLabel.text = "From address"
-                        cell.cellIndicatorImageView.isHidden = false
-                        cell.totalValueTextField.isHidden = true
-                        cell.percentageLabel.isHidden = true
                         cell.currencyLabel.text = "\(ethAddress.prefix(10))...\(ethAddress.suffix(4))"
-                        cell.changeLabel.isHidden = false
                     } else {
-                        cell.cellIndicatorImageView.isHidden = false
-                        cell.totalValueTextField.isHidden = true
-                        cell.percentageLabel.isHidden = true
-                        cell.currencyLabel.text = "Insert value or Import from Address"
+                        cell.currencyLabel.text = "\(holding.value!)"
                     }
+                    cell.cellIndicatorImageView.isHidden = false
+                    cell.totalValueTextField.isHidden = true
+                    cell.percentageLabel.isHidden = false
+                    cell.changeLabel.isHidden = false
+
                 } else {
                     cell.cellIndicatorImageView.isHidden = true
                     cell.totalValueTextField.isHidden = false
                     cell.percentageLabel.isHidden = false
                     cell.totalValueTextField.text = String(format: "%.2f", holding.value!)
-                    cell.percentageLabel.text = "\(String(format: "%.2f", Currencies.getEuroValue(value: holding.value!, currency: holding.currency!)/euroTotalValue*100))%"
                     cell.currencyLabel.text = holding.currency!.symbol
                 }
+                cell.percentageLabel.text = "\(String(format: "%.2f", holding.totalEuroValue!/euroTotalValue*100))%"
+
             } else {
                 let currency = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: CurrencyUserDefaults().getDefaultCurrencyCode()!, in: NSManagedObjectContext.mr_default())
                 cell.currencyLabel.text = currency!.symbol
@@ -489,6 +496,7 @@ extension CreateHoldingController : ETHDelegate {
     func insertedValue(value: Double) {
         print("insertedValue \(value)")
         ethAddress = nil
+        ethValue = value
 
         let indexPathForTotalValue = IndexPath(row: 1, section: 0)
         let totalValueCell = tableView.cellForRow(at: indexPathForTotalValue) as! TotalValueCell
