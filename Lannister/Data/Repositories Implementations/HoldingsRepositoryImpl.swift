@@ -31,7 +31,16 @@ class HoldingsRepositoryImpl: HoldingsRepository {
             let predicateCode = NSPredicate(format: "code == %@", "ETH")
             let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateAddress, predicateCode])
             
-            let tokenManagedObjects = TokenManagedObject.mr_findAll(with: compoundPredicate, in: NSManagedObjectContext.mr_default()) as! [TokenManagedObject]
+            var tokenManagedObjects = TokenManagedObject.mr_findAll(with: compoundPredicate, in: NSManagedObjectContext.mr_default()) as! [TokenManagedObject]
+            if tokenManagedObjects.count == 0 {
+                let tokenManagedObject = TokenManagedObject(context: NSManagedObjectContext.mr_default())
+                tokenManagedObject.address = holding.address
+                tokenManagedObject.code = "ETH"
+                let currencyManagedObject = CurrencyManagedObject.mr_findFirst(byAttribute: "code", withValue: "ETH", in: NSManagedObjectContext.mr_default())
+                tokenManagedObject.currency = currencyManagedObject
+                NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+                tokenManagedObjects = TokenManagedObject.mr_findAll(with: compoundPredicate, in: NSManagedObjectContext.mr_default()) as! [TokenManagedObject]
+            }
             let tokens = TokenDto().tokens(from: tokenManagedObjects)
             updatedHolding.representiveValue = tokens[0].value
             updatedHolding.representiveCurrency = tokens[0].currency

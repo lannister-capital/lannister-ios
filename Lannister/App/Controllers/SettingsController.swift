@@ -405,5 +405,6 @@ extension SettingsController : CurrenciesDelegate {
         let indexPath = IndexPath(row: 0, section: 0)
         let settingsCell = tableView.cellForRow(at: indexPath) as! SettingsCell
         settingsCell.currencyLabel.text = currency.symbol
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateHoldings"), object: nil)
     }
 }
