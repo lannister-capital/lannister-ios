@@ -10,4 +10,5 @@ import UIKit
 
 enum ERC20ContractsList : String {
     case dai = "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"
+    case cDai = "0xf5dce57282a584d2746faf1593d3121fcac444dc"
 }

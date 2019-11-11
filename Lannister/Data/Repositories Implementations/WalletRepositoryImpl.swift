@@ -11,6 +11,7 @@ import MagicalRecord
 import CoreData
 import Web3swift
 import EthereumAddress
+import BigInt
 
 class WalletRepositoryImpl: WalletRepository {
     
@@ -24,6 +25,30 @@ class WalletRepositoryImpl: WalletRepository {
             let balanceString = Web3.Utils.formatToEthereumUnits(balanceResult, toUnits: .eth, decimals: 3)!
 
             print("balanceString \(balanceString)")
+            success(balanceString.doubleValue!)
+        }
+    }
+    
+    func getBalanceOfToken(address: String, erc20TokenAddress: String, success: @escaping(Double) -> Void, failure: @escaping(_ error: Error) -> Void) {
+        
+        DispatchQueue.global(qos: .background).async {
+            let walletAddress = EthereumAddress(address)! // Your wallet address
+            let erc20ContractAddress = EthereumAddress(erc20TokenAddress)!
+            let web3 = Web3.InfuraMainnetWeb3(accessToken: "c7b6351e2ba84d3e94d1b33c14bb9a16") // Mainnet Infura Endpoint Provider
+            let contract = web3.contract(Web3.Utils.erc20ABI, at: erc20ContractAddress, abiVersion: 2)!
+            var options = TransactionOptions.defaultOptions
+            options.from = walletAddress
+            options.gasPrice = .automatic
+            options.gasLimit = .automatic
+            let method = "balanceOf"
+            let tx = contract.read(
+                method,
+                parameters: [walletAddress] as [AnyObject],
+                extraData: Data(),
+                transactionOptions: options)!
+            let tokenBalance = try! tx.call()
+            let balanceBigUInt = tokenBalance["0"] as! BigUInt
+            let balanceString = Web3.Utils.formatToEthereumUnits(balanceBigUInt, toUnits: .eth, decimals: 3)!
             success(balanceString.doubleValue!)
         }
     }
