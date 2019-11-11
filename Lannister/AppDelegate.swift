@@ -380,7 +380,7 @@ extension AppDelegate {
             let predicateAddress = NSPredicate(format: "address == %@", holding.address!)
             let tokenManagedObjects = TokenManagedObject.mr_findAll(with: predicateAddress, in: NSManagedObjectContext.mr_default()) as! [TokenManagedObject]
             for tokenManagedObject in tokenManagedObjects {
-                WalletUseCase(with: WalletRepositoryImpl()).getBalance(address: holding.address!, success: { balance in
+                WalletUseCase(with: WalletRepositoryImpl()).getBalanceOfToken(address: holding.address!, erc20TokenAddress: ERC20ContractsList.dai.rawValue, success: { balance in
                     DispatchQueue.main.async {
                         // Update token balance
                         tokenManagedObject.value = balance

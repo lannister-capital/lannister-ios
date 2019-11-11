@@ -65,7 +65,7 @@ DEPENDENCIES:
   - web3swift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - BigInt
     - BiometricAuthentication
@@ -122,4 +122,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 72dee91fbd733d689e133975f6f7a74082763356
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.1

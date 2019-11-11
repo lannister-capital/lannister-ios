@@ -23,6 +23,11 @@ class WalletUseCase : NSObject {
         return repo.getBalance(address: address, success: success, failure: failure)
     }
     
+    func getBalanceOfToken(address: String, erc20TokenAddress: String, success: @escaping(Double) -> Void, failure: @escaping(_ error: Error) -> Void) {
+        let repo = self.repository as! WalletRepository
+        return repo.getBalanceOfToken(address: address, erc20TokenAddress: erc20TokenAddress, success: success, failure: failure)
+    }
+    
     func getTransactions(address: String, success: @escaping(_ transactions: Array<Transaction>?) -> Void, failure: @escaping(_ error: Error) -> Void) {
 
         let repo = self.repository as! WalletRepository
